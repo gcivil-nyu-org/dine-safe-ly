@@ -1,11 +1,13 @@
 from django.db import models
 
+
 class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=200, primary_key=True)
     business_id = models.CharField(max_length=200)
 
     def __str__(self):
         return self.restaurant_name
+
 
 class InspectionRecords(models.Model):
     restaurant_Inspection_ID = models.CharField(max_length=200, primary_key=True)
