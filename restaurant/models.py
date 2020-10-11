@@ -5,7 +5,10 @@ class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=200)
     business_address = models.CharField(max_length=200)
     postcode = models.CharField(max_length=200)
-    business_id = models.CharField(max_length=200)
+    business_id = models.CharField(max_length=200, default=None)
+
+    class Meta:
+        unique_together = (('restaurant_name', 'business_address', 'postcode'),)
 
     def __str__(self):
         return self.restaurant_name
