@@ -4,6 +4,7 @@ from .utils import query_yelp, query_inspection_record
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core import serializers
+from django.core.serializers.json import DjangoJSONEncoder
 import json
 
 
@@ -28,6 +29,6 @@ def get_restaurant_by_id(request, restaurant_id):
     response_yelp = query_yelp(restaurant.business_id)
     inspection_data = query_inspection_record(restaurant.restaurant_name, restaurant.business_address, restaurant.postcode)
     response = {'yelp_info': response_yelp, 'opendata_info': inspection_data}
-    return HttpResponse(json.dumps(response))
+    return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder))
 
 
