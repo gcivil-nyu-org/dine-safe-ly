@@ -2,7 +2,9 @@ from django.db import models
 
 
 class Restaurant(models.Model):
-    restaurant_name = models.CharField(max_length=200, primary_key=True)
+    restaurant_name = models.CharField(max_length=200)
+    business_address = models.CharField(max_length=200)
+    postcode = models.CharField(max_length=200)
     business_id = models.CharField(max_length=200)
 
     def __str__(self):
@@ -14,7 +16,7 @@ class InspectionRecords(models.Model):
     borough = models.CharField(max_length=200)
     restaurant_name = models.CharField(max_length=200)
     seating_choice = models.CharField(max_length=200)
-    legal_bussiness_name = models.CharField(max_length=200)
+    legal_business_name = models.CharField(max_length=200)
     business_address = models.CharField(max_length=200)
     is_sideway_compliant = models.CharField(max_length=200)
     is_roadway_compliant = models.CharField(max_length=200)
