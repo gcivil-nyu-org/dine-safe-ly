@@ -36,7 +36,7 @@ def add_inspection_records(request):
 def get_restaurant_by_id(request, restaurant_id):
     # TODO: Restaurant Model primary key haven't decided
     restaurant = Restaurant.objects.get(pk=restaurant_id)
-    if not restaurant or not restaurant.business_id or restaurant.business_id == "":
+    if not restaurant or not restaurant.business_id:
         # TODO: Query yelp with matching module
         return HttpResponseNotFound('Restaurant not found')
     response_yelp = query_yelp(restaurant.business_id)
