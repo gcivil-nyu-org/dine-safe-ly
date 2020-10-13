@@ -39,7 +39,7 @@ def get_restaurant_by_id(request, restaurant_id):
     return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder))
 
 
-def get_yelp_info(request, name, address, postcode):
+def get_inspection_info(request, name, address, postcode):
     inspection_data = query_inspection_record(name, address, postcode)
     response = {'opendata_info': inspection_data}
     return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder))
