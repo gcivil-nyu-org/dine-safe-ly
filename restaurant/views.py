@@ -19,22 +19,16 @@ def add_inspection_records(request):
     records = json.loads(request.body)
     for record in records:
         inspection_record = InspectionRecords(restaurant_Inspection_ID=record['restaurant_Inspection_ID'],
-                                              borough=record['borough'],
                                               restaurant_name=record['restaurant_name'],
-                                              seating_choice=record['seating_choice'],
                                               legal_business_name=record['legal_business_name'],
                                               business_address=record['business_address'],
-                                              is_sideway_compliant=record['is_sideway_compliant'],
-                                              is_roadway_compliant=record['is_roadway_compliant'],
-                                              skipped_reason=record['skipped_reason'],
-                                              inspected_on=record['inspected_on'], agency_code=record['agency_code'],
+                                              inspected_on=record['inspected_on'],
                                               postcode=record['postcode'])
         inspection_record.save()
     return HttpResponse("Add inspection records")
 
 
 def get_restaurant_by_id(request, restaurant_id):
-    # TODO: Restaurant Model primary key haven't decided
     restaurant = Restaurant.objects.get(pk=restaurant_id)
     if not restaurant or not restaurant.business_id:
         # TODO: Query yelp with matching module
