@@ -1,9 +1,14 @@
 
 
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','dinesafelysite.settings')
+
+import django
+django.setup()
 import pandas as pd
 from sodapy import Socrata
 
-from .models import Restaurant
+from restaurant.models import Restaurant, InspectionRecords
 
 def cleanInspectionData(results_df):
     restaurant_df = results_df.iloc[:,[0,1,2,3,4,9]]
@@ -20,14 +25,20 @@ def cleanInspectionData(results_df):
     print(restaurant_df.shape)
     return restaurant_df, inspection_df
 
-# def saveRestaurants(restaurant_df):
-#     for index, row in restaurant_df.iterrows():
-#         # print(row['restaurantname'],row['businessaddress'],row['postcode'],row['legalbusinessname'],row['seatingchoice'],row['borough'])
-#         r = Restaurant(restaurant_name=row['restaurantname'],business_address=row['businessaddress'],postcode=row['postcode'],legal_business_name=row['legalbusinessname'])
-#         r.save()
-#     return
+def saveRestaurants(restaurant_df):
+    for index, row in restaurant_df.iterrows():
+        r = Restaurant(restaurant_name=row['restaurantname'],business_address=row['businessaddress'],postcode=row['postcode'],legal_business_name=row['legalbusinessname'])
+        r.save()
+    return
 
 def saveInspections(inspection_df):
+    try:
+        for index, row in inspection_df.iterrows():
+            inspectRecord = InspectionRecords(restaurant_name=row['restaurantname'],restaurant_Inspection_ID=row['restaurantinspectionid'],is_roadway_compliant=row['isroadwaycompliant'],skipped_reason=row['skippedreason'],inspected_on=row['inspectedon'])
+            inspectRecord.save()
+    except e:
+        return
+
     return
 
 
