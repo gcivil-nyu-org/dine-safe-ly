@@ -14,7 +14,7 @@ def match_on_yelp(restaurant_name, restaurant_location):
     state = location_list[2]
     country = 'US'
 
-    # Yelp API
+    # Yelp API from Alex
     api_key = 'JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq-R_mEX3Yx'
     headers = {'Authorization': 'Bearer %s' % api_key}
     # use business match endpoint
@@ -40,7 +40,7 @@ grouped_opendata_df = opendata_df.groupby(['restaurantname','businessaddress'])
 #     # print('\nCREATE TABLE {}('.format(restaurant))
 #     print(restaurant[0][0])
 
-with open('macthed_data.csv', 'w', encoding='utf-8', newline="") as matched_data_file:
+with open('matched_data.csv', 'w', encoding='utf-8', newline="") as matched_data_file:
     file_writer = csv.writer(matched_data_file)
     file_writer.writerow(['business_name', 'business_id', 'business_address'])
 
