@@ -15,7 +15,7 @@ def match_on_yelp(restaurant_name, restaurant_location):
     country = 'US'
 
     # Yelp API
-    api_key = 'w5fGYpYDI6NYJOBI47KjmEJcROpCxq1VK841olTs0tSGOeGBNDuIIj8zF-C_MJFtAbrzfm7YF7bo72TxpOmrrn-zYnQ8xHBh_E4WEO39Z7IdKwbzCkBkCy0fjB6CX3Yx'
+    api_key = 'JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq-R_mEX3Yx'
     headers = {'Authorization': 'Bearer %s' % api_key}
     # use business match endpoint
     url = 'https://api.yelp.com/v3/businesses/matches'
@@ -31,7 +31,7 @@ client = Socrata("data.cityofnewyork.us",
                  "dLBzJwg25psQttbxjLlQ8Z53V",
                  username="cx657@nyu.edu",
                  password="Dinesafely123")
-results = client.get("4dx7-axux", limit=25000)
+results = client.get("4dx7-axux", limit=25)
 opendata_df = pd.DataFrame.from_records(results)
 # print(opendata_df.columns)
 grouped_opendata_df = opendata_df.groupby(['restaurantname','businessaddress'])
@@ -51,7 +51,7 @@ with open('macthed_data.csv', 'w', encoding='utf-8', newline="") as matched_data
         restaurant_location = restaurant[0][1]
         # restaurant_zip_code = restaurant.iat[1,9]
         response = json.loads(match_on_yelp(restaurant_name, restaurant_location))
-
+        print(response)
         if next(iter(response)) == 'error':
             # print("match failed")
             continue
