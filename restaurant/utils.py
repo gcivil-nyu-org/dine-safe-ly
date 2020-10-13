@@ -30,7 +30,8 @@ def query_yelp(business_id):
 
 
 def query_inspection_record(business_name, business_address, postcode):
-    records = InspectionRecords.objects.filter(restaurant_name=business_name, business_address=business_address, postcode=postcode)
+    records = InspectionRecords.objects.filter(restaurant_name=business_name, business_address=business_address,
+                                               postcode=postcode).order_by('-inspected_on')
     result = {}
     for record in records:
         result[record.restaurant_Inspection_ID] = model_to_dict(record)
