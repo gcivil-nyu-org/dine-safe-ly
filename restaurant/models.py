@@ -12,7 +12,7 @@ class Restaurant(models.Model):
         unique_together = (('restaurant_name', 'business_address', 'postcode'),)
 
     def __str__(self):
-        return '{} {} {} {} {}'.format(self.restaurant_name, self.business_address, self.postcode, self.business_id, self.legal_business_name) 
+        return '{} {} {} {} {} {} {}'.format(self.id,self.restaurant_name, self.business_address, self.postcode, self.business_id, self.legal_business_name, self.business_id) 
 
 
 class InspectionRecords(models.Model):
