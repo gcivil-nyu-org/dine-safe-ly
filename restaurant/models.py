@@ -9,7 +9,7 @@ class Restaurant(models.Model):
     legal_business_name = models.CharField(max_length=200,default = None)
 
     class Meta:
-        unique_together = (('restaurant_name', 'legal_business_name', 'postcode'),)
+        unique_together = (('restaurant_name', 'business_address', 'postcode'),)
 
     def __str__(self):
         return '{} {} {} {} {}'.format(self.restaurant_name, self.business_address, self.postcode, self.business_id, self.legal_business_name) 
