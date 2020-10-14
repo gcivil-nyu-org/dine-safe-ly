@@ -10,16 +10,16 @@ from sodapy import Socrata
 
 from restaurant.models import Restaurant, InspectionRecords
 
-def cleanInspectionData(results_df):
-    restaurant_df = results_df.iloc[:,[0,1,2,3,4,9]]
-    inspection_df = results_df.iloc[:,[5,6,7,8,10,1]]
+def clean_inspection_data(results_df):
+    restaurant_df = results_df.loc[:,['restaurantname','legalbusinessname','businessaddress','postcode']]
+    inspection_df = results_df.loc[:,['restaurantinspectionid','isroadwaycompliant','inspectedon','skippedreason','restaurantname','businessaddress','postcode']]
 
     restaurant_df = restaurant_df.apply(lambda x: x.str.strip() if x.dtype == "str" else x)
 
     restaurant_df.drop_duplicates(subset=['restaurantname','businessaddress','postcode'], keep='last',inplace = True)
     return restaurant_df, inspection_df
 
-def saveRestaurants(restaurant_df):
+def save_restaurants(restaurant_df):
     for index, row in restaurant_df.iterrows():
         try:
             r = Restaurant(restaurant_name=row['restaurantname'],business_address=row['businessaddress'],postcode=row['postcode'],legal_business_name=row['legalbusinessname'])
@@ -28,13 +28,16 @@ def saveRestaurants(restaurant_df):
             continue
     return
 
-def saveInspections(inspection_df):
+def save_inspections(inspection_df):
     for index, row in inspection_df.iterrows():
         try:
-            inspectRecord = InspectionRecords(restaurant_name=row['restaurantname'],restaurant_Inspection_ID=row['restaurantinspectionid'],is_roadway_compliant=row['isroadwaycompliant'],skipped_reason=row['skippedreason'],inspected_on=row['inspectedon'])
-            inspectRecord.save()
-        except:
-            continue
+            # print(row)
+            inspect_record = InspectionRecords(restaurant_name=row['restaurantname'],restaurant_Inspection_ID=row['restaurantinspectionid'],is_roadway_compliant=row['isroadwaycompliant'],business_address=row['businessaddress'],postcode=row['postcode'],skipped_reason=row['skippedreason'],inspected_on=row['inspectedon'])
+            # print(inspect_record)
+            inspect_record.save()
+        except Exception as e:
+            print(e)
+            # break
     return
 
 if __name__ == '__main__':
@@ -49,9 +52,9 @@ if __name__ == '__main__':
 
     # Convert to pandas DataFrame
     results_df = pd.DataFrame.from_records(results)
-    restaurant_df, inspection_df = cleanInspectionData(results_df)
-    saveRestaurants(restaurant_df)
+    restaurant_df, inspection_df = clean_inspection_data(results_df)
+    save_restaurants(restaurant_df)
 
-    saveInspections(inspection_df)
+    save_inspections(inspection_df)
 
 
