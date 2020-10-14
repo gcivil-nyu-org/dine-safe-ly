@@ -37,12 +37,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3bbed88d-91b4-424a-9bba-aa984ad578fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dine-safe-ly.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dinesafelysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dinesafelysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +142,7 @@
       <workItem from="1602621924650" duration="550000" />
       <workItem from="1602622512091" duration="768000" />
       <workItem from="1602632227682" duration="8000" />
-      <workItem from="1602632237029" duration="3445000" />
+      <workItem from="1602632237029" duration="4498000" />
     </task>
     <servers />
   </component>

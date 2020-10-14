@@ -25,7 +25,7 @@ SECRET_KEY = '4-wo^xhkbz@y1q7i*_yluq8p^pzl*k&7mm2df)b@v*e*@*6mwm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["dinesafely.herokuapp.com"]
 
 
 # Application definition
