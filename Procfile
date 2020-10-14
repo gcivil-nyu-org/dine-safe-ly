@@ -1,1 +1,1 @@
-web: gunicorn dinesafely.wsgi
+web: gunicorn dinesafelysite.wsgi
