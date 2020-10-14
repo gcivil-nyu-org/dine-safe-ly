@@ -309,14 +309,14 @@
 <!-- Available tile layers-->
 <script src="{% static 'js/map-layers.f6cf9b57.js' %}"> </script>
 <script src="{% static 'js/map-detail.ecc97be1.js' %}"></script>
-<script>
-      createDetailMap({
-          mapId: 'detailMap',
-          mapCenter: [{{ lat }}, {{ long }}],
-          markerShow: true,
-          markerPosition: [{{ lat }}, {{ long }}],
-          markerPath: '{% static 'img/marker.svg' %}',
-      })
-    </script>
+{#<script>#}
+{#      createDetailMap({#}
+{#          mapId: 'detailMap',#}
+{#          mapCenter: [{{ lat }}, {{ long }}],#}
+{#          markerShow: true,#}
+{#          markerPosition: [{{ lat }}, {{ long }}],#}
+{#          markerPath: '{% static 'img/marker.svg' %}',#}
+{#      })#}
+{#    </script>#}
 </body>
 </html>
