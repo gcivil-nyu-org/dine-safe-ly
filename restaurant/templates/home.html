@@ -56,8 +56,8 @@
       <div class="col-lg-8">
         <div class="text-block">
           <h3 class="mb-3">Restaurant Details</h3>
-          <b>Seating Choice:</b> {{ seating_choice }}<br>
-          <b>Roadway Compliant:</b> {{ is_roadway_compliant }}<br>
+          <!-- <b>Seating Choice:</b> {{ seating_choice }}<br> -->
+          <b>Compliance Status:</b> {{ is_roadway_compliant }}<br>
           <b> Skipped Reason:</b> {{ skipped_reason }}<br>
           <b>Last Inspection:</b> {{ inspected_on }}<br>
         </div>
@@ -247,7 +247,7 @@
               <ul class="list-unstyled mb-4">
                 <li class="mb-2"> <a class="text-gray-00 text-sm text-decoration-none" href="#"><i class="fas fa-phone mr-3"></i><span class="text-muted">{{ disp_phone }}</span></a></li>
                 <li class="mb-2"> <a class=" text-sm text-decoration-none" href="#"><i class="fas fa-star mr-3"></i><span class="text-muted">{{ rate }} Ratings</span></a></li>
-                <li class="mb-2"> <a class=" text-sm text-decoration-none" href="#"><i class="fas fa-money-check-alt mr-3"></i><span class="text-muted">{{ price }}</span></a></li>
+                <li class="mb-2"> <a class=" text-sm text-decoration-none" href="#"><i class="fas fa-money-check-alt mr-3"></i><span class="text-muted"> {% if price%}price {%endif%} </span></a></li>
               </ul>
               <div class="text-center"><a class="btn btn-outline-primary btn-block" href="{{ link }}"> <i class="far fa-paper-plane mr-2"></i>Reach out</a></div>
             </div>
