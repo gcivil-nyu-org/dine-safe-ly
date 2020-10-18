@@ -1,13 +1,15 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from .models import Restaurant, InspectionRecords
-from .utils import query_yelp, query_inspection_record
+from .utils import query_yelp, query_inspection_record, get_latest_inspection_record, get_restaurant_list
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+import logging
 
+logger = logging.getLogger(__name__)
 
 def index(request):
     return HttpResponse("Hello, this is restaurant.")
@@ -34,11 +36,9 @@ def get_restaurant_by_id(request, restaurant_id):
         # TODO: Query yelp with matching module
         return HttpResponseNotFound('Restaurant not found')
     response_yelp = query_yelp(restaurant.business_id)
-    inspection_data = query_inspection_record(restaurant.restaurant_name, restaurant.business_address, restaurant.postcode)
+    inspection_data = get_latest_inspection_record(restaurant.restaurant_name, restaurant.business_address, restaurant.postcode)
     response = {'yelp_info': response_yelp, 'opendata_info': inspection_data} 
-#     #return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder))
-#    # json_str = json.dumps(response, cls=DjangoJSONEncoder)
-#    # resp = json.loads(json_str)
+
     if 'price' not in response['yelp_info']['info']:
         return render(request, 'home.html', {
             'name': response['yelp_info']['info']['name'],
@@ -122,3 +122,10 @@ def get_inspection_info(request, name, address, postcode):
     inspection_data = query_inspection_record(name, address, postcode)
     response = {'opendata_info': inspection_data}
     return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder))
+
+
+def get_landing_page(request, page):
+    restaurant_list = get_restaurant_list(page, 6)
+    print(restaurant_list)
+    parameter_dict = {'restaurant_list': json.dumps(restaurant_list), 'page': page}
+    return render(request, 'restaurant_list.html', parameter_dict)
