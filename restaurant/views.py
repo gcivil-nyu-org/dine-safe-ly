@@ -134,6 +134,6 @@ def get_inspection_info(request, restaurant_id):
 
 def get_landing_page(request, page):
     restaurant_list = get_restaurant_list(page, 6)
-    # print(restaurant_list)
-    parameter_dict = {'restaurant_list': json.dumps(restaurant_list), 'page': page}
-    return render(request, 'restaurant_list.html', parameter_dict)
+    print(restaurant_list)
+    parameter_dict = {'restaurant_list': json.dumps(restaurant_list, cls=DjangoJSONEncoder), 'page': page}
+    return render(request, 'category-3.html', parameter_dict)
