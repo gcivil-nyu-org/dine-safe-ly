@@ -1,38 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  
-<!-- Mirrored from demo.bootstrapious.com/directory/1-6/category-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Oct 2020 06:16:33 GMT -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Directory Theme by Bootstrapious</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Price Slider Stylesheets -->
-    <link rel="stylesheet" href="../../../d19m59y37dris4.cloudfront.net/directory/1-6/vendor/nouislider/nouislider.css">
-    <!-- Google fonts - Playfair Display-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
-    <!-- Google fonts - Poppins-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
-    <!-- swiper-->
-    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
-    <!-- Magnigic Popup-->
-    <link rel="stylesheet" href="../../../d19m59y37dris4.cloudfront.net/directory/1-6/vendor/magnific-popup/magnific-popup.css">
-    <!-- Leaflet Maps-->
-    <link rel="stylesheet" href="../../../unpkg.com/leaflet%401.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="../../../d19m59y37dris4.cloudfront.net/directory/1-6/css/style.default.452e11c7.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="../../../d19m59y37dris4.cloudfront.net/directory/1-6/css/custom.0a822280.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="../../../d19m59y37dris4.cloudfront.net/directory/1-6/img/favicon.png">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="../../../use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  </head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Dine.ly</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <!-- Price Slider Stylesheets -->
+  <link rel="stylesheet" href="{% static 'vendor/nouislider/nouislider.css' %}">
+  <!-- Google fonts - Playfair Display-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
+  <!-- Google fonts - Poppins-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
+  <!-- swiper-->
+  <link rel="stylesheet" href="{% static 'ajax\libs\Swiper\4.4.1\css/swiper.min.css' %}">
+  <!-- Magnigic Popup-->
+  <link rel="stylesheet" href="{% static 'vendor/magnific-popup/magnific-popup.css' %}">
+  <!-- Leaflet Maps-->
+  <link rel="stylesheet" href="{% static 'dist/leaflet.css' %}" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
+  <!-- theme stylesheet-->
+  <link rel="stylesheet" href="{% static 'css/style.default.452e11c7.css' %}" id="theme-stylesheet">
+  <!-- Custom stylesheet - for your changes-->
+  <link rel="stylesheet" href="{% static 'css/custom.0a822280.css' %}">
+  <!-- Favicon-->
+  <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
+  <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  <!-- Font Awesome CSS-->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!--  <link rel="stylesheet" href="{% static 'css/all.css' %}" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">-->
+</head>
   <body style="padding-top: 72px;">
     <header class="header">
       <!-- Navbar-->
@@ -222,7 +226,7 @@
     <div class="container-fluid py-5 px-lg-5">
       <div class="row border-bottom mb-4">
         <div class="col-12">
-          <h1 class="display-4 font-weight-bold text-serif mb-4">Eat in Manhattan, NY</h1>
+          <h1 class="display-4 font-weight-bold text-serif mb-4">Dine Safely</h1>
         </div>
       </div>
       <div class="row">
@@ -434,10 +438,10 @@
             <!-- venue item-->
             <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
               <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url(../../../d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1430931071372-38127bd472b8.jpg); min-height: 200px;"><a class="tile-link" href="#" id="img0"></a>
+                <div id="image0" class="card-img-top overflow-hidden dark-overlay bg-cover" style="min-height: 200px;"><a class="tile-link" href="#" id="img0"></a>
                   <div class="card-img-overlay-bottom z-index-20">
                     <h4 id="name0" class="text-white text-shadow">Blue Hill </h4>
-                    <p class="mb-2 text-xs"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                    </i>
+                    <p class="mb-2 text-xs"><i class="fa fa-star text-warning" id="star00"></i><i class="fa fa-star text-warning" id="star01"></i><i class="fa fa-star text-warning" id="star02"></i><i class="fa fa-star text-warning" id="star03"></i><i class="fa fa-star text-warning" id="star04"></i>
                     </p>
                   </div>
                   <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
@@ -448,9 +452,9 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <p id="text0" class="text-sm text-muted mb-3"> Cupidatat excepteur non dolore laborum et quis nostrud veniam dolore deserunt. Pariatur dolore ut in elit id nulla. Irur...</p>
-                  <p id="status0" class="text-sm text-muted text-uppercase mb-1">Compliance <a href="#" class="text-dark">Matt Damon</a></p>
-                  <p id="blue0" class="text-sm mb-0"><a class="mr-1" href="#">Restaurant,</a><a class="mr-1" href="#">Contemporary</a>
+<!--                  <p id="text0" class="text-sm text-muted mb-3"> Cupidatat excepteur non dolore laborum et quis nostrud veniam dolore deserunt. Pariatur dolore ut in elit id nulla. Irur...</p>-->
+                  <p id="status0" class="text-sm text-muted text-uppercase mb-1">None <a href="#" class="text-dark">Matt Damon</a></p>
+                  <p id="blue0" class="text-sm mb-0"><a class="mr-1" href="#">Restaurant,</a>
                   </p>
                 </div>
               </div>
@@ -575,6 +579,55 @@
                 </div>
               </div>
             </div>
+            <script>
+                //var page = {{page|safe}}
+
+                //for (var i = 0; i < 3; i++) {
+                //    console.log(i.toString());
+                //    document.getElementById("page" + i.toString()).innerHTML = (page + i).toString();
+                //    document.getElementById("page" + i.toString()).href = (page + i).toString();
+                //}
+                //document.getElementById("page3").href = (page + 1).toString();
+                //if(page > 0) {
+                //    document.getElementById("page-1").href = (page - 1).toString();
+                //}
+
+                var List = {{ restaurant_list|safe }};
+                for (var i = 0; i < 1; i++) {
+                    console.log(List[i]['restaurant_name']);
+                    if (List[i]['yelp_info'] != null) {
+                        if (List[i]['yelp_info']['image_url'] != null) {
+                           console.log(List[i]['yelp_info']['image_url']);
+                           document.getElementById("image" + i.toString()).style.backgroundImage = "url(" + List[i]['yelp_info']['image_url'] + ")";
+                            document.getElementById("img" + i.toString()).href = "../" + List[i]['id'];
+                        }
+                        if (List[i]['yelp_info']['categories'] != null) {
+                          var categories_str = "";
+                          for(var j = 0; j < List[i]['yelp_info']['categories'].length; j++) {
+                            console.log(List[i]['yelp_info']['categories'][j]);
+                            categories_str += List[i]['yelp_info']['categories'][j]['title'] + "\t";
+                          }
+                          document.getElementById("blue" + i.toString()).innerHTML = categories_str;
+                        }
+                        if (List[i]['latest_record'] != null) {
+                          document.getElementById("status" + i.toString()).innerHTML = List[i]['latest_record']['is_roadway_compliant'];
+                        }
+
+                        if (List[i]['yelp_info']['rating'] != null) {
+                            console.log(List[i]['yelp_info']['rating']);
+                            for (var r = 0 ; r < 5; r++) {
+                                if (r > List[i]['yelp_info']['rating'] - 1) {
+                                    document.getElementById("star" + i.toString() + r.toString()).className = "fa fa-star text-gray-300";
+                                }
+                            }
+                        }
+                    }
+                    document.getElementById("name" + i.toString()).innerHTML = List[i]['restaurant_name'];
+                    document.getElementById("name" + i.toString()).href = "../" + List[i]['id'];
+                }
+            </script>
+
+
           </div>
           <!-- Pagination -->
           <nav aria-label="Page navigation example">

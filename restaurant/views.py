@@ -67,7 +67,7 @@ def get_restaurant_by_id(request, restaurant_id):
             'phone': response['yelp_info']['info']['phone'],
             'disp_phone': response['yelp_info']['info']['display_phone'],
             'rcnt': response['yelp_info']['info']['review_count'],
-            'type:': response['yelp_info']['info']['categories'][1]['title'],
+            #'type:': response['yelp_info']['info']['categories']['title'],
             'rate': response['yelp_info']['info']['rating'],
             'loc': response['opendata_info']['business_address'],
             'p1': response['yelp_info']['info']['photos'][0],
@@ -127,5 +127,5 @@ def get_inspection_info(request, name, address, postcode):
 def get_landing_page(request, page):
     restaurant_list = get_restaurant_list(page, 6)
     print(restaurant_list)
-    parameter_dict = {'restaurant_list': json.dumps(restaurant_list), 'page': page}
-    return render(request, 'restaurant_list.html', parameter_dict)
+    parameter_dict = {'restaurant_list': json.dumps(restaurant_list, cls=DjangoJSONEncoder), 'page': page}
+    return render(request, 'category-3.html', parameter_dict)
