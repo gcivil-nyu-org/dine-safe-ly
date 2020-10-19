@@ -37,10 +37,11 @@ def get_restaurant_by_id(request, restaurant_id):
         return HttpResponseNotFound('Restaurant not found')
     response_yelp = query_yelp(restaurant.business_id)
     inspection_data = get_latest_inspection_record(restaurant.restaurant_name, restaurant.business_address, restaurant.postcode)
-    response = {'yelp_info': response_yelp, 'opendata_info': inspection_data} 
+    response = {'yelp_info': response_yelp, 'opendata_info': inspection_data, 'restaurant_id' : restaurant_id} 
 
     if 'price' not in response['yelp_info']['info']:
         return render(request, 'home.html', {
+            'restaurant_id' : response['restaurant_id'],
             'name': response['yelp_info']['info']['name'],
             'img_url': response['yelp_info']['info']['image_url'],
             'link': response['yelp_info']['info']['url'],
@@ -61,6 +62,7 @@ def get_restaurant_by_id(request, restaurant_id):
             'skipped_reason': response['opendata_info']['skipped_reason']})
     try:
         return render(request, 'home.html', {
+            'restaurant_id' : response['restaurant_id'],
             'name': response['yelp_info']['info']['name'],
             'img_url': response['yelp_info']['info']['image_url'],
             'link': response['yelp_info']['info']['url'],
@@ -118,14 +120,20 @@ def get_restaurant_by_id(request, restaurant_id):
         return HttpResponseNotFound('Restaurant not found')
 
 
-def get_inspection_info(request, name, address, postcode):
-    inspection_data = query_inspection_record(name, address, postcode)
-    response = {'opendata_info': inspection_data}
-    return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder))
+def get_inspection_info(request, restaurant_id):
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+    if not restaurant or not restaurant.business_id:
+        # TODO: Query yelp with matching module
+        return HttpResponseNotFound('Restaurant not found')
+    inspection_data_list = query_inspection_record(restaurant.restaurant_name,
+                                                   restaurant.business_address, restaurant.postcode)
+    print(inspection_data_list)
+    parameter_dict = {'inspection_list': json.dumps(inspection_data_list, cls=DjangoJSONEncoder)}
+    return render(request, 'inspection_records.html', parameter_dict)
 
 
 def get_landing_page(request, page):
     restaurant_list = get_restaurant_list(page, 6)
-    print(restaurant_list)
-    parameter_dict = {'restaurant_list': json.dumps(restaurant_list, cls=DjangoJSONEncoder), 'page': page}
-    return render(request, 'category-3.html', parameter_dict)
+    # print(restaurant_list)
+    parameter_dict = {'restaurant_list': json.dumps(restaurant_list), 'page': page}
+    return render(request, 'restaurant_list.html', parameter_dict)

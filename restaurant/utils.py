@@ -56,8 +56,6 @@ def get_restaurant_list(page, limit):
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)
         restaurant_dict['yelp_info'] = json.loads(get_restaurant_info_yelp(restaurant.business_id).content) if restaurant.business_id else None
-        latest_inspection_record = get_latest_inspection_record(restaurant.restaurant_name, restaurant.business_address, restaurant.postcode)
-        restaurant_dict['latest_record'] = latest_inspection_record
         result.append(restaurant_dict)
     return result
 
