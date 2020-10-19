@@ -67,7 +67,7 @@ def get_restaurant_by_id(request, restaurant_id):
             'phone': response['yelp_info']['info']['phone'],
             'disp_phone': response['yelp_info']['info']['display_phone'],
             'rcnt': response['yelp_info']['info']['review_count'],
-            #'type:': response['yelp_info']['info']['categories']['title'],
+            'type:': response['yelp_info']['info']['categories'][1]['title'],
             'rate': response['yelp_info']['info']['rating'],
             'loc': response['opendata_info']['business_address'],
             'p1': response['yelp_info']['info']['photos'][0],
