@@ -59,17 +59,15 @@
     <div class="row">
       <div class="col-xl-8 col-lg-10 mx-auto">
         <div class="text-content">
-          <h2>NYC has announced the requirements of
+
+          <!-- <ol><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li></ol> -->
+          <blockquote id="inspection_records_list" class="blockquote blockquote-primary bg-gray-100 p-5"></blockquote>
+          <h4>NYC has announced the requirements of
             <br>re-opening restaurants following the
             <a target="_blank" href="https://www1.nyc.gov/html/dot/html/pedestrians/openrestaurants.shtml">
               <br>Open Restaurant Compliance
             </a>.
-          </h2>
-          <div class="col-xl-10 mx-auto">
-            <img class="img-fluid mb-5" src="https://www1.nyc.gov/html/dot/images/pedestrians/open-restaurants-application-detailed-specs.jpg" alt="">
-          </div>
-          <!-- <ol><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li></ol> -->
-          <blockquote id="inspection_records_list" class="blockquote blockquote-primary bg-gray-100 p-5"></blockquote>
+          </h4>
           <script>
       var List = {{ inspection_list|safe }};
 
@@ -79,7 +77,7 @@
           document.getElementById("restaurant_name1").innerHTML = name;
           var compliant_status = List[i]['is_roadway_compliant'].toString();
           var inspection_date = List[i]['inspected_on'].toString();
-          var info = compliant_status + " inspected on " + inspection_date;
+          var info = compliant_status + " - " + inspection_date;
           // abc.innerHTML = compliant_status;
           var entry = document.createElement('span');
           var x = document.createElement('br');
