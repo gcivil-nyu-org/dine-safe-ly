@@ -128,7 +128,7 @@ def get_inspection_info(request, restaurant_id):
     inspection_data_list = query_inspection_record(restaurant.restaurant_name,
                                                    restaurant.business_address, restaurant.postcode)
     print(inspection_data_list)
-    parameter_dict = {'inspection_list': json.dumps(inspection_data_list, cls=DjangoJSONEncoder)}
+    parameter_dict = {'inspection_list': json.dumps(inspection_data_list, cls=DjangoJSONEncoder),'restaurant_id':restaurant_id}
     return render(request, 'inspection_records.html', parameter_dict)
 
 
