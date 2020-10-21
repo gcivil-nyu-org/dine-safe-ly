@@ -124,6 +124,8 @@ STATIC_URL = '/static/'
 YELP_BUSINESS_API = 'https://api.yelp.com/v3/businesses/'
 YELP_ACCESS_TOKE = 'A_V_V4rxelsvDsI2uFW1kT2mP2lUjd75GTEEsEcLnnvVOK5ssemrbw-R49czpANtS2ZtAeCl6FaapQrp1_30cRt9YKao3pFL1I6304sAtwKwKJkF1JBgF88FZl1_X3Yx'
 
+django_heroku.settings(locals())
+
 # Logging
 LOGGING = {
     'version': 1,
@@ -156,4 +158,3 @@ LOGGING = {
     }
 }
 
-django_heroku.settings(locals())
