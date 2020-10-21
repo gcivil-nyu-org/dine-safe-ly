@@ -36,7 +36,7 @@ def save_inspections(inspection_df):
         try:
             # print(row)
             inspect_record = InspectionRecords(restaurant_name=row['restaurantname'],restaurant_Inspection_ID=row['restaurantinspectionid'],is_roadway_compliant=row['isroadwaycompliant'],business_address=row['businessaddress'],postcode=row['postcode'],skipped_reason=row['skippedreason'],inspected_on=row['inspectedon'])
-            # print(inspect_record)
+            print(inspect_record)
             inspect_record.save()
         except Exception as e:
             print(e)
@@ -45,7 +45,7 @@ def save_inspections(inspection_df):
 import dateutil.parser
 
 # if __name__ == '__main__':
-@sched.scheduled_job('interval', minutes=1)
+@sched.scheduled_job('interval', minutes=2)
 def get_inspection_data():
     # client = Socrata("data.cityofnewyork.us", None)
     #https://data.cityofnewyork.us/resource/4dx7-axux.json?$where=inspectedon > '2020-10-16T10:43:54.000'
@@ -78,3 +78,4 @@ def get_inspection_data():
 # if __name__ == '__main__':
 #     get_inspection_data()
 sched.start()
+print("scheduler started")
