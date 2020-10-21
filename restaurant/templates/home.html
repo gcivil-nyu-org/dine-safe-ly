@@ -37,6 +37,7 @@
 
 <!--  <link rel="stylesheet" href="{% static 'css/all.css' %}" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">-->
 </head>
+
 <body>
 <!-- Hero Section-->
 <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('{{ img_url }}');">
@@ -312,13 +313,13 @@
 <script src="{% static 'js/map-layers.f6cf9b57.js' %}"> </script>
 <script src="{% static 'js/map-detail.ecc97be1.js' %}"></script>
 <script>
-      createDetailMap({
-          mapId: 'detailMap',
-          mapCenter: [{{ lat }}, {{ long }}],
-          markerShow: true,
-          markerPosition: [{{ lat }}, {{ long }}],
-          markerPath: '{% static 'img/marker.svg' %}',
-      })
+<!--      createDetailMap({-->
+<!--          mapId: 'detailMap',-->
+<!--          mapCenter: [{{ lat }}, {{ long }}],-->
+<!--          markerShow: true,-->
+<!--          markerPosition: [{{ lat }}, {{ long }}],-->
+<!--          markerPath: '{% static 'img/marker.svg' %}',-->
+<!--      })-->
     </script>
 </body>
 </html>

@@ -128,12 +128,12 @@ def get_inspection_info(request, restaurant_id):
     inspection_data_list = query_inspection_record(restaurant.restaurant_name,
                                                    restaurant.business_address, restaurant.postcode)
     print(inspection_data_list)
-    parameter_dict = {'inspection_list': json.dumps(inspection_data_list, cls=DjangoJSONEncoder)}
+    parameter_dict = {'inspection_list': json.dumps(inspection_data_list, cls=DjangoJSONEncoder), 'restaurant_id': restaurant_id}
     return render(request, 'inspection_records.html', parameter_dict)
 
 
 def get_landing_page(request, page):
+    logger.debug("Request get for the landing page")
     restaurant_list = get_restaurant_list(page, 6)
-    print(restaurant_list)
     parameter_dict = {'restaurant_list': json.dumps(restaurant_list, cls=DjangoJSONEncoder), 'page': page}
     return render(request, 'category-3.html', parameter_dict)
