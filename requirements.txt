@@ -1,0 +1,5 @@
+sodapy
+Django~=3.1.2
+gunicorn==20.0.4
+django-heroku==0.3.1
+django-environ==0.4.5
