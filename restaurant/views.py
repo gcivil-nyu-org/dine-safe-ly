@@ -1,10 +1,8 @@
 from django.shortcuts import get_object_or_404, render
-from django.views.decorators.csrf import csrf_exempt
 from .models import Restaurant, InspectionRecords
 from .utils import query_yelp, query_inspection_record, get_latest_inspection_record, get_restaurant_list
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
-from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 import logging
@@ -14,21 +12,6 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     return HttpResponse("Hello, this is restaurant.")
-
-
-@csrf_exempt
-def add_inspection_records(request):
-    # # TODO: check login status
-    records = json.loads(request.body)
-    for record in records:
-        inspection_record = InspectionRecords(restaurant_Inspection_ID=record['restaurant_Inspection_ID'],
-                                              restaurant_name=record['restaurant_name'],
-                                              legal_business_name=record['legal_business_name'],
-                                              business_address=record['business_address'],
-                                              inspected_on=record['inspected_on'],
-                                              postcode=record['postcode'])
-        inspection_record.save()
-    return HttpResponse("Add inspection records")
 
 
 def get_restaurant_by_id(request, restaurant_id):
@@ -133,18 +116,21 @@ def get_restaurant_by_id(request, restaurant_id):
 def get_inspection_info(request, restaurant_id):
     try:
         restaurant = Restaurant.objects.get(pk=restaurant_id)
+
+        inspection_data_list = query_inspection_record(restaurant.restaurant_name,
+                                                       restaurant.business_address,
+                                                       restaurant.postcode)
+
+        parameter_dict = {'inspection_list': json.dumps(inspection_data_list, cls=DjangoJSONEncoder),
+                          'restaurant_id': restaurant_id}
+
+        return render(request, 'inspection_records.html', parameter_dict)
     except Restaurant.DoesNotExist:
-        return HttpResponseNotFound('Restaurant not found')
-    inspection_data_list = query_inspection_record(restaurant.restaurant_name,
-                                                   restaurant.business_address, restaurant.postcode)
-    # print(inspection_data_list)
-    parameter_dict = {'inspection_list': json.dumps(inspection_data_list, cls=DjangoJSONEncoder),
-                      'restaurant_id': restaurant_id}
-    return render(request, 'inspection_records.html', parameter_dict)
+        logger.warning("Restaurant ID could not be found: {}".format(restaurant_id))
+        return HttpResponseNotFound("Restaurant ID {} does not exist".format(restaurant_id))
 
 
 def get_landing_page(request, page):
     restaurant_list = get_restaurant_list(page, 6)
-    # print(restaurant_list)
     parameter_dict = {'restaurant_list': json.dumps(restaurant_list, cls=DjangoJSONEncoder), 'page': page}
     return render(request, 'browse.html', parameter_dict)
