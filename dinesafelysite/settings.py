@@ -126,6 +126,8 @@ YELP_ACCESS_TOKE = 'A_V_V4rxelsvDsI2uFW1kT2mP2lUjd75GTEEsEcLnnvVOK5ssemrbw-R49cz
 
 django_heroku.settings(locals())
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
 # Logging
 LOGGING = {
     'version': 1,
