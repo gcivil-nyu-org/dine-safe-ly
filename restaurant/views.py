@@ -131,9 +131,9 @@ def get_restaurant_by_id(request, restaurant_id):
 
 
 def get_inspection_info(request, restaurant_id):
-    restaurant = Restaurant.objects.get(pk=restaurant_id)
-    if not restaurant or not restaurant.business_id:
-        # TODO: Query yelp with matching module
+    try:
+        restaurant = Restaurant.objects.get(pk=restaurant_id)
+    except Restaurant.DoesNotExist:
         return HttpResponseNotFound('Restaurant not found')
     inspection_data_list = query_inspection_record(restaurant.restaurant_name,
                                                    restaurant.business_address, restaurant.postcode)

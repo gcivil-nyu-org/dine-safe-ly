@@ -1,6 +1,7 @@
 import enum
 from django.test import TestCase
 from django.urls import reverse
+
 from .models import InspectionRecords, Restaurant
 
 
@@ -27,7 +28,7 @@ def create_inspection_records(restaurant_Inspection_ID, restaurant_name, postcod
                                             skipped_reason=skipped_reason, inspected_on=inspected_on)
 
 
-def setup(self):
+def setup():
     create_inspection_records(restaurant_Inspection_ID='11157', restaurant_name='Tacos El Paisa', postcode='10040',
                               business_address='1548 St. Nicholas btw West 187th street and west 188th street, '
                                                'Manhattan, NY', is_roadway_compliant=Compliance.skipped,
@@ -41,12 +42,18 @@ def setup(self):
 
 
 class InspectionRecordsViewTests(TestCase):
-    """ Test InspectionRecords Views """
+    """ Tests """
 
-    def test_get_restaurant_inspections(self):
-        restaurant = setup(self)
-        response = self.client.get(reverse('restaurant:yelp_info', args=(restaurant.id,)))
+    def test_get_valid_restaurant_inspections(self):
+        restaurant = setup()
+        response = self.client.get(reverse('restaurant:inspection_history', args=(restaurant.id,)))
         self.assertEqual(response.status_code, 200)
+
+    def test_get_invalid_restaurant_inspections(self):
+        restaurant = setup()
+        restaurant.id = -1
+        response = self.client.get(reverse('restaurant:inspection_history', args=(restaurant.id,)))
+        self.assertEqual(response.status_code, 404)
 
 
 class RestaurantViewTests(TestCase):
