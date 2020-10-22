@@ -28,33 +28,32 @@ def create_inspection_records(restaurant_Inspection_ID, restaurant_name, postcod
                                             skipped_reason=skipped_reason, inspected_on=inspected_on)
 
 
-def setup():
-    create_inspection_records(restaurant_Inspection_ID='11157', restaurant_name='Tacos El Paisa', postcode='10040',
-                              business_address='1548 St. Nicholas btw West 187th street and west 188th street, '
-                                               'Manhattan, NY', is_roadway_compliant=Compliance.skipped,
-                              skipped_reason='No Seating', inspected_on='2020-07-16 18:09:42')
-
-    test_restaurant = create_restaurant(restaurant_name='Tacos El Paisa',
-                                        business_address='1548 St. Nicholas btw West 187th street and west 188th '
-                                                         'street, Manhattan, NY',
-                                        postcode='10040', business_id='16')
-    return test_restaurant
-
-
 class InspectionRecordsViewTests(TestCase):
-    """ Tests """
+    """ Tests for Inspection Record Views """
+
+    def setUp(self):
+        self.restaurant = create_restaurant(restaurant_name='Tacos El Paisa',
+                                            business_address='1548 St. Nicholas btw West 187th street and west 188th '
+                                                             'street, Manhattan, NY',
+                                            postcode='10040', business_id='16')
+
+    def tearDown(self):
+        self.restaurant.delete()
 
     def test_get_valid_restaurant_inspections(self):
-        restaurant = setup()
-        response = self.client.get(reverse('restaurant:inspection_history', args=(restaurant.id,)))
+        response = self.client.get(reverse('restaurant:inspection_history', args=(self.restaurant.id,)))
         self.assertEqual(response.status_code, 200)
 
     def test_get_invalid_restaurant_inspections(self):
-        restaurant = setup()
-        restaurant.id = -1
-        response = self.client.get(reverse('restaurant:inspection_history', args=(restaurant.id,)))
+        self.restaurant.id = -1
+        response = self.client.get(reverse('restaurant:inspection_history', args=(self.restaurant.id,)))
         self.assertEqual(response.status_code, 404)
+
+
 
 
 class RestaurantViewTests(TestCase):
     """ Test Restaurant Views """
+
+
+class IntegratedInspectionRestaurantsTests(TestCase):
