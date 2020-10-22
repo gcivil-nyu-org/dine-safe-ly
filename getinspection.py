@@ -75,14 +75,14 @@ def get_inspection_data():
     lastInspection = InspectionRecords.objects.order_by('-inspected_on')[0:1]
     date = str(lastInspection[0].inspected_on)
     date = date.replace(" ",'T')
-    var = 'inspectedon > \''+ date + '\''
+    date_query = 'inspectedon > \''+ date + '\''
 
     client = Socrata("data.cityofnewyork.us",
                     "dLBzJwg25psQttbxjLlQ8Z53V",
                     username="cx657@nyu.edu",
                     password="Dinesafely123")
 
-    results = client.get("4dx7-axux",where = var)
+    results = client.get("4dx7-axux",where = date_query)
 
     # Convert to pandas DataFrame
     results_df = pd.DataFrame.from_records(results)
