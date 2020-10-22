@@ -50,8 +50,9 @@ def save_restaurants(restaurant_df):
                 continue
             else:
                 b_id = response['businesses'][0]['id']
-                r = Restaurant(restaurant_name=row['restaurantname'],business_address=row['businessaddress'],postcode=row['postcode'],legal_business_name=row['legalbusinessname'],business_id=b_id)
-                r.save()
+            
+            r = Restaurant(restaurant_name=row['restaurantname'],business_address=row['businessaddress'],postcode=row['postcode'],legal_business_name=row['legalbusinessname'],business_id=b_id)
+            r.save()
         except:
             continue
     return
