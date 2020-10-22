@@ -69,7 +69,7 @@ def save_inspections(inspection_df):
     return
 
 
-@sched.scheduled_job('interval', minutes=2)
+@sched.scheduled_job('interval', hours=12)
 def get_inspection_data():
     ir = InspectionRecords.objects.all().count()
     lastInspection = InspectionRecords.objects.order_by('-inspected_on')[0:1]
