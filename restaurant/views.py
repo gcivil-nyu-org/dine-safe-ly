@@ -1,13 +1,15 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from .models import Restaurant, InspectionRecords
-from .utils import query_yelp, query_inspection_record
+from .utils import query_yelp, query_inspection_record, get_latest_inspection_record, get_restaurant_list
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+import logging
 
+logger = logging.getLogger(__name__)
 
 def index(request):
     return HttpResponse("Hello, this is restaurant.")
@@ -34,13 +36,12 @@ def get_restaurant_by_id(request, restaurant_id):
         # TODO: Query yelp with matching module
         return HttpResponseNotFound('Restaurant not found')
     response_yelp = query_yelp(restaurant.business_id)
-    inspection_data = query_inspection_record(restaurant.restaurant_name, restaurant.business_address, restaurant.postcode)
-    response = {'yelp_info': response_yelp, 'opendata_info': inspection_data} 
-#     #return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder))
-#    # json_str = json.dumps(response, cls=DjangoJSONEncoder)
-#    # resp = json.loads(json_str)
+    inspection_data = get_latest_inspection_record(restaurant.restaurant_name, restaurant.business_address, restaurant.postcode)
+    response = {'yelp_info': response_yelp, 'opendata_info': inspection_data, 'restaurant_id' : restaurant_id} 
+
     if 'price' not in response['yelp_info']['info']:
         return render(request, 'home.html', {
+            'restaurant_id' : response['restaurant_id'],
             'name': response['yelp_info']['info']['name'],
             'img_url': response['yelp_info']['info']['image_url'],
             'link': response['yelp_info']['info']['url'],
@@ -61,6 +62,7 @@ def get_restaurant_by_id(request, restaurant_id):
             'skipped_reason': response['opendata_info']['skipped_reason']})
     try:
         return render(request, 'home.html', {
+            'restaurant_id' : response['restaurant_id'],
             'name': response['yelp_info']['info']['name'],
             'img_url': response['yelp_info']['info']['image_url'],
             'link': response['yelp_info']['info']['url'],
@@ -118,7 +120,20 @@ def get_restaurant_by_id(request, restaurant_id):
         return HttpResponseNotFound('Restaurant not found')
 
 
-def get_inspection_info(request, name, address, postcode):
-    inspection_data = query_inspection_record(name, address, postcode)
-    response = {'opendata_info': inspection_data}
-    return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder))
+def get_inspection_info(request, restaurant_id):
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+    if not restaurant or not restaurant.business_id:
+        # TODO: Query yelp with matching module
+        return HttpResponseNotFound('Restaurant not found')
+    inspection_data_list = query_inspection_record(restaurant.restaurant_name,
+                                                   restaurant.business_address, restaurant.postcode)
+    print(inspection_data_list)
+    parameter_dict = {'inspection_list': json.dumps(inspection_data_list, cls=DjangoJSONEncoder), 'restaurant_id': restaurant_id}
+    return render(request, 'inspection_records.html', parameter_dict)
+
+
+def get_landing_page(request, page):
+    restaurant_list = get_restaurant_list(page, 6)
+    print(restaurant_list)
+    parameter_dict = {'restaurant_list': json.dumps(restaurant_list, cls=DjangoJSONEncoder), 'page': page}
+    return render(request, 'category-3.html', parameter_dict)

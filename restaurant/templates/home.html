@@ -37,6 +37,7 @@
 
 <!--  <link rel="stylesheet" href="{% static 'css/all.css' %}" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">-->
 </head>
+
 <body>
 <!-- Hero Section-->
 <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('{{ img_url }}');">
@@ -59,7 +60,9 @@
           <!-- <b>Seating Choice:</b> {{ seating_choice }}<br> -->
           <b>Compliance Status:</b> {{ is_roadway_compliant }}<br>
           <b> Skipped Reason:</b> {{ skipped_reason }}<br>
-          <b>Last Inspection:</b> {{ inspected_on }}<br>
+          <b>Last Inspection:</b> {{ inspected_on }}<br><br><br>
+          <a href="/restaurant/inspection_records/{{ restaurant_id }}"><button class="btn btn-outline-primary" type="button">Check Inspection History</button></a>
+            
         </div>
         <div class="text-block">
           <!-- Listing Location-->
