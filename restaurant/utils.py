@@ -19,15 +19,20 @@ def get_restaurant_reviews_yelp(business_id):
     return requests.get(url, headers=headers)
 
 
+def merge_yelp_info(restaurant_info, restaurant_reviews):
+    return {
+        'info': json.loads(restaurant_info.content),
+        'reviews': json.loads(restaurant_reviews.content)
+    }
+
+
 def query_yelp(business_id):
     if not business_id:
         return None
     restaurant_info = get_restaurant_info_yelp(business_id)
     restaurant_reviews = get_restaurant_reviews_yelp(business_id)
-    data = {
-        'info': json.loads(restaurant_info.content),
-        'reviews': json.loads(restaurant_reviews.content)
-    }
+
+    data = merge_yelp_info(restaurant_info, restaurant_reviews)
     return data
 
 
