@@ -70,7 +70,9 @@ class InspectionRecordsViewTests(TestCase):
 
 class RestaurantViewTests(TestCase):
     """ Test Restaurant Views """
+    pass
 
+class RestaurantUtilsTests(TestCase):
     def test_create_restaurant(self):
         restaurant = create_restaurant(restaurant_name='Gary Danko', business_address='800 N Point St', postcode='94109',
                                        business_id="WavvLdfdP6g8aZTtbBQHTw")
@@ -140,4 +142,4 @@ class RestaurantViewTests(TestCase):
 
 
 class IntegratedInspectionRestaurantsTests(TestCase):
-    pass
+    """ Test Restaurant Views """
