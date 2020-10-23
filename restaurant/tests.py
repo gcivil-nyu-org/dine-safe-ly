@@ -2,7 +2,7 @@ import enum
 from django.test import TestCase
 from django.forms.models import model_to_dict
 from django.urls import reverse
-
+from datetime import datetime
 from .models import InspectionRecords, Restaurant
 from unittest import mock
 from .utils import *
@@ -143,3 +143,32 @@ class RestaurantUtilsTests(TestCase):
 
 class IntegratedInspectionRestaurantsTests(TestCase):
     """ Test Restaurant Views """
+    def test_get_latest_inspections(self):
+        restaurant = create_restaurant(restaurant_name='Tacos El Paisa',
+                                       business_address='1548 St. Nicholas btw West 187th street and west 188th '
+                                                        'street, Manhattan, NY',
+                                       postcode='10040', business_id='16')
+        inspection1 = InspectionRecords.objects.create(restaurant_Inspection_ID='24111',
+                                                       restaurant_name='Tacos El Paisa', postcode='10040',
+                                                       business_address='1548 St. Nicholas btw West 187th street and west 188th '
+                                                                        'street, Manhattan, NY',
+                                                       is_roadway_compliant='Compliant',
+                                                       skipped_reason='No Seating', inspected_on=datetime(2020, 10, 21, 12, 30, 30))
+        inspection2 = InspectionRecords.objects.create(restaurant_Inspection_ID='24112',
+                                                       restaurant_name='Tacos El Paisa', postcode='10040',
+                                                       business_address='1548 St. Nicholas btw West 187th street and west 188th '
+                                                                        'street, Manhattan, NY',
+                                                       is_roadway_compliant='Non-Compliant',
+                                                       skipped_reason='No Seating', inspected_on=datetime(2020, 10, 22, 12, 30, 30))
+
+        latest_inspection = get_latest_inspection_record('Tacos El Paisa',
+                                                         '1548 St. Nicholas btw West 187th street and west 188th '
+                                                         'street, Manhattan, NY', '10040')
+        self.assertEqual(latest_inspection, {'restaurant_Inspection_ID': '24112',
+                                             'restaurant_name': 'Tacos El Paisa',
+                                             'postcode': '10040',
+                                             'business_address': '1548 St. Nicholas btw West 187th street and west 188th '
+                                                                 'street, Manhattan, NY',
+                                             'is_roadway_compliant': 'Non-Compliant',
+                                             'skipped_reason': 'No Seating',
+                                             'inspected_on': datetime(2020, 10, 22, 12, 30, 30)})
