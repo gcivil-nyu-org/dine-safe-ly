@@ -983,3 +983,6 @@ NameError: name 'response' is not defined
 2020-10-22 20:49:32,592 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
 2020-10-22 20:49:32,597 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
 2020-10-22 20:49:32,809 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw/reviews HTTP/1.1" 200 None
+2020-10-23 16:32:38,991 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-23 16:32:42,247 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-23 16:32:42,292 asyncio      DEBUG    Using proactor: IocpProactor

@@ -4,3 +4,4 @@ data.json
 logs
 db.sqlite3
 restaurant/migrations
+.coverage
