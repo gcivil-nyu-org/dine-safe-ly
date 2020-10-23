@@ -9,11 +9,16 @@ class Restaurant(models.Model):
     # legal_business_name = models.CharField(max_length=200, default=None)
 
     class Meta:
-        unique_together = (('restaurant_name', 'business_address', 'postcode'),)
+        unique_together = (("restaurant_name", "business_address", "postcode"),)
 
     def __str__(self):
-        return '{} {} {} {} {}'.format(self.id, self.restaurant_name, self.business_address,
-                                          self.postcode, self.business_id)
+        return "{} {} {} {} {}".format(
+            self.id,
+            self.restaurant_name,
+            self.business_address,
+            self.postcode,
+            self.business_id,
+        )
 
 
 class InspectionRecords(models.Model):
@@ -27,6 +32,12 @@ class InspectionRecords(models.Model):
     # seating_choice = models.CharField(max_length=20)
 
     def __str__(self):
-        return '{} {} {} {} {} {} {}'.format(self.restaurant_Inspection_ID, self.restaurant_name,
-                                             self.is_roadway_compliant, self.skipped_reason, self.inspected_on,
-                                             self.postcode, self.business_address)
+        return "{} {} {} {} {} {} {}".format(
+            self.restaurant_Inspection_ID,
+            self.restaurant_name,
+            self.is_roadway_compliant,
+            self.skipped_reason,
+            self.inspected_on,
+            self.postcode,
+            self.business_address,
+        )

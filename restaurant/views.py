@@ -1,6 +1,11 @@
 from django.shortcuts import get_object_or_404, render
 from .models import Restaurant, InspectionRecords
-from .utils import query_yelp, query_inspection_record, get_latest_inspection_record, get_restaurant_list
+from .utils import (
+    query_yelp,
+    query_inspection_record,
+    get_latest_inspection_record,
+    get_restaurant_list,
+)
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
@@ -23,14 +28,17 @@ def get_restaurant_by_id(request, restaurant_id):
 
     if not restaurant or not restaurant.business_id:
         # TODO: Query yelp with matching module
-        return HttpResponseNotFound('Restaurant not found')
+        return HttpResponseNotFound("Restaurant not found")
     response_yelp = query_yelp(restaurant.business_id)
-    latest_inspection = get_latest_inspection_record(restaurant.restaurant_name,
-                                                     restaurant.business_address,
-                                                     restaurant.postcode)
-    parameter_dict = {'yelp_info': response_yelp, 'lasted_inspection': latest_inspection,
-                      'restaurant_id': restaurant_id}
-    return render(request, 'restaurant_detail.html', parameter_dict)
+    latest_inspection = get_latest_inspection_record(
+        restaurant.restaurant_name, restaurant.business_address, restaurant.postcode
+    )
+    parameter_dict = {
+        "yelp_info": response_yelp,
+        "lasted_inspection": latest_inspection,
+        "restaurant_id": restaurant_id,
+    }
+    return render(request, "restaurant_detail.html", parameter_dict)
 
     # if 'price' not in response['yelp_info']['info']:
     #     return render(request, 'home.html', {
@@ -117,20 +125,27 @@ def get_inspection_info(request, restaurant_id):
     try:
         restaurant = Restaurant.objects.get(pk=restaurant_id)
 
-        inspection_data_list = query_inspection_record(restaurant.restaurant_name,
-                                                       restaurant.business_address,
-                                                       restaurant.postcode)
+        inspection_data_list = query_inspection_record(
+            restaurant.restaurant_name, restaurant.business_address, restaurant.postcode
+        )
 
-        parameter_dict = {'inspection_list': json.dumps(inspection_data_list, cls=DjangoJSONEncoder),
-                          'restaurant_id': restaurant_id}
+        parameter_dict = {
+            "inspection_list": json.dumps(inspection_data_list, cls=DjangoJSONEncoder),
+            "restaurant_id": restaurant_id,
+        }
 
-        return render(request, 'inspection_records.html', parameter_dict)
+        return render(request, "inspection_records.html", parameter_dict)
     except Restaurant.DoesNotExist:
         logger.warning("Restaurant ID could not be found: {}".format(restaurant_id))
-        return HttpResponseNotFound("Restaurant ID {} does not exist".format(restaurant_id))
+        return HttpResponseNotFound(
+            "Restaurant ID {} does not exist".format(restaurant_id)
+        )
 
 
 def get_landing_page(request, page):
     restaurant_list = get_restaurant_list(page, 6)
-    parameter_dict = {'restaurant_list': json.dumps(restaurant_list, cls=DjangoJSONEncoder), 'page': page}
-    return render(request, 'browse.html', parameter_dict)
+    parameter_dict = {
+        "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),
+        "page": page,
+    }
+    return render(request, "browse.html", parameter_dict)
