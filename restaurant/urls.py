@@ -11,5 +11,5 @@ urlpatterns = [
         views.get_inspection_info,
         name="inspection_history",
     ),
-    path("browse/<page>", views.get_landing_page),
+    path("browse/<page>", views.get_landing_page, name="browse"),
 ]

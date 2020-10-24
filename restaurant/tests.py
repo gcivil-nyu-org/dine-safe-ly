@@ -4,7 +4,7 @@ from django.forms.models import model_to_dict
 from datetime import datetime
 from unittest import mock
 from .models import Restaurant, InspectionRecords
-from .views import get_inspection_info
+from .views import get_inspection_info, get_landing_page
 from .utils import (
     merge_yelp_info,
     get_restaurant_info_yelp,
@@ -45,9 +45,6 @@ def create_inspection_records(
         skipped_reason,
         inspected_on,
 ):
-    if not isinstance(is_roadway_compliant, Compliance):
-        raise TypeError("compliance_status must be an instance of Compliance enum")
-
     return InspectionRecords.objects.create(
         restaurant_inspection_id=restaurant_inspection_id,
         restaurant_name=restaurant_name,
@@ -59,10 +56,10 @@ def create_inspection_records(
     )
 
 
-class Compliance(enum.Enum):
-    no = "Non-Compliant"
-    yes = "Compliant"
-    skipped = "Skipped Inspection"
+# class Compliance(enum.Enum):
+#     no = "Non-Compliant"
+#     yes = "Compliant"
+#     skipped = "Skipped Inspection"
 
 
 class MockResponse:
@@ -73,8 +70,46 @@ class MockResponse:
     def content(self):
         return self.content
 
-    def json(self):
-        return self.content
+
+class ModelTests(TestCase):
+    def test_create_restaurant(self):
+        restaurant = create_restaurant(
+            restaurant_name="Gary Danko",
+            business_address="800 N Point St",
+            postcode="94109",
+            business_id="WavvLdfdP6g8aZTtbBQHTw",
+        )
+        self.assertIsNotNone(restaurant)
+        self.assertEqual(restaurant.restaurant_name, "Gary Danko")
+        self.assertEqual(restaurant.business_address, "800 N Point St")
+        self.assertEqual(restaurant.postcode, "94109")
+        self.assertEqual(restaurant.business_id, "WavvLdfdP6g8aZTtbBQHTw")
+        self.assertEqual(
+            str(restaurant), "1 Gary Danko 800 N Point St 94109 WavvLdfdP6g8aZTtbBQHTw"
+        )
+
+    def test_create_inspection_records(self):
+        inspection_record = create_inspection_records(
+            restaurant_inspection_id="27555",
+            restaurant_name="blah blah",
+            postcode="11101",
+            business_address="somewhere in LIC",
+            is_roadway_compliant="Compliant",
+            skipped_reason="Nan",
+            inspected_on=datetime(2020, 10, 24, 17, 36),
+        )
+        self.assertIsNotNone(inspection_record)
+        self.assertEqual(inspection_record.restaurant_inspection_id, "27555")
+        self.assertEqual(inspection_record.restaurant_name, "blah blah")
+        self.assertEqual(inspection_record.postcode, "11101")
+        self.assertEqual(inspection_record.business_address, "somewhere in LIC")
+        self.assertEqual(inspection_record.is_roadway_compliant, "Compliant")
+        self.assertEqual(inspection_record.skipped_reason, "Nan")
+        self.assertEqual(inspection_record.inspected_on, datetime(2020, 10, 24, 17, 36))
+        self.assertEqual(
+            str(inspection_record), "27555 blah blah Compliant Nan 2020-10-24 17:36:00 "
+                                    "11101 somewhere in LIC"
+        )
 
 
 class InspectionRecordsViewTests(TestCase):
@@ -95,7 +130,7 @@ class InspectionRecordsViewTests(TestCase):
             business_address="1548 St. Nicholas btw West 187th street "
                              "and west 188th "
                              "street, Manhattan, NY",
-            is_roadway_compliant=Compliance.yes,
+            is_roadway_compliant="Compliance",
             skipped_reason="No Seating",
             inspected_on=datetime(2020, 10, 21, 12, 30, 30),
         )
@@ -116,26 +151,40 @@ class InspectionRecordsViewTests(TestCase):
 
 class RestaurantViewTests(TestCase):
     """ Test Restaurant Views """
+    def setUp(self):
+        # Every test needs access to the request factory.
+        self.factory = RequestFactory()
+        self.restaurant = create_restaurant(
+            restaurant_name="Tacos El Paisa",
+            business_address="1548 St. Nicholas btw West 187th street and west 188th "
+                             "street, Manhattan, NY",
+            postcode="10040",
+            business_id="16",
+        )
+        self.inspection_records = create_inspection_records(
+            restaurant_inspection_id="24111",
+            restaurant_name="Tacos El Paisa",
+            postcode="10040",
+            business_address="1548 St. Nicholas btw West 187th street "
+                             "and west 188th "
+                             "street, Manhattan, NY",
+            is_roadway_compliant="Compliance",
+            skipped_reason="No Seating",
+            inspected_on=datetime(2020, 10, 21, 12, 30, 30),
+        )
 
-    pass
+
+    def test_valid_get_landing_page(self):
+        # restaurant_dict = model_to_dict(self.restaurant)
+        # restaurant_dict['yelp_info'] = None
+        # restaurant_dict['latest_record'] = self.inspection_records
+        # restaurant_list = [restaurant_dict]
+        request = self.factory.get("restaurant:browse")
+        response = get_landing_page(request, 6)
+        self.assertEqual(response.status_code, 200)
 
 
 class RestaurantUtilsTests(TestCase):
-    def test_create_restaurant(self):
-        restaurant = create_restaurant(
-            restaurant_name="Gary Danko",
-            business_address="800 N Point St",
-            postcode="94109",
-            business_id="WavvLdfdP6g8aZTtbBQHTw",
-        )
-        self.assertIsNotNone(restaurant)
-        self.assertEqual(restaurant.restaurant_name, "Gary Danko")
-        self.assertEqual(restaurant.business_address, "800 N Point St")
-        self.assertEqual(restaurant.postcode, "94109")
-        self.assertEqual(restaurant.business_id, "WavvLdfdP6g8aZTtbBQHTw")
-        self.assertEqual(
-            str(restaurant), "1 Gary Danko 800 N Point St 94109 WavvLdfdP6g8aZTtbBQHTw"
-        )
 
     def test_merge_yelp_info(self):
         restaurant_info = MockResponse(
@@ -254,7 +303,7 @@ class RestaurantUtilsTests(TestCase):
                                       'Tacos El Paisa',
                                       '10040',
                                       '1548 St. Nicholas btw West 187th street and west 188th street, Manhattan, NY',
-                                      Compliance.skipped,
+                                      'Skipped Inspection',
                                       'No Seating',
                                       '2020-07-16 18:09:42')
         )
@@ -269,7 +318,7 @@ class RestaurantUtilsTests(TestCase):
 class IntegratedInspectionRestaurantsTests(TestCase):
     """ Test Restaurant Views """
 
-    def test_get_latest_inspections(self):
+    def test_valid_get_latest_inspections(self):
         restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
@@ -305,9 +354,12 @@ class IntegratedInspectionRestaurantsTests(TestCase):
         )
         self.assertEqual(latest_inspection, model_to_dict(target_inspection))
 
+
     @mock.patch("restaurant.utils.InspectionRecords.objects.filter")
     def test_get_latest_inspections_empty(self, mock_records):
         mock_records.return_value = InspectionRecords.objects.none()
+
+    def test_invalid_get_inspection_info(self):
         restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
