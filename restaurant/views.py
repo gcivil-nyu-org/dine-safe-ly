@@ -19,27 +19,24 @@ def index(request):
     return HttpResponse("Hello, this is restaurant.")
 
 
-def get_restaurant_by_id(request, restaurant_id):
-    restaurant = Restaurant.objects.get(pk=restaurant_id)
-
-    # if not restaurant.business_id:
-    #     parameter_dict = {'restaurant':restaurant}
-    #     return render(request, 'dummy_restaurant.html', parameter_dict)
-
-    if not restaurant or not restaurant.business_id:
-        # TODO: Query yelp with matching module
-        return HttpResponseNotFound("Restaurant not found")
-    response_yelp = query_yelp(restaurant.business_id)
-    latest_inspection = get_latest_inspection_record(
-        restaurant.restaurant_name, restaurant.business_address, restaurant.postcode
-    )
-    parameter_dict = {
-        "yelp_info": response_yelp,
-        "lasted_inspection": latest_inspection,
-        "restaurant_id": restaurant_id,
-    }
-    return render(request, "restaurant_detail.html", parameter_dict)
-
+def get_restaurant_profile(request, restaurant_id):
+    try:
+        restaurant = Restaurant.objects.get(pk=restaurant_id)
+        response_yelp = query_yelp(restaurant.business_id)
+        latest_inspection = get_latest_inspection_record(
+            restaurant.restaurant_name, restaurant.business_address, restaurant.postcode
+        )
+        parameter_dict = {
+            "yelp_info": response_yelp,
+            "lasted_inspection": latest_inspection,
+            "restaurant_id": restaurant_id,
+        }
+        return render(request, "restaurant_detail.html", parameter_dict)
+    except Restaurant.DoesNotExist:
+        logger.warning("Restaurant ID could not be found: {}".format(restaurant_id))
+        return HttpResponseNotFound(
+            "Restaurant ID {} does not exist".format(restaurant_id)
+        )
     # if 'price' not in response['yelp_info']['info']:
     #     return render(request, 'home.html', {
     #         'restaurant_id': response['restaurant_id'],

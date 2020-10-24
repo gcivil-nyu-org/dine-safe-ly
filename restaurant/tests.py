@@ -1,17 +1,16 @@
-import enum
 from django.test import RequestFactory, TestCase
 from django.forms.models import model_to_dict
 from datetime import datetime
 from unittest import mock
 from .models import Restaurant, InspectionRecords
-from .views import get_inspection_info, get_landing_page
+from .views import get_inspection_info, get_landing_page, get_restaurant_profile
 from .utils import (
     merge_yelp_info,
     get_restaurant_info_yelp,
     get_restaurant_reviews_yelp,
     query_yelp,
     get_latest_inspection_record,
-    get_restaurant_list
+    get_restaurant_list,
 )
 
 # from getinspection import (
@@ -37,13 +36,13 @@ def create_restaurant(restaurant_name, business_address, postcode, business_id):
 
 
 def create_inspection_records(
-        restaurant_inspection_id,
-        restaurant_name,
-        postcode,
-        business_address,
-        is_roadway_compliant,
-        skipped_reason,
-        inspected_on,
+    restaurant_inspection_id,
+    restaurant_name,
+    postcode,
+    business_address,
+    is_roadway_compliant,
+    skipped_reason,
+    inspected_on,
 ):
     return InspectionRecords.objects.create(
         restaurant_inspection_id=restaurant_inspection_id,
@@ -54,12 +53,6 @@ def create_inspection_records(
         skipped_reason=skipped_reason,
         inspected_on=inspected_on,
     )
-
-
-# class Compliance(enum.Enum):
-#     no = "Non-Compliant"
-#     yes = "Compliant"
-#     skipped = "Skipped Inspection"
 
 
 class MockResponse:
@@ -107,32 +100,32 @@ class ModelTests(TestCase):
         self.assertEqual(inspection_record.skipped_reason, "Nan")
         self.assertEqual(inspection_record.inspected_on, datetime(2020, 10, 24, 17, 36))
         self.assertEqual(
-            str(inspection_record), "27555 blah blah Compliant Nan 2020-10-24 17:36:00 "
-                                    "11101 somewhere in LIC"
+            str(inspection_record),
+            "27555 blah blah Compliant Nan 2020-10-24 17:36:00 "
+            "11101 somewhere in LIC",
         )
 
 
 class InspectionRecordsViewTests(TestCase):
     def setUp(self):
-        # Every test needs access to the request factory.
         self.factory = RequestFactory()
-        self.restaurant = create_restaurant(
-            restaurant_name="Tacos El Paisa",
-            business_address="1548 St. Nicholas btw West 187th street and west 188th "
-                             "street, Manhattan, NY",
-            postcode="10040",
-            business_id="16",
-        )
         self.inspection_records = create_inspection_records(
             restaurant_inspection_id="24111",
             restaurant_name="Tacos El Paisa",
             postcode="10040",
             business_address="1548 St. Nicholas btw West 187th street "
-                             "and west 188th "
-                             "street, Manhattan, NY",
+            "and west 188th "
+            "street, Manhattan, NY",
             is_roadway_compliant="Compliance",
             skipped_reason="No Seating",
             inspected_on=datetime(2020, 10, 21, 12, 30, 30),
+        )
+        self.restaurant = create_restaurant(
+            restaurant_name="Tacos El Paisa",
+            business_address="1548 St. Nicholas btw West 187th street and west 188th "
+            "street, Manhattan, NY",
+            postcode="10040",
+            business_id="16",
         )
 
     def test_get_valid_restaurant_inspections(self):
@@ -151,41 +144,37 @@ class InspectionRecordsViewTests(TestCase):
 
 class RestaurantViewTests(TestCase):
     """ Test Restaurant Views """
+
     def setUp(self):
-        # Every test needs access to the request factory.
         self.factory = RequestFactory()
         self.restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-                             "street, Manhattan, NY",
+            "street, Manhattan, NY",
             postcode="10040",
             business_id="16",
         )
-        self.inspection_records = create_inspection_records(
-            restaurant_inspection_id="24111",
-            restaurant_name="Tacos El Paisa",
-            postcode="10040",
-            business_address="1548 St. Nicholas btw West 187th street "
-                             "and west 188th "
-                             "street, Manhattan, NY",
-            is_roadway_compliant="Compliance",
-            skipped_reason="No Seating",
-            inspected_on=datetime(2020, 10, 21, 12, 30, 30),
-        )
 
+    def test_get_valid_restaurant_profile(self):
+        request = self.factory.get("restaurant:profile")
+        request.restaurant = self.restaurant
+        response = get_restaurant_profile(request, self.restaurant.id)
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_invalid_restaurant_profile(self):
+        request = self.factory.get("restaurant:profile")
+        request.restaurant = self.restaurant
+        self.restaurant.id = -1
+        response = get_restaurant_profile(request, self.restaurant.id)
+        self.assertEqual(response.status_code, 404)
 
     def test_valid_get_landing_page(self):
-        # restaurant_dict = model_to_dict(self.restaurant)
-        # restaurant_dict['yelp_info'] = None
-        # restaurant_dict['latest_record'] = self.inspection_records
-        # restaurant_list = [restaurant_dict]
         request = self.factory.get("restaurant:browse")
         response = get_landing_page(request, 6)
         self.assertEqual(response.status_code, 200)
 
 
 class RestaurantUtilsTests(TestCase):
-
     def test_merge_yelp_info(self):
         restaurant_info = MockResponse(
             json.dumps(
@@ -209,30 +198,30 @@ class RestaurantUtilsTests(TestCase):
                             "id": "xAG4O7l-t1ubbwVAlPnDKg",
                             "rating": 5,
                             "text": "Went back again to this place since the last "
-                                    "time i visited the bay area 5 "
-                                    "months ago, and nothing has changed. Still the "
-                                    "sketchy Mission, "
-                                    "Still the cashier...",
+                            "time i visited the bay area 5 "
+                            "months ago, and nothing has changed. Still the "
+                            "sketchy Mission, "
+                            "Still the cashier...",
                             "time_created": "2016-08-29 00:41:13",
                         },
                         {
                             "id": "1JNmYjJXr9ZbsfZUAgkeXQ",
                             "rating": 4,
                             "text": 'The "restaurant" is inside a small deli so there '
-                                    "is no sit down area. Just grab "
-                                    "and go.\n\nInside, they sell individually "
-                                    "packaged ingredients so that you "
-                                    "can...",
+                            "is no sit down area. Just grab "
+                            "and go.\n\nInside, they sell individually "
+                            "packaged ingredients so that you "
+                            "can...",
                             "time_created": "2016-09-28 08:55:29",
                         },
                         {
                             "id": "SIoiwwVRH6R2s2ipFfs4Ww",
                             "rating": 4,
                             "text": "Dear Mission District,\n\nI miss you and your "
-                                    "many delicious late night food "
-                                    "establishments and vibrant atmosphere.  I miss "
-                                    "the way you sound and smell on "
-                                    "a...",
+                            "many delicious late night food "
+                            "establishments and vibrant atmosphere.  I miss "
+                            "the way you sound and smell on "
+                            "a...",
                             "time_created": "2016-08-10 07:56:44",
                         },
                     ],
@@ -267,7 +256,7 @@ class RestaurantUtilsTests(TestCase):
     @mock.patch("restaurant.utils.get_restaurant_reviews_yelp")
     @mock.patch("restaurant.utils.get_restaurant_info_yelp")
     def test_query_yelp(
-            self, mock_get_restaurant_info_yelp, mock_get_restaurant_reviews_yelp
+        self, mock_get_restaurant_info_yelp, mock_get_restaurant_reviews_yelp
     ):
         business_id = "WavvLdfdP6g8aZTtbBQHTw"
         mock_get_restaurant_info_yelp.return_value = MockResponse(
@@ -288,31 +277,32 @@ class RestaurantUtilsTests(TestCase):
     @mock.patch("restaurant.utils.json.loads")
     @mock.patch("restaurant.utils.get_latest_inspection_record")
     @mock.patch("restaurant.models.Restaurant.objects.all")
-    def test_get_restaurant_list(self,
-                                 mock_objects,
-                                 mock_get_latest_inspection_record,
-                                 mock_get_yelp_info):
+    def test_get_restaurant_list(
+        self, mock_objects, mock_get_latest_inspection_record, mock_get_yelp_info
+    ):
         mock_objects.return_value = [
-            create_restaurant('Gary Danko',
-                              '800 N Point St',
-                              '94109',
-                              "WavvLdfdP6g8aZTtbBQHTw")]
+            create_restaurant(
+                "Gary Danko", "800 N Point St", "94109", "WavvLdfdP6g8aZTtbBQHTw"
+            )
+        ]
         print(mock_objects.return_value[0:1])
         model_dict = model_to_dict(
-            create_inspection_records('11157',
-                                      'Tacos El Paisa',
-                                      '10040',
-                                      '1548 St. Nicholas btw West 187th street and west 188th street, Manhattan, NY',
-                                      'Skipped Inspection',
-                                      'No Seating',
-                                      '2020-07-16 18:09:42')
+            create_inspection_records(
+                "11157",
+                "Tacos El Paisa",
+                "10040",
+                "1548 St. Nicholas btw West 187th street and west 188th street,"
+                "Manhattan, NY",
+                "Skipped Inspection",
+                "No Seating",
+                "2020-07-16 18:09:42",
+            )
         )
         mock_get_latest_inspection_record.return_value = model_dict
-        mock_get_yelp_info.return_value = {'id': 'WavvLdfdP6g8aZTtbBQHTw'}
+        mock_get_yelp_info.return_value = {"id": "WavvLdfdP6g8aZTtbBQHTw"}
         data = get_restaurant_list(0, 1)
-        self.assertEqual(data[0]['yelp_info'], {'id': 'WavvLdfdP6g8aZTtbBQHTw'})
-        self.assertEqual(data[0]['latest_record'], model_dict)
-
+        self.assertEqual(data[0]["yelp_info"], {"id": "WavvLdfdP6g8aZTtbBQHTw"})
+        self.assertEqual(data[0]["latest_record"], model_dict)
 
 
 class IntegratedInspectionRestaurantsTests(TestCase):
@@ -322,7 +312,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
         restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-                             "street, Manhattan, NY",
+            "street, Manhattan, NY",
             postcode="10040",
             business_id="16",
         )
@@ -331,7 +321,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant_name="Tacos El Paisa",
             postcode="10040",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-                             "street, Manhattan, NY",
+            "street, Manhattan, NY",
             is_roadway_compliant="Compliant",
             skipped_reason="No Seating",
             inspected_on=datetime(2020, 10, 21, 12, 30, 30),
@@ -341,7 +331,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant_name="Tacos El Paisa",
             postcode="10040",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-                             "street, Manhattan, NY",
+            "street, Manhattan, NY",
             is_roadway_compliant="Non-Compliant",
             skipped_reason="No Seating",
             inspected_on=datetime(2020, 10, 22, 12, 30, 30),
@@ -354,7 +344,6 @@ class IntegratedInspectionRestaurantsTests(TestCase):
         )
         self.assertEqual(latest_inspection, model_to_dict(target_inspection))
 
-
     @mock.patch("restaurant.utils.InspectionRecords.objects.filter")
     def test_get_latest_inspections_empty(self, mock_records):
         mock_records.return_value = InspectionRecords.objects.none()
@@ -363,7 +352,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
         restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-                             "street, Manhattan, NY",
+            "street, Manhattan, NY",
             postcode="10040",
             business_id="16",
         )
@@ -373,6 +362,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant.postcode,
         )
         self.assertEqual(latest_inspection, None)
+
 
 class GetInspectionDataTests(TestCase):
     """ Test Get/Save Inspection data Script"""
