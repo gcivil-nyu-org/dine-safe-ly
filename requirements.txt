@@ -7,3 +7,5 @@ APScheduler==3.0.0
 pandas
 black
 flake8
+coverage
+coveralls

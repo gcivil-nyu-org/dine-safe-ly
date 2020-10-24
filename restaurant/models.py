@@ -33,7 +33,7 @@ class InspectionRecords(models.Model):
 
     def __str__(self):
         return "{} {} {} {} {} {} {}".format(
-            self.restaurant_Inspection_ID,
+            self.restaurant_inspection_id,
             self.restaurant_name,
             self.is_roadway_compliant,
             self.skipped_reason,
