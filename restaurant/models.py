@@ -22,7 +22,7 @@ class Restaurant(models.Model):
 
 
 class InspectionRecords(models.Model):
-    restaurant_Inspection_ID = models.CharField(max_length=200, primary_key=True)
+    restaurant_inspection_id = models.CharField(max_length=200, primary_key=True)
     restaurant_name = models.CharField(max_length=200)
     postcode = models.CharField(max_length=200)
     business_address = models.CharField(max_length=200)

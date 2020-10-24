@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404, render
-from .models import Restaurant, InspectionRecords
+from django.shortcuts import render
+from .models import Restaurant
 from .utils import (
     query_yelp,
     query_inspection_record,

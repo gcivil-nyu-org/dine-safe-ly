@@ -1,13 +1,29 @@
 import enum
 from django.test import RequestFactory, TestCase
+from django.forms.models import model_to_dict
 from datetime import datetime
 from unittest import mock
-from .views import *
-from .utils import *
-from getinspection import *
-import pandas as pd
+from .models import Restaurant, InspectionRecords
+from .views import get_inspection_info
+from .utils import (
+    merge_yelp_info,
+    get_restaurant_info_yelp,
+    get_restaurant_reviews_yelp,
+    query_yelp,
+    get_latest_inspection_record,
+)
+
+# from getinspection import (
+#     clean_inspection_data,
+#     match_on_yelp,
+#     save_restaurants,
+#     save_inspections,
+# )
+# import pandas as pd
 import json
-from pandas.util.testing import assert_frame_equal
+
+
+# from pandas.util.testing import assert_frame_equal
 
 
 def create_restaurant(restaurant_name, business_address, postcode, business_id):
@@ -20,7 +36,7 @@ def create_restaurant(restaurant_name, business_address, postcode, business_id):
 
 
 def create_inspection_records(
-    restaurant_Inspection_ID,
+    restaurant_inspection_id,
     restaurant_name,
     postcode,
     business_address,
@@ -32,7 +48,7 @@ def create_inspection_records(
         raise TypeError("compliance_status must be an instance of Compliance enum")
 
     return InspectionRecords.objects.create(
-        restaurant_Inspection_ID=restaurant_Inspection_ID,
+        restaurant_inspection_id=restaurant_inspection_id,
         restaurant_name=restaurant_name,
         postcode=postcode,
         business_address=business_address,
@@ -72,7 +88,7 @@ class InspectionRecordsViewTests(TestCase):
             business_id="16",
         )
         self.inspection_records = create_inspection_records(
-            restaurant_Inspection_ID="24111",
+            restaurant_inspection_id="24111",
             restaurant_name="Tacos El Paisa",
             postcode="10040",
             business_address="1548 St. Nicholas btw West 187th street "
@@ -142,19 +158,31 @@ class RestaurantUtilsTests(TestCase):
                         {
                             "id": "xAG4O7l-t1ubbwVAlPnDKg",
                             "rating": 5,
-                            "text": "Went back again to this place since the last time i visited the bay area 5 months ago, and nothing has changed. Still the sketchy Mission, Still the cashier...",
+                            "text": "Went back again to this place since the last "
+                            "time i visited the bay area 5 "
+                            "months ago, and nothing has changed. Still the "
+                            "sketchy Mission, "
+                            "Still the cashier...",
                             "time_created": "2016-08-29 00:41:13",
                         },
                         {
                             "id": "1JNmYjJXr9ZbsfZUAgkeXQ",
                             "rating": 4,
-                            "text": 'The "restaurant" is inside a small deli so there is no sit down area. Just grab and go.\n\nInside, they sell individually packaged ingredients so that you can...',
+                            "text": 'The "restaurant" is inside a small deli so there '
+                            "is no sit down area. Just grab "
+                            "and go.\n\nInside, they sell individually "
+                            "packaged ingredients so that you "
+                            "can...",
                             "time_created": "2016-09-28 08:55:29",
                         },
                         {
                             "id": "SIoiwwVRH6R2s2ipFfs4Ww",
                             "rating": 4,
-                            "text": "Dear Mission District,\n\nI miss you and your many delicious late night food establishments and vibrant atmosphere.  I miss the way you sound and smell on a...",
+                            "text": "Dear Mission District,\n\nI miss you and your "
+                            "many delicious late night food "
+                            "establishments and vibrant atmosphere.  I miss "
+                            "the way you sound and smell on "
+                            "a...",
                             "time_created": "2016-08-10 07:56:44",
                         },
                     ],
@@ -202,15 +230,29 @@ class RestaurantUtilsTests(TestCase):
         self.assertIsNotNone(data)
         self.assertEqual(data, {"info": {"id": business_id}, "reviews": {"reviews": 1}})
 
-    @mock.patch("restaurant.models.Restaurant.objects.all")
-    @mock.patch("restaurant.utils.get_latest_inspection_record")
-    def test_get_restaurant_list(self, mock_objects, mock_get_latest_inspection_record):
-        # mock_objects.return_value = [create_restaurant('Gary Danko', '800 N Point St', '94109', "WavvLdfdP6g8aZTtbBQHTw")]
-        # print(mock_objects.return_value[0:1])
-        # #mock_get_latest_inspection_record.return_value = model_to_dict(create_inspection_records('11157', 'Tacos El Paisa', '10040', '1548 St. Nicholas btw West 187th street and west 188th street, Manhattan, NY', Compliance.skipped, 'No Seating', '2020-07-16 18:09:42'))
-        # #get_restaurant_list(0, 1)
-        # TODO
-        pass
+    # @mock.patch("restaurant.models.Restaurant.objects.all")
+    # @mock.patch("restaurant.utils.get_latest_inspection_record")
+    # def test_get_restaurant_list(self,
+    #                              mock_objects,
+    #                              mock_get_latest_inspection_record):
+    #     mock_objects.return_value = [
+    #         create_restaurant('Gary Danko',
+    #                           '800 N Point St',
+    #                           '94109',
+    #                           "WavvLdfdP6g8aZTtbBQHTw")]
+    #     print(mock_objects.return_value[0:1])
+    #     #mock_get_latest_inspection_record.return_value = model_to_dict(
+    #     # create_inspection_records('11157',
+    #     # 'Tacos El Paisa',
+    #     # '10040',
+    #     # '1548 St. Nicholas btw West 187th street and west 188th street,
+    #     # Manhattan, NY',
+    #     # Compliance.skipped,
+    #     # 'No Seating',
+    #     # '2020-07-16 18:09:42')
+    #     # )
+    #     # #get_restaurant_list(0, 1) TODO
+    #     pass
 
 
 class IntegratedInspectionRestaurantsTests(TestCase):
@@ -224,8 +266,8 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             postcode="10040",
             business_id="16",
         )
-        inspection1 = InspectionRecords.objects.create(
-            restaurant_Inspection_ID="24111",
+        InspectionRecords.objects.create(
+            restaurant_inspection_id="24111",
             restaurant_name="Tacos El Paisa",
             postcode="10040",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
@@ -234,8 +276,8 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             skipped_reason="No Seating",
             inspected_on=datetime(2020, 10, 21, 12, 30, 30),
         )
-        inspection2 = InspectionRecords.objects.create(
-            restaurant_Inspection_ID="24112",
+        target_inspection = InspectionRecords.objects.create(
+            restaurant_inspection_id="24112",
             restaurant_name="Tacos El Paisa",
             postcode="10040",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
@@ -246,118 +288,156 @@ class IntegratedInspectionRestaurantsTests(TestCase):
         )
 
         latest_inspection = get_latest_inspection_record(
-            "Tacos El Paisa",
-            "1548 St. Nicholas btw West 187th street and west 188th "
-            "street, Manhattan, NY",
-            "10040",
+            restaurant.restaurant_name,
+            restaurant.business_address,
+            restaurant.postcode,
         )
-        self.assertEqual(
-            latest_inspection,
-            {
-                "restaurant_Inspection_ID": "24112",
-                "restaurant_name": "Tacos El Paisa",
-                "postcode": "10040",
-                "business_address": "1548 St. Nicholas btw West 187th street and west 188th "
-                "street, Manhattan, NY",
-                "is_roadway_compliant": "Non-Compliant",
-                "skipped_reason": "No Seating",
-                "inspected_on": datetime(2020, 10, 22, 12, 30, 30),
-            },
-        )
+        self.assertEqual(latest_inspection, model_to_dict(target_inspection))
 
 
 class GetInspectionDataTests(TestCase):
     """ Test Get/Save Inspection data Script"""
 
-    def test_clean_inspection_data(self):
-        result = [{'borough': 'Manhattan', 'restaurantname': 'AJISEN RAMEN', 'seatingchoice': 'both', 'legalbusinessname': 'AJISEN RAMEN CHELSEA INC.', 'businessaddress': '136 WEST 28TH STREET', 'restaurantinspectionid': '25808', 'isroadwaycompliant': 'Skipped Inspection', 'skippedreason': 'No Seating', 'inspectedon': '2020-10-19T10:57:21.000', 'agencycode': 'DOT', 'postcode': '10001', 'latitude': '40.746520', 'longitude': '-73.991678', 'communityboard': '5', 'councildistrict': '3', 'censustract': '95', 'bin': '1015092', 'bbl': '1008030060', 'nta': 'Midtown-Midtown South'}]
-        
-        results_df = pd.DataFrame.from_records(result)
-        restaurant = [{'restaurantname': 'AJISEN RAMEN','legalbusinessname': 'AJISEN RAMEN CHELSEA INC.','businessaddress': '136 WEST 28TH STREET','postcode': '10001'}]
-        r_df = pd.DataFrame.from_records(restaurant)
-        restaurant_df, inspection_df = clean_inspection_data(results_df)
-        
-        assert_frame_equal(restaurant_df,r_df)
-    
-    
-    def test_match_on_yelp(self):
-        restaurant_name = 'AJISEN RAMEN'
-        restaurant_location = '136 WEST 28TH STREET'
-        b_id = '2SMaAUcbNjW7vSwdg38P2Q'
-        response = json.loads(match_on_yelp(restaurant_name,restaurant_location))
+    # def test_clean_inspection_data(self):
+    #     result = [
+    #         {
+    #             "borough": "Manhattan",
+    #             "restaurantname": "AJISEN RAMEN",
+    #             "seatingchoice": "both",
+    #             # "legalbusinessname": "AJISEN RAMEN CHELSEA INC.",
+    #             "businessaddress": "136 WEST 28TH STREET",
+    #             "restaurantinspectionid": "25808",
+    #             "isroadwaycompliant": "Skipped Inspection",
+    #             "skippedreason": "No Seating",
+    #             "inspectedon": "2020-10-19T10:57:21.000",
+    #             "agencycode": "DOT",
+    #             "postcode": "10001",
+    #             "latitude": "40.746520",
+    #             "longitude": "-73.991678",
+    #             "communityboard": "5",
+    #             "councildistrict": "3",
+    #             "censustract": "95",
+    #             "bin": "1015092",
+    #             "bbl": "1008030060",
+    #             "nta": "Midtown-Midtown South",
+    #         }
+    #     ]
+    #
+    #     results_df = pd.DataFrame.from_records(result)
+    #     restaurant = [
+    #         {
+    #             "restaurantname": "AJISEN RAMEN",
+    #             # "legalbusinessname": "AJISEN RAMEN CHELSEA INC.",
+    #             "businessaddress": "136 WEST 28TH STREET",
+    #             "postcode": "10001",
+    #         }
+    #     ]
+    #     r_df = pd.DataFrame.from_records(restaurant)
+    #     restaurant_df, inspection_df = clean_inspection_data(results_df)
+    #
+    #     assert_frame_equal(restaurant_df, r_df)
 
-        self.assertEqual(response["businesses"][0]["id"], b_id) 
-    
-    def test_save_restaurants(self):
-        restaurant = [{'restaurantname': 'AJISEN RAMEN','legalbusinessname': 'AJISEN RAMEN CHELSEA INC.','businessaddress': '136 WEST 28TH STREET','postcode': '10001'}]
-        r_df = pd.DataFrame.from_records(restaurant)
+    # def test_match_on_yelp(self):
+    #     restaurant_name = "AJISEN RAMEN"
+    #     restaurant_location = "136 WEST 28TH STREET"
+    #     b_id = "2SMaAUcbNjW7vSwdg38P2Q"
+    #     response = json.loads(match_on_yelp(restaurant_name, restaurant_location))
+    #
+    #     self.assertEqual(response["businesses"][0]["id"], b_id)
 
-        save_restaurants(r_df)
+    # def test_save_restaurants(self):
+    #     restaurant = [
+    #         {
+    #             "restaurantname": "AJISEN RAMEN",
+    #             # "legalbusinessname": "AJISEN RAMEN CHELSEA INC.",
+    #             "businessaddress": "136 WEST 28TH STREET",
+    #             "postcode": "10001",
+    #         }
+    #     ]
+    #     r_df = pd.DataFrame.from_records(restaurant)
+    #
+    #     save_restaurants(r_df)
+    #
+    #     return True
 
-        return True
+    # @mock.patch("getinspection.match_on_yelp")
+    # def test_save_restaurants_catch(self, mock_match_on_yelp):
+    #     restaurant = [
+    #         {
+    #             "restaurantname": "AJISEN RAMEN",
+    #             # "legalbusinessname": "AJISEN RAMEN CHELSEA INC.",
+    #             "businessaddress": "136 WEST 28TH STREET",
+    #             "postcode": "10001",
+    #         }
+    #     ]
+    #     r_df = pd.DataFrame.from_records(restaurant)
+    #
+    #     # business_id = "2SMaAUcbNjW7vSwdg38P2Q"
+    #     mock_match_on_yelp.return_value = MockResponse(
+    #         {
+    #             "businesses": [
+    #                 {
+    #                     "id": "2SMaAUcbNjW7vSwdg38P2Q",
+    #                     "alias": "ajisen-ramen-new-york-2",
+    #                     "name": "Ajisen Ramen",
+    #                     "coordinates": {"latitude": 40.74661, "longitude": -73.9921},
+    #                     "location": {
+    #                         "address1": "136 W 28th St",
+    #                         "address2": None,
+    #                         "address3": "",
+    #                         "city": "New York",
+    #                         "zip_code": "10001",
+    #                         "country": "US",
+    #                         "state": "NY",
+    #                         "display_address":
+    #                         ["136 W 28th St", "New York, NY 10001"],
+    #                     },
+    #                     "phone": "+16466380888",
+    #                     "display_phone": "(646) 638-0888",
+    #                 }
+    #             ]
+    #         },
+    #         200,
+    #     )
+    #
+    #     save_restaurants(r_df)
+    #
+    #     return True
 
-    @mock.patch("getinspection.match_on_yelp")
-    def test_save_restaurants_catch(self,mock_match_on_yelp):
-        restaurant = [{'restaurantname': 'AJISEN RAMEN','legalbusinessname': 'AJISEN RAMEN CHELSEA INC.','businessaddress': '136 WEST 28TH STREET','postcode': '10001'}]
-        r_df = pd.DataFrame.from_records(restaurant)
-
-        # business_id = "2SMaAUcbNjW7vSwdg38P2Q"
-        mock_match_on_yelp.return_value = MockResponse(
-            {
-            "businesses": [
-                {
-                    "id": "2SMaAUcbNjW7vSwdg38P2Q",
-                    "alias": "ajisen-ramen-new-york-2",
-                    "name": "Ajisen Ramen",
-                    "coordinates": {
-                        "latitude": 40.74661,
-                        "longitude": -73.9921
-                    },
-                    "location": {
-                        "address1": "136 W 28th St",
-                        "address2": None,
-                        "address3": "",
-                        "city": "New York",
-                        "zip_code": "10001",
-                        "country": "US",
-                        "state": "NY",
-                        "display_address": [
-                            "136 W 28th St",
-                            "New York, NY 10001"
-                        ]
-                    },
-                    "phone": "+16466380888",
-                    "display_phone": "(646) 638-0888"
-                }
-            ]
-        }, 200
-        )
-
-        save_restaurants(r_df)
-
-        return True
-
-
-    def test_save_inspections(self):
-        inspections = [{'restaurantname': 'AJISEN RAMEN', 'businessaddress': '136 WEST 28TH STREET', 'restaurantinspectionid': '25808', 'isroadwaycompliant': 'Skipped Inspection', 'skippedreason': 'No Seating', 'inspectedon': '2020-10-19T10:57:21.000','postcode': '10001'}]
- 
-        in_rec_df = pd.DataFrame.from_records(inspections)
-
-        save_inspections(in_rec_df)
-
-        return True
+    # def test_save_inspections(self):
+    #     inspections = [
+    #         {
+    #             "restaurantname": "AJISEN RAMEN",
+    #             "businessaddress": "136 WEST 28TH STREET",
+    #             "restaurantinspectionid": "25808",
+    #             "isroadwaycompliant": "Skipped Inspection",
+    #             "skippedreason": "No Seating",
+    #             "inspectedon": "2020-10-19T10:57:21.000",
+    #             "postcode": "10001",
+    #         }
+    #     ]
+    #
+    #     in_rec_df = pd.DataFrame.from_records(inspections)
+    #
+    #     save_inspections(in_rec_df)
+    #
+    #     return True
 
     # @mock.patch("getinspection.clean_inspection_data")
     # @mock.patch("getinspection.save_restaurants")
     # @mock.patch("getinspection.save_inspections")
-    # # @mock.patch("getinspection.get_inspection_data.client.get")
-    # def test_get_inspection_data(self,mock_clean_inspection_data,mock_save_restaurants,mock_save_inspections):
+    # @mock.patch("getinspection.get_inspection_data.client.get")
+
+    # def test_get_inspection_data(self,
+    #                              mock_clean_inspection_data,
+    #                              mock_save_restaurants,
+    #                              mock_save_inspections):
     #     inspection1 = InspectionRecords.objects.create(
     #         restaurant_Inspection_ID="24111",
     #         restaurant_name="Tacos El Paisa",
     #         postcode="10040",
     #         business_address="1548 St. Nicholas btw West 187th street and west 188th "
-    #         "street, Manhattan, NY",
+    #                          "street, Manhattan, NY",
     #         is_roadway_compliant="Compliant",
     #         skipped_reason="No Seating",
     #         inspected_on=datetime(2020, 10, 21, 12, 30, 30),
@@ -367,7 +447,7 @@ class GetInspectionDataTests(TestCase):
     #         restaurant_name="Tacos El Paisa",
     #         postcode="10040",
     #         business_address="1548 St. Nicholas btw West 187th street and west 188th "
-    #         "street, Manhattan, NY",
+    #                          "street, Manhattan, NY",
     #         is_roadway_compliant="Non-Compliant",
     #         skipped_reason="No Seating",
     #         inspected_on=datetime(2020, 10, 22, 12, 30, 30),
@@ -395,17 +475,29 @@ class GetInspectionDataTests(TestCase):
     #     #             "nta": "Midtown-Midtown South"
     #     #         }
     #     #     ]
-    #     inspections = [{'restaurantname': 'AJISEN RAMEN', 'businessaddress': '136 WEST 28TH STREET', 'restaurantinspectionid': '25808', 'isroadwaycompliant': 'Skipped Inspection', 'skippedreason': 'No Seating', 'inspectedon': '2020-10-19T10:57:21.000','postcode': '10001'}]
+    #     inspections = [
+    #         {'restaurantname': 'AJISEN RAMEN',
+    #          'businessaddress': '136 WEST 28TH STREET',
+    #          'restaurantinspectionid': '25808',
+    #          'isroadwaycompliant': 'Skipped Inspection',
+    #          'skippedreason': 'No Seating',
+    #          'inspectedon': '2020-10-19T10:57:21.000',
+    #          'postcode': '10001'}
+    #     ]
     #     in_rec_df = pd.DataFrame.from_records(inspections)
-
-    #     restaurant = [{'restaurantname': 'AJISEN RAMEN','legalbusinessname': 'AJISEN RAMEN CHELSEA INC.','businessaddress': '136 WEST 28TH STREET','postcode': '10001'}]
+    #
+    #     restaurant = [
+    #         {'restaurantname': 'AJISEN RAMEN',
+    #          'legalbusinessname': 'AJISEN RAMEN CHELSEA INC.',
+    #          'businessaddress': '136 WEST 28TH STREET',
+    #          'postcode': '10001'}
+    #     ]
     #     r_df = pd.DataFrame.from_records(restaurant)
-
+    #
     #     mock_clean_inspection_data.return_value = r_df
     #     mock_save_restaurants = True
     #     mock_save_inspections = True
-
+    #
     #     get_inspection_data()
-
+    #
     #     return True
-
