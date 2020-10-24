@@ -1,0 +1,6 @@
+2020-10-24 16:31:23,387 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-24 16:31:26,725 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-24 16:31:26,853 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-24 16:31:34,784 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-24 16:31:44,684 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-24 16:31:47,872 django.utils.autoreload INFO     Watching for file changes with StatReloader
