@@ -6,11 +6,11 @@ import requests
 import json
 import dateutil.parser
 
-from restaurant.models import Restaurant, InspectionRecords
-from apscheduler.schedulers.blocking import BlockingScheduler
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
+
+from restaurant.models import Restaurant, InspectionRecords
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
@@ -18,8 +18,8 @@ sched = BlockingScheduler()
 def match_on_yelp(restaurant_name, restaurant_location):
     location_list = restaurant_location.split(", ")
     address1 = location_list[0]
-    city = location_list[1]
-    state = location_list[2]
+    city = 'New York'
+    state = 'NY'
     country = "US"
 
     api_key = "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq-R_mEX3Yx"
@@ -114,7 +114,7 @@ def save_inspections(inspection_df):
     return
 
 
-@sched.scheduled_job("interval", hours=12)
+# @sched.scheduled_job("interval", minutes=1)
 def get_inspection_data():
     ir = InspectionRecords.objects.all().count()
     lastInspection = InspectionRecords.objects.order_by("-inspected_on")[0:1]
@@ -142,4 +142,4 @@ def get_inspection_data():
         save_inspections(inspection_df)
 
 
-sched.start()
+# sched.start()

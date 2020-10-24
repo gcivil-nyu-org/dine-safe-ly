@@ -13,7 +13,7 @@ before_script:
 script:
   - black --check .
   - flake8 .
-  - coverage run --source=polls manage.py test
+  - coverage run --source=restaurant manage.py test
 
 after_script:
   - coveralls
