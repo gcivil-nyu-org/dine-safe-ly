@@ -12,8 +12,8 @@ before_script:
   - python manage.py collectstatic --noinput
 
 script:
-  - black --check .
-  - flake8 .
+  - black --check restaurant
+  - flake8 restaurant
   - coverage run --source=restaurant manage.py test
 
 after_script:

@@ -1,17 +1,18 @@
 import os
 import django
 
-# import pandas as pd
-# from sodapy import Socrata
+import pandas as pd
+from sodapy import Socrata
+
 import requests
 import json
-from restaurant.models import Restaurant, InspectionRecords
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 # import dateutil.parser
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
+from restaurant.models import Restaurant, InspectionRecords
 
 sched = BlockingScheduler()
 
@@ -47,20 +48,21 @@ def match_on_yelp(restaurant_name, restaurant_location):
 
 def clean_inspection_data(results_df):
     restaurant_df = results_df.loc[
-        :, ["restaurantname", "legalbusinessname", "businessaddress", "postcode"]
-    ]
+                    :, ["restaurantname", "businessaddress",
+                        "postcode"]
+                    ]
     inspection_df = results_df.loc[
-        :,
-        [
-            "restaurantinspectionid",
-            "isroadwaycompliant",
-            "inspectedon",
-            "skippedreason",
-            "restaurantname",
-            "businessaddress",
-            "postcode",
-        ],
-    ]
+                    :,
+                    [
+                        "restaurantinspectionid",
+                        "isroadwaycompliant",
+                        "inspectedon",
+                        "skippedreason",
+                        "restaurantname",
+                        "businessaddress",
+                        "postcode",
+                    ],
+                    ]
 
     restaurant_df = restaurant_df.apply(
         lambda x: x.str.strip() if x.dtype == "str" else x
@@ -91,7 +93,7 @@ def save_restaurants(restaurant_df):
                 restaurant_name=row["restaurantname"],
                 business_address=row["businessaddress"],
                 postcode=row["postcode"],
-                legal_business_name=row["legalbusinessname"],
+                # legal_business_name=row["legalbusinessname"],
                 business_id=b_id,
             )
             r.save()
@@ -107,7 +109,7 @@ def save_inspections(inspection_df):
 
             inspect_record = InspectionRecords(
                 restaurant_name=row["restaurantname"],
-                restaurant_Inspection_ID=row["restaurantinspectionid"],
+                restaurant_inspection_id=row["restaurantinspectionid"],
                 is_roadway_compliant=row["isroadwaycompliant"],
                 business_address=row["businessaddress"],
                 postcode=row["postcode"],
@@ -119,3 +121,38 @@ def save_inspections(inspection_df):
         except Exception as e:
             print(e)
     return
+
+
+# @sched.scheduled_job("interval", minutes=1)
+def get_inspection_data():
+    # ir = InspectionRecords.objects.all().count()
+    # lastInspection = InspectionRecords.objects.order_by("-inspected_on")[0:1]
+    # date = str(lastInspection[0].inspected_on)
+    # print(date)
+    # date = date.replace(" ", "T")
+    # date_query = "inspectedon > '" + date + "'"
+
+    client = Socrata(
+        "data.cityofnewyork.us",
+        "dLBzJwg25psQttbxjLlQ8Z53V",
+        username="cx657@nyu.edu",
+        password="Dinesafely123",
+    )
+
+    # results = client.get("4dx7-axux", where=date_query)
+    results = client.get("4dx7-axux")
+
+    # Convert to pandas DataFrame
+    results_df = pd.DataFrame.from_records(results)
+    if results_df.shape[0] > 0:
+        restaurant_df, inspection_df = clean_inspection_data(results_df)
+        # print(restaurant_df)
+        save_restaurants(restaurant_df)
+        # print(inspection_df)
+        save_inspections(inspection_df)
+
+
+# sched.start()
+
+if __name__ == '__main__':
+    get_inspection_data()
