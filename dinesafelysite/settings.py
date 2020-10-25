@@ -129,7 +129,7 @@ YELP_ACCESS_TOKE = (
     "F1JBgF88FZl1_X3Yx "
 )
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), test_runner=False)
 
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 

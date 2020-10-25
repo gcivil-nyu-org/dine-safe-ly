@@ -1855,3 +1855,19 @@
 2020-10-25 00:35:22,565 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\restaurant\utils.py changed, reloading.
 2020-10-25 00:35:22,568 asyncio      DEBUG    Using proactor: IocpProactor
 2020-10-25 00:35:23,367 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 00:43:01,603 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\dinesafelysite\settings.py changed, reloading.
+2020-10-25 00:43:01,605 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 00:43:02,320 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 00:44:38,774 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 00:44:39,127 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-25 00:44:39,162 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-25 00:44:39,521 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-25 00:44:39,528 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-25 00:44:39,839 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-25 00:44:39,845 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-25 00:44:40,045 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw/reviews HTTP/1.1" 200 None
+2020-10-25 00:44:40,052 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-25 00:44:40,056 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-25 00:44:40,171 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16 HTTP/1.1" 404 102
+2020-10-25 00:44:40,175 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-25 00:44:40,283 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16/reviews HTTP/1.1" 404 102
