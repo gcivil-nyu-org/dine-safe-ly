@@ -1871,3 +1871,524 @@
 2020-10-25 00:44:40,171 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16 HTTP/1.1" 404 102
 2020-10-25 00:44:40,175 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
 2020-10-25 00:44:40,283 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16/reviews HTTP/1.1" 404 102
+2020-10-25 15:40:23,018 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 15:40:43,871 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\urls.py changed, reloading.
+2020-10-25 15:40:43,872 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 15:40:44,584 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 15:42:08,019 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\dinesafelysite\settings.py changed, reloading.
+2020-10-25 15:42:08,020 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 15:42:08,747 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 15:42:21,331 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\admin.py changed, reloading.
+2020-10-25 15:42:21,331 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 15:42:22,030 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 15:43:12,535 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\admin.py changed, reloading.
+2020-10-25 15:43:12,537 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 15:43:13,278 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 15:43:37,172 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\views.py changed, reloading.
+2020-10-25 15:43:37,173 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 15:43:37,902 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 15:43:39,934 django.request WARNING  Not Found: /
+2020-10-25 15:43:40,029 django.request WARNING  Not Found: /favicon.ico
+2020-10-25 15:59:12,658 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\views.py changed, reloading.
+2020-10-25 15:59:12,659 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 15:59:13,408 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 15:59:31,998 django.request WARNING  Not Found: /
+2020-10-25 15:59:33,728 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/nouislider/nouislider.css
+2020-10-25 15:59:33,735 django.request WARNING  Not Found: /cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css
+2020-10-25 15:59:33,739 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/css/style.default.452e11c7.css
+2020-10-25 15:59:33,740 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/magnific-popup/magnific-popup.css
+2020-10-25 15:59:33,742 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/css/custom.0a822280.css
+2020-10-25 15:59:33,744 django.request WARNING  Not Found: /use.fontawesome.com/releases/v5.8.1/css/all.css
+2020-10-25 15:59:33,755 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/jquery/jquery.min.js
+2020-10-25 15:59:33,756 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/bootstrap/js/bootstrap.bundle.min.js
+2020-10-25 15:59:33,760 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/magnific-popup/jquery.magnific-popup.min.js
+2020-10-25 15:59:33,771 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/smooth-scroll/smooth-scroll.polyfills.min.js
+2020-10-25 15:59:33,776 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/object-fit-images/ofi.min.js
+2020-10-25 15:59:33,777 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/bootstrap-select/js/bootstrap-select.min.js
+2020-10-25 15:59:33,784 django.request WARNING  Not Found: /cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js
+2020-10-25 15:59:33,790 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/jquery.cookie/jquery.cookie.js
+2020-10-25 15:59:33,792 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1497436072909-60f360e1d4b1.jpg
+2020-10-25 15:59:33,798 django.request WARNING  Not Found: /login/js/demo.36f8799a.js
+2020-10-25 15:59:33,803 django.request WARNING  Not Found: /login/js/theme.55f8348b.js
+2020-10-25 15:59:33,810 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/object-fit-images/ofi.min.js
+2020-10-25 15:59:33,819 django.request WARNING  Not Found: /cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js
+2020-10-25 15:59:33,827 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/jquery.cookie/jquery.cookie.js
+2020-10-25 15:59:33,834 django.request WARNING  Not Found: /login/js/demo.36f8799a.js
+2020-10-25 15:59:33,842 django.request WARNING  Not Found: /login/js/theme.55f8348b.js
+2020-10-25 15:59:33,874 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/favicon.png
+2020-10-25 16:00:04,082 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/nouislider/nouislider.css
+2020-10-25 16:00:04,084 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/magnific-popup/magnific-popup.css
+2020-10-25 16:00:04,085 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/css/custom.0a822280.css
+2020-10-25 16:00:04,086 django.request WARNING  Not Found: /use.fontawesome.com/releases/v5.8.1/css/all.css
+2020-10-25 16:00:04,087 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/css/style.default.452e11c7.css
+2020-10-25 16:00:04,088 django.request WARNING  Not Found: /cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css
+2020-10-25 16:00:04,102 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/bootstrap/js/bootstrap.bundle.min.js
+2020-10-25 16:00:04,104 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/jquery/jquery.min.js
+2020-10-25 16:00:04,105 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/magnific-popup/jquery.magnific-popup.min.js
+2020-10-25 16:00:04,121 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/smooth-scroll/smooth-scroll.polyfills.min.js
+2020-10-25 16:00:04,124 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/bootstrap-select/js/bootstrap-select.min.js
+2020-10-25 16:00:04,134 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1497436072909-60f360e1d4b1.jpg
+2020-10-25 16:00:04,139 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/object-fit-images/ofi.min.js
+2020-10-25 16:00:04,140 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/bootstrap/js/bootstrap.bundle.min.js
+2020-10-25 16:00:04,142 django.request WARNING  Not Found: /cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js
+2020-10-25 16:00:04,145 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/jquery.cookie/jquery.cookie.js
+2020-10-25 16:00:04,147 django.request WARNING  Not Found: /login/js/demo.36f8799a.js
+2020-10-25 16:00:04,156 django.request WARNING  Not Found: /login/js/theme.55f8348b.js
+2020-10-25 16:00:04,158 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/magnific-popup/jquery.magnific-popup.min.js
+2020-10-25 16:00:04,166 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/smooth-scroll/smooth-scroll.polyfills.min.js
+2020-10-25 16:00:04,174 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/bootstrap-select/js/bootstrap-select.min.js
+2020-10-25 16:00:04,183 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/object-fit-images/ofi.min.js
+2020-10-25 16:00:04,191 django.request WARNING  Not Found: /cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js
+2020-10-25 16:00:04,198 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/jquery.cookie/jquery.cookie.js
+2020-10-25 16:00:04,208 django.request WARNING  Not Found: /login/js/demo.36f8799a.js
+2020-10-25 16:00:04,215 django.request WARNING  Not Found: /login/js/theme.55f8348b.js
+2020-10-25 16:07:21,982 django.request WARNING  Not Found: /cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css' % static}
+2020-10-25 16:07:21,983 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/nouislider/nouislider.css' % static}
+2020-10-25 16:07:21,987 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/magnific-popup/magnific-popup.css' % static}
+2020-10-25 16:07:21,988 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/css/style.default.452e11c7.css' % static}
+2020-10-25 16:07:21,990 django.request WARNING  Not Found: /use.fontawesome.com/releases/v5.8.1/css/all.css' % static}
+2020-10-25 16:07:21,991 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/css/custom.0a822280.css' % static}
+2020-10-25 16:07:21,998 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/jquery/jquery.min.js' % static}
+2020-10-25 16:07:22,006 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/bootstrap/js/bootstrap.bundle.min.js' % static}
+2020-10-25 16:07:22,007 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/magnific-popup/jquery.magnific-popup.min.js' % static}
+2020-10-25 16:07:22,012 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/smooth-scroll/smooth-scroll.polyfills.min.js' % static}
+2020-10-25 16:07:22,017 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/bootstrap-select/js/bootstrap-select.min.js' % static}
+2020-10-25 16:07:22,025 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/object-fit-images/ofi.min.js' % static}
+2020-10-25 16:07:22,043 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1497436072909-60f360e1d4b1.jpg
+2020-10-25 16:07:22,046 django.request WARNING  Not Found: /cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js' % static}
+2020-10-25 16:07:22,052 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/vendor/jquery.cookie/jquery.cookie.js' % static}
+2020-10-25 16:07:22,053 django.request WARNING  Not Found: /login/{% static 'js/demo.36f8799a.js' % static}
+2020-10-25 16:07:22,055 django.request WARNING  Not Found: /login/{% static 'js/theme.55f8348b.js' % static}
+2020-10-25 16:07:22,075 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/favicon.png' % static}
+2020-10-25 16:28:32,394 django.request ERROR    Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1034, in find_library
+    return parser.libraries[name]
+KeyError: 'crispy_forms_tags'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\views.py", line 12, in get_login_page
+    return render(request, "login.html")
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1091, in load
+    lib = find_library(parser, name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1036, in find_library
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'crispy_forms_tags' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz
+2020-10-25 16:28:44,515 django.request ERROR    Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1034, in find_library
+    return parser.libraries[name]
+KeyError: 'crispy_forms_tags'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\views.py", line 12, in get_login_page
+    return render(request, "login.html")
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1091, in load
+    lib = find_library(parser, name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1036, in find_library
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'crispy_forms_tags' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz
+2020-10-25 16:28:53,957 django.request ERROR    Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1034, in find_library
+    return parser.libraries[name]
+KeyError: 'crispy_forms_tags'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\views.py", line 12, in get_login_page
+    return render(request, "login.html")
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1091, in load
+    lib = find_library(parser, name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1036, in find_library
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'crispy_forms_tags' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz
+2020-10-25 16:29:00,701 django.request ERROR    Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1034, in find_library
+    return parser.libraries[name]
+KeyError: 'crispy_forms_tags'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\views.py", line 12, in get_login_page
+    return render(request, "login.html")
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1091, in load
+    lib = find_library(parser, name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1036, in find_library
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'crispy_forms_tags' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz
+2020-10-25 16:29:10,138 django.request ERROR    Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1034, in find_library
+    return parser.libraries[name]
+KeyError: 'crispy_forms_tags'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\views.py", line 12, in get_login_page
+    return render(request, "login.html")
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1091, in load
+    lib = find_library(parser, name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1036, in find_library
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'crispy_forms_tags' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz
+2020-10-25 16:29:37,100 django.request ERROR    Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1034, in find_library
+    return parser.libraries[name]
+KeyError: 'crispy_forms_tags'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\views.py", line 12, in get_login_page
+    return render(request, "login.html")
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1091, in load
+    lib = find_library(parser, name)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\defaulttags.py", line 1036, in find_library
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'crispy_forms_tags' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz
+2020-10-25 16:29:56,478 django.security.csrf WARNING  Forbidden (CSRF token missing or incorrect.): /login/
+2020-10-25 16:44:55,279 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 16:47:27,368 django.request ERROR    Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user_login\views.py", line 12, in get_login_page
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\Legen\AppData\Local\Programs\Python\Python38-32\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: login.html
+2020-10-25 16:59:22,421 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\dinesafelysite\settings.py changed, reloading.
+2020-10-25 16:59:22,422 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 16:59:23,228 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 16:59:45,668 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 16:59:45,711 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 16:59:48,664 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:00:44,418 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\admin.py changed, reloading.
+2020-10-25 17:00:44,420 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:00:45,224 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:00:56,844 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\urls.py changed, reloading.
+2020-10-25 17:00:56,844 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:00:57,621 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:01:10,264 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\urls.py changed, reloading.
+2020-10-25 17:01:10,264 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:01:11,047 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:02:03,889 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\models.py changed, reloading.
+2020-10-25 17:02:03,889 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:02:04,674 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:02:13,186 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\admin.py changed, reloading.
+2020-10-25 17:02:13,187 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:02:13,961 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:04:06,594 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\dinesafelysite\settings.py changed, reloading.
+2020-10-25 17:04:06,595 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:04:07,486 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:04:25,245 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\dinesafelysite\settings.py changed, reloading.
+2020-10-25 17:04:25,247 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:04:26,023 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:04:44,344 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:04:44,386 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:04:47,179 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:05:34,675 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\dinesafelysite\settings.py changed, reloading.
+2020-10-25 17:05:34,677 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:05:35,459 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:08:17,876 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\apps.py changed, reloading.
+2020-10-25 17:08:17,877 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:08:18,555 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:09:10,748 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\apps.py changed, reloading.
+2020-10-25 17:09:11,511 django.utils.autoreload INFO     Watching for file changes with StatReloader
