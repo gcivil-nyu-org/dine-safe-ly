@@ -1852,3 +1852,6 @@
 2020-10-25 00:33:08,484 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\restaurant\utils.py changed, reloading.
 2020-10-25 00:33:08,486 asyncio      DEBUG    Using proactor: IocpProactor
 2020-10-25 00:33:09,250 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 00:35:22,565 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\restaurant\utils.py changed, reloading.
+2020-10-25 00:35:22,568 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 00:35:23,367 django.utils.autoreload INFO     Watching for file changes with StatReloader
