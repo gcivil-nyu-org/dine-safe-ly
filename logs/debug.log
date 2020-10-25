@@ -2392,3 +2392,47 @@ django.template.exceptions.TemplateDoesNotExist: login.html
 2020-10-25 17:08:18,555 django.utils.autoreload INFO     Watching for file changes with StatReloader
 2020-10-25 17:09:10,748 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\apps.py changed, reloading.
 2020-10-25 17:09:11,511 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:18:10,284 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\dinesafelysite\settings.py changed, reloading.
+2020-10-25 17:18:10,285 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:18:11,009 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:18:11,053 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:18:12,362 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:18:12,447 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:22:28,418 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:29:08,734 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\dinesafelysite\settings.py changed, reloading.
+2020-10-25 17:29:08,735 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:29:09,515 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:29:25,245 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\admin.py changed, reloading.
+2020-10-25 17:29:25,246 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:29:26,029 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:29:28,814 django.request WARNING  Not Found: /
+2020-10-25 17:33:47,885 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:34:41,320 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:34:52,123 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:36:01,092 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:38:48,746 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\urls.py changed, reloading.
+2020-10-25 17:38:48,747 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:38:49,555 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:38:58,008 django.request WARNING  Not Found: /
+2020-10-25 17:39:05,705 django.request WARNING  Not Found: /login/
+2020-10-25 17:39:14,311 django.request WARNING  Not Found: /user/login/
+2020-10-25 17:39:43,324 django.request WARNING  Not Found: /register
+2020-10-25 17:40:09,373 django.request WARNING  Not Found: /register
+2020-10-25 17:40:49,844 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\views.py changed, reloading.
+2020-10-25 17:40:49,845 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:40:50,676 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:41:10,606 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\admin.py changed, reloading.
+2020-10-25 17:41:10,608 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:41:11,403 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:41:14,835 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\models.py changed, reloading.
+2020-10-25 17:41:14,837 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:41:15,644 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:41:45,920 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\views.py changed, reloading.
+2020-10-25 17:41:45,921 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:41:46,731 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:42:06,580 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\views.py changed, reloading.
+2020-10-25 17:42:06,581 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:42:07,343 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-25 17:42:10,781 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\admin.py changed, reloading.
+2020-10-25 17:42:10,782 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-25 17:42:11,535 django.utils.autoreload INFO     Watching for file changes with StatReloader

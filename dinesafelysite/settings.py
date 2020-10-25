@@ -148,4 +148,4 @@ LOGGING = {
     "loggers": {"": {"level": "DEBUG", "handlers": ["console", "file"]}},
 }
 
-AUTH_USER_MODEL = 'user.MyUser'
+
