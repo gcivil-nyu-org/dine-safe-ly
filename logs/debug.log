@@ -3756,3 +3756,119 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.yelp.com', po
 2020-10-26 21:20:11,385 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
 2020-10-26 21:20:12,791 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Zcc5Gbnd8nwtE_-uei4Swg/reviews HTTP/1.1" 200 None
 2020-10-26 21:20:13,107 django.request WARNING  Not Found: /restaurant/18/null
+2020-10-26 21:21:16,277 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 21:21:16,411 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 21:33:58,779 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-26 21:34:03,558 django.request WARNING  Not Found: /
+2020-10-26 21:34:03,864 django.request WARNING  Not Found: /favicon.ico
+2020-10-26 21:34:07,138 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:34:08,635 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-26 21:34:08,644 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:34:10,084 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-26 21:34:50,697 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:34:52,579 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Zcc5Gbnd8nwtE_-uei4Swg HTTP/1.1" 200 None
+2020-10-26 21:34:52,588 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:34:53,993 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Zcc5Gbnd8nwtE_-uei4Swg/reviews HTTP/1.1" 200 None
+2020-10-26 21:34:54,230 django.request WARNING  Not Found: /restaurant/18/null
+2020-10-26 21:35:20,317 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:35:21,698 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/GRXvvB1OKMuW4XDWEaVAlg HTTP/1.1" 200 None
+2020-10-26 21:35:21,708 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:35:23,114 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/VdAVjghEq_Zl-DDte0mjrw HTTP/1.1" 200 None
+2020-10-26 21:35:23,124 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:35:24,439 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/_GILcifgU5lOeKMThneSPg HTTP/1.1" 200 None
+2020-10-26 21:35:24,446 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:35:25,797 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wctR1TrheHAwpHZ2sJknEw HTTP/1.1" 200 None
+2020-10-26 21:35:25,807 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:35:27,160 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/bHkJ-7cOUTI7SJrqnRpt7g HTTP/1.1" 200 None
+2020-10-26 21:35:27,168 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:35:28,542 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/dwIlsPQ8CXOvS9-It2opzw HTTP/1.1" 200 None
+2020-10-26 21:35:28,873 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-26 21:35:28,893 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-26 21:35:28,934 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-26 21:35:28,938 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-26 21:35:28,942 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-26 21:35:34,622 django.request ERROR    Internal Server Error: /restaurant/inspection_records/
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1774, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'inspection_records'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 24, in get_restaurant_profile
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1380, in _add_q
+    split_subq=split_subq, check_filterable=check_filterable,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1319, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1165, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 76, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1778, in get_prep_value
+    ) from e
+ValueError: Field 'id' expected a number but got 'inspection_records'.
+2020-10-26 21:36:18,050 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:19,609 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Ve6GVzzJpR5QIIPdcn6ViQ HTTP/1.1" 200 None
+2020-10-26 21:36:19,615 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:21,025 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Ve6GVzzJpR5QIIPdcn6ViQ/reviews HTTP/1.1" 200 None
+2020-10-26 21:36:26,393 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:26,980 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/GRXvvB1OKMuW4XDWEaVAlg HTTP/1.1" 200 None
+2020-10-26 21:36:26,994 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:28,291 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/VdAVjghEq_Zl-DDte0mjrw HTTP/1.1" 200 None
+2020-10-26 21:36:28,300 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:28,934 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/_GILcifgU5lOeKMThneSPg HTTP/1.1" 200 None
+2020-10-26 21:36:28,949 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:29,765 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:30,285 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wctR1TrheHAwpHZ2sJknEw HTTP/1.1" 200 None
+2020-10-26 21:36:30,295 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:30,949 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/bHkJ-7cOUTI7SJrqnRpt7g HTTP/1.1" 200 None
+2020-10-26 21:36:30,956 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:31,197 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Ve6GVzzJpR5QIIPdcn6ViQ HTTP/1.1" 200 None
+2020-10-26 21:36:31,203 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:31,505 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/dwIlsPQ8CXOvS9-It2opzw HTTP/1.1" 200 None
+2020-10-26 21:36:32,603 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Ve6GVzzJpR5QIIPdcn6ViQ/reviews HTTP/1.1" 200 None
+2020-10-26 21:36:48,434 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:50,034 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-26 21:36:50,045 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:51,377 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-26 21:36:57,152 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:58,524 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-26 21:36:58,535 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:36:59,901 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-26 21:37:07,801 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:37:09,128 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/GRXvvB1OKMuW4XDWEaVAlg HTTP/1.1" 200 None
+2020-10-26 21:37:09,144 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:37:10,411 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/VdAVjghEq_Zl-DDte0mjrw HTTP/1.1" 200 None
+2020-10-26 21:37:10,421 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:37:11,712 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/_GILcifgU5lOeKMThneSPg HTTP/1.1" 200 None
+2020-10-26 21:37:11,721 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:37:12,988 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wctR1TrheHAwpHZ2sJknEw HTTP/1.1" 200 None
+2020-10-26 21:37:12,998 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:37:14,353 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/bHkJ-7cOUTI7SJrqnRpt7g HTTP/1.1" 200 None
+2020-10-26 21:37:14,365 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 21:37:15,680 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/dwIlsPQ8CXOvS9-It2opzw HTTP/1.1" 200 None
+2020-10-26 21:37:15,904 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-26 21:37:15,908 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-26 21:37:15,910 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-26 21:37:15,913 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-26 21:37:15,947 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
