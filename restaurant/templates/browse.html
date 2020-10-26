@@ -426,7 +426,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
           <div class="card h-100 border-0 shadow">
-            <div id="image1" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url(../../../d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg); min-height: 200px;">
+            <div id="image1" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg' %}); min-height: 200px;">
               <a class="tile-link" id="img1"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name1" class="text-white text-shadow">Plutorque</h4>
@@ -455,7 +455,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e3a31e62979bf147c9">
           <div class="card h-100 border-0 shadow">
-            <div id="image2" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url(../../../d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg); min-height: 200px;">
+            <div id="image2" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({% static '/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg'%}); min-height: 200px;">
               <a class="tile-link" id="img2"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name2" class="text-white text-shadow">Junipoor</h4>
@@ -481,7 +481,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e3503eb77d487e8082">
           <div class="card h-100 border-0 shadow">
-            <div id="image3" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url(../../../d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg); min-height: 200px;">
+            <div id="image3" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({% static '/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg'%); min-height: 200px;">
               <a class="tile-link" href="detail.html" id="img3"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name3" class="text-white text-shadow">Musix</h4>
@@ -507,7 +507,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2eed0626e485d">
           <div class="card h-100 border-0 shadow">
-            <div id="image4" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url(../../../d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg); min-height: 200px;">
+            <div id="image4" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({% static '/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg' %}); min-height: 200px;">
               <a class="tile-link" href="detail.html" id="img4"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name4" class="text-white text-shadow">Prosure</h4>
@@ -533,7 +533,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2edasd626e485d">
           <div class="card h-100 border-0 shadow">
-            <div id="image5" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url(../../../d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg); min-height: 200px;">
+            <div id="image5" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg' %}); min-height: 200px;">
               <a class="tile-link" href="detail.html" id="img5"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name5" class="text-white text-shadow">Take That</h4>
@@ -573,11 +573,7 @@
       </nav>
     </div>
     <script>
-		var page = {
-			{
-				page | safe
-			}
-		}
+		var page = {{page | safe}}
 		for(var i = 0; i < 3; i++) {
 			console.log(i.toString());
 			document.getElementById("page" + i.toString()).innerHTML = (page + i).toString();
@@ -587,18 +583,14 @@
 		if(page > 0) {
 			document.getElementById("prev").href = (page - 1).toString();
 		}
-		var List = {
-			{
-				restaurant_list | safe
-			}
-		};
+		var List = {{restaurant_list | safe}};
 		for(var i = 0; i < 6; i++) {
 			console.log(List[i]['restaurant_name']);
 			if(List[i]['yelp_info'] != null) {
 				if(List[i]['yelp_info']['image_url'] != null) {
 					console.log(List[i]['yelp_info']['image_url']);
 					document.getElementById("image" + i.toString()).style.backgroundImage = "url(" + List[i]['yelp_info']['image_url'] + ")";
-					document.getElementById("img" + i.toString()).href = "../" + List[i]['id'];
+					document.getElementById("img" + i.toString()).href = "../profile/" + List[i]['id'];
 				}
 				if(List[i]['yelp_info']['categories'] != null) {
 					var categories_str = "";

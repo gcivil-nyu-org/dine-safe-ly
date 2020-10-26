@@ -60,7 +60,7 @@ def get_inspection_info(request, restaurant_id):
         )
 
 
-def get_landing_page(request, page):
+def get_landing_page(request, page=0):
     restaurant_list = get_restaurant_list(page, 6)
     parameter_dict = {
         "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),

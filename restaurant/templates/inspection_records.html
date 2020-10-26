@@ -27,11 +27,7 @@
             </a>.
           </h4>
           <script>
-					var List = {
-						{
-							inspection_list | safe
-						}
-					};
+					var List = {{inspection_list | safe}};
 					var abc = document.getElementById("inspection_records_list");
 					for(var i = 0; i < List.length; i++) {
 						var name = List[i]['restaurant_name'].toString();
@@ -46,7 +42,7 @@
 						abc.appendChild(entry);
 						abc.appendChild(x);
 					}
-					</script>
+		  </script>
         </div>
       </div>
     </div>
