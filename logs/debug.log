@@ -4063,3 +4063,18 @@ ValueError: Field 'id' expected a number but got 'inspection_records'.
 2020-10-27 01:48:40,436 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
 2020-10-27 01:48:40,441 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
 2020-10-27 01:48:41,773 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:50:38,333 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 01:50:38,354 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 01:50:40,368 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 01:51:55,798 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:51:56,456 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:51:56,479 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:51:57,806 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:57:37,620 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 01:57:37,759 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 01:57:42,540 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 01:57:45,429 django.request WARNING  Not Found: /
+2020-10-27 01:57:52,289 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:57:52,935 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:57:52,943 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:57:53,447 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
