@@ -1,28 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<table id="res_open_hours"></table>
-<script>
 
-for(i=0; i < yelp_info.hours[0].open.length; i++)
+{% extends 'base-static.html' %} {% load static %} {% block content %}
+<div class="text-block">
+    <p class="subtitle text-sm text-primary">Reviews </p>
+    <h5 class="mb-4">Listing Reviews </h5>
+    <span id="review_content">
+
+    </span>
+
+    <div class="py-5">
+        <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">Leave a review</button>
+        <div class="collapse mt-4" id="leaveReview">
+            <h5 class="mb-4">Leave a review</h5>
+            <form class="form" id="contact-form" method="get" action="#">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Your name *</label>
+                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required="required"> </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label" for="rating">Your rating *</label>
+                            <select class="custom-select focus-shadow-0" name="rating" id="rating">
+                                <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
+                                <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
+                                <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
+                                <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
+                                <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">Your email *</label>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="Enter your  email" required="required"> </div>
+                <div class="form-group">
+                    <label class="form-label" for="review">Review text *</label>
+                    <textarea class="form-control" rows="4" name="review" id="review" placeholder="Enter your review" required="required"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Post review</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+var yelp_reviews = {{ yelp_info.reviews|safe }};
+for(i=0; i < yelp_reviews.reviews.length; i++)
   {
-    var opening_hours = document.getElementById("res_open_hours");
-    var row = document.createElement("tr");
-    opening_hours.appendChild(row);
-    var thh = document.createElement("th");
-    thh.className = "pl-0";
-    thh.innerHTML="+hello+";
-    row.appendChild(thh);
-    var tdd = document.createElement("td");
-    tdd.className = "pr-0 text-right border-0";
-    tdd.innerHTML=yelp_info.hours[0].open[i].start + "-" +yelp_info.hours[0].open[i].end;
-    row.appendChild(tdd);
+  var review_content = document.getElementById("review_content");
+   var ele = document.createElement("div");
+   ele.className = "media d-block d-sm-flex review";
+   review_content.appendChild(ele);
+
+   var ele2 = document.createElement("div");
+   ele2.className = "text-md-center mr-4 mr-xl-5";
+        var img = document.createElement("img");
+        img.className = "d-block avatar avatar-xl p-2 mb-2";
+        img.src = yelp_reviews.reviews[i].user.image_url;
+        img.alt = yelp_reviews.reviews[i].user.name;
+        var span = document.createElement("span");
+        span.className = "text-uppercase text-muted text-sm";
+        span.innerHTML = yelp_reviews.reviews[i].time_created;
+   ele2.appendChild(img);
+   ele2.appendChild(span);
+   ele.appendChild(ele2);
+
+   var ele3 = document.createElement("div");
+   ele3.className = "media-body";
+        var h6 = document.createElement("h6");
+        h6.className = "mt-2 mb-1";
+            var a = document.createElement("a");
+            a.href = yelp_reviews.reviews[i].user.profile_url;
+            a.innerHTML = yelp_reviews.reviews[i].user.name;
+        h6.appendChild(a);
+   ele3.appendChild(h6);
+        var div4 = document.createElement("div");
+        div4.className = "mb-2";
+
+   ele3.appendChild(div4);
+       var p = document.createElement("p");
+       p.className = "text-muted text-sm";
+       p.innerHTML = yelp_reviews.reviews[i].text;
+   ele3.appendChild(p);
+
+
+   ele.appendChild(ele3);
 
   }
 </script>
-</body>
-</html>
+{% endblock %}

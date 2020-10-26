@@ -81,30 +81,7 @@
         <div class="text-block">
           <p class="subtitle text-sm text-primary">Reviews </p>
           <h5 class="mb-4">Listing Reviews </h5>
-          <div class="media d-block d-sm-flex review">
-            <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="{{ r1_user_img }}" alt="{{ r1_user_name }}"><span class="text-uppercase text-muted text-sm">{{ r1_time }}</span></div>
-            <div class="media-body">
-              <h6 class="mt-2 mb-1"><a href="{{ r1_user_url }}">{{ r1_user_name }}</a></h6>
-              <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i> </div>
-              <p class="text-muted text-sm">{{ r1_text }}</p>
-            </div>
-          </div>
-          <div class="media d-block d-sm-flex review">
-            <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="{{ r2_user_img }}" alt="{{ r2_user_name }}"><span class="text-uppercase text-muted text-sm">{{ r2_time}}</span></div>
-            <div class="media-body">
-              <h6 class="mt-2 mb-1"><a href="{{ r2_user_url }}">{{ r2_user_name }}</a></h6>
-              <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-gray-200 mr-4"></i> </div>
-              <p class="text-muted text-sm">{{ r2_text }}</p>
-            </div>
-          </div>
-          <div class="media d-block d-sm-flex review">
-            <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="{{ r3_user_img }}" alt="{{ r3_user_name }}"><span class="text-uppercase text-muted text-sm">{{ r3_time}}</span></div>
-            <div class="media-body">
-              <h6 class="mt-2 mb-1"><a href="{{ r3_user_url }}">{{ r3_user_name }}</a></h6>
-              <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-gray-200 mr-4"></i> </div>
-              <p class="text-muted text-sm">{{ r3_text }}</p>
-            </div>
-          </div>
+          <span id="review_content"></span>
           <div class="py-5">
             <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">Leave a review</button>
             <div class="collapse mt-4" id="leaveReview">
@@ -220,7 +197,7 @@
 </script>
 <!--Insert values into HTML-->
 <script>
- var True = true;
+var True = true;
 var False = false;
 var None = null;
 var yelp_info = {{ yelp_info.info|safe }};
@@ -239,7 +216,7 @@ switch(false) {
   case (empty1.includes(price)): document.getElementById("res-price").innerHTML = yelp_info.price;
   case (empty1.includes(display_phone)): document.getElementById("res_display_phn").innerHTML = yelp_info.display_phone;
   case (empty1.includes(image_url)): document.getElementById("res_img").style.backgroundImage  = 'url(' + yelp_info.image_url + ')';
-
+}
   var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   for(i=0; i < yelp_info.hours[0].open.length; i++)
   {
@@ -272,7 +249,48 @@ switch(false) {
     gallery_imgs.appendChild(ele);
   }
 
-}
+var yelp_reviews = {{ yelp_info.reviews|safe }};
+for(i=0; i < yelp_reviews.reviews.length; i++)
+  {
+  var review_content = document.getElementById("review_content");
+   var ele = document.createElement("div");
+   ele.className = "media d-block d-sm-flex review";
+   review_content.appendChild(ele);
 
+   var ele2 = document.createElement("div");
+   ele2.className = "text-md-center mr-4 mr-xl-5";
+        var img = document.createElement("img");
+        img.className = "d-block avatar avatar-xl p-2 mb-2";
+        img.src = yelp_reviews.reviews[i].user.image_url;
+        img.alt = yelp_reviews.reviews[i].user.name;
+        var span = document.createElement("span");
+        span.className = "text-uppercase text-muted text-sm";
+        span.innerHTML = yelp_reviews.reviews[i].time_created;
+   ele2.appendChild(img);
+   ele2.appendChild(span);
+   ele.appendChild(ele2);
+
+   var ele3 = document.createElement("div");
+   ele3.className = "media-body";
+        var h6 = document.createElement("h6");
+        h6.className = "mt-2 mb-1";
+            var a = document.createElement("a");
+            a.href = yelp_reviews.reviews[i].user.profile_url;
+            a.innerHTML = yelp_reviews.reviews[i].user.name;
+        h6.appendChild(a);
+   ele3.appendChild(h6);
+        var div4 = document.createElement("div");
+        div4.className = "mb-2";
+
+   ele3.appendChild(div4);
+       var p = document.createElement("p");
+       p.className = "text-muted text-sm";
+       p.innerHTML = yelp_reviews.reviews[i].text;
+   ele3.appendChild(p);
+
+
+   ele.appendChild(ele3);
+
+  }
 </script>
 {% endblock %}
