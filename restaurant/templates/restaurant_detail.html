@@ -44,16 +44,8 @@
         <div class="text-block">
           <!-- Gallery-->
           <h3 class="mb-4">Gallery</h3>
-          <div class="row gallery ml-n1 mr-n1">
-            <div class="col-lg-4 col-6 px-1 mb-2">
-              <a href="{{ p1 }}"><img class="img-fluid" src="{{ p1 }}" alt="..."></a>
-            </div>
-            <div class="col-lg-4 col-6 px-1 mb-2">
-              <a href="{{ p2 }}"><img class="img-fluid" src="{{ p2 }}" alt="..."></a>
-            </div>
-            <div class="col-lg-4 col-6 px-1 mb-2">
-              <a href="{{ p3 }}"><img class="img-fluid" src="{{ p3 }}" alt="..."></a>
-            </div>
+          <div id="gallery_imgs" class="row gallery ml-n1 mr-n1">
+
           </div>
         </div>
         <!-- Amenities-->
@@ -157,7 +149,7 @@
             <div class="card-header bg-gray-100 py-4 border-0">
               <div class="media align-items-center">
                 <div class="media-body">
-<!--                  <p class="subtitle text-sm text-primary">Opening in 5 minutes</p>-->
+<!--                  <p class="subtitle text-sm text-primary">Overnight Status : <span id="res_overnight_status"></span></p>-->
                   <h4 class="mb-0">Opening Hours </h4> </div>
                 <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
                   <use xlink:href="#wall-clock-1"> </use>
@@ -166,34 +158,7 @@
             </div>
             <div class="card-body">
               <table id="res_open_hours" class="table text-sm mb-0">
-                <tr>
-                  <th class="pl-0 border-0">Sunday</th>
-                  <td class="pr-0 text-right border-0">8:00 am - 6:00 pm</td>
-                </tr>
-                <tr>
-                  <th class="pl-0">Monday</th>
-                  <td class="pr-0 text-right">8:00 am - 6:00 pm</td>
-                </tr>
-                <tr>
-                  <th class="pl-0">Tuesday</th>
-                  <td class="pr-0 text-right">8:00 am - 6:00 pm</td>
-                </tr>
-                <tr>
-                  <th class="pl-0">Wednesday</th>
-                  <td class="pr-0 text-right">8:00 am - 6:00 pm</td>
-                </tr>
-                <tr>
-                  <th class="pl-0">Thursday</th>
-                  <td class="pr-0 text-right">8:00 am - 6:00 pm</td>
-                </tr>
-                <tr>
-                  <th class="pl-0">Friday</th>
-                  <td class="pr-0 text-right">8:00 am - 6:00 pm</td>
-                </tr>
-                <tr>
-                  <th class="pl-0">Saturday</th>
-                  <td class="pr-0 text-right">Closed</td>
-                </tr>
+
               </table>
             </div>
           </div>
@@ -275,9 +240,36 @@ switch(false) {
   case (empty1.includes(display_phone)): document.getElementById("res_display_phn").innerHTML = yelp_info.display_phone;
   case (empty1.includes(image_url)): document.getElementById("res_img").style.backgroundImage  = 'url(' + yelp_info.image_url + ')';
 
+  var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   for(i=0; i < yelp_info.hours[0].open.length; i++)
   {
+    var opening_hours = document.getElementById("res_open_hours");
+    var row = document.createElement("tr");
+    opening_hours.appendChild(row);
+    var thh = document.createElement("th");
+    thh.className = "pl-0";
+    thh.innerHTML=days[i];
+    row.appendChild(thh);
+    var tdd = document.createElement("td");
+    tdd.className = "pr-0 text-right";
+    tdd.innerHTML=yelp_info.hours[0].open[i].start + "-" +yelp_info.hours[0].open[i].end;
+    row.appendChild(tdd);
+  }
 
+  for(i=0; i < yelp_info.photos.length; i++)
+  {
+    var gallery_imgs = document.getElementById("gallery_imgs");
+    var ele = document.createElement("div");
+    ele.className = "col-lg-4 col-6 px-1 mb-2";
+    var a = document.createElement("a");
+    a.href = yelp_info.photos[i];
+    var img = document.createElement("img");
+    img.className = "img-fluid";
+    img.src = yelp_info.photos[i];
+
+    a.appendChild(img);
+    ele.appendChild(a);
+    gallery_imgs.appendChild(ele);
   }
 
 }
