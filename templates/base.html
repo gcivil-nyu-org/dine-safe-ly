@@ -20,8 +20,9 @@
     <!-- Magnigic Popup-->
     <link rel="stylesheet" href="{% static 'vendor/magnific-popup/magnific-popup.css' %}">
     <!-- Leaflet Maps-->
-    <link rel="stylesheet" href="{% static 'dist/leaflet.css' %}" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
-    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/><!-- theme stylesheet-->
     <link rel="stylesheet" href="{% static 'css/style.default.452e11c7.css' %}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{% static 'css/custom.0a822280.css' %}">
@@ -35,7 +36,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'css/all.css' %}" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> </head>
+    <link rel="stylesheet" href="{% static 'css/all.css' %}" crossorigin="anonymous"> </head>
 
 <body style="padding-top: 72px;">
 <header class="header">
@@ -128,11 +129,15 @@
 <script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}">
 </script>
 <script src="{% static 'js/demo.36f8799a.js' %}"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&callback=initMap"
+        type="text/javascript"></script>
 
 <!-- Main Theme JS file    -->
 <script src="{% static 'js/theme.55f8348b.js' %}"></script>
 <!-- Map-->
-<script src="{% static 'dist/leaflet.js' %}" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
 <!-- Available tile layers-->
 <script src="{% static 'js/map-layers.f6cf9b57.js' %}">
 </script>

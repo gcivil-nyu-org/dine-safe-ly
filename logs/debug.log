@@ -3872,3 +3872,194 @@ ValueError: Field 'id' expected a number but got 'inspection_records'.
 2020-10-26 21:37:15,910 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
 2020-10-26 21:37:15,913 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
 2020-10-26 21:37:15,947 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-26 21:57:31,751 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 21:57:31,878 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 21:57:38,462 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-26 21:57:40,765 django.request WARNING  Not Found: /
+2020-10-26 21:57:59,004 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 21:57:59,114 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:18:16,828 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 00:18:20,482 django.request WARNING  Not Found: /
+2020-10-27 00:18:20,801 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 00:19:12,077 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:19:12,211 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:19:17,419 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 00:19:21,425 django.request WARNING  Not Found: /
+2020-10-27 00:19:21,729 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 00:20:00,945 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 00:20:00,953 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 00:20:00,959 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 00:20:00,961 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 00:20:00,966 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 00:20:13,925 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:20:14,045 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:20:22,384 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:20:29,387 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:20:42,357 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 00:20:47,378 django.request WARNING  Not Found: /
+2020-10-27 00:20:47,620 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 00:21:43,284 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:21:43,440 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:21:55,461 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:22:04,842 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:22:11,049 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 00:22:15,235 django.request WARNING  Not Found: /
+2020-10-27 00:22:15,742 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 00:23:41,101 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:23:41,256 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 00:31:08,608 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 00:31:11,896 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:31:13,437 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/3gTKpKeSOOjfxsrWKny7vA HTTP/1.1" 200 None
+2020-10-27 00:31:13,447 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:31:14,942 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/3gTKpKeSOOjfxsrWKny7vA/reviews HTTP/1.1" 200 None
+2020-10-27 00:31:15,383 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:31:16,846 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/3gTKpKeSOOjfxsrWKny7vA HTTP/1.1" 200 None
+2020-10-27 00:31:16,857 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:31:18,278 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/3gTKpKeSOOjfxsrWKny7vA/reviews HTTP/1.1" 200 None
+2020-10-27 00:31:21,263 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:31:22,712 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 00:31:22,723 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:31:24,297 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 00:33:01,658 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:33:03,617 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 00:33:03,625 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:33:04,575 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 00:33:08,701 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:33:10,122 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/GRXvvB1OKMuW4XDWEaVAlg HTTP/1.1" 200 None
+2020-10-27 00:33:10,135 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:33:11,585 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/VdAVjghEq_Zl-DDte0mjrw HTTP/1.1" 200 None
+2020-10-27 00:33:11,598 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:33:13,039 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/_GILcifgU5lOeKMThneSPg HTTP/1.1" 200 None
+2020-10-27 00:33:13,052 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:33:14,370 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wctR1TrheHAwpHZ2sJknEw HTTP/1.1" 200 None
+2020-10-27 00:33:14,382 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:33:15,854 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/bHkJ-7cOUTI7SJrqnRpt7g HTTP/1.1" 200 None
+2020-10-27 00:33:15,865 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:33:17,253 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/dwIlsPQ8CXOvS9-It2opzw HTTP/1.1" 200 None
+2020-10-27 00:33:17,487 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 00:33:17,492 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 00:33:17,505 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 00:33:17,508 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 00:33:17,514 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 00:47:08,571 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 00:47:16,397 django.request WARNING  Not Found: /
+2020-10-27 00:47:17,174 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 00:53:14,747 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:53:15,364 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 00:53:15,369 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:53:16,684 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 00:53:31,681 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:53:32,996 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 00:53:33,003 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 00:53:34,342 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 00:53:48,117 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 01:02:19,960 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 01:02:33,360 django.request WARNING  Not Found: /
+2020-10-27 01:02:37,854 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:02:39,269 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:02:39,276 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:02:40,584 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:11:10,106 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:11:11,520 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:11:11,529 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:11:12,847 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:13:29,086 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:13:30,427 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:13:30,434 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:13:31,848 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:16:32,291 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:16:32,861 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:16:32,866 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:16:33,370 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:16:48,473 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:16:49,796 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:16:49,802 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:16:51,088 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:18:37,959 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:18:38,524 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:18:38,530 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:18:39,830 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:19:58,554 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:19:59,932 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:19:59,937 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:20:01,230 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:21:43,569 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:21:45,035 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:21:45,042 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:21:46,411 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:24:54,847 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:24:56,259 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:24:56,268 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:24:57,575 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:25:11,226 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:25:12,541 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:25:12,548 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:25:13,865 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:26:01,136 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:26:02,542 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:26:02,550 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:26:03,799 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:26:27,184 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:26:28,537 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:26:28,542 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:26:29,861 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:27:04,524 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:27:05,963 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:27:05,968 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:27:07,224 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:28:01,198 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:28:02,525 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:28:02,532 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:28:03,824 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:28:47,953 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:28:49,297 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:28:49,303 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:28:50,607 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:37:30,473 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:37:31,831 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:37:31,836 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:37:33,146 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:37:44,325 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:37:45,657 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:37:45,664 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:37:46,184 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:42:09,673 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:42:11,098 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:42:11,105 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:42:12,465 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:42:27,677 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:42:29,011 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:42:29,019 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:42:30,305 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:42:49,349 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:42:50,737 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:42:50,742 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:42:51,999 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:44:44,883 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:44:46,262 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:44:46,267 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:44:47,551 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:44:54,244 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:44:55,658 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:44:55,665 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:44:56,931 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:45:41,684 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:45:43,122 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:45:43,127 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:45:44,452 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:48:04,472 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:48:05,873 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:48:05,879 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:48:07,245 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:48:22,601 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:48:23,883 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:48:23,889 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:48:24,354 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:48:27,218 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:48:28,594 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:48:28,600 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:48:29,930 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 01:48:39,873 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:48:40,436 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 01:48:40,441 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 01:48:41,773 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
