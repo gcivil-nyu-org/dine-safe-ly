@@ -1,0 +1,65 @@
+
+{% extends 'base-static.html' %} {% load static %} {% block content %}
+<p class="subtitle text-sm text-primary">Reviews </p>
+    <h5 class="mb-4">Listing Reviews </h5>
+    <span id="review_content">
+    </span>
+<script>
+var yelp_reviews = {{ yelp_info.reviews|safe }};
+for(i=0; i < yelp_reviews.reviews.length; i++)
+  {
+  var review_content = document.getElementById("review_content");
+   var ele = document.createElement("div");
+   ele.className = "media d-block d-sm-flex review";
+   review_content.appendChild(ele);
+
+   var ele2 = document.createElement("div");
+   ele2.className = "text-md-center mr-4 mr-xl-5";
+        var img = document.createElement("img");
+        img.className = "d-block avatar avatar-xl p-2 mb-2";
+        img.src = yelp_reviews.reviews[i].user.image_url;
+        img.alt = yelp_reviews.reviews[i].user.name;
+        var span = document.createElement("span");
+        span.className = "text-uppercase text-muted text-sm";
+        span.innerHTML = yelp_reviews.reviews[i].time_created;
+   ele2.appendChild(img);
+   ele2.appendChild(span);
+   ele.appendChild(ele2);
+
+   var ele3 = document.createElement("div");
+   ele3.className = "media-body";
+        var h6 = document.createElement("h6");
+        h6.className = "mt-2 mb-1";
+            var a = document.createElement("a");
+            a.href = yelp_reviews.reviews[i].user.profile_url;
+            a.innerHTML = yelp_reviews.reviews[i].user.name;
+        h6.appendChild(a);
+   ele3.appendChild(h6);
+        var div4 = document.createElement("div");
+        div4.className = "mb-2";
+            var user_review_count = yelp_reviews.reviews[i].rating;
+               for(j=0; j<int(user_review_count); j++)
+               {
+                 var i-star = document.createElement("i");
+                 i-star.className = "fa fa-xs fa-star text-primary";
+                 div4.appendChild(i-star);
+               }
+               for(j=0; j<5-int(user_review_count); j++)
+               {
+                 var i-gray = document.createElement("i");
+                 i-gray.className = "fa fa-xs fa-star text-gray-200";
+                 div4.appendChild(i-gray);
+               }
+
+   ele3.appendChild(div4);
+       var p = document.createElement("p");
+       p.className = "text-muted text-sm";
+       p.innerHTML = yelp_reviews.reviews[i].text;
+   ele3.appendChild(p);
+
+
+   ele.appendChild(ele3);
+
+  }
+</script>
+{% endblock %}
