@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <!-- Hero Section-->
 <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('{{ img_url }}');">
   <div class="container overlay-content">
@@ -19,12 +17,15 @@
       <div class="col-lg-8">
         <div class="text-block">
           <h3 class="mb-3">Restaurant Details</h3>
-          <!-- <b>Seating Choice:</b> {{ seating_choice }}<br> -->
-          <b>Compliance Status:</b> {{ is_roadway_compliant }}<br>
-          <b> Skipped Reason:</b> {{ skipped_reason }}<br>
-          <b>Last Inspection:</b> {{ inspected_on }}<br><br><br>
-          <a href="/restaurant/inspection_records/{{ restaurant_id }}"><button class="btn btn-outline-primary" type="button">Check Inspection History</button></a>
-            
+          <!-- <b>Seating Choice:</b> {{ seating_choice }}<br> --><b>Compliance Status:</b> {{ is_roadway_compliant }}
+          <br> <b> Skipped Reason:</b> {{ skipped_reason }}
+          <br> <b>Last Inspection:</b> {{ inspected_on }}
+          <br>
+          <br>
+          <br>
+          <a href="/restaurant/inspection_records/{{ restaurant_id }}">
+            <button class="btn btn-outline-primary" type="button">Check Inspection History</button>
+          </a>
         </div>
         <div class="text-block">
           <!-- Listing Location-->
@@ -37,9 +38,15 @@
           <!-- Gallery-->
           <h3 class="mb-4">Gallery</h3>
           <div class="row gallery ml-n1 mr-n1">
-            <div class="col-lg-4 col-6 px-1 mb-2"><a href="{{ p1 }}"><img class="img-fluid" src="{{ p1 }}" alt="..."></a></div>
-            <div class="col-lg-4 col-6 px-1 mb-2"><a href="{{ p2 }}"><img class="img-fluid" src="{{ p2 }}" alt="..."></a></div>
-            <div class="col-lg-4 col-6 px-1 mb-2"><a href="{{ p3 }}"><img class="img-fluid" src="{{ p3 }}" alt="..."></a></div>
+            <div class="col-lg-4 col-6 px-1 mb-2">
+              <a href="{{ p1 }}"><img class="img-fluid" src="{{ p1 }}" alt="..."></a>
+            </div>
+            <div class="col-lg-4 col-6 px-1 mb-2">
+              <a href="{{ p2 }}"><img class="img-fluid" src="{{ p2 }}" alt="..."></a>
+            </div>
+            <div class="col-lg-4 col-6 px-1 mb-2">
+              <a href="{{ p3 }}"><img class="img-fluid" src="{{ p3 }}" alt="..."></a>
+            </div>
           </div>
         </div>
         <!-- Amenities-->
@@ -48,45 +55,38 @@
           <ul class="amenities-list list-inline">
             <li class="list-inline-item mb-3">
               <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Elevator</span>
-              </div>
+                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Elevator</span> </div>
             </li>
             <li class="list-inline-item mb-3">
               <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Vegan friendly</span>
-              </div>
+                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Vegan friendly</span> </div>
             </li>
             <li class="list-inline-item mb-3">
               <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Alcohol served</span>
-              </div>
+                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Alcohol served</span> </div>
             </li>
             <li class="list-inline-item mb-3">
               <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>No smoking</span>
-              </div>
+                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>No smoking</span> </div>
             </li>
             <li class="list-inline-item mb-3">
               <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Parking spaces (paid)</span>
-              </div>
+                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Parking spaces (paid)</span> </div>
             </li>
             <li class="list-inline-item mb-3">
               <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>WiFi</span>
-              </div>
+                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>WiFi</span> </div>
             </li>
           </ul>
         </div>
         <div class="text-block">
-          <p class="subtitle text-sm text-primary">Reviews    </p>
+          <p class="subtitle text-sm text-primary">Reviews </p>
           <h5 class="mb-4">Listing Reviews </h5>
           <div class="media d-block d-sm-flex review">
             <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="{{ r1_user_img }}" alt="{{ r1_user_name }}"><span class="text-uppercase text-muted text-sm">{{ r1_time }}</span></div>
             <div class="media-body">
               <h6 class="mt-2 mb-1"><a href="{{ r1_user_url }}">{{ r1_user_name }}</a></h6>
-              <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i>
-              </div>
+              <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i> </div>
               <p class="text-muted text-sm">{{ r1_text }}</p>
             </div>
           </div>
@@ -94,8 +94,7 @@
             <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="{{ r2_user_img }}" alt="{{ r2_user_name }}"><span class="text-uppercase text-muted text-sm">{{ r2_time}}</span></div>
             <div class="media-body">
               <h6 class="mt-2 mb-1"><a href="{{ r2_user_url }}">{{ r2_user_name }}</a></h6>
-              <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-gray-200 mr-4"></i>
-              </div>
+              <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-gray-200 mr-4"></i> </div>
               <p class="text-muted text-sm">{{ r2_text }}</p>
             </div>
           </div>
@@ -103,8 +102,7 @@
             <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="{{ r3_user_img }}" alt="{{ r3_user_name }}"><span class="text-uppercase text-muted text-sm">{{ r3_time}}</span></div>
             <div class="media-body">
               <h6 class="mt-2 mb-1"><a href="{{ r3_user_url }}">{{ r3_user_name }}</a></h6>
-              <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-gray-200 mr-4"></i>
-              </div>
+              <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-gray-200 mr-4"></i> </div>
               <p class="text-muted text-sm">{{ r3_text }}</p>
             </div>
           </div>
@@ -117,8 +115,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-label" for="name">Your name *</label>
-                      <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required="required">
-                    </div>
+                      <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required="required"> </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -135,8 +132,7 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="email">Your email *</label>
-                  <input class="form-control" type="email" name="email" id="email" placeholder="Enter your  email" required="required">
-                </div>
+                  <input class="form-control" type="email" name="email" id="email" placeholder="Enter your  email" required="required"> </div>
                 <div class="form-group">
                   <label class="form-label" for="review">Review text *</label>
                   <textarea class="form-control" rows="4" name="review" id="review" placeholder="Enter your review" required="required"></textarea>
@@ -155,8 +151,7 @@
               <div class="media align-items-center">
                 <div class="media-body">
                   <p class="subtitle text-sm text-primary">Opening in 5 minutes</p>
-                  <h4 class="mb-0">Opening Hours </h4>
-                </div>
+                  <h4 class="mb-0">Opening Hours </h4> </div>
                 <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
                   <use xlink:href="#wall-clock-1"> </use>
                 </svg>
@@ -201,8 +196,7 @@
               <div class="media align-items-center">
                 <div class="media-body">
                   <p class="subtitle text-sm text-primary">Want to know more?</p>
-                  <h4 class="mb-0">Information</h4>
-                </div>
+                  <h4 class="mb-0">Information</h4> </div>
                 <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
                   <use xlink:href="#fountain-pen-1"> </use>
                 </svg>
@@ -214,28 +208,26 @@
                 <li class="mb-2"> <a class=" text-sm text-decoration-none" href="#"><i class="fas fa-star mr-3"></i><span class="text-muted">{{ rate }} Ratings</span></a></li>
                 <li class="mb-2"> <a class=" text-sm text-decoration-none" href="#"><i class="fas fa-money-check-alt mr-3"></i><span class="text-muted"> {% if price%}price {%endif%} </span></a></li>
               </ul>
-              <div class="text-center"><a class="btn btn-outline-primary btn-block" href="{{ link }}"> <i class="far fa-paper-plane mr-2"></i>Reach out</a></div>
+              <div class="text-center">
+                <a class="btn btn-outline-primary btn-block" href="{{ link }}"> <i class="far fa-paper-plane mr-2"></i>Reach out</a>
+              </div>
             </div>
           </div>
-<!--          <div class="text-center">-->
-<!--            <p><a class="text-secondary" href="#"> <i class="fa fa-heart"></i> Bookmark This Listing</a></p><span>79 people bookmarked this place </span>-->
-<!--          </div>-->
+          <!--          <div class="text-center">-->
+          <!--            <p><a class="text-secondary" href="#"> <i class="fa fa-heart"></i> Bookmark This Listing</a></p><span>79 people bookmarked this place </span>-->
+          <!--          </div>-->
         </div>
       </div>
     </div>
   </div>
 </section>
 <script>
-      // createDetailMap({
-      //     mapId: 'detailMap',
-      //     mapCenter: [{{ lat }}, {{ long }}],
-      //     markerShow: true,
-      //     markerPosition: [{{ lat }}, {{ long }}],
-      //     markerPath: '{% static 'img/marker.svg' %}',
-      // })
-
-      // var yelp_info = {{ inspection_list|safe }};
-
-
-</script>
-{% endblock %}
+// createDetailMap({
+//     mapId: 'detailMap',
+//     mapCenter: [{{ lat }}, {{ long }}],
+//     markerShow: true,
+//     markerPosition: [{{ lat }}, {{ long }}],
+//     markerPath: '{% static 'img/marker.svg' %}',
+// })
+// var yelp_info = {{ inspection_list|safe }};
+</script> {% endblock %}

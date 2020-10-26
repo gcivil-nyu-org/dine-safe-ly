@@ -1,26 +1,22 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <!-- Hero Section-->
-<section class="hero py-6 py-lg-7 text-white dark-overlay">
-  <img class="bg-image" src="https://media.architecturaldigest.com/photos/5d2c9e26ae81990009f6429f/16:9/w_2560%2Cc_limit/TAK%252520Room_by%252520Adrian%252520Gaut.jpg" alt="Text page">
+<section class="hero py-6 py-lg-7 text-white dark-overlay"> <img class="bg-image" src="https://media.architecturaldigest.com/photos/5d2c9e26ae81990009f6429f/16:9/w_2560%2Cc_limit/TAK%252520Room_by%252520Adrian%252520Gaut.jpg" alt="Text page">
   <div class="container overlay-content">
     <!-- Breadcrumbs -->
     <ol class="main breadcrumb text-white justify-content-center no-border mb-0">
-      <li class="breadcrumb-item">
-        <a href="index-2.html">Restaurant</a>
-      </li>
+      <li class="breadcrumb-item"> <a href="index-2.html">Restaurant</a> </li>
       <li class="breadcrumb-item active" id="restaurant_name1"></li>
     </ol>
-    <h1 class="hero-heading">Inspection History</h1>
-  </div>
+    <h1 class="hero-heading">Inspection History</h1> </div>
 </section>
 <section class="py-6">
   <div class="container">
     <div class="row">
       <div class="col-xl-8 col-lg-10 mx-auto">
         <div class="text-content">
-          <a href="/restaurant/{{ restaurant_id }}"><button class="btn btn-outline-primary" type="button">Back to Restaurant</button></a>
+          <a href="/restaurant/{{ restaurant_id }}">
+            <button class="btn btn-outline-primary" type="button">Back to Restaurant</button>
+          </a>
           <br>
           <!-- <ol><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li></ol> -->
           <blockquote id="inspection_records_list" class="blockquote blockquote-primary bg-gray-100 p-5"></blockquote>
@@ -31,28 +27,28 @@
             </a>.
           </h4>
           <script>
-      var List = {{ inspection_list|safe }};
-
-  var abc = document.getElementById("inspection_records_list");
-      for (var i = 0; i < List.length; i++) {
-          var name = List[i]['restaurant_name'].toString();
-          document.getElementById("restaurant_name1").innerHTML = name;
-          var compliant_status = List[i]['is_roadway_compliant'].toString();
-          var inspection_date = List[i]['inspected_on'].toString();
-          var info = compliant_status + " - " + inspection_date;
-          // abc.innerHTML = compliant_status;
-          var entry = document.createElement('span');
-          var x = document.createElement('br');
-          entry.appendChild(document.createTextNode(info));
-          abc.appendChild(entry);
-          abc.appendChild(x);      }
-
-
-
-																												</script>
+					var List = {
+						{
+							inspection_list | safe
+						}
+					};
+					var abc = document.getElementById("inspection_records_list");
+					for(var i = 0; i < List.length; i++) {
+						var name = List[i]['restaurant_name'].toString();
+						document.getElementById("restaurant_name1").innerHTML = name;
+						var compliant_status = List[i]['is_roadway_compliant'].toString();
+						var inspection_date = List[i]['inspected_on'].toString();
+						var info = compliant_status + " - " + inspection_date;
+						// abc.innerHTML = compliant_status;
+						var entry = document.createElement('span');
+						var x = document.createElement('br');
+						entry.appendChild(document.createTextNode(info));
+						abc.appendChild(entry);
+						abc.appendChild(x);
+					}
+					</script>
         </div>
       </div>
     </div>
   </div>
-</section>
-{% endblock %}
+</section> {% endblock %}
