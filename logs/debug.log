@@ -4219,3 +4219,29 @@ django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 1: 'block'.
 2020-10-27 03:12:04,369 django.utils.autoreload INFO     Watching for file changes with StatReloader
 2020-10-27 03:16:15,248 asyncio      DEBUG    Using selector: SelectSelector
 2020-10-27 03:16:15,414 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:41:59,850 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:42:02,114 django.request WARNING  Not Found: /
+2020-10-27 03:42:02,341 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 03:42:09,769 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:42:11,022 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 03:42:11,027 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:42:12,222 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 03:43:24,849 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:43:26,094 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/GRXvvB1OKMuW4XDWEaVAlg HTTP/1.1" 429 230
+2020-10-27 03:43:26,101 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:43:27,339 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/VdAVjghEq_Zl-DDte0mjrw HTTP/1.1" 429 230
+2020-10-27 03:43:27,346 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:43:28,517 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/_GILcifgU5lOeKMThneSPg HTTP/1.1" 429 230
+2020-10-27 03:43:28,525 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:43:29,716 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wctR1TrheHAwpHZ2sJknEw HTTP/1.1" 429 230
+2020-10-27 03:43:29,723 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:43:30,996 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/bHkJ-7cOUTI7SJrqnRpt7g HTTP/1.1" 429 230
+2020-10-27 03:43:31,002 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:43:32,146 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/dwIlsPQ8CXOvS9-It2opzw HTTP/1.1" 429 230
+2020-10-27 03:43:32,283 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 03:43:32,289 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 03:43:32,307 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 03:43:32,315 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 03:43:32,318 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 03:49:24,616 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:49:24,736 asyncio      DEBUG    Using selector: SelectSelector
