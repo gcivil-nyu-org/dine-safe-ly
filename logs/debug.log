@@ -2436,3 +2436,202 @@ django.template.exceptions.TemplateDoesNotExist: login.html
 2020-10-25 17:42:10,781 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\admin.py changed, reloading.
 2020-10-25 17:42:10,782 asyncio      DEBUG    Using proactor: IocpProactor
 2020-10-25 17:42:11,535 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-26 14:38:50,878 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-26 14:38:53,172 django.request WARNING  Not Found: /
+2020-10-26 14:38:53,415 django.request WARNING  Not Found: /favicon.ico
+2020-10-26 14:38:59,031 django.request ERROR    Internal Server Error: /restaurant/80/
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: restaurant_restaurant
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 24, in get_restaurant_profile
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 425, in get
+    num = len(clone)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 1308, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: restaurant_restaurant
+2020-10-26 14:39:14,626 django.request ERROR    Internal Server Error: /restaurant/inspection_records/25
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: restaurant_restaurant
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 44, in get_inspection_info
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 425, in get
+    num = len(clone)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 1308, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: restaurant_restaurant
+2020-10-26 14:39:54,605 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 14:39:54,720 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 14:40:03,068 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 14:40:11,728 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 14:40:17,841 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-26 14:40:24,607 restaurant.views WARNING  Restaurant ID could not be found: 80
+2020-10-26 14:40:24,608 django.request WARNING  Not Found: /restaurant/80/
+2020-10-26 14:40:28,240 restaurant.views WARNING  Restaurant ID could not be found: 1
+2020-10-26 14:40:28,240 django.request WARNING  Not Found: /restaurant/1/
+2020-10-26 14:40:28,643 restaurant.views WARNING  Restaurant ID could not be found: 12
+2020-10-26 14:40:28,644 django.request WARNING  Not Found: /restaurant/12/
+2020-10-26 14:40:32,704 restaurant.views WARNING  Restaurant ID could not be found: 80
+2020-10-26 14:40:32,705 django.request WARNING  Not Found: /restaurant/inspection_records/80
+2020-10-26 14:41:05,896 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 14:41:06,012 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 14:41:09,412 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-26 14:41:25,522 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:41:26,843 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-26 14:41:26,849 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:41:28,157 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-26 14:41:28,356 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:41:29,845 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-26 14:41:29,854 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:41:31,165 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-26 14:47:04,560 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 14:47:04,689 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-26 14:47:07,702 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-26 14:47:11,344 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:47:12,712 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-26 14:47:12,718 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:47:13,966 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-26 14:47:14,497 django.request ERROR    Internal Server Error: /restaurant/80/
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 34, in get_restaurant_profile
+    return render(request, "restaurant_detail.html", parameter_dict)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loaders\base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 534, in invalid_block_tag
+    "or load this tag?" % (token.lineno, command)
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 11: 'static'. Did you forget to register or load this tag?
+2020-10-26 14:48:02,032 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:48:03,395 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-26 14:48:03,399 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:48:04,631 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-26 14:48:04,902 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:48:06,194 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-26 14:48:06,201 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:48:07,462 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-26 14:50:19,818 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:50:21,129 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-26 14:50:21,135 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:50:22,419 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-26 14:50:22,561 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:50:23,045 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/1DT6XYMzcekpFQ41Hj44vA HTTP/1.1" 200 None
+2020-10-26 14:50:23,051 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:50:23,538 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/5EQOEAkH2Qh3Rv1TcnE7yA HTTP/1.1" 200 None
+2020-10-26 14:50:23,545 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:50:24,788 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/kLxfxcs8DPVjeOt9jvPwrw HTTP/1.1" 200 None
+2020-10-26 14:50:24,794 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:50:26,082 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/q-_O0eVBE_VjcGeF9fB73Q HTTP/1.1" 200 None
+2020-10-26 14:50:26,090 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:50:27,396 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/eN-OHMPod8iJjzpgYS3LKw HTTP/1.1" 200 None
+2020-10-26 14:50:27,405 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-26 14:50:28,696 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/boRM4i0UQswxQIp6CA9y_A HTTP/1.1" 200 None
+2020-10-26 14:50:28,981 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-26 14:50:28,991 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-26 14:50:28,995 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-26 14:50:28,999 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-26 14:50:29,003 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
