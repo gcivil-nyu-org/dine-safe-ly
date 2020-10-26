@@ -1,49 +1,9 @@
 
 {% extends 'base-static.html' %} {% load static %} {% block content %}
-<div class="text-block">
-    <p class="subtitle text-sm text-primary">Reviews </p>
+<p class="subtitle text-sm text-primary">Reviews </p>
     <h5 class="mb-4">Listing Reviews </h5>
     <span id="review_content">
-
     </span>
-
-    <div class="py-5">
-        <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">Leave a review</button>
-        <div class="collapse mt-4" id="leaveReview">
-            <h5 class="mb-4">Leave a review</h5>
-            <form class="form" id="contact-form" method="get" action="#">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label" for="name">Your name *</label>
-                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required="required"> </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label" for="rating">Your rating *</label>
-                            <select class="custom-select focus-shadow-0" name="rating" id="rating">
-                                <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
-                                <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
-                                <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
-                                <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
-                                <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="email">Your email *</label>
-                    <input class="form-control" type="email" name="email" id="email" placeholder="Enter your  email" required="required"> </div>
-                <div class="form-group">
-                    <label class="form-label" for="review">Review text *</label>
-                    <textarea class="form-control" rows="4" name="review" id="review" placeholder="Enter your review" required="required"></textarea>
-                </div>
-                <button class="btn btn-primary" type="submit">Post review</button>
-            </form>
-        </div>
-    </div>
-</div>
-</div>
 <script>
 var yelp_reviews = {{ yelp_info.reviews|safe }};
 for(i=0; i < yelp_reviews.reviews.length; i++)
@@ -77,6 +37,19 @@ for(i=0; i < yelp_reviews.reviews.length; i++)
    ele3.appendChild(h6);
         var div4 = document.createElement("div");
         div4.className = "mb-2";
+            var user_review_count = yelp_reviews.reviews[i].rating;
+               for(j=0; j<int(user_review_count); j++)
+               {
+                 var i-star = document.createElement("i");
+                 i-star.className = "fa fa-xs fa-star text-primary";
+                 div4.appendChild(i-star);
+               }
+               for(j=0; j<5-int(user_review_count); j++)
+               {
+                 var i-gray = document.createElement("i");
+                 i-gray.className = "fa fa-xs fa-star text-gray-200";
+                 div4.appendChild(i-gray);
+               }
 
    ele3.appendChild(div4);
        var p = document.createElement("p");

@@ -280,7 +280,22 @@ for(i=0; i < yelp_reviews.reviews.length; i++)
         h6.appendChild(a);
    ele3.appendChild(h6);
         var div4 = document.createElement("div");
+        var user_rating = yelp_reviews.reviews[i].rating;
         div4.className = "mb-2";
+             for(j=0;j<user_rating;j++)
+              {
+                 var icon = document.createElement("i");
+                 icon.className = "fa fa-xs fa-star text-primary";
+                 div4.appendChild(icon);
+              }
+              for(j=0;j<5-user_rating;j++)
+              {
+                 var icon2 = document.createElement("i");
+                 icon2.className = "fa fa-xs fa-star text-gray-200";
+                 div4.appendChild(icon2);
+              }
+
+
 
    ele3.appendChild(div4);
        var p = document.createElement("p");
