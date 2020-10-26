@@ -157,7 +157,7 @@
             <div class="card-header bg-gray-100 py-4 border-0">
               <div class="media align-items-center">
                 <div class="media-body">
-                  <p class="subtitle text-sm text-primary">Opening in 5 minutes</p>
+<!--                  <p class="subtitle text-sm text-primary">Opening in 5 minutes</p>-->
                   <h4 class="mb-0">Opening Hours </h4> </div>
                 <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
                   <use xlink:href="#wall-clock-1"> </use>
@@ -165,7 +165,7 @@
               </div>
             </div>
             <div class="card-body">
-              <table class="table text-sm mb-0">
+              <table id="res_open_hours" class="table text-sm mb-0">
                 <tr>
                   <th class="pl-0 border-0">Sunday</th>
                   <td class="pr-0 text-right border-0">8:00 am - 6:00 pm</td>
@@ -274,6 +274,12 @@ switch(false) {
   case (empty1.includes(price)): document.getElementById("res-price").innerHTML = yelp_info.price;
   case (empty1.includes(display_phone)): document.getElementById("res_display_phn").innerHTML = yelp_info.display_phone;
   case (empty1.includes(image_url)): document.getElementById("res_img").style.backgroundImage  = 'url(' + yelp_info.image_url + ')';
+
+  for(i=0; i < yelp_info.hours[0].open.length; i++)
+  {
+
+  }
+
 }
 
 </script>
