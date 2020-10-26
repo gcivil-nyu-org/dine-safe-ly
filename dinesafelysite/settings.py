@@ -85,7 +85,7 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation"
-                ".UserAttributeSimilarityValidator",
+        ".UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -117,7 +117,7 @@ USE_TZ = False
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    ]
+]
 
 # Yelp:
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
@@ -151,4 +151,4 @@ LOGGING = {
     "loggers": {"": {"level": "DEBUG", "handlers": ["console", "file"]}},
 }
 
-
+LOGOUT_REDIRECT_URL = "browse"
