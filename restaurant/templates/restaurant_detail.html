@@ -4,16 +4,14 @@
   <div class="container overlay-content">
     <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
       <div class="text-white mb-4 mb-lg-0">
-        <div class="badge badge-pill badge-transparent px-3 py-2 mb-4">Bar</div>
+        <div id="res_cateogary" class="badge badge-pill badge-transparent px-3 py-2 mb-4"></div>
         <h1 id="res-name" class="text-shadow verified">}</h1>
         <p><i class="fas fa-map-marker-alt mr-2"></i><span id="res-display-addr"></span></p>
         <p class="mb-0 d-flex align-items-center">
-          <i class="fa fa-xs fa-star text-primary"></i>
-          <i class="fa fa-xs fa-star text-primary"></i>
-          <i class="fa fa-xs fa-star text-primary"></i>
-          <i class="fa fa-xs fa-star text-primary"></i>
-          <i class="fa fa-xs fa-star text-gray-200 mr-4"></i>
-          <span id="res-rating"></span><span>&nbsp;Reviews</span>
+          <span id="res_rev_star">
+
+          </span>
+          &nbsp;&nbsp;<span id="res_review_count"></span><span>&nbsp;Reviews</span>
         </p>
       </div>
     </div>
@@ -211,12 +209,33 @@ for(var i=0; i<keys.length; i++){
 }
 switch(false) {
   case (empty1.includes(name)): document.getElementById("res-name").innerHTML = yelp_info.name;
-  case (empty1.includes(rating)): document.getElementById("res-rating").innerHTML = yelp_info.rating; document.getElementById("res_rating_info").innerHTML = yelp_info.rating;
+  case (empty1.includes(review_count)): document.getElementById("res_review_count").innerHTML = yelp_info.review_count;
+  case (empty1.includes(rating)): document.getElementById("res_rating_info").innerHTML = yelp_info.rating;
   case (empty1.includes(display_address)): document.getElementById("res-display-addr").innerHTML = yelp_info.location.display_address;
   case (empty1.includes(price)): document.getElementById("res-price").innerHTML = yelp_info.price;
   case (empty1.includes(display_phone)): document.getElementById("res_display_phn").innerHTML = yelp_info.display_phone;
   case (empty1.includes(image_url)): document.getElementById("res_img").style.backgroundImage  = 'url(' + yelp_info.image_url + ')';
 }
+
+   for(i=0; i < yelp_info.categories.length; i++){
+      document.getElementById("res_cateogary").innerHTML += yelp_info.categories[i].title + "&nbsp;&nbsp;&nbsp;&nbsp;";
+  }
+
+  var res_rev_star = document.getElementById("res_rev_star");
+  var rate = yelp_info.rating;
+            for(j=0;j<Math.ceil(rate);j++)
+              {
+                 var icon = document.createElement("i");
+                 icon.className = "fa fa-xs fa-star text-primary";
+                 res_rev_star.appendChild(icon);
+              }
+            for(j=0;j<5-Math.ceil(rate);j++)
+              {
+                 var icon2 = document.createElement("i");
+                 icon2.className = "fa fa-xs fa-star text-gray-200 mr-4";
+                 res_rev_star.appendChild(icon2);
+              }
+
   var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   for(i=0; i < yelp_info.hours[0].open.length; i++)
   {
