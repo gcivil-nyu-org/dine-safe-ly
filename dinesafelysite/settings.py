@@ -85,7 +85,7 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation"
-                ".UserAttributeSimilarityValidator",
+        ".UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -117,14 +117,14 @@ USE_TZ = False
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    ]
+]
 
 # Yelp:
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
 YELP_ACCESS_TOKE = (
-    "A_V_V4rxelsvDsI2uFW1kT2mP2lUjd75GTEEsEcLnnvVOK5ssemrbw"
-    "-R49czpANtS2ZtAeCl6FaapQrp1_30cRt9YKao3pFL1I6304sAtwKwKJk"
-    "F1JBgF88FZl1_X3Yx "
+    "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"
+    "-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq"
+    "-R_mEX3Yx "
 )
 
 django_heroku.settings(locals(), test_runner=False)
@@ -151,4 +151,4 @@ LOGGING = {
     "loggers": {"": {"level": "DEBUG", "handlers": ["console", "file"]}},
 }
 
-
+LOGOUT_REDIRECT_URL = "browse"
