@@ -14,6 +14,8 @@ from django.shortcuts import render, redirect
 # logger = logging.getLogger(__name__)
 
 
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 def get_login_page(request):
     if request.method == 'GET':
         return render(request, "login.html")
@@ -26,7 +28,7 @@ def get_login_page(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}")
-                return redirect('/')
+                return redirect('/restaurant')
             else:
                 messages.error(request, "Invalid username or password.")
         else:

@@ -4078,3 +4078,144 @@ ValueError: Field 'id' expected a number but got 'inspection_records'.
 2020-10-27 01:57:52,935 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
 2020-10-27 01:57:52,943 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
 2020-10-27 01:57:53,447 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 02:00:22,004 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:00:23,359 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 02:00:23,363 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:00:24,668 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 02:02:00,963 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:02:02,206 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 02:02:02,212 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:02:03,356 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 02:02:15,613 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:02:16,858 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 02:02:16,863 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:02:18,007 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 02:02:26,857 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:02:28,038 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 02:02:28,043 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:02:29,200 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 02:02:41,639 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 02:02:41,763 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 02:02:45,188 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 02:02:47,589 django.request WARNING  Not Found: /
+2020-10-27 02:02:47,749 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 02:02:53,334 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:02:54,081 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 02:02:54,087 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:02:55,260 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 02:03:20,642 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 02:03:20,771 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 02:03:24,722 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 02:03:28,381 django.request WARNING  Not Found: /
+2020-10-27 02:03:28,665 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 02:03:31,471 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:03:31,963 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 02:03:31,968 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:03:33,133 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 02:29:11,969 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 02:29:14,284 django.request WARNING  Not Found: /
+2020-10-27 02:29:14,686 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 02:29:21,192 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:29:22,466 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 02:29:22,473 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 02:29:23,612 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 02:31:57,322 django.request WARNING  Not Found: /user/
+2020-10-27 02:38:21,070 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 02:38:21,072 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 02:38:22,413 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 02:38:24,345 django.request WARNING  Not Found: /
+2020-10-27 02:40:00,021 django.request WARNING  Not Found: /user/index.html
+2020-10-27 02:56:40,561 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 02:56:40,685 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 02:56:49,056 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 02:57:26,118 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 02:57:36,799 django.request WARNING  Not Found: /
+2020-10-27 02:59:39,819 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 02:59:39,823 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 02:59:41,789 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:00:10,255 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 03:00:10,257 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:00:11,841 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:01:20,088 django.request WARNING  Not Found: /
+2020-10-27 03:01:36,171 django.request WARNING  Not Found: /
+2020-10-27 03:02:04,508 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 03:02:04,512 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:02:06,361 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:02:16,730 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:02:17,943 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 03:02:17,959 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:02:18,092 django.security.csrf WARNING  Forbidden (CSRF token missing or incorrect.): /user/login
+2020-10-27 03:02:19,182 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 03:02:31,582 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 03:02:31,587 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:02:33,484 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:03:45,459 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 03:03:45,461 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:03:48,208 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:03:54,932 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 03:03:54,934 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:03:57,416 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:04:47,499 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 03:04:47,502 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:04:49,091 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:05:56,171 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:05:56,449 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:06:21,356 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:06:48,119 django.request ERROR    Internal Server Error: /user/login
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py", line 37, in get_login_page
+    return render(request, template_name="login.html", context={"form": form})
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loaders\base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 483, in parse
+    self.unclosed_block_tag(parse_until)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 544, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 1: 'block'. Looking for one of: endblock.
+2020-10-27 03:07:44,697 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 03:07:44,698 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:07:46,332 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:10:24,716 django.request WARNING  Not Found: /user/signup.html
+2020-10-27 03:10:56,976 django.request WARNING  Not Found: /user/signup.html
+2020-10-27 03:11:00,372 django.request WARNING  Not Found: /user/
+2020-10-27 03:11:06,520 django.request WARNING  Not Found: /user/register.html
+2020-10-27 03:11:22,514 django.request WARNING  Not Found: /user/register.html
+2020-10-27 03:12:02,483 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 03:12:02,485 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:12:04,369 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:16:15,248 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:16:15,414 asyncio      DEBUG    Using selector: SelectSelector
