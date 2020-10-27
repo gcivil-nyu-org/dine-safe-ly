@@ -4,7 +4,8 @@
   <div class="container overlay-content">
     <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
       <div class="text-white mb-4 mb-lg-0">
-        <div id="res_cateogary" class="badge badge-pill badge-transparent px-3 py-2 mb-4"></div>
+        <div id="res_category" class="badge badge-pill badge-transparent px-3 py-2
+        mb-4"></div>
         <h1 id="res-name" class="text-shadow verified">}</h1>
         <p><i class="fas fa-map-marker-alt mr-2"></i><span id="res-display-addr"></span></p>
         <p class="mb-0 d-flex align-items-center">
@@ -188,7 +189,8 @@ switch (false) {
 }
 
 for (i = 0; i < yelp_info.categories.length; i++) {
-    document.getElementById("res_cateogary").innerHTML += yelp_info.categories[i].title + "&nbsp;&nbsp;&nbsp;&nbsp;";
+    document.getElementById("res_category").innerHTML += yelp_info.categories[i]
+        .title + "&nbsp;&nbsp;&nbsp;&nbsp;";
 }
 
 var res_rev_star = document.getElementById("res_rev_star");
