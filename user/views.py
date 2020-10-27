@@ -11,10 +11,15 @@ from django.shortcuts import render, redirect
 # from django.contrib.auth.models import User
 
 # logger = logging.getLogger(__name__)
-
+from .forms import NewUserForm
 
 from django.views.decorators.csrf import csrf_exempt
 
+from django.shortcuts import  render, redirect
+from .forms import NewUserForm
+from django.contrib.auth import login
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 @csrf_exempt
 def get_login_page(request):
@@ -37,9 +42,17 @@ def get_login_page(request):
     form = AuthenticationForm()
     return render(request, template_name="login.html", context={"form": form})
 
-
-def get_register_page(request):
-    return render(request, "register.html")
+def register_request(request):
+	if request.method == "POST":
+		form = NewUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			messages.success(request, "Registration successful." )
+			return redirect("register")
+		messages.error(request, "Unsuccessful registration. Invalid information.")
+	form = NewUserForm
+	return render (request=request, template_name="register.html", context={"register_form":form})
 
 
 def post_logout(request):

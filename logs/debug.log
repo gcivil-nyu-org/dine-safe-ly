@@ -4969,3 +4969,325 @@ django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '
 2020-10-27 15:41:26,856 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
 2020-10-27 15:41:28,162 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w/reviews HTTP/1.1" 200 None
 2020-10-27 15:41:28,553 django.request WARNING  Not Found: /restaurant/80/null
+2020-10-27 12:33:36,178 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:33:52,056 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:34:29,204 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:34:34,695 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:34:40,699 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:34:41,869 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:34:42,067 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:34:45,644 django.request WARNING  Not Found: /
+2020-10-27 12:34:50,336 django.request WARNING  Not Found: /user/
+2020-10-27 12:34:54,325 django.request WARNING  Not Found: /user/signup/
+2020-10-27 12:35:54,701 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\urls.py changed, reloading.
+2020-10-27 12:35:55,908 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:35:56,235 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:35:57,637 django.request WARNING  Not Found: /user/signup/
+2020-10-27 12:38:00,727 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:38:01,851 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:38:02,193 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:38:15,654 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:38:16,829 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:38:17,180 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:38:18,155 django.request ERROR    Internal Server Error: /user/register
+Traceback (most recent call last):
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py", line 52, in get_register_page
+    form = SignUpForm()
+NameError: name 'SignUpForm' is not defined
+2020-10-27 12:41:26,557 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:41:27,453 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:41:27,648 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:41:35,857 django.request WARNING  Not Found: /
+2020-10-27 12:42:23,608 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:42:24,688 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:42:24,974 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:43:17,173 django.request WARNING  Not Found: /
+2020-10-27 12:43:21,169 django.request WARNING  Not Found: /login/
+2020-10-27 12:43:28,704 django.request WARNING  Not Found: /user/login/
+2020-10-27 12:44:09,847 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:44:10,738 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:44:10,938 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:45:13,820 django.request WARNING  Not Found: /
+2020-10-27 12:47:56,843 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:47:58,083 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:47:58,367 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:50:03,494 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\forms.py changed, reloading.
+2020-10-27 12:50:04,810 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:50:05,133 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:51:31,272 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:51:32,410 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:51:32,674 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:51:47,018 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\urls.py changed, reloading.
+2020-10-27 12:51:48,183 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:51:48,467 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:52:29,549 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:52:30,798 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:52:31,150 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:52:34,736 django.request WARNING  Not Found: /
+2020-10-27 12:58:53,525 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:58:54,702 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:58:54,986 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 12:59:08,508 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 12:59:09,945 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 12:59:10,316 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:00:03,018 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\forms.py changed, reloading.
+2020-10-27 13:00:04,305 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:00:04,635 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:00:53,257 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:00:54,411 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:00:54,714 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:01:27,229 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:01:28,362 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:01:28,670 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:08:02,844 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\forms.py changed, reloading.
+2020-10-27 13:08:03,746 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:08:03,937 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:09:04,176 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:09:05,216 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:09:05,572 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:10:15,632 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:10:16,488 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:10:16,670 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:10:33,961 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:10:34,948 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:10:35,143 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:11:18,554 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:11:19,402 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:11:19,571 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:11:57,874 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:11:58,852 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:11:59,065 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:12:20,578 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:12:21,528 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:12:21,717 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:12:54,990 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:12:55,889 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:12:56,060 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:13:37,712 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:13:38,568 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:13:38,738 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:13:45,642 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:13:46,598 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:13:46,792 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:16:54,735 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\models.py changed, reloading.
+2020-10-27 13:16:55,754 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:16:55,987 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:19:32,061 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:19:32,937 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:19:33,113 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:20:31,348 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:20:32,221 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:20:32,393 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:21:50,849 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:21:51,707 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:21:51,879 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:25:05,055 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\forms.py changed, reloading.
+2020-10-27 13:25:05,896 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:25:06,074 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:26:39,288 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\urls.py changed, reloading.
+2020-10-27 13:26:40,251 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:26:40,437 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:26:59,878 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:27:00,781 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:27:00,990 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:27:19,330 django.request WARNING  Not Found: /
+2020-10-27 13:27:28,589 django.request ERROR    Internal Server Error: /user/register
+Traceback (most recent call last):
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py", line 59, in register_request
+    return render (request=request, template_name="main/register.html", context={"register_form":form})
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: main/register.html
+2020-10-27 13:28:15,603 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:28:16,496 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:28:16,689 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:28:24,604 django.request ERROR    Internal Server Error: /user/register
+Traceback (most recent call last):
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\defaulttags.py", line 1034, in find_library
+    return parser.libraries[name]
+KeyError: 'crispy_forms_tags'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py", line 55, in register_request
+    return render (request=request, template_name="register.html", context={"register_form":form})
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loaders\base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\defaulttags.py", line 1091, in load
+    lib = find_library(parser, name)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\defaulttags.py", line 1038, in find_library
+    name, "\n".join(sorted(parser.libraries)),
+django.template.exceptions.TemplateSyntaxError: 'crispy_forms_tags' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz
+2020-10-27 13:29:29,106 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\dinesafelysite\settings.py changed, reloading.
+2020-10-27 13:29:30,136 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:29:30,386 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:29:45,842 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\dinesafelysite\settings.py changed, reloading.
+2020-10-27 13:29:46,870 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:29:46,965 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:31:01,046 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:31:02,043 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:31:02,235 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:31:05,430 django.request WARNING  Not Found: /
+2020-10-27 13:31:13,759 django.request ERROR    Internal Server Error: /user/register
+Traceback (most recent call last):
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\engine.py", line 129, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: main/header.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py", line 55, in register_request
+    return render (request=request, template_name="register.html", context={"register_form":form})
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: main/header.html
+2020-10-27 13:33:04,273 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:33:05,165 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:33:05,346 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:35:06,836 django.request ERROR    Internal Server Error: /user/register
+Traceback (most recent call last):
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\engine.py", line 129, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: header.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py", line 55, in register_request
+    return render (request=request, template_name="register.html", context={"register_form":form})
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: header.html
+2020-10-27 13:36:28,454 django.request ERROR    Internal Server Error: /user/register
+Traceback (most recent call last):
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py", line 52, in register_request
+    return redirect("homepage")
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\shortcuts.py", line 41, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\shortcuts.py", line 131, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "C:\Users\DELL\Anaconda3\lib\site-packages\django\urls\resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'homepage' not found. 'homepage' is not a valid view function or pattern name.
+2020-10-27 13:36:56,852 django.utils.autoreload INFO     C:\Users\DELL\Desktop\NYU-Courses\SE-1\Dine-Safely\user\views.py changed, reloading.
+2020-10-27 13:36:57,721 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:36:57,894 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:37:16,799 django.security.csrf WARNING  Forbidden (CSRF token missing or incorrect.): /user/register
+2020-10-27 13:38:04,450 django.request WARNING  Not Found: /login
