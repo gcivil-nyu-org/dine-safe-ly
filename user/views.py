@@ -13,8 +13,8 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def user_login(request):
-    if request.method == "GET":
-        return render(request, "login.html")
+    if request.user.is_authenticated:
+        return redirect("restaurant:browse")
     if request.method == "POST":
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
@@ -23,10 +23,9 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"You are now logged in as {username}")
-                return redirect("/restaurant/browse/1")
+                return redirect("restaurant:browse")
             else:
-                messages.error(request, "Invalid username or password.")
+                messages.error(request, "Invalid username")
         else:
             messages.error(request, "Invalid username or password.")
     else:
@@ -36,11 +35,12 @@ def user_login(request):
 
 @csrf_exempt
 def register(request):
+    if request.user.is_authenticated:
+        return redirect("restaurant:browse")
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Registration successful.")
             return redirect("user:login")
         else:
             messages.error(request, "Unsuccessful registration. Invalid information.")

@@ -32,7 +32,7 @@ class UserCreationForm(forms.Form):
 
         return password2
 
-    def save(self):
+    def save(self, commit=True):
         user = User.objects.create_user(
             username=self.cleaned_data["username"],
             email=self.cleaned_data["email"],
