@@ -22,7 +22,8 @@
       <div class="col-lg-8">
         <div class="text-block">
           <h3 class="mb-3">Restaurant Details</h3>
-          <!-- <b>Seating Choice:</b> {{ seating_choice }}<br> --><b>Compliance Status:</b> {{ is_roadway_compliant }}
+          <!-- <b>Seating Choice:</b> {{ seating_choice }}<br> -->
+          <b>Compliance Status:</b> {{ is_roadway_compliant }}
           <br> <b> Skipped Reason:</b> {{ skipped_reason }}
           <br> <b>Last Inspection:</b> {{ inspected_on }}
           <br>
@@ -45,36 +46,6 @@
           <div id="gallery_imgs" class="row gallery ml-n1 mr-n1">
 
           </div>
-        </div>
-        <!-- Amenities-->
-        <div class="text-block">
-          <h3 class="mb-4">Amenities</h3>
-          <ul class="amenities-list list-inline">
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Elevator</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Vegan friendly</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Alcohol served</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>No smoking</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Parking spaces (paid)</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>WiFi</span> </div>
-            </li>
-          </ul>
         </div>
         <div class="text-block">
           <p class="subtitle text-sm text-primary">Reviews </p>
@@ -318,6 +289,8 @@ for (i = 0; i < yelp_reviews.reviews.length; i++) {
     ele.appendChild(ele3);
 }
 
+var inspection_data = {{ lasted_inspection | safe}};
+
 function initMap() {
   const myLatLng = { lat: lat, lng: long };
   const map = new google.maps.Map(document.getElementById("detailMap"), {
@@ -330,5 +303,6 @@ function initMap() {
     title: yelp_info.name,
   });
 }
+
 </script>
 {% endblock %}
