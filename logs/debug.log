@@ -4245,3 +4245,727 @@ django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 1: 'block'.
 2020-10-27 03:43:32,318 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
 2020-10-27 03:49:24,616 asyncio      DEBUG    Using selector: SelectSelector
 2020-10-27 03:49:24,736 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:51:36,239 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:51:39,064 django.request WARNING  Not Found: /
+2020-10-27 03:53:43,662 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:53:44,841 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 03:53:44,848 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:53:45,223 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 03:56:32,864 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 03:56:32,866 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 03:56:34,804 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 03:58:31,541 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:58:32,941 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 429 230
+2020-10-27 03:58:32,949 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 03:58:34,086 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 429 230
+2020-10-27 04:00:12,050 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\dinesafelysite\settings.py changed, reloading.
+2020-10-27 04:00:12,051 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 04:00:13,777 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 04:00:17,419 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:00:18,828 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 04:00:18,835 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:00:20,234 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 04:00:29,775 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:00:31,175 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/GRXvvB1OKMuW4XDWEaVAlg HTTP/1.1" 200 None
+2020-10-27 04:00:31,183 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:00:32,488 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/VdAVjghEq_Zl-DDte0mjrw HTTP/1.1" 200 None
+2020-10-27 04:00:32,499 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:00:33,048 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/_GILcifgU5lOeKMThneSPg HTTP/1.1" 200 None
+2020-10-27 04:00:33,059 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:00:33,574 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wctR1TrheHAwpHZ2sJknEw HTTP/1.1" 200 None
+2020-10-27 04:00:33,585 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:00:34,969 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/bHkJ-7cOUTI7SJrqnRpt7g HTTP/1.1" 200 None
+2020-10-27 04:00:34,978 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:00:35,533 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/dwIlsPQ8CXOvS9-It2opzw HTTP/1.1" 200 None
+2020-10-27 04:00:35,825 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 04:00:35,830 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 04:00:35,834 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 04:00:35,842 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 04:00:35,851 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 04:01:10,909 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 04:01:42,510 django.request ERROR    Internal Server Error: /restaurant/browse/index.html
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 64, in get_landing_page
+    restaurant_list = get_restaurant_list(page, 6)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\utils.py", line 64, in get_restaurant_list
+    offset = int(page) * int(limit)
+ValueError: invalid literal for int() with base 10: 'index.html'
+2020-10-27 04:02:21,903 django.request ERROR    Internal Server Error: /restaurant/browse/index.html
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 64, in get_landing_page
+    restaurant_list = get_restaurant_list(page, 6)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\utils.py", line 64, in get_restaurant_list
+    offset = int(page) * int(limit)
+ValueError: invalid literal for int() with base 10: 'index.html'
+2020-10-27 04:02:25,479 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:27,012 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/GRXvvB1OKMuW4XDWEaVAlg HTTP/1.1" 200 None
+2020-10-27 04:02:27,023 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:30,614 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/VdAVjghEq_Zl-DDte0mjrw HTTP/1.1" 200 None
+2020-10-27 04:02:30,623 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:31,985 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/_GILcifgU5lOeKMThneSPg HTTP/1.1" 200 None
+2020-10-27 04:02:31,994 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:33,300 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wctR1TrheHAwpHZ2sJknEw HTTP/1.1" 200 None
+2020-10-27 04:02:33,320 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:34,691 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/bHkJ-7cOUTI7SJrqnRpt7g HTTP/1.1" 200 None
+2020-10-27 04:02:34,701 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:36,046 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/dwIlsPQ8CXOvS9-It2opzw HTTP/1.1" 200 None
+2020-10-27 04:02:36,444 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 04:02:36,452 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 04:02:36,459 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 04:02:36,464 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 04:02:36,469 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 04:02:39,535 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:40,861 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/GRXvvB1OKMuW4XDWEaVAlg HTTP/1.1" 200 None
+2020-10-27 04:02:40,873 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:41,388 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/VdAVjghEq_Zl-DDte0mjrw HTTP/1.1" 200 None
+2020-10-27 04:02:41,398 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:42,759 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/_GILcifgU5lOeKMThneSPg HTTP/1.1" 200 None
+2020-10-27 04:02:42,768 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:43,287 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wctR1TrheHAwpHZ2sJknEw HTTP/1.1" 200 None
+2020-10-27 04:02:43,296 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:44,602 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/bHkJ-7cOUTI7SJrqnRpt7g HTTP/1.1" 200 None
+2020-10-27 04:02:44,611 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:02:45,922 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/dwIlsPQ8CXOvS9-It2opzw HTTP/1.1" 200 None
+2020-10-27 04:02:46,188 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 04:02:46,193 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 04:02:46,227 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 04:02:46,239 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 04:02:46,243 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 04:10:56,209 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 04:10:58,079 django.request WARNING  Not Found: /
+2020-10-27 04:11:01,161 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:11:02,694 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA HTTP/1.1" 200 None
+2020-10-27 04:11:02,700 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:11:03,998 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/Vf38zUk09gMgEzg60BrACA/reviews HTTP/1.1" 200 None
+2020-10-27 04:13:55,197 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 04:14:10,218 django.request WARNING  Not Found: /
+2020-10-27 04:14:10,661 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 04:14:14,400 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:14:15,935 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w HTTP/1.1" 200 None
+2020-10-27 04:14:15,945 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:14:16,522 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w/reviews HTTP/1.1" 200 None
+2020-10-27 04:14:17,536 django.request WARNING  Not Found: /restaurant/80/null
+2020-10-27 04:20:18,881 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py changed, reloading.
+2020-10-27 04:20:18,882 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 04:20:21,221 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 04:22:59,416 django.request ERROR    Internal Server Error: /restaurant/inspection_records/user-booking-detail.html
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1774, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'user-booking-detail.html'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 44, in get_inspection_info
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1380, in _add_q
+    split_subq=split_subq, check_filterable=check_filterable,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1319, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1165, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 76, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1778, in get_prep_value
+    ) from e
+ValueError: Field 'id' expected a number but got 'user-booking-detail.html'.
+2020-10-27 04:44:09,759 django.request ERROR    Internal Server Error: /restaurant/inspection_records/user-booking-detail.html
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1774, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'user-booking-detail.html'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 44, in get_inspection_info
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1380, in _add_q
+    split_subq=split_subq, check_filterable=check_filterable,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1319, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1165, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 76, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1778, in get_prep_value
+    ) from e
+ValueError: Field 'id' expected a number but got 'user-booking-detail.html'.
+2020-10-27 04:47:43,627 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:47:45,058 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig HTTP/1.1" 200 None
+2020-10-27 04:47:45,082 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:47:46,406 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/ZhwXNucu2sV9XfILoXbNjw HTTP/1.1" 200 None
+2020-10-27 04:47:46,429 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:47:47,864 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/sog3etuV8CwqG0gbQnyw2g HTTP/1.1" 200 None
+2020-10-27 04:47:47,884 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:47:48,387 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/r7z65v8cnBP0MhGP4oQ0bQ HTTP/1.1" 200 None
+2020-10-27 04:47:48,407 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:47:50,406 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/M8xnlKQOh0tl58LJCnPUVA HTTP/1.1" 200 None
+2020-10-27 04:47:50,424 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:47:51,777 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rVJNWn99tF1Jf1l01iFp_A HTTP/1.1" 200 None
+2020-10-27 04:47:52,481 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 04:47:52,497 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 04:47:52,519 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 04:47:52,551 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 04:47:52,558 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 04:48:11,386 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:12,729 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig HTTP/1.1" 200 None
+2020-10-27 04:48:12,765 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:14,290 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/ZhwXNucu2sV9XfILoXbNjw HTTP/1.1" 200 None
+2020-10-27 04:48:14,315 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:15,380 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:15,615 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/sog3etuV8CwqG0gbQnyw2g HTTP/1.1" 200 None
+2020-10-27 04:48:15,643 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:15,901 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig HTTP/1.1" 200 None
+2020-10-27 04:48:15,927 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:16,474 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/ZhwXNucu2sV9XfILoXbNjw HTTP/1.1" 200 None
+2020-10-27 04:48:16,491 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:17,020 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/r7z65v8cnBP0MhGP4oQ0bQ HTTP/1.1" 200 None
+2020-10-27 04:48:17,042 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:17,770 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/sog3etuV8CwqG0gbQnyw2g HTTP/1.1" 200 None
+2020-10-27 04:48:17,821 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:18,411 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/M8xnlKQOh0tl58LJCnPUVA HTTP/1.1" 200 None
+2020-10-27 04:48:18,448 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:18,454 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/r7z65v8cnBP0MhGP4oQ0bQ HTTP/1.1" 200 None
+2020-10-27 04:48:18,488 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:19,833 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/M8xnlKQOh0tl58LJCnPUVA HTTP/1.1" 200 None
+2020-10-27 04:48:19,868 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:19,905 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rVJNWn99tF1Jf1l01iFp_A HTTP/1.1" 200 None
+2020-10-27 04:48:20,484 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rVJNWn99tF1Jf1l01iFp_A HTTP/1.1" 200 None
+2020-10-27 04:48:29,116 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 04:48:29,117 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 04:48:29,156 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 04:48:29,196 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 04:48:29,423 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 04:48:41,242 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:42,515 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig HTTP/1.1" 200 None
+2020-10-27 04:48:42,543 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:43,936 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/ZhwXNucu2sV9XfILoXbNjw HTTP/1.1" 200 None
+2020-10-27 04:48:43,959 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:45,381 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/sog3etuV8CwqG0gbQnyw2g HTTP/1.1" 200 None
+2020-10-27 04:48:45,400 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:45,988 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/r7z65v8cnBP0MhGP4oQ0bQ HTTP/1.1" 200 None
+2020-10-27 04:48:46,014 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:47,330 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/M8xnlKQOh0tl58LJCnPUVA HTTP/1.1" 200 None
+2020-10-27 04:48:47,347 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:48:48,809 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rVJNWn99tF1Jf1l01iFp_A HTTP/1.1" 200 None
+2020-10-27 04:48:48,981 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 04:48:48,984 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 04:48:48,986 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 04:48:49,018 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 04:48:49,024 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 04:49:29,008 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:30,366 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig HTTP/1.1" 200 None
+2020-10-27 04:49:30,388 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:31,738 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/ZhwXNucu2sV9XfILoXbNjw HTTP/1.1" 200 None
+2020-10-27 04:49:31,759 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:32,325 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/sog3etuV8CwqG0gbQnyw2g HTTP/1.1" 200 None
+2020-10-27 04:49:32,342 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:33,619 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/r7z65v8cnBP0MhGP4oQ0bQ HTTP/1.1" 200 None
+2020-10-27 04:49:33,640 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:35,054 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/M8xnlKQOh0tl58LJCnPUVA HTTP/1.1" 200 None
+2020-10-27 04:49:35,077 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:35,595 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rVJNWn99tF1Jf1l01iFp_A HTTP/1.1" 200 None
+2020-10-27 04:49:35,932 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 04:49:35,936 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 04:49:35,939 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 04:49:35,942 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 04:49:35,946 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 04:49:40,616 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:41,975 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig HTTP/1.1" 200 None
+2020-10-27 04:49:41,981 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:43,345 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig/reviews HTTP/1.1" 200 None
+2020-10-27 04:49:47,429 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:48,875 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rVJNWn99tF1Jf1l01iFp_A HTTP/1.1" 200 None
+2020-10-27 04:49:48,884 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:50,214 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rVJNWn99tF1Jf1l01iFp_A/reviews HTTP/1.1" 200 None
+2020-10-27 04:49:50,378 django.request WARNING  Not Found: /restaurant/12/null
+2020-10-27 04:49:53,525 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:54,865 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FaebPpZ8fKuvPtMOZ_dslw HTTP/1.1" 200 None
+2020-10-27 04:49:54,891 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:56,268 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/yWn06c7BmeVsoHBxLbnAsA HTTP/1.1" 200 None
+2020-10-27 04:49:56,290 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:57,686 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/F1cTAyVghrMagxFHikwQKQ HTTP/1.1" 200 None
+2020-10-27 04:49:57,706 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:59,046 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/ysFjhHDTuYnTv6wrvsgsWg HTTP/1.1" 200 None
+2020-10-27 04:49:59,075 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:49:59,624 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/RQojRzAYA9Cq87PqwQq5yg HTTP/1.1" 200 None
+2020-10-27 04:49:59,645 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:50:00,442 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rrDymUQnu95UnZtTeeHfnA HTTP/1.1" 200 None
+2020-10-27 04:50:00,625 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 04:50:00,630 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 04:50:00,635 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 04:50:00,637 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 04:50:00,639 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 04:50:04,741 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:50:06,124 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/THKnKxcaYAW4ItT8HMZvhA HTTP/1.1" 200 None
+2020-10-27 04:50:06,151 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 04:50:07,427 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/J0OeDwmh5JBhid0A5GvltA HTTP/1.1" 200 None
+2020-10-27 04:50:07,639 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 04:50:07,643 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 04:50:07,646 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 04:50:07,649 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 04:50:07,652 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 04:50:15,984 django.request ERROR    Internal Server Error: /restaurant/browse/detail.html
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 64, in get_landing_page
+    restaurant_list = get_restaurant_list(page, 6)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\utils.py", line 64, in get_restaurant_list
+    offset = int(page) * int(limit)
+ValueError: invalid literal for int() with base 10: 'detail.html'
+2020-10-27 04:50:30,138 django.request ERROR    Internal Server Error: /restaurant/browse/detail.html
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 64, in get_landing_page
+    restaurant_list = get_restaurant_list(page, 6)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\utils.py", line 64, in get_restaurant_list
+    offset = int(page) * int(limit)
+ValueError: invalid literal for int() with base 10: 'detail.html'
+2020-10-27 05:02:31,087 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 05:02:31,304 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:30:20,137 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:30:26,480 django.request WARNING  Not Found: /
+2020-10-27 13:30:26,846 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 13:39:52,004 django.request ERROR    Internal Server Error: /restaurant/inspection_records/user-booking-detail.html
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1774, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'user-booking-detail.html'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 44, in get_inspection_info
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1380, in _add_q
+    split_subq=split_subq, check_filterable=check_filterable,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1319, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1165, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 76, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1778, in get_prep_value
+    ) from e
+ValueError: Field 'id' expected a number but got 'user-booking-detail.html'.
+2020-10-27 13:49:57,474 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:49:57,596 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 13:50:00,991 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 13:50:04,878 django.request WARNING  Not Found: /
+2020-10-27 13:50:12,076 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 13:50:12,690 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w HTTP/1.1" 200 None
+2020-10-27 13:50:12,697 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 13:50:13,989 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w/reviews HTTP/1.1" 200 None
+2020-10-27 13:50:14,266 django.request WARNING  Not Found: /restaurant/80/null
+2020-10-27 14:55:48,496 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 14:55:48,674 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 14:55:51,798 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 15:00:07,239 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 15:00:07,352 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 15:00:12,435 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 15:00:19,299 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:00:20,725 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w HTTP/1.1" 200 None
+2020-10-27 15:00:20,733 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:00:22,139 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w/reviews HTTP/1.1" 200 None
+2020-10-27 15:00:23,034 django.request WARNING  Not Found: /restaurant/80/null
+2020-10-27 15:25:04,617 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 15:31:56,606 django.request ERROR    Internal Server Error: /restaurant/undefined/
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1774, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'undefined'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 24, in get_restaurant_profile
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1380, in _add_q
+    split_subq=split_subq, check_filterable=check_filterable,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1319, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1165, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 76, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1778, in get_prep_value
+    ) from e
+ValueError: Field 'id' expected a number but got 'undefined'.
+2020-10-27 15:32:13,023 django.request WARNING  Not Found: /restaurant//4062
+2020-10-27 15:32:25,307 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:32:26,728 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w HTTP/1.1" 200 None
+2020-10-27 15:32:26,736 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:32:28,198 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w/reviews HTTP/1.1" 200 None
+2020-10-27 15:32:28,341 django.request WARNING  Not Found: /restaurant/80/null
+2020-10-27 15:32:31,779 django.request ERROR    Internal Server Error: /restaurant/undefined/
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1774, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'undefined'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 24, in get_restaurant_profile
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1380, in _add_q
+    split_subq=split_subq, check_filterable=check_filterable,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1319, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1165, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 76, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1778, in get_prep_value
+    ) from e
+ValueError: Field 'id' expected a number but got 'undefined'.
+2020-10-27 15:32:46,984 django.request ERROR    Internal Server Error: /restaurant/undefined/
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1774, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'undefined'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 24, in get_restaurant_profile
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1380, in _add_q
+    split_subq=split_subq, check_filterable=check_filterable,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1319, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1165, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 76, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1778, in get_prep_value
+    ) from e
+ValueError: Field 'id' expected a number but got 'undefined'.
+2020-10-27 15:32:49,170 django.request ERROR    Internal Server Error: /restaurant/undefined/
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1774, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'undefined'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 24, in get_restaurant_profile
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1380, in _add_q
+    split_subq=split_subq, check_filterable=check_filterable,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1319, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1165, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 76, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1778, in get_prep_value
+    ) from e
+ValueError: Field 'id' expected a number but got 'undefined'.
+2020-10-27 15:33:01,389 django.request ERROR    Internal Server Error: /restaurant/undefined/
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1774, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'undefined'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 24, in get_restaurant_profile
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1380, in _add_q
+    split_subq=split_subq, check_filterable=check_filterable,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1319, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\sql\query.py", line 1165, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\lookups.py", line 76, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\db\models\fields\__init__.py", line 1778, in get_prep_value
+    ) from e
+ValueError: Field 'id' expected a number but got 'undefined'.
+2020-10-27 15:34:40,241 django.request ERROR    Internal Server Error: /restaurant/inspection_records/80
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 55, in get_inspection_info
+    return render(request, "inspection_demo.html", parameter_dict)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loaders\base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 449, in parse
+    raise self.error(token, e)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 447, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 563, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 663, in __init__
+    "from '%s'" % (token[upto:], token))
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '[restaurant_id]' from 'inspection_list[restaurant_id]'
+2020-10-27 15:34:50,960 django.request ERROR    Internal Server Error: /restaurant/inspection_records/80
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py", line 55, in get_inspection_info
+    return render(request, "inspection_demo.html", parameter_dict)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loaders\base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 449, in parse
+    raise self.error(token, e)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 447, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 563, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\django\template\base.py", line 663, in __init__
+    "from '%s'" % (token[upto:], token))
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '["restaurant_id"]' from 'inspection_list["restaurant_id"]'
+2020-10-27 15:38:03,292 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:38:03,836 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig HTTP/1.1" 200 None
+2020-10-27 15:38:03,852 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:38:05,199 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/ZhwXNucu2sV9XfILoXbNjw HTTP/1.1" 200 None
+2020-10-27 15:38:05,215 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:38:06,474 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/sog3etuV8CwqG0gbQnyw2g HTTP/1.1" 200 None
+2020-10-27 15:38:06,489 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:38:07,759 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/r7z65v8cnBP0MhGP4oQ0bQ HTTP/1.1" 200 None
+2020-10-27 15:38:07,776 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:38:09,238 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/M8xnlKQOh0tl58LJCnPUVA HTTP/1.1" 200 None
+2020-10-27 15:38:09,252 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:38:10,547 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rVJNWn99tF1Jf1l01iFp_A HTTP/1.1" 200 None
+2020-10-27 15:38:11,176 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1436018626274-89acd1d6ec9d.jpg
+2020-10-27 15:38:11,200 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg
+2020-10-27 15:38:11,203 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg
+2020-10-27 15:38:11,205 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg
+2020-10-27 15:38:11,209 django.request WARNING  Not Found: /d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg
+2020-10-27 15:38:14,968 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:38:16,241 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig HTTP/1.1" 200 None
+2020-10-27 15:38:16,246 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:38:16,736 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig/reviews HTTP/1.1" 200 None
+2020-10-27 15:41:17,991 django.utils.autoreload INFO     C:\Users\ronak\Documents\GitHub\dine-safe-ly\restaurant\views.py changed, reloading.
+2020-10-27 15:41:17,998 asyncio      DEBUG    Using selector: SelectSelector
+2020-10-27 15:41:19,301 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 15:41:21,969 django.request WARNING  Not Found: /
+2020-10-27 15:41:25,339 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:41:26,851 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w HTTP/1.1" 200 None
+2020-10-27 15:41:26,856 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 15:41:28,162 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FGSHyzOteuQudWXqrIU95w/reviews HTTP/1.1" 200 None
+2020-10-27 15:41:28,553 django.request WARNING  Not Found: /restaurant/80/null
