@@ -226,7 +226,7 @@ function timeChangeFunc(x) {
   else {return (x-12) + " AM"}
 }
 
-var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 for (i = 0; i < yelp_info.hours[0].open.length; i++) {
     var opening_hours = document.getElementById("res_open_hours");
     var row = document.createElement("tr");
@@ -347,4 +347,6 @@ function initMap() {
 }
 
 </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&callback=initMap"
+        type="text/javascript"></script>
 {% endblock %}
