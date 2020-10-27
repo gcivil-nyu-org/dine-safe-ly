@@ -213,7 +213,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
           <div class="card h-100 border-0 shadow">
-            <div id="image0" class="card-img-top overflow-hidden dark-overlay bg-cover" style="min-height: 200px;">
+            <div id="image0" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
               <a class="tile-link" href="#" id="img0"></a>
               <div class="card-img-overlay-bottom z-index-20"> <span>
                       <h4 id="name0" class="text-white text-shadow">Blue Hill </h4>
@@ -242,7 +242,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
           <div class="card h-100 border-0 shadow">
-            <div id="image1" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg' %}); min-height: 200px;">
+            <div id="image1" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
               <a class="tile-link" id="img1"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name1" class="text-white text-shadow">Plutorque</h4>
@@ -271,7 +271,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e3a31e62979bf147c9">
           <div class="card h-100 border-0 shadow">
-            <div id="image2" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({% static '/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg'%}); min-height: 200px;">
+            <div id="image2" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
               <a class="tile-link" id="img2"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name2" class="text-white text-shadow">Junipoor</h4>
@@ -297,7 +297,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e3503eb77d487e8082">
           <div class="card h-100 border-0 shadow">
-            <div id="image3" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({% static '/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg'%); min-height: 200px;">
+            <div id="image3" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
               <a class="tile-link" href="detail.html" id="img3"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name3" class="text-white text-shadow">Musix</h4>
@@ -323,7 +323,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2eed0626e485d">
           <div class="card h-100 border-0 shadow">
-            <div id="image4" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({% static '/img/photo/restaurant-1504087697492-238a6bf49ce8.jpg' %}); min-height: 200px;">
+            <div id="image4" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
               <a class="tile-link" href="detail.html" id="img4"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name4" class="text-white text-shadow">Prosure</h4>
@@ -349,7 +349,7 @@
         <!-- venue item-->
         <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2edasd626e485d">
           <div class="card h-100 border-0 shadow">
-            <div id="image5" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg' %}); min-height: 200px;">
+            <div id="image5" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
               <a class="tile-link" href="detail.html" id="img5"></a>
               <div class="card-img-overlay-bottom z-index-20">
                 <h4 id="name5" class="text-white text-shadow">Take That</h4>
@@ -424,6 +424,8 @@
 						}
 					}
 				}
+			} else {
+			  document.getElementById("img" + i.toString()).href = "../inspection_records/" + List[i]['id'];
 			}
 			console.log(List[i]['latest_record']['is_roadway_compliant'])
 			if(List[i]['latest_record'] != null) {
