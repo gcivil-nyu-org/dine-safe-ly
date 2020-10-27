@@ -153,3 +153,9 @@ LOGGING = {
 
 LOGOUT_REDIRECT_URL = "browse"
 CRISPY_TEMPLATE_PACK = "bootstrap3"
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "dinesafely.nyc@gmail.com"
+EMAIL_HOST_PASSWORD = "Nyucs2020"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587

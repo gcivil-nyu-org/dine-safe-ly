@@ -39,3 +39,23 @@ class UserCreationForm(forms.Form):
             password=self.cleaned_data["password1"],
         )
         return user
+
+
+class ResetPasswordForm(forms.Form):
+    password1 = forms.CharField(label="New password", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Confirm password", widget=forms.PasswordInput)
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("Password don't match")
+
+        return password2
+
+    def save(self, uid, commit=True):
+        user = User.objects.get(pk=uid)
+        user.password = self.cleaned_data["password1"]
+        user.save()
+        return user
