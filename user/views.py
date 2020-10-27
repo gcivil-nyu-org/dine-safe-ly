@@ -24,7 +24,7 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}")
-                return redirect("restaurant:browse")
+                return redirect("/restaurant/browse/1")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -50,4 +50,5 @@ def register(request):
 
 
 def post_logout(request):
-    logout()
+    logout(request)
+    return redirect("user:login")
