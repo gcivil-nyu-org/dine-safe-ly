@@ -292,7 +292,7 @@ for (i = 0; i < yelp_reviews.reviews.length; i++) {
 }
 
 var inspection_data = {{ lasted_inspection | safe}};
-
+console.log(inspection_data);
 function initMap() {
   const myLatLng = { lat: lat, lng: long };
   const map = new google.maps.Map(document.getElementById("detailMap"), {

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.forms.models import model_to_dict
 from .models import InspectionRecords, Restaurant
 import requests
+import datetime
 import json
 
 
@@ -43,7 +44,9 @@ def get_latest_inspection_record(business_name, business_address, postcode):
         postcode=postcode,
     ).order_by("-inspected_on")
     if len(records) >= 1:
-        return model_to_dict(records[0])
+        record = model_to_dict(records[0])
+        record['inspected_on'] = record['inspected_on'].strftime("%Y-%m-%d %H:%M:%S")
+        return record
 
     return None
 
