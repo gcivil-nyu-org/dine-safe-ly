@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import CustomUserCreationForm
+from .forms import UserCreationForm
 
 import logging
 
@@ -29,21 +29,22 @@ def user_login(request):
                 messages.error(request, "Invalid username or password.")
         else:
             messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
+    else:
+        form = AuthenticationForm()
     return render(request, template_name="login.html", context={"form": form})
 
 
+@csrf_exempt
 def register(request):
     if request.method == "POST":
-        form = CustomUserCreationForm(request=request, data=request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            # login(request, user)
             messages.success(request, "Registration successful.")
             return redirect("user:login")
         else:
             messages.error(request, "Unsuccessful registration. Invalid information.")
-    form = CustomUserCreationForm()
+    form = UserCreationForm()
     return render(
         request=request, template_name="register.html", context={"form": form}
     )
