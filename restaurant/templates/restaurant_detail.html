@@ -4,7 +4,8 @@
   <div class="container overlay-content">
     <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
       <div class="text-white mb-4 mb-lg-0">
-        <div id="res_cateogary" class="badge badge-pill badge-transparent px-3 py-2 mb-4"></div>
+        <div id="res_category" class="badge badge-pill badge-transparent px-3 py-2
+        mb-4"></div>
         <h1 id="res-name" class="text-shadow verified">}</h1>
         <p><i class="fas fa-map-marker-alt mr-2"></i><span id="res-display-addr"></span></p>
         <p class="mb-0 d-flex align-items-center">
@@ -22,7 +23,8 @@
       <div class="col-lg-8">
         <div class="text-block">
           <h3 class="mb-3">Restaurant Details</h3>
-          <!-- <b>Seating Choice:</b> {{ seating_choice }}<br> --><b>Compliance Status:</b> {{ is_roadway_compliant }}
+          <!-- <b>Seating Choice:</b> {{ seating_choice }}<br> -->
+          <b>Compliance Status:</b> {{ is_roadway_compliant }}
           <br> <b> Skipped Reason:</b> {{ skipped_reason }}
           <br> <b>Last Inspection:</b> {{ inspected_on }}
           <br>
@@ -45,36 +47,6 @@
           <div id="gallery_imgs" class="row gallery ml-n1 mr-n1">
 
           </div>
-        </div>
-        <!-- Amenities-->
-        <div class="text-block">
-          <h3 class="mb-4">Amenities</h3>
-          <ul class="amenities-list list-inline">
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Elevator</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Vegan friendly</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Alcohol served</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>No smoking</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>Parking spaces (paid)</span> </div>
-            </li>
-            <li class="list-inline-item mb-3">
-              <div class="d-flex align-items-center">
-                <div class="icon-circle bg-secondary mr-2"><i class="fa fa-check"></i></div><span>WiFi</span> </div>
-            </li>
-          </ul>
         </div>
         <div class="text-block">
           <p class="subtitle text-sm text-primary">Reviews </p>
@@ -217,7 +189,8 @@ switch (false) {
 }
 
 for (i = 0; i < yelp_info.categories.length; i++) {
-    document.getElementById("res_cateogary").innerHTML += yelp_info.categories[i].title + "&nbsp;&nbsp;&nbsp;&nbsp;";
+    document.getElementById("res_category").innerHTML += yelp_info.categories[i]
+        .title + "&nbsp;&nbsp;&nbsp;&nbsp;";
 }
 
 var res_rev_star = document.getElementById("res_rev_star");
@@ -318,6 +291,8 @@ for (i = 0; i < yelp_reviews.reviews.length; i++) {
     ele.appendChild(ele3);
 }
 
+var inspection_data = {{ lasted_inspection | safe}};
+
 function initMap() {
   const myLatLng = { lat: lat, lng: long };
   const map = new google.maps.Map(document.getElementById("detailMap"), {
@@ -330,5 +305,6 @@ function initMap() {
     title: yelp_info.name,
   });
 }
+
 </script>
 {% endblock %}

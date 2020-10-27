@@ -152,3 +152,4 @@ LOGGING = {
 }
 
 LOGOUT_REDIRECT_URL = "browse"
+CRISPY_TEMPLATE_PACK = "bootstrap3"

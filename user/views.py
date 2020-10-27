@@ -2,22 +2,17 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-
-# from django.http import HttpResponse
-# from django.http import HttpResponseNotFound
-# from django.core.serializers.json import DjangoJSONEncoder
-# import json
-# import logging
-# from django.contrib.auth.models import User
-
-# logger = logging.getLogger(__name__)
-
-
 from django.views.decorators.csrf import csrf_exempt
+
+from .forms import CustomUserCreationForm
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @csrf_exempt
-def get_login_page(request):
+def user_login(request):
     if request.method == "GET":
         return render(request, "login.html")
     if request.method == "POST":
@@ -29,7 +24,7 @@ def get_login_page(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}")
-                return redirect("/restaurant")
+                return redirect("/restaurant/browse/1")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -38,9 +33,22 @@ def get_login_page(request):
     return render(request, template_name="login.html", context={"form": form})
 
 
-def get_register_page(request):
-    return render(request, "register.html")
+def register(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request=request, data=request.POST)
+        if form.is_valid():
+            form.save()
+            # login(request, user)
+            messages.success(request, "Registration successful.")
+            return redirect("user:login")
+        else:
+            messages.error(request, "Unsuccessful registration. Invalid information.")
+    form = CustomUserCreationForm()
+    return render(
+        request=request, template_name="register.html", context={"form": form}
+    )
 
 
 def post_logout(request):
-    logout()
+    logout(request)
+    return redirect("user:login")
