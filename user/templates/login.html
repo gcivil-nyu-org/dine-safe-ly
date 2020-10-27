@@ -10,19 +10,21 @@
                 </div>
                 <form class="form-validate" method="post">
                     {% csrf_token %}
-                    {% if messages %}
-                    <div class="messages alert alert-danger alert-dismissible fade show" role="alert">
-                        {% for message in messages %}
-                        <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
-                        {% endfor %}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    {% endif %}
-
-
                     <div class="form-group">
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <label class="form-label" for="username"> Username</label>
                         <input class="form-control" name="username" id="username" placeholder="Username" autocomplete="off" required data-msg="Please enter your email">
                     </div>
