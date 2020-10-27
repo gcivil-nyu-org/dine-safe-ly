@@ -219,6 +219,13 @@ for (j = 0; j < 5 - Math.ceil(rate); j++) {
     res_rev_star.appendChild(icon2);
 }
 
+function timeChangeFunc(x) {
+  if(x<12){return x +" AM"}
+  else if(x==12){return x + " PM"}
+  else if(x>12 && x<24){return (x-12) + " PM"}
+  else {return (x-12) + " AM"}
+}
+
 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 for (i = 0; i < yelp_info.hours[0].open.length; i++) {
     var opening_hours = document.getElementById("res_open_hours");
@@ -230,7 +237,7 @@ for (i = 0; i < yelp_info.hours[0].open.length; i++) {
     row.appendChild(thh);
     var tdd = document.createElement("td");
     tdd.className = "pr-0 text-right";
-    tdd.innerHTML = yelp_info.hours[0].open[i].start + "-" + yelp_info.hours[0].open[i].end;
+    tdd.innerHTML = timeChangeFunc((yelp_info.hours[0].open[i].start)/100) + "-" + timeChangeFunc((yelp_info.hours[0].open[i].end)/100);
     row.appendChild(tdd);
 }
 
