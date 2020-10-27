@@ -11,17 +11,24 @@
 					<h2>Sign up</h2>
 <!--					<p class="text-muted">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.</p>-->
 				</div>
-                {% if messages %}
-                    <div class="messages alert alert-danger alert-dismissible fade show" role="alert">
-                        {% for message in messages %}
-                        <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
-                        {% endfor %}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endif %}
+
 				<form class="form-validate" method="post">
+                {% csrf_token %}
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
 					<div class="form-group">
 						<label class="form-label" for="email"> Email Address</label>
 						<input class="form-control" name="email" id="email"

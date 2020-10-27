@@ -6,13 +6,16 @@ from sodapy import Socrata
 
 import requests
 import json
+
 # from apscheduler.schedulers.blocking import BlockingScheduler
 
 # import dateutil.parser
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
-from restaurant.models import Restaurant, InspectionRecords
+
+from restaurant.models import Restaurant, InspectionRecords  # noqa: E402
+
 
 # sched = BlockingScheduler()
 
@@ -25,8 +28,8 @@ def match_on_yelp(restaurant_name, restaurant_location):
     country = "US"
 
     YELP_ACCESS_TOKE = (
-        "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr" \
-        "-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq" \
+        "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"
+        "-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq"
         "-R_mEX3Yx "
     )
     # YELP_ACCESS_TOKE = (
@@ -49,29 +52,26 @@ def match_on_yelp(restaurant_name, restaurant_location):
 
 
 def clean_inspection_data(results_df):
-    restaurant_df = results_df.loc[
-                    :, ["restaurantname", "businessaddress",
-                        "postcode"]
-                    ]
+    restaurant_df = results_df.loc[:, ["restaurantname", "businessaddress", "postcode"]]
     inspection_df = results_df.loc[
-                    :,
-                    [
-                        "restaurantinspectionid",
-                        "isroadwaycompliant",
-                        "inspectedon",
-                        "skippedreason",
-                        "restaurantname",
-                        "businessaddress",
-                        "postcode",
-                    ],
-                    ]
+        :,
+        [
+            "restaurantinspectionid",
+            "isroadwaycompliant",
+            "inspectedon",
+            "skippedreason",
+            "restaurantname",
+            "businessaddress",
+            "postcode",
+        ],
+    ]
     restaurant_df = restaurant_df.apply(
         lambda x: x.str.strip() if x.dtype == "str" else x
     )
 
-    restaurant_df = restaurant_df[restaurant_df['restaurantname'] != 'Test']
-    restaurant_df = restaurant_df[restaurant_df['restaurantname'] != 'test']
-    restaurant_df = restaurant_df[restaurant_df['restaurantname'] != 'TEST']
+    restaurant_df = restaurant_df[restaurant_df["restaurantname"] != "Test"]
+    restaurant_df = restaurant_df[restaurant_df["restaurantname"] != "test"]
+    restaurant_df = restaurant_df[restaurant_df["restaurantname"] != "TEST"]
 
     restaurant_df.drop_duplicates(
         subset=["restaurantname", "businessaddress", "postcode"],
@@ -91,8 +91,8 @@ def save_restaurants(restaurant_df):
                 continue
             elif not response["businesses"]:
                 continue
-            else:
-                b_id = response["businesses"][0]["id"]
+            # else:
+            #     b_id = response["businesses"][0]["id"]
 
             # r = Restaurant(
             #     restaurant_name=row["restaurantname"],
@@ -163,6 +163,7 @@ def get_inspection_data():
 
 # sched.start()
 
+
 def populate_restaurant_with_yelp_id():
     restaurants = Restaurant.objects.all()[4316:6849]
     limit = 3000
@@ -188,6 +189,7 @@ def populate_restaurant_with_yelp_id():
             break
     print(count)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     populate_restaurant_with_yelp_id()
-    #get_inspection_data()
+    # get_inspection_data()
