@@ -220,10 +220,10 @@ for (j = 0; j < 5 - Math.ceil(rate); j++) {
 }
 
 function timeChangeFunc(x) {
-  if(x<12){return x +" AM"}
-  else if(x==12){return x + " PM"}
-  else if(x>12 && x<24){return (x-12) + " PM"}
-  else {return (x-12) + " AM"}
+  var a = "";
+  a = (x<12) ? 'AM' : 'PM';
+  x = (x%12) || 12;
+  return (x + a);
 }
 
 var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
