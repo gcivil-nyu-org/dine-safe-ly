@@ -489,3 +489,100 @@ django.urls.exceptions.NoReverseMatch: Reverse for 'browse' not found. 'browse' 
 2020-10-27 22:44:48,886 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\views.py changed, reloading.
 2020-10-27 22:44:48,888 asyncio      DEBUG    Using proactor: IocpProactor
 2020-10-27 22:44:49,721 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 22:48:38,919 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 22:49:27,396 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-27 22:49:27,839 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-27 22:49:27,894 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:49:28,266 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-27 22:49:28,277 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:49:28,603 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-27 22:49:28,614 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:49:28,808 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw/reviews HTTP/1.1" 200 None
+2020-10-27 22:49:28,816 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-27 22:49:28,822 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:49:29,040 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16 HTTP/1.1" 404 102
+2020-10-27 22:49:29,046 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:49:29,175 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16/reviews HTTP/1.1" 404 102
+2020-10-27 22:51:53,260 django.utils.autoreload INFO     /Users/alexhong/PycharmProjects/dine-safe-ly/user/views.py changed, reloading.
+2020-10-27 22:51:53,260 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-27 22:51:53,690 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 22:51:56,326 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-27 22:51:56,701 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-27 22:51:56,756 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:51:57,109 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-27 22:51:57,120 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:51:57,483 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-27 22:51:57,491 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:51:57,715 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw/reviews HTTP/1.1" 200 None
+2020-10-27 22:51:57,724 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-27 22:51:57,730 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:51:57,867 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16 HTTP/1.1" 404 102
+2020-10-27 22:51:57,874 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:51:57,984 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16/reviews HTTP/1.1" 404 102
+2020-10-27 22:52:36,057 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 22:53:02,196 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 22:53:24,277 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 22:56:00,842 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-27 22:56:01,168 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-27 22:56:01,217 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:01,692 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-27 22:56:01,700 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:02,044 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-27 22:56:02,052 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:02,289 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw/reviews HTTP/1.1" 200 None
+2020-10-27 22:56:02,296 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-27 22:56:02,301 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:02,444 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16 HTTP/1.1" 404 102
+2020-10-27 22:56:02,450 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:02,578 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16/reviews HTTP/1.1" 404 102
+2020-10-27 23:13:16,423 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 23:13:21,492 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 23:13:21,646 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-27 23:13:25,672 django.request WARNING  Not Found: /
+2020-10-27 23:13:25,801 django.request WARNING  Not Found: /favicon.ico
+2020-10-27 23:13:34,655 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:34,979 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/U8C69ISrhGTTubjqoVgZYg HTTP/1.1" 200 None
+2020-10-27 23:13:34,990 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:35,202 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wp5BpfUi9Aa4T0Gk0bnhag HTTP/1.1" 200 None
+2020-10-27 23:13:35,211 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:35,428 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/MHbxF-ZS918-ZoXKQPBEyg HTTP/1.1" 200 None
+2020-10-27 23:13:35,436 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:35,779 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/c76v7CGWWjWj__18Mv2j5w HTTP/1.1" 200 None
+2020-10-27 23:13:35,788 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:35,944 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/kKSZT7BJ5VH6hCaGlJ52tg HTTP/1.1" 200 None
+2020-10-27 23:13:41,050 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:41,270 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wp5BpfUi9Aa4T0Gk0bnhag HTTP/1.1" 200 None
+2020-10-27 23:13:41,276 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:41,471 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wp5BpfUi9Aa4T0Gk0bnhag/reviews HTTP/1.1" 200 None
+2020-10-27 23:13:47,261 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:47,491 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/qI18SQBMcNTNo4ZqosfEig HTTP/1.1" 200 None
+2020-10-27 23:13:47,504 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:47,733 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/ZhwXNucu2sV9XfILoXbNjw HTTP/1.1" 200 None
+2020-10-27 23:13:47,749 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:47,977 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/sog3etuV8CwqG0gbQnyw2g HTTP/1.1" 200 None
+2020-10-27 23:13:47,989 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:48,199 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/r7z65v8cnBP0MhGP4oQ0bQ HTTP/1.1" 200 None
+2020-10-27 23:13:48,210 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:48,426 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/M8xnlKQOh0tl58LJCnPUVA HTTP/1.1" 200 None
+2020-10-27 23:13:48,438 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:48,661 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rVJNWn99tF1Jf1l01iFp_A HTTP/1.1" 200 None
+2020-10-27 23:13:54,872 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:55,099 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/U8C69ISrhGTTubjqoVgZYg HTTP/1.1" 200 None
+2020-10-27 23:13:55,112 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:55,342 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/wp5BpfUi9Aa4T0Gk0bnhag HTTP/1.1" 200 None
+2020-10-27 23:13:55,352 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:55,616 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/MHbxF-ZS918-ZoXKQPBEyg HTTP/1.1" 200 None
+2020-10-27 23:13:55,633 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:55,853 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/c76v7CGWWjWj__18Mv2j5w HTTP/1.1" 200 None
+2020-10-27 23:13:55,870 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 23:13:56,062 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/kKSZT7BJ5VH6hCaGlJ52tg HTTP/1.1" 200 None
+2020-10-27 23:14:28,480 django.utils.autoreload INFO     /Users/alexhong/PycharmProjects/dine-safe-ly/dinesafelysite/settings.py changed, reloading.
+2020-10-27 23:14:28,481 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-27 23:14:29,338 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 23:17:11,198 django.utils.autoreload INFO     /Users/alexhong/PycharmProjects/dine-safe-ly/restaurant/models.py changed, reloading.
+2020-10-27 23:17:11,198 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-27 23:17:11,989 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 23:17:35,749 django.utils.autoreload INFO     /Users/alexhong/PycharmProjects/dine-safe-ly/restaurant/models.py changed, reloading.
+2020-10-27 23:17:35,749 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-27 23:17:36,510 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 23:18:51,718 django.request WARNING  Not Found: /
