@@ -100,7 +100,7 @@ def forget_password(request):
             email = EmailMessage(email_subject, message, to=[user.email])
             email.send()
             return render(request=request, template_name="sent_email.html")
-        return HttpResponse("Email not valid")
+        return render(request=request, template_name="reset_email.html", context={"form": form})
     else:
         form = GetEmailForm()
         return render(
