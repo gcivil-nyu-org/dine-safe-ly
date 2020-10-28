@@ -2,6 +2,7 @@
 
 A restaurant search app to help NYC residents find establishments that have passed COVID-19 dine-in inspections.
 
+https://dine-safe-ly.herokuapp.com/
 
 develop branch:
 [![Build Status](https://travis-ci.com/gcivil-nyu-org/dine-safe-ly.svg?branch=develop)](https://travis-ci.com/gcivil-nyu-org/dine-safe-ly)
