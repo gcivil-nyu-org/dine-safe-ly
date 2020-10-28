@@ -12,9 +12,9 @@ before_script:
   - python manage.py collectstatic --noinput
 
 script:
-  - black --check restaurant, user
-  - flake8 restaurant, user
-  - coverage run --source=restaurant, user manage.py test
+  - black --check .
+  - flake8 .
+  - coverage run manage.py test
 
 after_script:
   - coveralls
