@@ -1,0 +1,105 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section class="py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-5">
+      <h1 class="hero-heading mb-0">Inspection History</h1>
+      <a class="btn btn-link text-muted" target="_blank" href="https://www1.nyc.gov/html/dot/html/pedestrians/openrestaurants.shtml">Open Restaurant Compliance</a>
+    </div>
+    <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
+      <div class="mr-3">
+        <p class="mb-3 mb-lg-0">There are <strong id="inspection_count"></strong> inspections for this restaurant</p>
+      </div>
+    </div>
+    <div id="group_item" class="list-group shadow mb-5">
+
+    </div>
+  </div>
+</section>
+<script>
+var List = {{ inspection_list | safe }};
+document.getElementById("inspection_count").innerHTML= List.length;
+for(var i = 0; i < List.length; i++)
+{
+    var group_item = document.getElementById("group_item");
+
+    var a = document.createElement("a");
+    a.className = "list-group-item list-group-item-action p-4";
+
+    var div_row = document.createElement("div");
+    div_row.className = "row";
+
+    var div1 = document.createElement("div");
+    div1.className = "col-lg-4 align-self-center mb-4 mb-lg-0";
+
+    var div2 = document.createElement("div");
+    div2.className = "d-flex align-items-center mb-3"
+
+    var h2 = document.createElement("h2");
+    h2.className = "h5 mb-0";
+    h2.innerHTML = List[i].restaurant_name;
+
+    div2.appendChild(h2);
+
+    var p = document.createElement("p");
+    p.className = "text-sm text-muted";
+    p.innerHTML = "Compliance Status";
+
+    var span = document.createElement("span");
+    span.className = "badge badge-pill p-2 badge-secondary-light";
+    span.innerHTML = List[i].is_roadway_compliant;
+
+    div1.appendChild(div2);
+    div1.appendChild(p);
+    div1.appendChild(span);
+
+    var div3 = document.createElement("div");
+    div3.className = "col-lg-8";
+
+    var div_row2 = document.createElement("div");
+    div_row2.className = "row";
+
+    var div4 = document.createElement("div");
+    div4.className = "col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0";
+
+    var h6_1 = document.createElement("h6");
+    h6_1.className = "label-heading";
+    h6_1.innerHTML = "Skipped Reason";
+
+    var p_1 = document.createElement("p");
+    p_1.className = "text-sm font-weight-bold";
+    p_1.innerHTML = List[i].skipped_reason;
+
+    div4.appendChild(h6_1);
+    div4.appendChild(p_1);
+
+    var div5 = document.createElement("div");
+    div5.className = "col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0";
+
+    var h6_2 = document.createElement("h6");
+    h6_2.className = "label-heading";
+    h6_2.innerHTML = "Inspection Date";
+
+    var p_2 = document.createElement("p");
+    p_2.className = "text-sm font-weight-bold mb-0";
+    p_2.innerHTML = List[i].inspected_on;
+
+    div5.appendChild(h6_2);
+    div5.appendChild(p_2);
+
+    div_row2.appendChild(div4);
+    div_row2.appendChild(div5);
+    div3.appendChild(div_row2);
+
+    div_row.appendChild(div1);
+    div_row.appendChild(div3);
+
+    a.appendChild(div_row);
+
+    group_item.appendChild(a);
+
+}
+
+</script>
+
+{% endblock %}
