@@ -489,3 +489,25 @@ django.urls.exceptions.NoReverseMatch: Reverse for 'browse' not found. 'browse' 
 2020-10-27 22:44:48,886 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\views.py changed, reloading.
 2020-10-27 22:44:48,888 asyncio      DEBUG    Using proactor: IocpProactor
 2020-10-27 22:44:49,721 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 22:47:30,138 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 22:47:30,139 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-27 22:47:30,950 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-27 22:55:36,118 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-27 22:55:52,277 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-27 22:56:01,418 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-27 22:56:04,874 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-27 22:56:05,236 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-27 22:56:05,286 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:05,707 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-27 22:56:05,715 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:06,081 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw HTTP/1.1" 200 None
+2020-10-27 22:56:06,086 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:06,351 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/WavvLdfdP6g8aZTtbBQHTw/reviews HTTP/1.1" 200 None
+2020-10-27 22:56:06,358 restaurant.views WARNING  Restaurant ID could not be found: -1
+2020-10-27 22:56:06,362 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:06,474 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16 HTTP/1.1" 404 102
+2020-10-27 22:56:06,478 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-27 22:56:06,615 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/16/reviews HTTP/1.1" 404 102
+2020-10-27 22:57:07,277 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\views.py changed, reloading.
+2020-10-27 22:57:07,278 asyncio      DEBUG    Using proactor: IocpProactor
+2020-10-27 22:57:08,058 django.utils.autoreload INFO     Watching for file changes with StatReloader
