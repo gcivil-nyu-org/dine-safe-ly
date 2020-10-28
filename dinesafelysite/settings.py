@@ -152,7 +152,6 @@ LOGGING = {
 }
 
 LOGOUT_REDIRECT_URL = "browse"
-CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "dinesafely.nyc@gmail.com"

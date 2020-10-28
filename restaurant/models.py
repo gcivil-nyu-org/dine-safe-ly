@@ -6,7 +6,6 @@ class Restaurant(models.Model):
     business_address = models.CharField(max_length=200)
     postcode = models.CharField(max_length=200)
     business_id = models.CharField(max_length=200, default=None, blank=True, null=True)
-    # legal_business_name = models.CharField(max_length=200, default=None)
 
     class Meta:
         unique_together = (("restaurant_name", "business_address", "postcode"),)
@@ -29,7 +28,6 @@ class InspectionRecords(models.Model):
     is_roadway_compliant = models.CharField(max_length=200)
     skipped_reason = models.CharField(max_length=200)
     inspected_on = models.DateTimeField()
-    # seating_choice = models.CharField(max_length=20)
 
     def __str__(self):
         return "{} {} {} {} {} {} {}".format(
