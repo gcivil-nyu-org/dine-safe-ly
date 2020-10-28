@@ -33,7 +33,7 @@
                             <div class="col">
                                 <label class="form-label" for="password"> Password</label>
                             </div>
-                            <div class="col-auto"><a class="form-text small" href="#">Forgot password?</a></div>
+                            <div class="col-auto"><a class="form-text small" href="{% url 'user:forget_password' %}">Forgot password?</a></div>
                         </div>
                         <input class="form-control" name="password" id="password" placeholder="Password" type="password" required data-msg="Please enter your password">
                     </div>

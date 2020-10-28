@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.core.mail import EmailMessage
 
-from .forms import UserCreationForm, ResetPasswordForm
+from .forms import UserCreationForm, ResetPasswordForm, GetEmailForm
 
 import logging
 
@@ -70,7 +70,7 @@ def reset_password_link(request, base64_id, token):
         print(form)
         if form.is_valid():
             form.save(uid)
-            return redirect("restaurant:browse")
+            return redirect("user:login")
         else:
             return HttpResponse("Invalid")
     else:
@@ -78,15 +78,25 @@ def reset_password_link(request, base64_id, token):
         return render(
             request=request, template_name="reset.html", context={"form": form}
         )
-    return redirect("user:login")
 
 
-def forget_password(request, email):
-    user = User.objects.get(email=email)
-    base_url = "http://127.0.0.1:8000/user/reset_password/"
-    url = base_url + urlsafe_base64_encode(force_bytes(user.pk)) + "/" + PasswordResetTokenGenerator().make_token(user)
-    email_subject = "Reset Your Dine-safe-ly Password!"
-    message = url
-    email = EmailMessage(email_subject, message, to=[user.email])
-    email.send()
-    return HttpResponse(url)
+def forget_password(request):
+    if request.method == "POST":
+        form = GetEmailForm(request.POST)
+        print(form)
+        if form.is_valid():
+            email = form.cleaned_data.get("email")
+            user = User.objects.get(email=email)
+            base_url = "http://127.0.0.1:8000/user/reset_password/"
+            url = base_url + urlsafe_base64_encode(force_bytes(user.pk)) + "/" + PasswordResetTokenGenerator().make_token(user)
+            email_subject = "Reset Your Dine-safe-ly Password!"
+            message = url
+            email = EmailMessage(email_subject, message, to=[user.email])
+            email.send()
+            return render(request=request, template_name="sent_email.html")
+        return HttpResponse("Email not valid")
+    else:
+        form = GetEmailForm()
+        return render(
+            request=request, template_name="reset_email.html", context={"form": form}
+        )

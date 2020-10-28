@@ -60,3 +60,15 @@ class ResetPasswordForm(forms.Form):
         print(user.password)
         user.save()
         return user
+
+
+class GetEmailForm(forms.Form):
+    email = forms.EmailField(label="email")
+
+    def clean_email(self):
+        email = self.cleaned_data["email"].lower()
+        r = User.objects.filter(email=email)
+        if r.count() == 0:
+            raise ValidationError("Email doesn't exists")
+        return email
+
