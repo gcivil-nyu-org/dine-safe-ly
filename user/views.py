@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.csrf import csrf_exempt
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_bytes, force_text
@@ -87,8 +87,14 @@ def forget_password(request):
         if form.is_valid():
             email = form.cleaned_data.get("email")
             user = User.objects.get(email=email)
-            base_url = "http://127.0.0.1:8000/user/reset_password/"
-            url = base_url + urlsafe_base64_encode(force_bytes(user.pk)) + "/" + PasswordResetTokenGenerator().make_token(user)
+            host_name = request.get_host()
+            base_url = "http://" + host_name + "/user/reset_password/"
+            url = (
+                base_url
+                + urlsafe_base64_encode(force_bytes(user.pk))
+                + "/"
+                + PasswordResetTokenGenerator().make_token(user)
+            )
             email_subject = "Reset Your Dine-safe-ly Password!"
             message = url
             email = EmailMessage(email_subject, message, to=[user.email])

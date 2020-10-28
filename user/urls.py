@@ -6,6 +6,10 @@ urlpatterns = [
     path("login", views.user_login, name="login"),
     path("logout", views.post_logout, name="logout"),
     path("register", views.register, name="register"),
-    path("reset_password/<base64_id>/<token>", views.reset_password_link, name="reset_password"),
+    path(
+        "reset_password/<base64_id>/<token>",
+        views.reset_password_link,
+        name="reset_password",
+    ),
     path("forget_password", views.forget_password, name="forget_password"),
 ]

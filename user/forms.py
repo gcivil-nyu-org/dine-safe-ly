@@ -71,4 +71,3 @@ class GetEmailForm(forms.Form):
         if r.count() == 0:
             raise ValidationError("Email doesn't exists")
         return email
-
