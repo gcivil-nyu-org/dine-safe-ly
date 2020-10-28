@@ -25,10 +25,12 @@ def user_login(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
+            print(username, password)
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
                 return redirect("restaurant:browse")
+
     else:
         form = AuthenticationForm()
     return render(request, template_name="login.html", context={"form": form})
@@ -57,23 +59,30 @@ def post_logout(request):
 
 def reset_password_link(request, base64_id, token):
     if request.method == "POST":
+
         uid = force_text(urlsafe_base64_decode(base64_id))
+
         user = User.objects.get(pk=uid)
+        print(user)
         if not user or not PasswordResetTokenGenerator().check_token(user, token):
             return HttpResponse("This is invalid!")
         form = ResetPasswordForm(request.POST)
+        print(form)
         if form.is_valid():
             form.save(uid)
+            return redirect("restaurant:browse")
         else:
-            messages.error(request, "Unsuccessful. Invalid information.")
+            return HttpResponse("Invalid")
     else:
         form = ResetPasswordForm()
-        return HttpResponse("Reset Password page")
+        return render(
+            request=request, template_name="reset.html", context={"form": form}
+        )
     return redirect("user:login")
 
 
-def forget_password(request):
-    user = request.user
+def forget_password(request, email):
+    user = User.objects.get(email=email)
     base_url = "http://127.0.0.1:8000/user/reset_password/"
     url = base_url + urlsafe_base64_encode(force_bytes(user.pk)) + "/" + PasswordResetTokenGenerator().make_token(user)
     email_subject = "Reset Your Dine-safe-ly Password!"

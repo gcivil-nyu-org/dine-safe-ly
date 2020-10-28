@@ -42,8 +42,8 @@ class UserCreationForm(forms.Form):
 
 
 class ResetPasswordForm(forms.Form):
-    password1 = forms.CharField(label="New password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Confirm password", widget=forms.PasswordInput)
+    password1 = forms.CharField(label="password1", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="password2", widget=forms.PasswordInput)
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -56,6 +56,7 @@ class ResetPasswordForm(forms.Form):
 
     def save(self, uid, commit=True):
         user = User.objects.get(pk=uid)
-        user.password = self.cleaned_data["password1"]
+        user.set_password(self.cleaned_data["password1"])
+        print(user.password)
         user.save()
         return user
