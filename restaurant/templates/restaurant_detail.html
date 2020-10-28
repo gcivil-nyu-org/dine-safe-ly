@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0">
                       <h6 class="label-heading">Inspection Date </h6>
-                      <p id="res_last_inspection" class="text-sm font-weight-bold mb-0">Dummy</p>
+                      <p id="res_last_inspection" class="text-sm font-weight-bold mb-0"></p>
                     </div>
                   </div>
                 </div>
@@ -170,6 +170,18 @@
 </section>
 <!--Insert values into HTML-->
 <script>
+var inspection_data = {{ lasted_inspection | safe}};
+
+document.getElementById("res_compliance_status").innerHTML = inspection_data.is_roadway_compliant;
+document.getElementById("res_skipped_reason").innerHTML = "-";
+document.getElementById("res_last_inspection").innerHTML = inspection_data.inspected_on;
+
+if(inspection_data.is_roadway_compliant=="Compliant")
+  {document.getElementById("res_compliance_status").className = "badge badge-pill p-2 badge-success-light"}
+else
+  {document.getElementById("res_skipped_reason").innerHTML = inspection_data.skipped_reason;
+  document.getElementById("res_compliance_status").className = "badge badge-pill p-2 badge-danger-light"}
+
 var True = true;
 var False = false;
 var None = null;
@@ -220,10 +232,11 @@ for (j = 0; j < 5 - Math.ceil(rate); j++) {
 }
 
 function timeChangeFunc(x) {
-  if(x<12){return x +" AM"}
-  else if(x==12){return x + " PM"}
-  else if(x>12 && x<24){return (x-12) + " PM"}
-  else {return (x-12) + " AM"}
+  var hrs = parseInt(x.slice(0,2));
+  var a = (hrs<12)?'AM':'PM';
+  var mins = x.slice(2,4);
+  hrs = hrs%12 || 12;
+  return(hrs + ":" + mins + " " + a);
 }
 
 var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -237,7 +250,7 @@ for (i = 0; i < yelp_info.hours[0].open.length; i++) {
     row.appendChild(thh);
     var tdd = document.createElement("td");
     tdd.className = "pr-0 text-right";
-    tdd.innerHTML = timeChangeFunc((yelp_info.hours[0].open[i].start)/100) + "-" + timeChangeFunc((yelp_info.hours[0].open[i].end)/100);
+    tdd.innerHTML = timeChangeFunc(yelp_info.hours[0].open[i].start) + "-" + timeChangeFunc(yelp_info.hours[0].open[i].end);
     row.appendChild(tdd);
 }
 
@@ -319,17 +332,7 @@ for (i = 0; i < yelp_reviews.reviews.length; i++) {
     ele.appendChild(ele3);
 }
 
-var inspection_data = {{ lasted_inspection | safe}};
 
-document.getElementById("res_compliance_status").innerHTML = inspection_data.is_roadway_compliant;
-document.getElementById("res_skipped_reason").innerHTML = "-";
-document.getElementById("res_last_inspection").innerHTML = inspection_data.inspected_on;
-
-if(inspection_data.is_roadway_compliant=="Compliant")
-  {document.getElementById("res_compliance_status").className = "badge badge-pill p-2 badge-success-light"}
-else
-  {document.getElementById("res_skipped_reason").innerHTML = inspection_data.skipped_reason;
-  document.getElementById("res_compliance_status").className = "badge badge-pill p-2 badge-danger-light"}
 
 
 console.log(inspection_data);
