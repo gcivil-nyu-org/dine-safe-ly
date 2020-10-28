@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from .forms import UserCreationForm, ResetPasswordForm
 from django.test import Client
+
 # from unittest import mock
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -149,6 +150,10 @@ class TestUserRegisterView(BaseTest):
             },
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_logout_request(self):
+        response = self.c.post("/user/logout")
+        self.assertEqual(response.status_code, 302)
 
 
 class TestUserLoginView(BaseTest):

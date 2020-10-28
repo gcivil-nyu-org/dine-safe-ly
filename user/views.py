@@ -1,8 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-# from django.views.decorators.csrf import csrf_exempt
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_bytes, force_text
@@ -51,7 +49,7 @@ def register(request):
     )
 
 
-@login_required
+# @login_required
 def post_logout(request):
     logout(request)
     return redirect("user:login")
@@ -100,7 +98,9 @@ def forget_password(request):
             email = EmailMessage(email_subject, message, to=[user.email])
             email.send()
             return render(request=request, template_name="sent_email.html")
-        return render(request=request, template_name="reset_email.html", context={"form": form})
+        return render(
+            request=request, template_name="reset_email.html", context={"form": form}
+        )
     else:
         form = GetEmailForm()
         return render(
