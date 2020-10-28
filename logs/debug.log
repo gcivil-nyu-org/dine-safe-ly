@@ -489,3 +489,27 @@ django.urls.exceptions.NoReverseMatch: Reverse for 'browse' not found. 'browse' 
 2020-10-27 22:44:48,886 django.utils.autoreload INFO     C:\Users\Legen\Documents\NYU\Software Engineering\dine-safe-ly\user\views.py changed, reloading.
 2020-10-27 22:44:48,888 asyncio      DEBUG    Using proactor: IocpProactor
 2020-10-27 22:44:49,721 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-28 00:15:31,393 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-28 00:15:58,055 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-28 00:17:51,657 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-28 00:18:04,056 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-28 00:18:56,553 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-28 00:18:56,686 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-28 00:19:04,365 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-28 00:19:17,204 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-28 00:19:23,324 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2020-10-28 00:20:59,470 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-28 00:20:59,710 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/FaebPpZ8fKuvPtMOZ_dslw HTTP/1.1" 200 None
+2020-10-28 00:20:59,721 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-28 00:20:59,984 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/yWn06c7BmeVsoHBxLbnAsA HTTP/1.1" 200 None
+2020-10-28 00:20:59,998 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-28 00:21:00,209 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/F1cTAyVghrMagxFHikwQKQ HTTP/1.1" 200 None
+2020-10-28 00:21:00,222 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-28 00:21:01,028 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/ysFjhHDTuYnTv6wrvsgsWg HTTP/1.1" 200 None
+2020-10-28 00:21:01,039 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-28 00:21:01,244 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/RQojRzAYA9Cq87PqwQq5yg HTTP/1.1" 200 None
+2020-10-28 00:21:01,257 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): api.yelp.com:443
+2020-10-28 00:21:01,496 urllib3.connectionpool DEBUG    https://api.yelp.com:443 "GET /v3/businesses/rrDymUQnu95UnZtTeeHfnA HTTP/1.1" 200 None
+2020-10-28 00:21:05,672 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-28 00:21:05,842 asyncio      DEBUG    Using selector: KqueueSelector
+2020-10-28 00:21:12,139 asyncio      DEBUG    Using selector: KqueueSelector
