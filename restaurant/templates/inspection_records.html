@@ -60,7 +60,7 @@ for(var i = 0; i < List.length; i++)
     div_row2.className = "row";
 
     var div4 = document.createElement("div");
-    div4.className = "col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0";
+    div4.className = "col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0";
 
     var h6_1 = document.createElement("h6");
     h6_1.className = "label-heading";
@@ -70,6 +70,12 @@ for(var i = 0; i < List.length; i++)
     p_1.className = "text-sm font-weight-bold";
     p_1.innerHTML = List[i].skipped_reason;
 
+    div4.appendChild(h6_1);
+    div4.appendChild(p_1);
+
+    var div5 = document.createElement("div");
+    div5.className = "col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0";
+
     var h6_2 = document.createElement("h6");
     h6_2.className = "label-heading";
     h6_2.innerHTML = "Inspection Date";
@@ -78,12 +84,11 @@ for(var i = 0; i < List.length; i++)
     p_2.className = "text-sm font-weight-bold mb-0";
     p_2.innerHTML = List[i].inspected_on;
 
-    div4.appendChild(h6_1);
-    div4.appendChild(p_1);
-    div4.appendChild(h6_2);
-    div4.appendChild(p_2);
+    div5.appendChild(h6_2);
+    div5.appendChild(p_2);
 
     div_row2.appendChild(div4);
+    div_row2.appendChild(div5);
     div3.appendChild(div_row2);
 
     div_row.appendChild(div1);
