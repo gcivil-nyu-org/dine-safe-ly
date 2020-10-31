@@ -11,6 +11,7 @@ from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 import logging
+import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +47,9 @@ def get_inspection_info(request, restaurant_id):
         inspection_data_list = query_inspection_record(
             restaurant.restaurant_name, restaurant.business_address, restaurant.postcode
         )
-
+        
+        for i in range(len(inspection_data_list)):
+            inspection_data_list[i]['inspected_on'] = inspection_data_list[i]['inspected_on'].strftime('%Y-%m-%d %H:%M:%S')
         parameter_dict = {
             "inspection_list": json.dumps(inspection_data_list, cls=DjangoJSONEncoder),
             "restaurant_id": restaurant_id,
