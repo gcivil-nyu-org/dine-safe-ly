@@ -44,7 +44,7 @@ def get_latest_inspection_record(business_name, business_address, postcode):
     ).order_by("-inspected_on")
     if len(records) >= 1:
         record = model_to_dict(records[0])
-        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d %H:%M:%S")
+        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d")
         return record
 
     return None
