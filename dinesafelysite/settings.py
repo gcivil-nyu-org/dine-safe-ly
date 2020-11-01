@@ -127,6 +127,12 @@ YELP_ACCESS_TOKE = (
     "-R_mEX3Yx "
 )
 
+YELP_CATEGORY_API = "https://api.yelp.com/v3/categories/"
+YELP_ACESS_TOKEN_BETA = (
+    "Rp2eX_CuQVgaBc0Zk3sKRbFroy_s3_4eUtnNutojHg2G745uXH6-IakxKebxmc"
+    "EcM2lIoOhGAjPcb_SoKx0evgi3YeRRre2Ago-9SWh_yGluXMwGAi03y9kIfEueX3Yx"
+)
+
 django_heroku.settings(locals(), test_runner=False)
 
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
