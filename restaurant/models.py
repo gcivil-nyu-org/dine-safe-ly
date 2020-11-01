@@ -50,11 +50,7 @@ class YelpRestaurantDetails(models.Model):
 
     def __str__(self):
         return "{} {} {} {} {}".format(
-            self.business_id,
-            self.neighbourhood,
-            self.category,
-            self.price,
-            self.rating
+            self.business_id, self.neighbourhood, self.category, self.price, self.rating
         )
 
 
@@ -64,8 +60,4 @@ class Zipcodes(models.Model):
     neighborhood = models.CharField(max_length=200, default=None, null=True)
 
     def __str__(self):
-        return "{} {} {}".format(
-            self.zipcode,
-            self.borough,
-            self.neighborhood
-        )
+        return "{} {} {}".format(self.zipcode, self.borough, self.neighborhood)
