@@ -122,9 +122,8 @@ STATICFILES_DIRS = [
 # Yelp:
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
 YELP_ACCESS_TOKE = (
-    "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"
-    "-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq"
-    "-R_mEX3Yx "
+    "w5fGYpYDI6NYJOBI47KjmEJcROpCxq1VK841olTs0tSGOeGBNDuIIj8zF"
+    "-C_MJFtAbrzfm7YF7bo72TxpOmrrn-zYnQ8xHBh_E4WEO39Z7IdKwbzCkBkCy0fjB6CX3Yx "
 )
 
 django_heroku.settings(locals(), test_runner=False)

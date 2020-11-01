@@ -39,3 +39,25 @@ class InspectionRecords(models.Model):
             self.postcode,
             self.business_address,
         )
+
+
+class UserQuestionnaire(models.Model):
+    # the restaurant the feedback is for
+    restaurant_business_id = models.CharField(max_length=200, blank=True, null=True)
+    # indicate your level or satisfaction for this restaurant
+    satisfaction_level = models.CharField(max_length=200)
+    # indicate your level of safety for this restaurant
+    safety_level = models.CharField(max_length=200)
+    mask_required = models.CharField(max_length=200)
+    temperature_required = models.CharField(max_length=200)
+    would_recommend = models.CharField(max_length=200)
+
+    def __str__(self):
+        return "{} {} {} {} {} {} {}".format(
+            self.restaurant_business_id,
+            self.satisfaction_level,
+            self.safety_level,
+            self.mask_required,
+            self.temperature_required,
+            self.would_recommend,
+        )

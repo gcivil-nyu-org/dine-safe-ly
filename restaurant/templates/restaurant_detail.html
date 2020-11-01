@@ -47,6 +47,111 @@
             </a>
           </div>
         </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Have you been here before?
+</button>
+
+<!-- Modal -->
+
+<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tell us about your experience!</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+<!--      <form class="form-validate" method="post">-->
+<!--                {% csrf_token %}-->
+<!--                    {% if form.errors %}-->
+<!--                        {% for field in form %}-->
+<!--                            {% for error in field.errors %}-->
+<!--                                <div class="alert alert-danger">-->
+<!--                                    <strong>{{ error|escape }}</strong>-->
+<!--                                </div>-->
+<!--                            {% endfor %}-->
+<!--                        {% endfor %}-->
+<!--                        {% for error in form.non_field_errors %}-->
+<!--                            <div class="alert alert-danger">-->
+<!--                                <strong>{{ error|escape }}</strong>-->
+<!--                            </div>-->
+<!--                        {% endfor %}-->
+<!--                    {% endif %}-->
+
+<!--					<div class="form-group">-->
+<!--						<label class="form-label" for="email"> Email Address</label>-->
+<!--						<input class="form-control" name="email" id="email"-->
+<!--                               type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email">-->
+<!--					</div>-->
+
+<!--					<button class="btn btn-lg btn-block btn-primary" type="submit">Sign up</button>-->
+
+<!--      </form>-->
+      <div class="modal-body">
+        <form class="form-validate" method="post">
+          <h2>For this restaurant:</h2>
+        <br>
+        <p>Choose your satisfaction level: (5 for the best)</p>
+        <div class="rate">
+          <input type="radio" id="star1" name="rate" value="1" />
+          <label for="star1" title="text">1</label>
+          <input type="radio" id="star2" name="rate" value="2" />
+          <label for="star2" title="text">2</label>
+          <input type="radio" id="star3" name="rate" value="3" />
+          <label for="star3" title="text">3</label>
+          <input type="radio" id="star4" name="rate" value="4" />
+          <label for="star4" title="text">4</label>
+          <input type="radio" id="star5" name="rate" value="5" />
+          <label for="star5" title="text">5</label>
+        </div>
+        <br>
+        <label for="satety_form">Choose your satety level: (5 for the best)</label>
+        <select id="satety_form" name="satisfaction list">
+          <option value="safety_0">0</option>
+          <option value="safety_1">1</option>
+          <option value="safety_2">2</option>
+          <option value="safety_3">3</option>
+          <option value="safety_4">4</option>
+          <option value="safety_5">5</option>
+        </select>
+        <br>
+        <br>
+        <label for="mask_required_form">Is mask required when you were there?</label>
+        <select id="mask_required_form" name="satisfaction list">
+          <option value="mask_yes">yes</option>
+          <option value="mask_no">no</option>
+        </select>
+        <br>
+        <br>
+        <label for="temperature_required_form">Is your body temperature required when you were there?</label>
+        <select id="temperature_required_form" name="satisfaction list">
+          <option value="temperature_yes">yes</option>
+          <option value="temperature_no">no</option>
+        </select>
+        <br>
+        <br>
+        <label for="recommend_form">Would you recommend this restaurant to others?</label>
+        <select id="recommend_form" name="satisfaction list">
+          <option value="would_recommend_yes">yes</option>
+          <option value="would_recommend_no">no</option>
+        </select>
+        <br>
+        <br>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" onclick="save()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
         <div class="text-block">
           <!-- Listing Location-->
           <h3 class="mb-4">Location</h3>
@@ -352,4 +457,10 @@ function initMap() {
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&callback=initMap"
         type="text/javascript"></script>
+
+<script>
+function save() {
+
+}
+</script>
 {% endblock %}
