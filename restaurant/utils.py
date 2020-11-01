@@ -59,12 +59,16 @@ def query_inspection_record(business_name, business_address, postcode):
     result = []
     for record in records:
         result.append(model_to_dict(record))
+        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d %H:%M:%S")
     return result
 
 
-def get_restaurant_list(page, limit):
+def get_restaurant_list(page, limit, keyword):
     offset = int(page) * int(limit)
-    restaurants = Restaurant.objects.all()[offset : offset + int(limit)]  # noqa E203
+    if keyword:
+        restaurants = Restaurant.objects.filter(restaurant_name__contains=keyword)[offset: offset + int(limit)]
+    else:
+        restaurants = Restaurant.objects.all()[offset: offset + int(limit)]
     result = []
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)

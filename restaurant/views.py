@@ -47,11 +47,6 @@ def get_inspection_info(request, restaurant_id):
             restaurant.restaurant_name, restaurant.business_address, restaurant.postcode
         )
 
-        for i in range(len(inspection_data_list)):
-            inspection_data_list[i]["inspected_on"] = inspection_data_list[i][
-                "inspected_on"
-            ].strftime("%Y-%m-%d %H:%M:%S")
-
         parameter_dict = {
             "inspection_list": json.dumps(inspection_data_list, cls=DjangoJSONEncoder),
             "restaurant_id": restaurant_id,
@@ -66,9 +61,17 @@ def get_inspection_info(request, restaurant_id):
 
 
 def get_landing_page(request, page=0):
-    restaurant_list = get_restaurant_list(page, 6)
+    neighbourhoods_filter = request.GET.getlist("neighbourhood")
+    categories_filter = request.GET.getlist("category")
+    keyword = request.GET.get("search")
+    logger.debug(neighbourhoods_filter)
+    logger.debug(categories_filter)
+
+    restaurant_list = get_restaurant_list(page, 6, keyword)
+    logger.debug(keyword)
     parameter_dict = {
         "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),
         "page": page,
+        "keyword": json.dumps({'keyword': keyword})
     }
     return render(request, "browse.html", parameter_dict)
