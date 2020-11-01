@@ -50,7 +50,7 @@ class YelpRestaurantDetails(models.Model):
 
     def __str__(self):
         return "{} {} {} {} {}".format(
-            self.business_id, self.neighbourhood, self.category, self.price, self.rating
+            self.business_id, self.neighborhood, self.category, self.price, self.rating
         )
 
 

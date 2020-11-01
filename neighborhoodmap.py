@@ -3,12 +3,13 @@ import django
 import requests
 import json
 import logging
-from django.conf import settings
-from restaurant.models import Zipcodes, YelpRestaurantDetails, Restaurant
-from restaurant.utils import query_yelp
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
+
+from django.conf import settings
+from restaurant.models import Zipcodes, YelpRestaurantDetails, Restaurant
+from restaurant.utils import query_yelp
 
 logger = logging.getLogger(__name__)
 
