@@ -3,13 +3,12 @@ import django
 import requests
 import json
 import logging
+from django.conf import settings
+from restaurant.models import Zipcodes, YelpRestaurantDetails, Restaurant
+from restaurant.utils import query_yelp
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
-
-from django.conf import settings
-from restaurant.models import Zipcodes, YelpRestaurantDetails, Restaurant
-from restaurant.utils import *
 
 logger = logging.getLogger(__name__)
 
@@ -31,8 +30,8 @@ def map_zipcode_to_neighbourhood():
             neigbourhood_map.save()
         except Exception as e:
             logger.warning(
-                "Error while saving zipcode/neighbourhood to table Zipcodes: {}".format(
-                    zip["zip"]
+                "Error while saving zipcode/neighbourhood to table Zipcodes: {} {}".format(
+                    zip["zip"], e
                 )
             )
 
@@ -90,8 +89,8 @@ def save_yelp_restaurant_details():
                 continue
         except Exception as e:
             logger.warning(
-                "Error while saving to table YelpRestaurantDetails: {}".format(
-                    r.business_id
+                "Error while saving to table YelpRestaurantDetails: {} {}".format(
+                    r.business_id, e
                 )
             )
 

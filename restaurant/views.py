@@ -11,7 +11,6 @@ from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 import logging
-import datetime
 
 logger = logging.getLogger(__name__)
 
