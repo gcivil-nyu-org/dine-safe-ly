@@ -3,6 +3,7 @@ from django.forms.models import model_to_dict
 from .models import InspectionRecords, Restaurant
 import requests
 import json
+from django.db import connection
 
 
 def get_restaurant_info_yelp(business_id):
@@ -63,7 +64,7 @@ def query_inspection_record(business_name, business_address, postcode):
     return result
 
 
-def get_restaurant_list(page, limit, keyword):
+def get_restaurant_list(page, limit, keyword, neighbourhoods_filter, categories_filter):
     offset = int(page) * int(limit)
     if keyword:
         restaurants = Restaurant.objects.filter(restaurant_name__contains=keyword)[offset: offset + int(limit)]

@@ -10,10 +10,10 @@
     <div class="col-lg-3 pt-3">
       <form class="pr-xl-3" action="#">
         <div class="mb-4">
-          <label class="form-label" for="form_search">Keyword</label>
+          <label class="form-label" for="form_search">Search by restaurant name</label>
           <div class="input-label-absolute input-label-absolute-right">
             <div class="label-absolute"><i class="fa fa-search"></i></div>
-            <input class="form-control pr-4" type="search" name="search" placeholder="Keywords" id="form_search"> </div>
+            <input class="form-control pr-4" type="search" name="search" placeholder="Restaurant Name" id="form_search" >  </div>
         </div>
         <div class="mb-4">
           <label class="form-label" for="form_neighbourhood">Neighbourhood</label>
@@ -389,11 +389,13 @@
       </nav>
     </div>
     <script>
-		var page = {{page | safe}}
+		var page = {{page | safe}};
+		var keyword_dict = {{ keyword | safe}};
+		var keyword = keyword_dict['keyword']
+		console.log(keyword)
 		for(var i = 0; i < 3; i++) {
-			console.log(i.toString());
 			document.getElementById("page" + i.toString()).innerHTML = (page + i).toString();
-			document.getElementById("page" + i.toString()).href = (page + i).toString();
+			document.getElementById("page" + i.toString()).href = (page + i).toString() + "?search=" + keyword.toString();
 		}
 		document.getElementById("next").href = (page + 1).toString();
 		if(page > 0) {
@@ -401,7 +403,6 @@
 		}
 		var List = {{restaurant_list | safe}};
 		for(var i = 0; i < 6; i++) {
-			console.log(List[i]['restaurant_name']);
 			if(List[i]['yelp_info'] != null) {
 				if(List[i]['yelp_info']['image_url'] != null) {
 					console.log(List[i]['yelp_info']['image_url']);
