@@ -67,15 +67,17 @@ def query_inspection_record(business_name, business_address, postcode):
     return result
 
 
-def get_restaurant_list(page, limit, keyword=None, neighbourhoods_filter=None, categories_filter=None):
+def get_restaurant_list(
+    page, limit, keyword=None, neighbourhoods_filter=None, categories_filter=None
+):
     page = int(page) - 1
     offset = int(page) * int(limit)
     if keyword:
         restaurants = Restaurant.objects.filter(restaurant_name__contains=keyword)[
-            offset: offset + int(limit)
+            offset : offset + int(limit)
         ]
     else:
-        restaurants = Restaurant.objects.all()[offset: offset + int(limit)]
+        restaurants = Restaurant.objects.all()[offset : offset + int(limit)]
     result = []
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)
