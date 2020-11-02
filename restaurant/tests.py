@@ -343,7 +343,8 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant.postcode,
         )
         record = model_to_dict(target_inspection)
-        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d")
+        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d %I:%M %p")
+
         self.assertEqual(latest_inspection, record)
 
     @mock.patch("restaurant.utils.InspectionRecords.objects.filter")
