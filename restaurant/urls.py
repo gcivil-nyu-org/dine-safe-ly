@@ -10,6 +10,6 @@ urlpatterns = [
         views.get_inspection_info,
         name="inspection_history",
     ),
-    path("browse/", views.get_landing_page, name="browse"),
-    path("browse/<page>", views.get_landing_page, name="browse"),
+    path("", views.get_landing_page, name="browse"),
+    path("<page>", views.get_landing_page, name="browse"),
 ]

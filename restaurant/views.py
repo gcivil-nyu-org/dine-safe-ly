@@ -8,13 +8,17 @@ from .utils import (
     get_restaurant_list,
 )
 
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 import logging
 
 logger = logging.getLogger(__name__)
+
+
+def index(request):
+    return HttpResponse("Hello, this is restaurant.")
 
 
 def get_restaurant_profile(request, restaurant_id):
