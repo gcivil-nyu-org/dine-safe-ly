@@ -74,10 +74,12 @@ def get_restaurant_list(
     offset = int(page) * int(limit)
     if keyword:
         restaurants = Restaurant.objects.filter(restaurant_name__contains=keyword)[
-            offset : offset + int(limit)
+            offset : offset + int(limit)  # noqa: E203
         ]
     else:
-        restaurants = Restaurant.objects.all()[offset : offset + int(limit)]
+        restaurants = Restaurant.objects.all()[
+            offset : offset + int(limit)  # noqa: E203
+        ]
     result = []
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)
