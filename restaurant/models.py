@@ -53,7 +53,7 @@ class UserQuestionnaire(models.Model):
     would_recommend = models.CharField(max_length=200)
 
     def __str__(self):
-        return "{} {} {} {} {} {} {}".format(
+        return "{} {} {} {} {} {}".format(
             self.restaurant_business_id,
             self.satisfaction_level,
             self.safety_level,
