@@ -46,8 +46,12 @@ for(var i = 0; i < List.length; i++)
     p.innerHTML = "Compliance Status";
 
     var span = document.createElement("span");
-    span.className = "badge badge-pill p-2 badge-secondary-light";
-    span.innerHTML = List[i].is_roadway_compliant;
+    if(List[i].is_roadway_compliant=="Compliant")
+      {span.className = "badge badge-pill p-2 badge-success-light";
+      span.innerHTML = List[i].is_roadway_compliant;}
+     else
+     {span.className = "badge badge-pill p-2 badge-danger-light";
+      span.innerHTML = List[i].is_roadway_compliant;}
 
     div1.appendChild(div2);
     div1.appendChild(p);
@@ -68,7 +72,10 @@ for(var i = 0; i < List.length; i++)
 
     var p_1 = document.createElement("p");
     p_1.className = "text-sm font-weight-bold";
-    p_1.innerHTML = List[i].skipped_reason;
+    if(List[i].skipped_reason=="nan")
+        {p_1.innerHTML = "-";}
+    else {p_1.innerHTML = List[i].skipped_reason;}
+
 
     div4.appendChild(h6_1);
     div4.appendChild(p_1);
