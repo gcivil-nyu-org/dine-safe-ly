@@ -335,7 +335,6 @@
 		var page = {{page | safe}};
 		var keyword_dict = {{ keyword | safe}};
 		var keyword = keyword_dict['keyword']
-		console.log(keyword)
 		for(var i = 0; i < 3; i++) {
 			document.getElementById("page" + i.toString()).innerHTML = (page + i).toString();
 			if (keyword != null) {
@@ -350,24 +349,20 @@
 			document.getElementById("prev").href = (page - 1).toString();
 		}
 		var List = {{restaurant_list | safe}};
-		console.log(List)
 		for(var i = 0; i < 6; i++) {
 			if(List[i]['yelp_info'] != null) {
 				if(List[i]['yelp_info']['image_url'] != null) {
-					console.log(List[i]['yelp_info']['image_url']);
 					document.getElementById("image" + i.toString()).style.backgroundImage = "url(" + List[i]['yelp_info']['image_url'] + ")";
 					document.getElementById("img" + i.toString()).href = "../profile/" + List[i]['id'];
 				}
 				if(List[i]['yelp_info']['categories'] != null) {
 					var categories_str = "";
 					for(var j = 0; j < List[i]['yelp_info']['categories'].length; j++) {
-						console.log(List[i]['yelp_info']['categories'][j]);
 						categories_str += List[i]['yelp_info']['categories'][j]['title'] + "\t";
 					}
 					document.getElementById("blue" + i.toString()).innerHTML = categories_str;
 				}
 				if(List[i]['yelp_info']['rating'] != null) {
-					console.log(List[i]['yelp_info']['rating']);
 					for(var r = 0; r < 5; r++) {
 						if(r > List[i]['yelp_info']['rating'] - 1) {
 							document.getElementById("star" + i.toString() + r.toString()).className = "fa fa-star text-gray-300";
@@ -377,11 +372,8 @@
 			} else {
 			  document.getElementById("img" + i.toString()).href = "../inspection_records/" + List[i]['id'];
 			}
-			console.log(List[i]['latest_record']['is_roadway_compliant'])
 			if(List[i]['latest_record'] != null) {
 				document.getElementById("status" + i.toString()).innerHTML = List[i]['latest_record']['is_roadway_compliant'];
-				//document.getElementById("compliance" + i.toString()).className = "far fa-check-circle fa-3x";
-				//document.getElementById("compliance" + i.toString()).style.color = "#FFFFFF"
 			}
 			document.getElementById("name" + i.toString()).innerHTML = List[i]['restaurant_name'];
 			document.getElementById("name" + i.toString()).href = "../" + List[i]['id'];

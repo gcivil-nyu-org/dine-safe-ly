@@ -76,7 +76,6 @@ def get_restaurant_list(page, limit, keyword=None, neighbourhoods_filter=None, c
         ]
     else:
         restaurants = Restaurant.objects.all()[offset: offset + int(limit)]
-    # restaurants = Restaurant.objects.all()[offset: offset + int(limit)]
     result = []
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)
