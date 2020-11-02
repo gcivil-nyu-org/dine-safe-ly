@@ -58,7 +58,6 @@ def get_cuisine(categories):
             return c["alias"]
         else:
             return category["category"]["parent_aliases"][0]
-        # break
 
 
 def save_yelp_restaurant_details():

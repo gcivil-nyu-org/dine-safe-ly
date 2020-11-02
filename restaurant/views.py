@@ -67,11 +67,13 @@ def get_landing_page(request, page=0):
     logger.debug(neighbourhoods_filter)
     logger.debug(categories_filter)
 
-    restaurant_list = get_restaurant_list(page, 6, keyword, neighbourhoods_filter, categories_filter)
-    logger.debug(keyword)
+    restaurant_list = get_restaurant_list(
+        page, 6, keyword, neighbourhoods_filter, categories_filter
+    )
+    logger.debug(restaurant_list)
     parameter_dict = {
         "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),
         "page": page,
-        "keyword": json.dumps({'keyword': keyword})
+        "keyword": json.dumps({"keyword": keyword}),
     }
     return render(request, "browse.html", parameter_dict)

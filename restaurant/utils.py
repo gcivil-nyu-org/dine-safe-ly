@@ -3,7 +3,6 @@ from django.forms.models import model_to_dict
 from .models import InspectionRecords, Restaurant
 import requests
 import json
-from django.db import connection
 
 
 def get_restaurant_info_yelp(business_id):
@@ -45,7 +44,7 @@ def get_latest_inspection_record(business_name, business_address, postcode):
     ).order_by("-inspected_on")
     if len(records) >= 1:
         record = model_to_dict(records[0])
-        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d %H:%M:%S")
+        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d %I:%M %p")
         return record
 
     return None
@@ -59,17 +58,25 @@ def query_inspection_record(business_name, business_address, postcode):
     ).order_by("-inspected_on")
     result = []
     for record in records:
-        result.append(model_to_dict(record))
-        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d %H:%M:%S")
+        inspection_record = model_to_dict(record)
+        inspection_record["inspected_on"] = inspection_record["inspected_on"].strftime(
+            "%Y-%m-%d %I:%M %p"
+        )
+        result.append(inspection_record)
+
     return result
 
 
-def get_restaurant_list(page, limit, keyword, neighbourhoods_filter, categories_filter):
+def get_restaurant_list(page, limit, keyword=None, neighbourhoods_filter=None, categories_filter=None):
+    page = int(page) - 1
     offset = int(page) * int(limit)
     if keyword:
-        restaurants = Restaurant.objects.filter(restaurant_name__contains=keyword)[offset: offset + int(limit)]
+        restaurants = Restaurant.objects.filter(restaurant_name__contains=keyword)[
+            offset: offset + int(limit)
+        ]
     else:
         restaurants = Restaurant.objects.all()[offset: offset + int(limit)]
+    # restaurants = Restaurant.objects.all()[offset: offset + int(limit)]
     result = []
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)
