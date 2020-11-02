@@ -39,3 +39,31 @@ class InspectionRecords(models.Model):
             self.postcode,
             self.business_address,
         )
+
+
+class YelpRestaurantDetails(models.Model):
+    business_id = models.CharField(max_length=200, primary_key=True)
+    neighborhood = models.CharField(max_length=200, default=None, null=True)
+    category = models.CharField(max_length=200, default=None, null=True)
+    price = models.CharField(max_length=200, default=None, null=True)
+    rating = models.CharField(max_length=200, default=None, null=True)
+    img_url = models.CharField(max_length=200, default=None, null=True)
+
+    def __str__(self):
+        return "{} {} {} {} {} {}".format(
+            self.business_id,
+            self.neighborhood,
+            self.category,
+            self.price,
+            self.rating,
+            self.img_url,
+        )
+
+
+class Zipcodes(models.Model):
+    zipcode = models.CharField(max_length=200, primary_key=True)
+    borough = models.CharField(max_length=200, default=None, null=True)
+    neighborhood = models.CharField(max_length=200, default=None, null=True)
+
+    def __str__(self):
+        return "{} {} {}".format(self.zipcode, self.borough, self.neighborhood)

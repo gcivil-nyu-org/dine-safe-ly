@@ -1,5 +1,6 @@
 [flake8]
-max-line-length = 88
+max-line-length = 92
 per-file-ignores =
     restaurant/migrations/*:E501
+    neighborhoodmap.py:E501, E402
 

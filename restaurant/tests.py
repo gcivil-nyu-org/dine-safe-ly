@@ -300,7 +300,7 @@ class RestaurantUtilsTests(TestCase):
         )
         mock_get_latest_inspection_record.return_value = model_dict
         mock_get_yelp_info.return_value = {"id": "WavvLdfdP6g8aZTtbBQHTw"}
-        data = get_restaurant_list(0, 1)
+        data = get_restaurant_list(1, 1)
         self.assertEqual(data[0]["yelp_info"], {"id": "WavvLdfdP6g8aZTtbBQHTw"})
         self.assertEqual(data[0]["latest_record"], model_dict)
 
@@ -343,7 +343,8 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant.postcode,
         )
         record = model_to_dict(target_inspection)
-        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d %H:%M:%S")
+        record["inspected_on"] = record["inspected_on"].strftime("%Y-%m-%d %I:%M %p")
+
         self.assertEqual(latest_inspection, record)
 
     @mock.patch("restaurant.utils.InspectionRecords.objects.filter")

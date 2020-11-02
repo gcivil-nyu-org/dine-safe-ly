@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="{% static 'css/custom.0a822280.css' %}">
     <!-- Favicon-->
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
+    <!-- Price Slider-->
+    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-6/vendor/nouislider/nouislider.min.js"></script>
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -44,13 +46,13 @@
     <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="container-fluid">
             <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="/restaurant/browse/1"><h3>Dine Safe.ly</h3></a>
-                <!--                <form class="form-inline d-none d-sm-flex" action="#" id="search">-->
-                <!--                    <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">-->
-                <!--                        <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>-->
-                <!--                        <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search" placeholder="Search" aria-label="Search">-->
-                <!--                        <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"></i></button>-->
-                <!--                    </div>-->
-                <!--                </form>-->
+                                <form class="form-inline d-none d-sm-flex" action="#" id="search">
+                                    <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
+                                        <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
+                                        <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search" placeholder="Search" aria-label="Search">
+                                        <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"></i></button>
+                                    </div>
+                                </form>
             </div>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <!-- Navbar Collapse -->
@@ -63,34 +65,26 @@
                     </div>
                 </form>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle " id="homeDropdownMenuLink" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Restaurant</a>
-                        <div class="dropdown-menu" aria-labelledby="homeDropdownMenuLink">
-                            <a class="dropdown-item" href="/restaurant/browse/1">Restaurant List</a>
-                            <a class="dropdown-item" href="/restaurant/inspection_records/{{ restaurant_id }}">Inspection History</a>
-                            <a class="dropdown-item" href="/restaurant/profile/{{ restaurant_id }}">Restaurant details</a>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'restaurant:browse' %}">Restaurants</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="/">About Us</a> </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " id="docsDropdownMenuLink" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi {{user.username}}</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="docsDropdownMenuLink">
+                            <h6 class="dropdown-header font-weight-normal">User</h6>
+                            <a class="dropdown-item" href="#">Update Profile </a>
+                            <a class="dropdown-item" href="#">Update Password </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <h6 class="dropdown-header font-weight-normal">Account</h6>
+                            <a class="dropdown-item" href="{% url 'user:logout' %}">Logout </a>
                         </div>
                     </li>
-<!--                    Megamenu Start-->
-<!--                    Megamenu End-->
-<!--                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a> </li>-->
-<!--                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle " id="docsDropdownMenuLink" href="index.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                        Docs</a>-->
-<!--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="docsDropdownMenuLink">-->
-<!--                            <h6 class="dropdown-header font-weight-normal">Documentation</h6><a class="dropdown-item" href="docs/docs-introduction.html">Introduction </a><a class="dropdown-item" href="docs/docs-directory-structure.html">Directory structure </a><a class="dropdown-item" href="docs/docs-gulp.html">Gulp </a><a class="dropdown-item" href="docs/docs-customizing-css.html">Customizing CSS </a><a class="dropdown-item" href="docs/docs-credits.html">Credits </a><a class="dropdown-item" href="docs/docs-changelog.html">Changelog </a>-->
-<!--                            <div class="dropdown-divider"></div>-->
-<!--                            <h6 class="dropdown-header font-weight-normal">Components</h6><a class="dropdown-item" href="docs/components-bootstrap.html">Bootstrap </a><a class="dropdown-item" href="docs/components-directory.html">Theme </a> </div>-->
-<!--                    </li>-->
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle " id="homeDropdownMenuLink" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Hi {{user.username}}</a>
-                        <div class="dropdown-menu" aria-labelledby="homeDropdownMenuLink">
-                            <a class="dropdown-item" href="/user/logout">Logout</a></a>
-                         </div>
-                    </li>
                     {% else %}
-                    <li class="nav-item"><a class="nav-link" href="/user/login">Log in</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/user/register">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user:login' %}">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user:register' %}">Register</a></li>
                     {% endif %}
 <!--                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="user-add-0.html">Add a listing</a></li>-->
                 </ul>

@@ -27,16 +27,16 @@ def match_on_yelp(restaurant_name, restaurant_location):
     state = "NY"
     country = "US"
 
-    YELP_ACCESS_TOKE = (
-        "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"
-        "-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq"
-        "-R_mEX3Yx "
-    )
     # YELP_ACCESS_TOKE = (
-    #     "A_V_V4rxelsvDsI2uFW1kT2mP2lUjd75GTEEsEcLnnvVOK5ssemrbw"
-    #     "-R49czpANtS2ZtAeCl6FaapQrp1_30cRt9YKao3pFL1I6304sAtwKwKJk"
-    #     "F1JBgF88FZl1_X3Yx "
+    #     "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"
+    #     "-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq"
+    #     "-R_mEX3Yx "
     # )
+    YELP_ACCESS_TOKE = (
+        "A_V_V4rxelsvDsI2uFW1kT2mP2lUjd75GTEEsEcLnnvVOK5ssemrbw"
+        "-R49czpANtS2ZtAeCl6FaapQrp1_30cRt9YKao3pFL1I6304sAtwKwKJk"
+        "F1JBgF88FZl1_X3Yx "
+    )
     headers = {"Authorization": "Bearer %s" % YELP_ACCESS_TOKE}
     url = "https://api.yelp.com/v3/businesses/matches"
     params = {
