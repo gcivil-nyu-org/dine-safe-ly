@@ -119,7 +119,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-# Yelp:
+# Yelp business api:
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
 YELP_ACCESS_TOKE = (
     "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"
@@ -127,6 +127,7 @@ YELP_ACCESS_TOKE = (
     "-R_mEX3Yx "
 )
 
+# Yelp categories
 YELP_CATEGORY_API = "https://api.yelp.com/v3/categories/"
 YELP_ACESS_TOKEN_BETA = (
     "Rp2eX_CuQVgaBc0Zk3sKRbFroy_s3_4eUtnNutojHg2G745uXH6-IakxKebxmc"
