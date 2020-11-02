@@ -47,10 +47,16 @@ class YelpRestaurantDetails(models.Model):
     category = models.CharField(max_length=200, default=None, null=True)
     price = models.CharField(max_length=200, default=None, null=True)
     rating = models.CharField(max_length=200, default=None, null=True)
+    img_url = models.CharField(max_length=200, default=None, null=True)
 
     def __str__(self):
-        return "{} {} {} {} {}".format(
-            self.business_id, self.neighborhood, self.category, self.price, self.rating
+        return "{} {} {} {} {} {}".format(
+            self.business_id,
+            self.neighborhood,
+            self.category,
+            self.price,
+            self.rating,
+            self.img_url,
         )
 
 

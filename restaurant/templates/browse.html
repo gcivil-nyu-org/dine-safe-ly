@@ -8,12 +8,12 @@
   </div>
   <div class="row">
     <div class="col-lg-3 pt-3">
-      <form class="pr-xl-3" action="GET">
+      <form class="pr-xl-3" action="" method="GET">
         <div class="mb-4">
-          <label class="form-label" for="form_search">Keyword</label>
+          <label class="form-label" for="form_search">Search by restaurant name</label>
           <div class="input-label-absolute input-label-absolute-right">
             <div class="label-absolute"><i class="fa fa-search"></i></div>
-            <input class="form-control pr-4" type="search" name="search" placeholder="Keywords" id="form_search"> </div>
+            <input class="form-control pr-4" type="search" name="search" placeholder="Restaurant Name" id="form_search" >  </div>
         </div>
         <div class="mb-4">
           <label class="form-label" for="form_neighbourhood">Neighbourhood</label>
@@ -132,16 +132,16 @@
               </div>
             </div>
           </div>
-            <div class="mb-4">
-              <label class="form-label">Price</label>
-              <div class="text-primary" id="slider-snap"></div>
-              <div class="nouislider-values">
-                <div class="min">From $<span id="slider-snap-value-from"></span></div>
-                <div class="max">To $<span id="slider-snap-value-to"></span></div>
-              </div>
-              <input type="hidden" name="pricefrom" id="slider-snap-input-from" value="$">
-              <input type="hidden" name="priceto" id="slider-snap-input-to" value="$$$$">
-            </div>
+<!--            <div class="mb-4">-->
+<!--              <label class="form-label">Price</label>-->
+<!--              <div class="text-primary" id="slider-snap"></div>-->
+<!--              <div class="nouislider-values">-->
+<!--                <div class="min">From $<span id="slider-snap-value-from"></span></div>-->
+<!--                <div class="max">To $<span id="slider-snap-value-to"></span></div>-->
+<!--              </div>-->
+<!--              <input type="hidden" name="pricefrom" id="slider-snap-input-from" value="$">-->
+<!--              <input type="hidden" name="priceto" id="slider-snap-input-to" value="$$$$">-->
+<!--            </div>-->
 <!--          <div class="mb-4">-->
 <!--            <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>-->
 <!--          </div>-->
@@ -332,35 +332,37 @@
       </nav>
     </div>
     <script>
-		var page = {{page | safe}}
+		var page = {{page | safe}};
+		var keyword_dict = {{ keyword | safe}};
+		var keyword = keyword_dict['keyword']
 		for(var i = 0; i < 3; i++) {
-			console.log(i.toString());
 			document.getElementById("page" + i.toString()).innerHTML = (page + i).toString();
-			document.getElementById("page" + i.toString()).href = (page + i).toString();
+			if (keyword != null) {
+			  document.getElementById("page" + i.toString()).href = (page + i).toString() + "?search=" + keyword;
+			} else {
+			  document.getElementById("page" + i.toString()).href = (page + i).toString();
+			}
+
 		}
 		document.getElementById("next").href = (page + 1).toString();
-		if(page > 0) {
+		if(page > 1) {
 			document.getElementById("prev").href = (page - 1).toString();
 		}
 		var List = {{restaurant_list | safe}};
 		for(var i = 0; i < 6; i++) {
-			console.log(List[i]['restaurant_name']);
 			if(List[i]['yelp_info'] != null) {
 				if(List[i]['yelp_info']['image_url'] != null) {
-					console.log(List[i]['yelp_info']['image_url']);
 					document.getElementById("image" + i.toString()).style.backgroundImage = "url(" + List[i]['yelp_info']['image_url'] + ")";
 					document.getElementById("img" + i.toString()).href = "../profile/" + List[i]['id'];
 				}
 				if(List[i]['yelp_info']['categories'] != null) {
 					var categories_str = "";
 					for(var j = 0; j < List[i]['yelp_info']['categories'].length; j++) {
-						console.log(List[i]['yelp_info']['categories'][j]);
 						categories_str += List[i]['yelp_info']['categories'][j]['title'] + "\t";
 					}
 					document.getElementById("blue" + i.toString()).innerHTML = categories_str;
 				}
 				if(List[i]['yelp_info']['rating'] != null) {
-					console.log(List[i]['yelp_info']['rating']);
 					for(var r = 0; r < 5; r++) {
 						if(r > List[i]['yelp_info']['rating'] - 1) {
 							document.getElementById("star" + i.toString() + r.toString()).className = "fa fa-star text-gray-300";
@@ -370,41 +372,38 @@
 			} else {
 			  document.getElementById("img" + i.toString()).href = "../inspection_records/" + List[i]['id'];
 			}
-			console.log(List[i]['latest_record']['is_roadway_compliant'])
 			if(List[i]['latest_record'] != null) {
 				document.getElementById("status" + i.toString()).innerHTML = List[i]['latest_record']['is_roadway_compliant'];
-				//document.getElementById("compliance" + i.toString()).className = "far fa-check-circle fa-3x";
-				//document.getElementById("compliance" + i.toString()).style.color = "#FFFFFF"
 			}
 			document.getElementById("name" + i.toString()).innerHTML = List[i]['restaurant_name'];
 			document.getElementById("name" + i.toString()).href = "../" + List[i]['id'];
 		}
 		</script>
     <script>
-      var snapSlider = document.getElementById('slider-snap');
+<!--      var snapSlider = document.getElementById('slider-snap');-->
 
-      noUiSlider.create(snapSlider, {
-          start: [ 40, 450 ],
-          snap: false,
-          connect: true,
-          step: 1,
-          range: {
-              'min': 40,
-              'max': 450
-          }
-      });
-      var snapValues = [
-          document.getElementById('slider-snap-value-from'),
-          document.getElementById('slider-snap-value-to')
-      ];
-      var inputValues = [
-          document.getElementById('slider-snap-input-from'),
-          document.getElementById('slider-snap-input-to')
-      ];
-      snapSlider.noUiSlider.on('update', function( values, handle ) {
-          snapValues[handle].innerHTML = values[handle];
-          inputValues[handle].value = values[handle];
-      })
+<!--      noUiSlider.create(snapSlider, {-->
+<!--          start: [ 40, 450 ],-->
+<!--          snap: false,-->
+<!--          connect: true,-->
+<!--          step: 1,-->
+<!--          range: {-->
+<!--              'min': 40,-->
+<!--              'max': 450-->
+<!--          }-->
+<!--      });-->
+<!--      var snapValues = [-->
+<!--          document.getElementById('slider-snap-value-from'),-->
+<!--          document.getElementById('slider-snap-value-to')-->
+<!--      ];-->
+<!--      var inputValues = [-->
+<!--          document.getElementById('slider-snap-input-from'),-->
+<!--          document.getElementById('slider-snap-input-to')-->
+<!--      ];-->
+<!--      snapSlider.noUiSlider.on('update', function( values, handle ) {-->
+<!--          snapValues[handle].innerHTML = values[handle];-->
+<!--          inputValues[handle].value = values[handle];-->
+<!--      })-->
     </script>
   </div>
 </div>
