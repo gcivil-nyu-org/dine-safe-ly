@@ -1,14 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_text
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.core.mail import EmailMessage
-
-from .forms import UserCreationForm, ResetPasswordForm, GetEmailForm
+from .utils import send_reset_password_email
+from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
 
 import logging
 
@@ -23,7 +22,6 @@ def user_login(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            print(username, password)
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -49,10 +47,35 @@ def register(request):
     )
 
 
-# @login_required
 def post_logout(request):
     logout(request)
     return redirect("user:login")
+
+
+def update_password(request):
+    if not request.user.is_authenticated:
+        return redirect("restaurant:browse")
+
+    if request.method == "POST":
+        user = request.user
+        if not user:
+            return HttpResponse("This is invalid!")
+        form = UpdatePasswordForm(user=user, data=request.POST)
+        if form.is_valid():
+            form.save(user)
+            return redirect("user:login")
+        return render(
+            request=request,
+            template_name="update_password.html",
+            context={"form": form},
+        )
+    else:
+        form = ResetPasswordForm()
+        return render(
+            request=request,
+            template_name="update_password.html",
+            context={"form": form},
+        )
 
 
 def reset_password_link(request, base64_id, token):
@@ -61,11 +84,9 @@ def reset_password_link(request, base64_id, token):
         uid = force_text(urlsafe_base64_decode(base64_id))
 
         user = User.objects.get(pk=uid)
-        print(user)
         if not user or not PasswordResetTokenGenerator().check_token(user, token):
             return HttpResponse("This is invalid!")
         form = ResetPasswordForm(request.POST)
-        print(form)
         if form.is_valid():
             form.save(uid)
             return redirect("user:login")
@@ -81,22 +102,9 @@ def reset_password_link(request, base64_id, token):
 def forget_password(request):
     if request.method == "POST":
         form = GetEmailForm(request.POST)
-        print(form)
         if form.is_valid():
-            email = form.cleaned_data.get("email")
-            user = User.objects.get(email=email)
-            host_name = request.get_host()
-            base_url = "http://" + host_name + "/user/reset_password/"
-            url = (
-                base_url
-                + urlsafe_base64_encode(force_bytes(user.pk))
-                + "/"
-                + PasswordResetTokenGenerator().make_token(user)
-            )
-            email_subject = "Reset Your Dine-safe-ly Password!"
-            message = url
-            email = EmailMessage(email_subject, message, to=[user.email])
-            email.send()
+            # TODO: Check the django reset password form
+            send_reset_password_email(request, form.cleaned_data.get("email"))
             return render(request=request, template_name="sent_email.html")
         return render(
             request=request, template_name="reset_email.html", context={"form": form}

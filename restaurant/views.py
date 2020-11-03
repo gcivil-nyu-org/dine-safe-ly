@@ -70,7 +70,7 @@ def get_landing_page(request, page=1):
     restaurant_list = get_restaurant_list(
         page, 6, keyword, neighbourhoods_filter, categories_filter
     )
-    logger.debug(restaurant_list)
+
     parameter_dict = {
         "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),
         "page": page,
