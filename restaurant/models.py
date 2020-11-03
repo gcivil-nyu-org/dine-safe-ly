@@ -46,17 +46,25 @@ class YelpRestaurantDetails(models.Model):
     neighborhood = models.CharField(max_length=200, default=None, null=True)
     category = models.CharField(max_length=200, default=None, null=True)
     price = models.CharField(max_length=200, default=None, null=True)
-    rating = models.CharField(max_length=200, default=None, null=True)
+    rating = models.FloatField(blank=True, default=0.0, null=True)
     img_url = models.CharField(max_length=200, default=None, null=True)
+    latitude = models.DecimalField(
+        max_digits=17, decimal_places=14, blank=True, default=0
+    )
+    longitude = models.DecimalField(
+        max_digits=17, decimal_places=14, blank=True, default=0
+    )
 
     def __str__(self):
-        return "{} {} {} {} {} {}".format(
+        return "{} {} {} {} {} {} {} {}".format(
             self.business_id,
             self.neighborhood,
             self.category,
             self.price,
             self.rating,
             self.img_url,
+            self.latitude,
+            self.longitude,
         )
 
 
