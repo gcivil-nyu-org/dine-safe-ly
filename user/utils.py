@@ -21,6 +21,7 @@ def send_reset_password_email(request, email):
     )
     email_subject = "Reset Your Dine-safe-ly Password!"
     message = url
+    logger.info("Send email to: %s", user.email)
     email = EmailMessage(email_subject, message, to=[user.email])
-    email.send()
-    logger.info("Send email to: ", email)
+    return email.send()
+

@@ -1,12 +1,14 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from .forms import UserCreationForm, ResetPasswordForm
+from .utils import send_reset_password_email
 from django.test import Client
 
 # from unittest import mock
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_bytes
+from unittest import mock
 
 # Create your tests here.
 
@@ -174,3 +176,24 @@ class TestUserLoginView(BaseTest):
             "/user/login", {"username": "myuser", "password": "pass123"}
         )
         self.assertEqual(response.status_code, 200)
+
+
+class TestUtils(BaseTest):
+
+    class MockRequest:
+        host_name = 'localhost'
+
+        def get_host(self):
+            return self.host_name
+
+    credentials = {
+        "username": "myuser17",
+        "email": "cx608@nyu.edu",
+        "password": "pass123",
+    }
+
+    def test_send_reset_password_email(self):
+        user = User.objects.create_user(**self.credentials)
+        self.assertEqual(send_reset_password_email(self.MockRequest(), user.email), 1)
+
+
