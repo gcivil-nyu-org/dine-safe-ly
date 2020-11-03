@@ -154,13 +154,13 @@ LOGGING = {
     "handlers": {
         "console": {"class": "logging.StreamHandler", "formatter": "console"},
         "file": {
-            "level": "DEBUG",
+            "level": "INFO",
             "class": "logging.FileHandler",
             "formatter": "file",
             "filename": BASE_DIR / "logs/debug.log",
         },
     },
-    "loggers": {"": {"level": "DEBUG", "handlers": ["console", "file"]}},
+    "loggers": {"": {"level": "INFO", "handlers": ["console", "file"]}},
 }
 
 LOGOUT_REDIRECT_URL = "browse"
