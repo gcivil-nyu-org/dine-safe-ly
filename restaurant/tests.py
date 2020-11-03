@@ -11,6 +11,7 @@ from .utils import (
     query_yelp,
     get_latest_inspection_record,
     get_restaurant_list,
+    get_filtered_restaurants,
 )
 
 # from getinspection import (
@@ -52,6 +53,21 @@ def create_inspection_records(
         is_roadway_compliant=is_roadway_compliant,
         skipped_reason=skipped_reason,
         inspected_on=inspected_on,
+    )
+
+
+def create_yelp_restaurant_details(
+    business_id, neighborhood, category, price, rating, img_url, latitude, longitude
+):
+    return YelpRestaurantDetails.objects.create(
+        business_id=business_id,
+        neighborhood=neighborhood,
+        category=category,
+        price=price,
+        rating=rating,
+        img_url=img_url,
+        latitude=latitude,
+        longitude=longitude,
     )
 
 
@@ -407,6 +423,41 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant.postcode,
         )
         self.assertEqual(latest_inspection, None)
+
+
+class GetFilteredRestaurantsTests(TestCase):
+    """ Test Filter Restaurants module"""
+
+    def test_get_filtered_restaurants(self):
+        business_id = "WavvLdfdP6g8aZTtbBQHTw"
+        neighborhood = "Upper East Side"
+        category = "italian"
+        price = "$$"
+        rating = 4.0
+        img_url = "https://s3-media1.fl.yelpcdn.com/bphoto/C4emY32GDusdMCybR6NmpQ/o.jpg"
+        latitude = 40.8522129
+        longitude = -73.8290069
+        page = 1
+        limit = 4
+
+        details = create_yelp_restaurant_details(
+            business_id,
+            neighborhood,
+            category,
+            price,
+            rating,
+            img_url,
+            latitude,
+            longitude,
+        )
+        filtered_restaurants = get_filtered_restaurants(
+            ["$$"], ["Upper East Side"], 2.0, ["italian"], page, limit
+        )
+        print(details)
+        print("hello")
+        print(filtered_restaurants)
+
+        self.assertEqual(details.business_id, filtered_restaurants[0].business_id)
 
 
 class GetInspectionDataTests(TestCase):
