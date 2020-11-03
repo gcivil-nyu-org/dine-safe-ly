@@ -453,9 +453,6 @@ class GetFilteredRestaurantsTests(TestCase):
         filtered_restaurants = get_filtered_restaurants(
             ["$$"], ["Upper East Side"], 2.0, ["italian"], page, limit
         )
-        print(details)
-        print("hello")
-        print(filtered_restaurants)
 
         self.assertEqual(details.business_id, filtered_restaurants[0].business_id)
 
