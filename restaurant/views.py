@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import Restaurant
 from .forms import QuestionnaireForm
 from .utils import (
@@ -23,6 +23,16 @@ def index(request):
 
 
 def get_restaurant_profile(request, restaurant_id):
+    if request.method == "POST":
+        form = QuestionnaireForm(request.POST)
+        if form.is_valid():
+            print("form is saved")
+            form.save()
+        else:
+            print("form is invalid")
+
+    # return render(request, "restaurant_detail.html", context={"form": form})
+    # if request.method == "GET":
     try:
         restaurant = Restaurant.objects.get(pk=restaurant_id)
         response_yelp = query_yelp(restaurant.business_id)
@@ -34,22 +44,13 @@ def get_restaurant_profile(request, restaurant_id):
             "lasted_inspection": latest_inspection,
             "restaurant_id": restaurant_id,
         }
+
         return render(request, "restaurant_detail.html", parameter_dict)
     except Restaurant.DoesNotExist:
         logger.warning("Restaurant ID could not be found: {}".format(restaurant_id))
         return HttpResponseNotFound(
             "Restaurant ID {} does not exist".format(restaurant_id)
         )
-
-
-def save_feedback(request):
-    if request.method == "POST":
-        form = QuestionnaireForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(request.build_absolute_uri())
-    form = QuestionnaireForm()
-    return render(request, "restaurant_detail.html", context={"form": form})
 
 
 def get_inspection_info(request, restaurant_id):

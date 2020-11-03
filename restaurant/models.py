@@ -43,16 +43,14 @@ class InspectionRecords(models.Model):
 
 class UserQuestionnaire(models.Model):
     # the restaurant the feedback is for
-    restaurant_business_id = models.CharField(
-        max_length=200, null=False, primary_key=True
-    )
+    restaurant_business_id = models.CharField(max_length=200, null=False)
     safety_level = models.CharField(max_length=1)
 
-    temperature_required = models.BooleanField(null=False, default="False")
-    contact_info_required = models.BooleanField(null=False, default="False")
-    employee_mask = models.BooleanField(null=False, default="False")
-    capacity_compliant = models.BooleanField(null=False, default="False")
-    distance_compliant = models.BooleanField(null=False, default="False")
+    temperature_required = models.CharField(max_length=5, null=False, default="False")
+    contact_info_required = models.CharField(max_length=5, null=False, default="False")
+    employee_mask = models.CharField(max_length=5, null=False, default="False")
+    capacity_compliant = models.CharField(max_length=5, null=False, default="False")
+    distance_compliant = models.CharField(max_length=5, null=False, default="False")
 
     def __str__(self):
         return "{} {} {} {} {} {}".format(

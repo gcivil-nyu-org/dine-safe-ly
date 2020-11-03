@@ -63,53 +63,54 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <form class="form-validate" method="post">
+              <form class="form-validate" method="POST">
                 {% csrf_token %}
                 <div class="modal-body">
                   <h2>For this restaurant:</h2>
+                  <input type="text" id="restaurant_business_id" name="restaurant_business_id" value="" hidden>
                   <br>
                   <p>Did you receive a temperature check?</p>
-                  <div class="rate">
-                    <input type="radio" id="star1" name="body_temp" value=true />
+                  <div class="form-group">
+                    <input type="radio" id="star1" name="temperature_required" value="true" />
                     <label for="star1" title="text">Yes</label>
-                    <input type="radio" id="star2" name="body_temp" value=false />
+                    <input type="radio" id="star2" name="temperature_required" value="false" />
                     <label for="star2" title="text">No</label>
                   </div>
                   <br>
                   <p>Were you or a member of your party required to provide contact tracing information?</p>
-                  <div class="rate">
-                    <input type="radio" name="contact_info" value=true />
+                  <div class="form-group">
+                    <input type="radio" name="contact_info_required" value="true" />
                     <label for="star1" title="text">Yes</label>
-                    <input type="radio" name="contact_info" value=false />
+                    <input type="radio" name="contact_info_required" value="false" />
                     <label for="star2" title="text">No</label>
                   </div>
                   <br>
                   <p>Were restaurant staff wearing masks at all times?</p>
-                  <div class="rate">
-                    <input type="radio" name="employee_mask" value=true />
+                  <div class="form-group">
+                    <input type="radio" name="employee_mask" value="true" />
                     <label for="star1" title="text">Yes</label>
-                    <input type="radio" name="employee_mask" value=false />
+                    <input type="radio" name="employee_mask" value="false" />
                     <label for="star2" title="text">No</label>
                   </div>
                   <br>
                   <p>Was in-door capacity under 25%?</p>
-                  <div class="rate">
-                    <input type="radio" name="capacity" value=true />
+                  <div class="form-group">
+                    <input type="radio" name="capacity_compliant" value="true" />
                     <label for="star1" title="text">Yes</label>
-                    <input type="radio" name="capacity" value=false />
+                    <input type="radio" name="capacity_compliant" value="false" />
                     <label for="star2" title="text">No</label>
                   </div>
                   <br>
                   <p>Were you seated at least 6 feet from the nearest party?</p>
-                  <div class="rate">
-                    <input type="radio" name="distance" value=true />
+                  <div class="form-group">
+                    <input type="radio" name="distance_compliant" value="true" />
                     <label for="star1" title="text">Yes</label>
-                    <input type="radio" name="distance" value=false />
+                    <input type="radio" name="distance_compliant" value="false" />
                     <label for="star2" title="text">No</label>
                   </div>
                   <br>
                   <p>How would you rate the safety level for this restaurant?</p>
-                  <div class="rate">
+                  <div class="form-group">
                     <input type="radio" name="safety_level" value="1" />
                     <label for="star1" title="text">1</label>
                     <input type="radio" name="safety_level" value="2" />
@@ -125,7 +126,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button class="btn btn-primary" type="submit">Save changes</button>
+                  <button class="btn btn-primary" type="submit" >Save changes</button>
                 </div>
               </form>
             </div>
@@ -438,5 +439,8 @@ function initMap() {
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&callback=initMap"
         type="text/javascript"></script>
+<script>
+  document.getElementById("restaurant_business_id").value= yelp_info.id ;
+</script>
 
 {% endblock %}
