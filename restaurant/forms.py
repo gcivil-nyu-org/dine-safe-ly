@@ -16,7 +16,7 @@ class QuestionnaireForm(forms.Form):
     distance_compliant = forms.CharField(label="distance")
 
     def __str__(self):
-        return "{} {} {} {} {} {}".format(
+        return "{} {} {} {} {} {} {}".format(
             self.restaurant_business_id,
             self.safety_level,
             self.temperature_required,
