@@ -2,5 +2,6 @@
 max-line-length = 92
 per-file-ignores =
     restaurant/migrations/*:E501
+    restaurant/tests.py:E501
     neighborhoodmap.py:E501, E402
 

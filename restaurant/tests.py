@@ -2,7 +2,7 @@ from django.test import RequestFactory, TestCase
 from django.forms.models import model_to_dict
 from datetime import datetime
 from unittest import mock
-from .models import Restaurant, InspectionRecords
+from .models import Restaurant, InspectionRecords, YelpRestaurantDetails, Zipcodes
 from .views import get_inspection_info, get_landing_page, get_restaurant_profile
 from .utils import (
     merge_yelp_info,
@@ -104,6 +104,48 @@ class ModelTests(TestCase):
             "27555 blah blah Compliant Nan 2020-10-24 17:36:00 "
             "11101 somewhere in LIC",
         )
+
+    def test_yelp_restaurant_details(self):
+        details = YelpRestaurantDetails(
+            business_id="WavvLdfdP6g8aZTtbBQHTw",
+            neighborhood="Upper East Side",
+            category="italian",
+            price="$$",
+            rating=4.0,
+            img_url="https://s3-media1.fl.yelpcdn.com/bphoto/C4emY32GDusdMCybR6NmpQ/o.jpg",
+            latitude=40.8522129,
+            longitude=-73.8290069,
+        )
+
+        self.assertIsNotNone(details)
+        self.assertEqual(details.business_id, "WavvLdfdP6g8aZTtbBQHTw")
+        self.assertEqual(details.neighborhood, "Upper East Side")
+        self.assertEqual(details.category, "italian")
+        self.assertEqual(details.price, "$$")
+        self.assertEqual(details.rating, 4.0)
+        self.assertEqual(
+            details.img_url,
+            "https://s3-media1.fl.yelpcdn.com/bphoto/C4emY32GDusdMCybR6NmpQ/o.jpg",
+        )
+        self.assertEqual(details.latitude, 40.8522129)
+        self.assertEqual(details.longitude, -73.8290069)
+        self.assertEqual(
+            str(details),
+            "WavvLdfdP6g8aZTtbBQHTw Upper East Side italian $$ 4.0 https://s3-media1.fl.yelpcdn.com/bphoto/C4emY32GDusdMCybR6NmpQ/o.jpg 40.8522129 -73.8290069",
+        )
+
+    def test_create_zipcodes(self):
+        neigbourhood_map = Zipcodes(
+            zipcode="11220",
+            borough="Brooklyn",
+            neighborhood="Sunset Park",
+        )
+
+        self.assertIsNotNone(neigbourhood_map)
+        self.assertEqual(neigbourhood_map.zipcode, "11220")
+        self.assertEqual(neigbourhood_map.borough, "Brooklyn")
+        self.assertEqual(neigbourhood_map.neighborhood, "Sunset Park")
+        self.assertEqual(str(neigbourhood_map), "11220 Brooklyn Sunset Park")
 
 
 class InspectionRecordsViewTests(TestCase):

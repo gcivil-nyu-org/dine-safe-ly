@@ -98,7 +98,7 @@ def get_restaurant_list(
 
 def get_filtered_restaurants(price, neighborhood, rating, category, page, limit):
     filters = {}
-
+    offset = int(page-1)*int(limit)
     if price:
         filters["price__in"] = price
     if neighborhood:
@@ -108,5 +108,5 @@ def get_filtered_restaurants(price, neighborhood, rating, category, page, limit)
     if category:
         filters["category__in"] = category
 
-    filtered_restaurants = YelpRestaurantDetails.objects.filter(**filters)
+    filtered_restaurants = YelpRestaurantDetails.objects.filter(**filters)[offset:offset+int(limit)]
     return filtered_restaurants
