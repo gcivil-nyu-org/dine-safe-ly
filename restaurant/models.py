@@ -49,10 +49,10 @@ class YelpRestaurantDetails(models.Model):
     rating = models.FloatField(blank=True, default=0.0, null=True)
     img_url = models.CharField(max_length=200, default=None, null=True)
     latitude = models.DecimalField(
-        max_digits=9, decimal_places=14, blank=True, default=0
+        max_digits=17, decimal_places=14, blank=True, default=0
     )
     longitude = models.DecimalField(
-        max_digits=9, decimal_places=14, blank=True, default=0
+        max_digits=17, decimal_places=14, blank=True, default=0
     )
 
     def __str__(self):
