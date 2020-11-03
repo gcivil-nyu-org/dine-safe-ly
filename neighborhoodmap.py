@@ -54,10 +54,54 @@ def get_cuisine(categories):
 
     for c in categories:
         category = get_restaurant_category_yelp(c["alias"])
-        if category["category"]["parent_aliases"][0] == "restaurants":
+        if (
+            not category["category"]["parent_aliases"]
+            or category["category"]["parent_aliases"][0] == "restaurants"
+        ):
             return c["alias"]
         else:
             return category["category"]["parent_aliases"][0]
+
+
+def validate_fields(restaurant_info):
+    keys = [
+        "neighborhood",
+        "category",
+        "price",
+        "rating",
+        "latitude",
+        "longitude",
+        "img_url",
+    ]
+    restaurant_data = dict.fromkeys(keys)
+
+    if "info" in restaurant_info.keys():
+        if "price" in restaurant_info["info"].keys():
+            restaurant_data["price"] = restaurant_info["info"]["price"]
+        if "rating" in restaurant_info["info"].keys():
+            restaurant_data["rating"] = restaurant_info["info"]["rating"]
+        if "image_url" in restaurant_info["info"].keys():
+            restaurant_data["img_url"] = restaurant_info["info"]["image_url"]
+        if "coordinates" in restaurant_info["info"].keys():
+            if "latitude" in restaurant_info["info"]["coordinates"].keys():
+                restaurant_data["latitude"] = restaurant_info["info"]["coordinates"][
+                    "latitude"
+                ]
+            if "latitude" in restaurant_info["info"]["coordinates"].keys():
+                restaurant_data["longitude"] = restaurant_info["info"]["coordinates"][
+                    "longitude"
+                ]
+        if "location" in restaurant_info["info"].keys():
+            if "zip_code" in restaurant_info["info"]["location"].keys():
+                restaurant_data["neighborhood"] = get_neighbourhood(
+                    restaurant_info["info"]["location"]["zip_code"]
+                )
+        if "categories" in restaurant_info["info"].keys():
+            restaurant_data["category"] = get_cuisine(
+                restaurant_info["info"]["categories"]
+            )
+
+    return restaurant_data
 
 
 def save_yelp_restaurant_details():
@@ -66,18 +110,20 @@ def save_yelp_restaurant_details():
         try:
             if r.business_id:
                 restaurant_info = query_yelp(r.business_id)
-                area = get_neighbourhood(
-                    restaurant_info["info"]["location"]["zip_code"]
-                )
-                cuisine = get_cuisine(restaurant_info["info"]["categories"])
+
+                restaurant_data = validate_fields(restaurant_info)
 
                 details = YelpRestaurantDetails(
                     business_id=r.business_id,
-                    neighborhood=area,
-                    category=cuisine,
-                    price=restaurant_info["info"]["price"],
-                    rating=restaurant_info["info"]["rating"],
+                    neighborhood=restaurant_data["neighborhood"],
+                    category=restaurant_data["category"],
+                    price=restaurant_data["price"],
+                    rating=restaurant_data["rating"],
+                    img_url=restaurant_data["img_url"],
+                    latitude=restaurant_data["latitude"],
+                    longitude=restaurant_data["longitude"],
                 )
+
                 details.save()
 
                 logger.info(
@@ -88,7 +134,7 @@ def save_yelp_restaurant_details():
             else:
                 continue
         except Exception as e:
-            logger.warning(
+            logger.error(
                 "Error while saving to table YelpRestaurantDetails: {} {}".format(
                     r.business_id, e
                 )

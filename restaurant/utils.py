@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.forms.models import model_to_dict
-from .models import InspectionRecords, Restaurant
+from .models import InspectionRecords, Restaurant, YelpRestaurantDetails
 import requests
 import json
 
@@ -94,3 +94,21 @@ def get_restaurant_list(
         restaurant_dict["latest_record"] = latest_inspection_record
         result.append(restaurant_dict)
     return result
+
+
+def get_filtered_restaurants(price, neighborhood, rating, category, page, limit):
+    filters = {}
+    offset = int(page - 1) * int(limit)
+    if price:
+        filters["price__in"] = price
+    if neighborhood:
+        filters["neighborhood__in"] = neighborhood
+    if rating:
+        filters["rating__gte"] = rating
+    if category:
+        filters["category__in"] = category
+
+    filtered_restaurants = YelpRestaurantDetails.objects.filter(**filters)[
+        offset : offset + int(limit)
+    ]
+    return filtered_restaurants
