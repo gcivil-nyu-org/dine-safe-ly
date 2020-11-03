@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Restaurant
 from .forms import QuestionnaireForm
 from .utils import (
@@ -8,6 +8,7 @@ from .utils import (
     get_restaurant_list,
 )
 
+# from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
@@ -46,6 +47,9 @@ def save_feedback(request):
         form = QuestionnaireForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect(request.build_absolute_uri())
+    form = QuestionnaireForm()
+    return render(request, "restaurant_detail.html", context={"form": form})
 
 
 def get_inspection_info(request, restaurant_id):

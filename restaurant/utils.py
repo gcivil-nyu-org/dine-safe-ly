@@ -13,7 +13,7 @@ def get_restaurant_info_yelp(business_id):
 
 
 def get_restaurant_reviews_yelp(business_id):
-    access_token = settings.YELP_ACCESS_TOKE
+    access_token = settings.YELP_TOKEN_1
     headers = {"Authorization": "bearer %s" % access_token}
     url = settings.YELP_BUSINESS_API + business_id + "/reviews"
     return requests.get(url, headers=headers)
@@ -70,7 +70,7 @@ def query_inspection_record(business_name, business_address, postcode):
 def get_restaurant_list(
     page, limit, keyword=None, neighbourhoods_filter=None, categories_filter=None
 ):
-    page = int(page) - 1
+    # page = int(page) - 1
     offset = int(page) * int(limit)
     if keyword:
         restaurants = Restaurant.objects.filter(restaurant_name__contains=keyword)[
