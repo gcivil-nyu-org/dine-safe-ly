@@ -16,6 +16,7 @@
         </p>
       </div>
     </div>
+    </div>
 </section>
 <section class="py-6">
   <div class="container">
@@ -48,96 +49,85 @@
           </div>
         </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Have you been here before?
-</button>
-
-<!-- Modal -->
-<form class="form-validate" method="post">
-   {% csrf_token %}
-<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tell us about your experience!</h5>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-
-      <div class="modal-body">
-
-          <h2>For this restaurant:</h2>
-        <br>
-        <p>Did you receive a temperature check?</p>
-        <div class="rate">
-          <input type="radio" id="star1" name="body_temp" value=true />
-          <label for="star1" title="text">Yes</label>
-          <input type="radio" id="star2" name="body_temp" value=false />
-          <label for="star2" title="text">No</label>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tell us about your experience!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form class="form-validate" method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                  <h2>For this restaurant:</h2>
+                  <br>
+                  <p>Did you receive a temperature check?</p>
+                  <div class="rate">
+                    <input type="radio" id="star1" name="body_temp" value=true />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" id="star2" name="body_temp" value=false />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>Were you or a member of your party required to provide contact tracing information?</p>
+                  <div class="rate">
+                    <input type="radio" name="contact_info" value=true />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" name="contact_info" value=false />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>Were restaurant staff wearing masks at all times?</p>
+                  <div class="rate">
+                    <input type="radio" name="employee_mask" value=true />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" name="employee_mask" value=false />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>Was in-door capacity under 25%?</p>
+                  <div class="rate">
+                    <input type="radio" name="capacity" value=true />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" name="capacity" value=false />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>Were you seated at least 6 feet from the nearest party?</p>
+                  <div class="rate">
+                    <input type="radio" name="distance" value=true />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" name="distance" value=false />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>How would you rate the safety level for this restaurant?</p>
+                  <div class="rate">
+                    <input type="radio" name="safety_level" value="1" />
+                    <label for="star1" title="text">1</label>
+                    <input type="radio" name="safety_level" value="2" />
+                    <label for="star2" title="text">2</label>
+                    <input type="radio" name="safety_level" value="3" />
+                    <label for="star1" title="text">3</label>
+                    <input type="radio" name="safety_level" value="4" />
+                    <label for="star1" title="text">4</label>
+                    <input type="radio" name="safety_level" value="5" />
+                    <label for="star1" title="text">5</label>
+                  </div>
+                  <br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <br>
-          <p>Were you or a member of your party required to provide contact tracing information?</p>
-        <div class="rate">
-          <input type="radio" name="contact_info" value=true />
-          <label for="star1" title="text">Yes</label>
-          <input type="radio" name="contact_info" value=false />
-          <label for="star2" title="text">No</label>
-        </div>
-        <br>
-          <p>Were restaurant staff wearing masks at all times?</p>
-        <div class="rate">
-          <input type="radio" name="employee_mask" value=true />
-          <label for="star1" title="text">Yes</label>
-          <input type="radio" name="employee_mask" value=false />
-          <label for="star2" title="text">No</label>
-        </div>
-        <br>
-          <p>Was in-door capacity under 25%?</p>
-          <div class="rate">
-          <input type="radio" name="capacity" value=true />
-          <label for="star1" title="text">Yes</label>
-          <input type="radio" name="capacity" value=false />
-          <label for="star2" title="text">No</label>
-        </div>
-        <br>
-          <p>Were you seated at least 6 feet from the nearest party?</p>
-          <div class="rate">
-          <input type="radio" name="distance" value=true />
-          <label for="star1" title="text">Yes</label>
-          <input type="radio" name="distance" value=false />
-          <label for="star2" title="text">No</label>
-        </div>
-        <br>
-          <p>How would you rate the safety level for this restaurant?</p>
-          <div class="rate">
-          <input type="radio" name="safety_level" value="1" />
-          <label for="star1" title="text">1</label>
-          <input type="radio" name="safety_level" value="2" />
-          <label for="star2" title="text">2</label>
-            <input type="radio" name="safety_level" value="3" />
-          <label for="star1" title="text">3</label>
-            <input type="radio" name="safety_level" value="4" />
-          <label for="star1" title="text">4</label>
-            <input type="radio" name="safety_level" value="5" />
-          <label for="star1" title="text">5</label>
-        </div>
-        <br>
 
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" type="submit">Save changes</button>
-      </div>
-      </div>
-      </div>
-</div>
-    </form>
 
         <div class="text-block">
           <!-- Listing Location-->
