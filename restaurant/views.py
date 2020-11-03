@@ -74,7 +74,7 @@ def get_inspection_info(request, restaurant_id):
         )
 
 
-def get_landing_page(request, page=0):
+def get_landing_page(request, page=1):
     neighbourhoods_filter = request.GET.getlist("neighbourhood")
     categories_filter = request.GET.getlist("category")
     keyword = request.GET.get("search")

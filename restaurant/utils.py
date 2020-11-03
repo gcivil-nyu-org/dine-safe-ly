@@ -70,7 +70,7 @@ def query_inspection_record(business_name, business_address, postcode):
 def get_restaurant_list(
     page, limit, keyword=None, neighbourhoods_filter=None, categories_filter=None
 ):
-    # page = int(page) - 1
+    page = int(page) - 1
     offset = int(page) * int(limit)
     if keyword:
         restaurants = Restaurant.objects.filter(restaurant_name__contains=keyword)[
