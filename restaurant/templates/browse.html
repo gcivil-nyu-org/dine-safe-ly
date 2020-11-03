@@ -396,7 +396,7 @@
 					}
 				}
 			} else {
-			  document.getElementById("img" + i.toString()).href = "../inspection_records/" + List[i]['id'];
+			  document.getElementById("img" + i.toString()).href = "../restaurant/inspection_records/" + List[i]['id'];
 			}
 			if(List[i]['latest_record'] != null) {
 				document.getElementById("status" + i.toString()).innerHTML = List[i]['latest_record']['is_roadway_compliant'];
