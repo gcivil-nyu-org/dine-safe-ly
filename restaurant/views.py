@@ -60,7 +60,7 @@ def get_inspection_info(request, restaurant_id):
         )
 
 
-def get_landing_page(request, page=0):
+def get_landing_page(request, page=1):
     neighbourhoods_filter = request.GET.getlist("neighbourhood")
     categories_filter = request.GET.getlist("category")
     keyword = request.GET.get("search")
@@ -70,7 +70,7 @@ def get_landing_page(request, page=0):
     restaurant_list = get_restaurant_list(
         page, 6, keyword, neighbourhoods_filter, categories_filter
     )
-    logger.debug(restaurant_list)
+
     parameter_dict = {
         "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),
         "page": page,
