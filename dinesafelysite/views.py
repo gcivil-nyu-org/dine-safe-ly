@@ -2,8 +2,7 @@ from django.shortcuts import render
 from restaurant.utils import (
     get_restaurant_list,
 )
-from django.http import HttpResponse
-from django.http import HttpResponseNotFound
+
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 import logging
