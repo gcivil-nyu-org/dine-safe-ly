@@ -437,7 +437,7 @@ class GetFilteredRestaurantsTests(TestCase):
         img_url = "https://s3-media1.fl.yelpcdn.com/bphoto/C4emY32GDusdMCybR6NmpQ/o.jpg"
         latitude = 40.8522129
         longitude = -73.8290069
-        page = 1
+        page = 0
         limit = 4
 
         details = create_yelp_restaurant_details(

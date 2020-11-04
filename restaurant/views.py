@@ -77,12 +77,20 @@ def get_inspection_info(request, restaurant_id):
 def get_landing_page(request, page=1):
     neighbourhoods_filter = request.GET.getlist("neighbourhood")
     categories_filter = request.GET.getlist("category")
+    price_filter = request.GET.getlist("price")
+    rating_filter = None
+    if request.GET.getlist("ratingfrom"):
+        rating_filter = float(request.GET.getlist("ratingfrom")[0])
     keyword = request.GET.get("search")
-    logger.debug(neighbourhoods_filter)
-    logger.debug(categories_filter)
 
     restaurant_list = get_restaurant_list(
-        page, 6, keyword, neighbourhoods_filter, categories_filter
+        page,
+        6,
+        keyword,
+        neighbourhoods_filter,
+        categories_filter,
+        price_filter,
+        rating_filter,
     )
     logger.debug(restaurant_list)
     parameter_dict = {
