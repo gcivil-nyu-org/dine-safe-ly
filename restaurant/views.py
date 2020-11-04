@@ -92,7 +92,7 @@ def get_landing_page(request, page=1):
         price_filter,
         rating_filter,
     )
-    logger.debug(restaurant_list)
+
     parameter_dict = {
         "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),
         "page": page,
