@@ -28,7 +28,7 @@
             <option value="East Harlem">East Harlem </option>
             <option value="Inwood and Washington Heights">Inwood and Washington Heights </option>
             <option value="Lower Manhattan">Lower Manhattan </option>
-             <option value="Stapleton and St. George">Stapleton and St. George </option>
+            <option value="Stapleton and St. George">Stapleton and St. George </option>
             <option value="Tribeca">Tribeca </option>
             <option value="Port Richmond">Port Richmond </option>
             <option value="South Shore">South Shore </option>
@@ -69,52 +69,69 @@
         <div class="mb-4">
           <label class="form-label" for="form_category">Category</label>
           <select class="selectpicker form-control" name="category" id="form_category" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
-            <option value="category_0">Food Truck </option>
-            <option value="category_1">Cafe </option>
-            <option value="category_2">Bar </option>
-            <option value="category_3">Pub </option>
-            <option value="category_4">Deli </option>
-            <option value="category_5">Bistro </option>
+            <option value="newamerican">newamerican </option>
+            <option value="armenian">armenian </option>
+            <option value="barbeque">barbeque </option>
+            <option value="bars">bars </option>
+            <option value="bistros">bistros </option>
+            <option value="burgers">burgers </option>
+            <option value="chinese">chinese </option>
+            <option value="danish">danish </option>
+            <option value="diners">diners </option>
+            <option value="ethiopian">ethiopian </option>
+            <option value="filipino">filipino </option>
+            <option value="french">french </option>
+            <option value="georgian">georgian </option>
+            <option value="german">german </option>
+            <option value="greek">greek </option>
+            <option value="hotdog">hotdog </option>
+            <option value="italian">italian </option>
+            <option value="bistros">bistros </option>
+            <option value="japanese">japanese </option>
+            <option value="jewish">jewish </option>
+            <option value="kebab">kebab </option>
+            <option value="korean">korean </option>
+            <option value="kosher">kosher </option>
+            <option value="mexican">mexican </option>
+            <option value="noodles">noodles </option>
+            <option value="pizza">pizza </option>
+            <option value="salad">salad </option>
+            <option value="sandwiches">sandwiches </option>
+            <option value="seafood">seafood </option>
+            <option value="sushi">sushi </option>
+            <option value="tapassmallplates">tapassmallplates </option>
+            <option value="vegan">vegan </option>
+            <option value="vegetarian">vegetarian </option>
+            <option value="vietnamese">vietnamese </option>
+            <option value="waffles">waffles </option>
+            <option value="wraps">wraps </option>
           </select>
         </div>
-        <div class="pb-4">
-          <div class="mb-4">
-              <label class="form-label">Cuisine</label>
+        <div class="mb-4">
+              <label class="form-label">Price</label>
               <ul class="list-unstyled mb-0">
                 <li>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="cuisine_0" name="cuisine[]">
-                    <label class="custom-control-label" for="cuisine_0">Fusion</label>
+                    <input class="custom-control-input" type="checkbox" id="price_1" name="price" value="$">
+                    <label class="custom-control-label" for="price_1">$</label>
                   </div>
                 </li>
                 <li>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="cuisine_1" name="cuisine[]">
-                    <label class="custom-control-label" for="cuisine_1">Indian</label>
+                    <input class="custom-control-input" type="checkbox" id="price_2" name="price" value="$$">
+                    <label class="custom-control-label" for="price_2">$$</label>
                   </div>
                 </li>
                 <li>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="cuisine_2" name="cuisine[]">
-                    <label class="custom-control-label" for="cuisine_2">French</label>
+                    <input class="custom-control-input" type="checkbox" id="price_3" name="price" value="$$$">
+                    <label class="custom-control-label" for="price_3">$$$</label>
                   </div>
                 </li>
                 <li>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="cuisine_3" name="cuisine[]">
-                    <label class="custom-control-label" for="cuisine_3">American</label>
-                  </div>
-                </li>
-                <li>
-                  <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="cuisine_4" name="cuisine[]">
-                    <label class="custom-control-label" for="cuisine_4">Mexican</label>
-                  </div>
-                </li>
-                <li>
-                  <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="cuisine_5" name="cuisine[]">
-                    <label class="custom-control-label" for="cuisine_5">Other</label>
+                    <input class="custom-control-input" type="checkbox" id="price_4" name="price" value="$$$$">
+                    <label class="custom-control-label" for="price_4">$$$$</label>
                   </div>
                 </li>
               </ul>
@@ -132,23 +149,42 @@
               </div>
             </div>
           </div>
-<!--            <div class="mb-4">-->
-<!--              <label class="form-label">Price</label>-->
-<!--              <div class="text-primary" id="slider-snap"></div>-->
-<!--              <div class="nouislider-values">-->
-<!--                <div class="min">From $<span id="slider-snap-value-from"></span></div>-->
-<!--                <div class="max">To $<span id="slider-snap-value-to"></span></div>-->
-<!--              </div>-->
-<!--              <input type="hidden" name="pricefrom" id="slider-snap-input-from" value="$">-->
-<!--              <input type="hidden" name="priceto" id="slider-snap-input-to" value="$$$$">-->
-<!--            </div>-->
+        <div class="mb-4">
+          <label class="form-label">Ratings</label>
+          <div class="text-primary" id="slider-snap"></div>
+          <div class="nouislider-values">
+            <div class="min"><span id="slider-snap-value-from"></span></div>
+            <div class="max"><span id="slider-snap-value-to"></span></div>
+          </div>
+          <input type="hidden" name="ratingfrom" id="slider-snap-input-from" value="1">
+          <input type="hidden" name="ratingto" id="slider-snap-input-to" value="5">
+        </div>
 <!--          <div class="mb-4">-->
 <!--            <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>-->
 <!--          </div>-->
           <div class="mb-4">
             <button class="btn btn-primary" type="submit"> <i class="fas fa-filter mr-1"></i>Filter </button>
+            <button class="btn btn-primary" type="reset" onclick="resetForm(event, $(this));"> <i class="fas fa-filter mr-1"></i>Reset </button>
+            <script>
+                   function resetForm(e, thisobj) {
+                      thisform = thisobj.closest('form');
+                      selectbox_in_form = thisform.find('select');
+
+                      // completely remove selected when it has been assigned.
+                      selectbox_in_form.find('option:selected').removeAttr('selected');
+                      selectbox_in_form.val('');
+                      selectbox_in_form.change();
+
+                      delete selectbox_in_form;
+                      delete thisform;
+                  }// resetForm
+
+                  $(function() {
+                      // activate Select2
+                      $('.selectbox-replacement-enabler').select2();
+                  });
+            </script>
           </div>
-        </div>
       </form>
     </div>
     <div class="col-lg-9">
@@ -353,7 +389,7 @@
 			if(List[i]['yelp_info'] != null) {
 				if(List[i]['yelp_info']['image_url'] != null) {
 					document.getElementById("image" + i.toString()).style.backgroundImage = "url(" + List[i]['yelp_info']['image_url'] + ")";
-					document.getElementById("img" + i.toString()).href = "../profile/" + List[i]['id'];
+					document.getElementById("img" + i.toString()).href = "../restaurant/profile/" + List[i]['id'];
 				}
 				if(List[i]['yelp_info']['categories'] != null) {
 					var categories_str = "";
@@ -370,7 +406,7 @@
 					}
 				}
 			} else {
-			  document.getElementById("img" + i.toString()).href = "../inspection_records/" + List[i]['id'];
+			  document.getElementById("img" + i.toString()).href = "../restaurant/inspection_records/" + List[i]['id'];
 			}
 			if(List[i]['latest_record'] != null) {
 				document.getElementById("status" + i.toString()).innerHTML = List[i]['latest_record']['is_roadway_compliant'];
@@ -380,30 +416,30 @@
 		}
 		</script>
     <script>
-<!--      var snapSlider = document.getElementById('slider-snap');-->
+      var snapSlider = document.getElementById('slider-snap');
 
-<!--      noUiSlider.create(snapSlider, {-->
-<!--          start: [ 40, 450 ],-->
-<!--          snap: false,-->
-<!--          connect: true,-->
-<!--          step: 1,-->
-<!--          range: {-->
-<!--              'min': 40,-->
-<!--              'max': 450-->
-<!--          }-->
-<!--      });-->
-<!--      var snapValues = [-->
-<!--          document.getElementById('slider-snap-value-from'),-->
-<!--          document.getElementById('slider-snap-value-to')-->
-<!--      ];-->
-<!--      var inputValues = [-->
-<!--          document.getElementById('slider-snap-input-from'),-->
-<!--          document.getElementById('slider-snap-input-to')-->
-<!--      ];-->
-<!--      snapSlider.noUiSlider.on('update', function( values, handle ) {-->
-<!--          snapValues[handle].innerHTML = values[handle];-->
-<!--          inputValues[handle].value = values[handle];-->
-<!--      })-->
+      noUiSlider.create(snapSlider, {
+          start: [ 1, 5 ],
+          snap: false,
+          connect: true,
+          step: 1,
+          range: {
+              'min': 1,
+              'max': 5
+          }
+      });
+      var snapValues = [
+          document.getElementById('slider-snap-value-from'),
+          document.getElementById('slider-snap-value-to')
+      ];
+      var inputValues = [
+          document.getElementById('slider-snap-input-from'),
+          document.getElementById('slider-snap-input-to')
+      ];
+      snapSlider.noUiSlider.on('update', function( values, handle ) {
+          snapValues[handle].innerHTML = values[handle];
+          inputValues[handle].value = values[handle];
+      })
     </script>
   </div>
 </div>
