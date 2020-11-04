@@ -1,6 +1,5 @@
 *.pyc
 .idea/
-data.json
 db.sqlite3
 restaurant/migrations
 .coverage
