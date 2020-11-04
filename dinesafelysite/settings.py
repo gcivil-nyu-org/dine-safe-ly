@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "import_export",
 ]
 
 MIDDLEWARE = [
@@ -119,12 +120,29 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-# Yelp:
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
-YELP_ACCESS_TOKE = (
+YELP_TOKEN_1 = (
     "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"
     "-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq"
     "-R_mEX3Yx "
+)
+YELP_ACCESS_TOKEN2 = (
+    "A_V_V4rxelsvDsI2uFW1kT2mP2lUjd75GTEEsEcLnnvVOK5ssemrbw"
+    "-R49czpANtS2ZtAeCl6FaapQrp1_30cRt9YKao3pFL1I6304sAtwKwKJk"
+    "F1JBgF88FZl1_X3Yx "
+)
+
+YELP_ACCESS_TOKE = (
+    "w5fGYpYDI6NYJOBI47KjmEJcROpCxq1VK841olTs0tSGOeGBNDuIIj8zF"
+    "-C_MJFtAbrzfm7YF7bo72TxpOmrrn-zYnQ8xHBh_E4WEO39Z7IdKwbzCkBkCy0fjB6CX3Yx "
+)
+
+
+# Yelp categories
+YELP_CATEGORY_API = "https://api.yelp.com/v3/categories/"
+YELP_ACESS_TOKEN_BETA = (
+    "Rp2eX_CuQVgaBc0Zk3sKRbFroy_s3_4eUtnNutojHg2G745uXH6-IakxKebxmc"
+    "EcM2lIoOhGAjPcb_SoKx0evgi3YeRRre2Ago-9SWh_yGluXMwGAi03y9kIfEueX3Yx"
 )
 
 django_heroku.settings(locals(), test_runner=False)
@@ -142,13 +160,13 @@ LOGGING = {
     "handlers": {
         "console": {"class": "logging.StreamHandler", "formatter": "console"},
         "file": {
-            "level": "DEBUG",
+            "level": "INFO",
             "class": "logging.FileHandler",
             "formatter": "file",
             "filename": BASE_DIR / "logs/debug.log",
         },
     },
-    "loggers": {"": {"level": "DEBUG", "handlers": ["console", "file"]}},
+    "loggers": {"": {"level": "INFO", "handlers": ["console", "file"]}},
 }
 
 LOGOUT_REDIRECT_URL = "browse"
