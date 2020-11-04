@@ -106,33 +106,8 @@
             <!-- Additional required wrapper-->
             <div id="res_list_group" class="swiper-wrapper pb-5">
                 <!-- Slides-->
-                <div class="swiper-slide h-auto px-2">
-                    <!-- venue item-->
-                    <div class="w-100 h-80 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
-                        <div class="card h-100 border-0 shadow">
-                            <div class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url(https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/restaurant-1430931071372-38127bd472b8.jpg); min-height: 200px;"><a class="tile-link" href="detail.html"></a>
-                                <div class="card-img-overlay-bottom z-index-20">
-                                    <h4 class="text-white text-shadow">Blue Hill</h4>
-                                    <p class="mb-2 text-xs"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                    </i>
-                                    </p>
-                                </div>
-                                <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
-                                    <div class="badge badge-transparent badge-pill px-3 py-2">Restaurants</div>
-                                    <a class="card-fav-icon position-relative z-index-40" href="javascript: void();">
-                                    <svg class="svg-icon text-white">
-                                        <use xlink:href="#heart-1"> </use>
-                                    </svg>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <p class="text-sm text-muted text-uppercase mb-1"><a href="#" class="text-dark">Compliant</a></p>
-                                <p class="text-sm mb-0"><a class="mr-1" href="#">Restaurant,</a><a class="mr-1" href="#">Contemporary</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
             <!-- If we need pagination-->
             <div class="swiper-pagination"></div>
@@ -227,15 +202,15 @@
 </section>
 
 <!-- Divider Section-->
-<section class="py-6 py-lg-7 position-relative dark-overlay"><img class="bg-image" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1507915135761-41a0a222c709.jpg" alt="">
-    <div class="container">
-        <div class="overlay-content text-white py-lg-5 text-center">
-            <p class="subtitle text-white letter-spacing-4 mb-4">Find the best spots</p>
-            <h3 class="display-3 font-weight-bold text-serif text-shadow mb-5">Travel & Explore</h3>
-            <p class="lead text-shadow mb-5">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections</p><a class="btn btn-primary" href="category-rooms.html">Get started</a>
-        </div>
-    </div>
-</section>
+<!--<section class="py-6 py-lg-7 position-relative dark-overlay"><img class="bg-image" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1507915135761-41a0a222c709.jpg" alt="">-->
+<!--    <div class="container">-->
+<!--        <div class="overlay-content text-white py-lg-5 text-center">-->
+<!--            <p class="subtitle text-white letter-spacing-4 mb-4">Find the best spots</p>-->
+<!--            <h3 class="display-3 font-weight-bold text-serif text-shadow mb-5">Travel & Explore</h3>-->
+<!--            <p class="lead text-shadow mb-5">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections</p><a class="btn btn-primary" href="category-rooms.html">Get started</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 <!-- Brands Section-->
 <!--<section class="py-6">-->
 <!--    <div class="container">-->
@@ -274,7 +249,7 @@
             <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-left">
                 <p class="subtitle text-secondary">Start using Dine Safe.ly</p>
                 <p class="text-lg">Dine Safe.ly is the best way to find & discover great local restaurants</p>
-                <p class="text-muted mb-0">One morning, when Alex woke from troubled dreams, he had this amazing idea of Dine Safely..</p>
+<!--                <p class="text-muted mb-0">One morning, when Alex woke from troubled dreams, he had this amazing idea of Dine Safely..</p>-->
             </div>
             <div class="col-lg-6 d-flex align-items-center justify-content-center">
                 <div class="text-center">
@@ -313,4 +288,105 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</section>-->
+
+<script type="text/javascript">
+
+var restaurant_list = {{restaurant_list | safe}};
+	for(var i = 0; i < 12; i++)
+	{
+			var res_list_group = document.getElementById("res_list_group");
+
+			var div1 = document.createElement("div");
+			div1.className = "swiper-slide h-auto px-2";
+
+			var div2 = document.createElement("div");
+			div2.className = "w-100 h-80 hover-animate";
+
+			var div3 = document.createElement("div");
+			div3.className = "card h-100 border-0 shadow";
+
+			var div4 = document.createElement("div");
+			div4.className = "card-img-top overflow-hidden dark-overlay bg-cover";
+			div4.id = "res_card_img"+ i.toString();
+			div4.style = "min-height: 200px";
+
+			var a1 = document.createElement("a");
+			a1.className = "title-link";
+			a1.href = restaurant_list[i].yelp_info.url;
+
+			var div5 = document.createElement("div");
+			div5.className = "card-img-overlay-bottom z-index-20";
+
+			var h4 = document.createElement("h4");
+			h4.className ="text-white text-shadow";
+			h4.innerHTML = restaurant_list[i].yelp_info.name;
+
+			var p = document.createElement("p");
+			p.id = "res_rating";
+			p.className = "mb-2 text-xs";
+
+			var rate = restaurant_list[i].yelp_info.rating;
+				for (var j = 0; j < Math.ceil(rate); j++) {
+				    var icon = document.createElement("i");
+				    icon.className = "fa fa-star text-warning";
+				    p.appendChild(icon);
+				}
+				for (var j = 0; j < 5 - Math.ceil(rate); j++) {
+				    var icon2 = document.createElement("i");
+				    icon2.className = "fa fa-star text-gray-300";
+				    p.appendChild(icon2);
+				}
+
+			div5.appendChild(h4);
+			div5.appendChild(p);
+
+
+
+			div4.appendChild(a1);
+			div4.appendChild(div5);
+			//div4.appendChild(div_svg);
+
+			var div6 = document.createElement("div");
+			div6.className = "card-body";
+
+			var p_1 = document.createElement("p");
+			p_1.className = "text-sm text-muted text-uppercase mb-1";
+
+			var a2 = document.createElement("a");
+			a2.className = "text-dark";
+			a2.href = restaurant_list[i].yelp_info.url;
+			a2.innerHTML = "Compliant";
+
+			p_1.appendChild(a2);
+
+			var p_2 = document.createElement("p");
+			p_2.id = "res_category";
+			p_2.className = "text-sm mb-0";
+
+			var a3 = document.createElement("a");
+			a3.className = "mr-1 disabled";
+			for (var p = 0; p < restaurant_list[i].yelp_info.categories.length; p++) {
+		    	a3.innerHTML += restaurant_list[i].yelp_info.categories[p].title + "&nbsp&nbsp";
+				}
+
+			p_2.appendChild(a3);
+
+			div6.appendChild(p_1);
+			div6.appendChild(p_2);
+
+			div3.appendChild(div4);
+			div3.appendChild(div6);
+
+			div2.appendChild(div3);
+
+			div1.appendChild(div2);
+
+			res_list_group.appendChild(div1);
+			document.getElementById("res_card_img"+ i.toString()).style.backgroundImage = "url(" + restaurant_list[i].yelp_info.image_url + ")";
+        }
+
+
+</script>
+
+</script>
 {% endblock %}
