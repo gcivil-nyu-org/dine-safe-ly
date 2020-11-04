@@ -1,7 +1,6 @@
 *.pyc
 .idea/
 db.sqlite3
-restaurant/migrations
 .coverage
 staticfiles/
 htmlcov/
