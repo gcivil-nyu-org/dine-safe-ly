@@ -243,6 +243,7 @@
 <!--    </div>-->
 <!--</section>-->
 <!-- Divider Section-->
+
 <section class="py-6 bg-gray-100">
     <div class="container">
         <div class="row">
@@ -253,13 +254,19 @@
             </div>
             <div class="col-lg-6 d-flex align-items-center justify-content-center">
                 <div class="text-center">
+                    {% if user.is_authenticated %}
+                    <p class="mb-2"><a class="btn btn-lg btn-primary" href="{% url 'restaurant:browse' %}">See Compliant Restaurants</a></p>
+                    {% else %}
                     <p class="mb-2"><a class="btn btn-lg btn-primary" href="{% url 'user:register' %}">Create Your Account</a></p>
                     <p class="text-muted text-small">It's free!</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
 <!--&lt;!&ndash; Instagram&ndash;&gt;-->
 <!--<section>-->
 <!--    <div class="container-fluid px-0">-->
