@@ -24,4 +24,3 @@ def send_reset_password_email(request, email):
     logger.info("Send email to: %s", user.email)
     email = EmailMessage(email_subject, message, to=[user.email])
     return email.send()
-
