@@ -47,12 +47,11 @@
               </div>
             </a>
           </div>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Have you been here before?
+          </button>
         </div>
-
-<!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Have you been here before?
-        </button>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -126,7 +125,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button class="btn btn-primary" type="submit" >Save changes</button>
+                  <button class="btn btn-primary" type="submit" >Submit</button>
                 </div>
               </form>
             </div>
@@ -426,7 +425,7 @@ console.log(inspection_data);
 function initMap() {
   const myLatLng = { lat: lat, lng: long };
   const map = new google.maps.Map(document.getElementById("detailMap"), {
-    zoom: 20,
+    zoom: 15,
     center: myLatLng,
   });
   new google.maps.Marker({

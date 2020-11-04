@@ -112,7 +112,7 @@
             <!-- If we need pagination-->
             <div class="swiper-pagination"></div>
         </div>
-        <div class="text-center mt-5"><a class="btn btn-outline-primary" href="../restaurant/browse">See all restaurants</a></div>
+        <div class="text-center mt-5"><a class="btn btn-outline-primary" href="{% url 'restaurant:browse' %}">See all restaurants</a></div>
     </div>
 </section>
 <section class="pt-4 pb-6">
@@ -248,7 +248,7 @@
         <div class="row">
             <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-left">
                 <p class="subtitle text-secondary">Start using Dine Safe.ly</p>
-                <p class="text-lg">Dine Safe.ly is the best way to find & discover great local restaurants</p>
+                <p class="text-lg">Dine Safe.ly is the easiest way to find & discover COVID compliant restaurants.</p>
 <!--                <p class="text-muted mb-0">One morning, when Alex woke from troubled dreams, he had this amazing idea of Dine Safely..</p>-->
             </div>
             <div class="col-lg-6 d-flex align-items-center justify-content-center">
@@ -294,6 +294,8 @@
 var restaurant_list = {{restaurant_list | safe}};
 	for(var i = 0; i < 12; i++)
 	{
+			if(restaurant_list[i].yelp_info == null) {continue;}
+
 			var res_list_group = document.getElementById("res_list_group");
 
 			var div1 = document.createElement("div");
