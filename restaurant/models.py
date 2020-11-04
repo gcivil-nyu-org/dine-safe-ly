@@ -42,7 +42,6 @@ class InspectionRecords(models.Model):
 
 
 class UserQuestionnaire(models.Model):
-    # the restaurant the feedback is for
     restaurant_business_id = models.CharField(max_length=200, null=False)
     safety_level = models.CharField(max_length=1)
 

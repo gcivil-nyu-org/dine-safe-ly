@@ -119,7 +119,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-# Yelp:
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
 YELP_TOKEN_1 = (
     "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"

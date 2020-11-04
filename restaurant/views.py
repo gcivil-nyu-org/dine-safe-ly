@@ -26,13 +26,7 @@ def get_restaurant_profile(request, restaurant_id):
     if request.method == "POST":
         form = QuestionnaireForm(request.POST)
         if form.is_valid():
-            print("form is saved")
             form.save()
-        else:
-            print("form is invalid")
-
-    # return render(request, "restaurant_detail.html", context={"form": form})
-    # if request.method == "GET":
     try:
         restaurant = Restaurant.objects.get(pk=restaurant_id)
         response_yelp = query_yelp(restaurant.business_id)

@@ -1,11 +1,8 @@
 from .models import UserQuestionnaire
 from django import forms
 
-# from django.core.exceptions import ValidationError
-
 
 class QuestionnaireForm(forms.Form):
-    # the restaurant the feedback is for
     restaurant_business_id = forms.CharField(label="restaurant_id")
     safety_level = forms.CharField(label="safety_level")
 
@@ -36,5 +33,4 @@ class QuestionnaireForm(forms.Form):
             capacity_compliant=self.cleaned_data.get("capacity_compliant"),
             distance_compliant=self.cleaned_data.get("distance_compliant"),
         )
-        questionnaire.save()
         return questionnaire
