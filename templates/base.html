@@ -45,7 +45,7 @@
     <!-- Navbar-->
     <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="container-fluid">
-            <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="/restaurant/browse/1"><h3>Dine Safe.ly</h3></a>
+            <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="/"><h3>Dine Safe.ly</h3></a>
                                 <form class="form-inline d-none d-sm-flex" action="#" id="search">
                                     <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
                                         <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
@@ -74,7 +74,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="docsDropdownMenuLink">
                             <h6 class="dropdown-header font-weight-normal">User</h6>
                             <a class="dropdown-item" href="#">Update Profile </a>
-                            <a class="dropdown-item" href="#">Update Password </a>
+                            <a class="dropdown-item" href="{% url 'user:update_password' %}">Update Password </a>
 
                             <div class="dropdown-divider"></div>
 
@@ -144,6 +144,31 @@
 <script src="{% static 'js/map-layers.f6cf9b57.js' %}">
 </script>
 <script src="{% static 'js/map-detail.ecc97be1.js' %}"></script>
+<script>
+      // ------------------------------------------------------- //
+      //   Inject SVG Sprite -
+      //   see more here
+      //   https://css-tricks.com/ajaxing-svg-sprite/
+      // ------------------------------------------------------ //
+      function injectSvgSprite(path) {
+
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+          var div = document.createElement("div");
+          div.className = 'd-none';
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }
+      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
+      // use your own URL in production, please :)
+      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
+      //- injectSvgSprite('${path}icons/orion-svg-sprite.69651a96.svg');
+      injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
+
+    </script>
 </body>
 
 </html>
