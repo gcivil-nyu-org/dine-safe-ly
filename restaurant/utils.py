@@ -97,8 +97,6 @@ def get_restaurant_list(
         )
         for rest in filtered_restaurants:
             restaurant = Restaurant.objects.filter(business_id=rest.business_id)
-            logger.error("HERE2")
-            logger.error(restaurant)
             restaurant_dict = model_to_dict(restaurant[0])
             restaurant_dict["yelp_info"] = (
                 json.loads(get_restaurant_info_yelp(rest.business_id).content)
