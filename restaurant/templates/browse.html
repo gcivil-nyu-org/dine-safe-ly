@@ -17,7 +17,7 @@
         </div>
         <div class="mb-4">
           <label class="form-label" for="form_neighbourhood">Neighbourhood</label>
-          <select class="selectpicker form-control" name="neighbourhood[]" id="form_neighbourhood" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
+          <select class="selectpicker form-control" name="neighbourhood" id="form_neighbourhood" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
             <option value="Chelsea and Clinton">Chelsea and Clinton </option>
             <option value="Lower East Side">Lower East Side </option>
             <option value="Gramercy Park and Murray Hill">Gramercy Park and Murray Hill </option>
@@ -68,7 +68,7 @@
         </div>
         <div class="mb-4">
           <label class="form-label" for="form_category">Category</label>
-          <select class="selectpicker form-control" name="category[]" id="form_category" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
+          <select class="selectpicker form-control" name="category" id="form_category" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
             <option value="newamerican">newamerican </option>
             <option value="armenian">armenian </option>
             <option value="barbeque">barbeque </option>
@@ -149,6 +149,16 @@
               </div>
             </div>
           </div>
+        <div class="mb-4">
+          <label class="form-label">Ratings</label>
+          <div class="text-primary" id="slider-snap"></div>
+          <div class="nouislider-values">
+            <div class="min"><span id="slider-snap-value-from"></span></div>
+            <div class="max"><span id="slider-snap-value-to"></span></div>
+          </div>
+          <input type="hidden" name="ratingfrom" id="slider-snap-input-from" value="1">
+          <input type="hidden" name="ratingto" id="slider-snap-input-to" value="5">
+        </div>
 <!--          <div class="mb-4">-->
 <!--            <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>-->
 <!--          </div>-->
@@ -405,6 +415,32 @@
 			document.getElementById("name" + i.toString()).href = "../" + List[i]['id'];
 		}
 		</script>
+    <script>
+      var snapSlider = document.getElementById('slider-snap');
+
+      noUiSlider.create(snapSlider, {
+          start: [ 1, 5 ],
+          snap: false,
+          connect: true,
+          step: 1,
+          range: {
+              'min': 1,
+              'max': 5
+          }
+      });
+      var snapValues = [
+          document.getElementById('slider-snap-value-from'),
+          document.getElementById('slider-snap-value-to')
+      ];
+      var inputValues = [
+          document.getElementById('slider-snap-input-from'),
+          document.getElementById('slider-snap-input-to')
+      ];
+      snapSlider.noUiSlider.on('update', function( values, handle ) {
+          snapValues[handle].innerHTML = values[handle];
+          inputValues[handle].value = values[handle];
+      })
+    </script>
   </div>
 </div>
 {% endblock %}
