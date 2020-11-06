@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dine.ly</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Price Slider Stylesheets -->
+    <link rel="stylesheet" href="{% static 'vendor/nouislider/nouislider.css' %}">
+    <!-- Google fonts - Playfair Display-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
+    <!-- swiper-->
+    <link rel="stylesheet" href="{% static 'ajax\libs\Swiper\4.4.1\css/swiper.min.css' %}">
+    <!-- Magnigic Popup-->
+    <link rel="stylesheet" href="{% static 'vendor/magnific-popup/magnific-popup.css' %}">
+    <!-- Leaflet Maps-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/><!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'css/style.default.452e11c7.css' %}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static 'css/custom.0a822280.css' %}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
+    <!-- Price Slider-->
+    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-6/vendor/nouislider/nouislider.min.js"></script>
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Font Awesome CSS-->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/all.css' %}" crossorigin="anonymous"> </head>
+
+<body style="padding-top: 72px;">
+<header class="header">
+    <!-- Navbar-->
+    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="{% url 'index' %}"><h3>Dine Safe.ly</h3></a>
+                                <form class="form-inline d-none d-sm-flex" action="#" id="search">
+                                    <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
+                                        <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
+                                        <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search" placeholder="Search" aria-label="Search">
+                                        <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"></i></button>
+                                    </div>
+                                </form>
+            </div>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <!-- Navbar Collapse -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <form class="form-inline mt-4 mb-2 d-sm-none" action="#" id="searchcollapsed">
+                    <div class="input-label-absolute input-label-absolute-left input-reset w-100">
+                        <label class="label-absolute" for="searchcollapsed_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
+                        <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="searchcollapsed_search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas">           </i></button>
+                    </div>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'restaurant:browse' %}">Restaurants</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="/">About Us</a> </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " id="docsDropdownMenuLink" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi {{user.username}}</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="docsDropdownMenuLink">
+                            <h6 class="dropdown-header font-weight-normal">User</h6>
+                            <a class="dropdown-item" href="#">Update Profile </a>
+                            <a class="dropdown-item" href="{% url 'user:update_password' %}">Update Password </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <h6 class="dropdown-header font-weight-normal">Account</h6>
+                            <a class="dropdown-item" href="{% url 'user:logout' %}">Logout </a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user:login' %}">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user:register' %}">Register</a></li>
+                    {% endif %}
+<!--                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="user-add-0.html">Add a listing</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- /Navbar -->
+</header> {% block content %} {% endblock %}
+<!-- Footer-->
+<footer class="position-relative z-index-10 d-print-none">
+    <!-- Copyright section of the footer-->
+    <div class="py-4 font-weight-light bg-gray-800 text-gray-300">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-left">
+                    <p class="text-sm mb-md-0">&copy; 2020, Dine.ly. All rights reserved by Team Fast But Not Furious</p>
+                </div>
+                <!--        <div class="col-md-6">-->
+                <!--          <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">-->
+                <!--            <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/visa.svg" alt="..."></li>-->
+                <!--            <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/mastercard.svg" alt="..."></li>-->
+                <!--            <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/paypal.svg" alt="..."></li>-->
+                <!--            <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/western-union.svg" alt="..."></li>-->
+                <!--          </ul>-->
+                <!--        </div>-->
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- JavaScript files-->
+<!-- jQuery-->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- Magnific Popup - Lightbox for the gallery-->
+<script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<!-- Smooth scroll-->
+<script src="{% static 'vendor/smooth-scroll/smooth-scroll.polyfills.min.js' %}"></script>
+<!-- Bootstrap Select-->
+<script src="{% static 'vendor/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+<!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
+<script src="{% static 'vendor/object-fit-images/ofi.min.js' %}"></script>
+<!-- Swiper Carousel                       -->
+<script src="{% static 'ajax/libs/Swiper/4.4.1/js/swiper.min.js' %}"></script>
+<script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}">
+</script>
+<script src="{% static 'js/demo.36f8799a.js' %}"></script>
+
+
+<!-- Main Theme JS file    -->
+<script src="{% static 'js/theme.55f8348b.js' %}"></script>
+<!-- Map-->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+<!-- Available tile layers-->
+<script src="{% static 'js/map-layers.f6cf9b57.js' %}">
+</script>
+<script src="{% static 'js/map-detail.ecc97be1.js' %}"></script>
+<script>
+      // ------------------------------------------------------- //
+      //   Inject SVG Sprite -
+      //   see more here
+      //   https://css-tricks.com/ajaxing-svg-sprite/
+      // ------------------------------------------------------ //
+      function injectSvgSprite(path) {
+
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+          var div = document.createElement("div");
+          div.className = 'd-none';
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }
+      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
+      // use your own URL in production, please :)
+      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
+      //- injectSvgSprite('${path}icons/orion-svg-sprite.69651a96.svg');
+      injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
+
+    </script>
+</body>
+
+</html>

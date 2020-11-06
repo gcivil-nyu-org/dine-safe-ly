@@ -1,0 +1,446 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container-fluid py-5 px-lg-5">
+  <div class="row border-bottom mb-4">
+    <div class="col-12">
+      <h1 class="display-4 font-weight-bold text-serif mb-4">Dine Safe.ly</h1>
+      <p class="lead text-muted">Browse local NYC restaurants based on COVID-19 seating
+          compliance</p></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 pt-3">
+      <form class="pr-xl-3" action="" method="GET">
+        <div class="mb-4">
+          <label class="form-label" for="form_search">Search by restaurant name</label>
+          <div class="input-label-absolute input-label-absolute-right">
+            <div class="label-absolute"><i class="fa fa-search"></i></div>
+            <input class="form-control pr-4" type="search" name="search" placeholder="Restaurant Name" id="form_search" >  </div>
+        </div>
+        <div class="mb-4">
+          <label class="form-label" for="form_neighbourhood">Neighbourhood</label>
+          <select class="selectpicker form-control" name="neighbourhood" id="form_neighbourhood" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
+            <option value="Chelsea and Clinton">Chelsea and Clinton </option>
+            <option value="Lower East Side">Lower East Side </option>
+            <option value="Gramercy Park and Murray Hill">Gramercy Park and Murray Hill </option>
+            <option value="Greenwich Village and Soho">Greenwich Village and Soho </option>
+            <option value="Upper West Side">Upper West Side </option>
+            <option value="Central Harlem">Central Harlem </option>
+            <option value="Upper East Side">Upper East Side </option>
+            <option value="East Harlem">East Harlem </option>
+            <option value="Inwood and Washington Heights">Inwood and Washington Heights </option>
+            <option value="Lower Manhattan">Lower Manhattan </option>
+            <option value="Stapleton and St. George">Stapleton and St. George </option>
+            <option value="Tribeca">Tribeca </option>
+            <option value="Port Richmond">Port Richmond </option>
+            <option value="South Shore">South Shore </option>
+            <option value="Mid-Island">Mid-Island </option>
+            <option value="High Bridge and Morrisania">High Bridge and Morrisania </option>
+            <option value="Central Bronx">Central Bronx </option>
+            <option value="Hunts Point and Mott Haven">Hunts Point and Mott Haven </option>
+            <option value="Bronx Park and Fordham">Bronx Park and Fordham </option>
+            <option value="Southeast Bronx">Southeast Bronx </option>
+            <option value="Northeast Bronx">Northeast Bronx </option>
+            <option value="Kingsbridge and Riverdale">Kingsbridge and Riverdale </option>
+            <option value="Southeast Queens">Southeast Queens </option>
+            <option value="Northwest Queens">Northwest Queens </option>
+            <option value="Long Island City">Long Island City </option>
+            <option value="Northwest Brooklyn">Northwest Brooklyn </option>
+            <option value="Bushwick and Williamsburg">Bushwick and Williamsburg </option>
+            <option value="East New York and New Lots">East New York and New Lots </option>
+            <option value="Southwest Brooklyn">Southwest Brooklyn </option>
+            <option value="Flatbush">Flatbush </option>
+            <option value="Greenpoint">Greenpoint </option>
+            <option value="Central Brooklyn">Central Brooklyn </option>
+            <option value="Borough Park">Borough Park </option>
+            <option value="Sunset Park">Sunset Park </option>
+            <option value="Bushwick and Williamsburg">Bushwick and Williamsburg </option>
+            <option value="Southern Brooklyn">Southern Brooklyn </option>
+            <option value="Canarsie and Flatlands">Canarsie and Flatlands </option>
+            <option value="North Queens">North Queens </option>
+            <option value="Northeast Queens">Northeast Queens </option>
+            <option value="Central Queens">Central Queens </option>
+            <option value="West Queens">West Queens </option>
+            <option value="West Central Queens">West Central Queens </option>
+            <option value="Southeast Queens">Southeast Queens </option>
+             <option value="Jamaica">Jamaica </option>
+            <option value="Southwest Queens">Southwest Queens </option>
+            <option value="Rockaways">Rockaways </option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label class="form-label" for="form_category">Category</label>
+          <select class="selectpicker form-control" name="category" id="form_category" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
+            <option value="newamerican">New American </option>
+            <option value="armenian">Armenian </option>
+            <option value="barbeque">Barbeque </option>
+            <option value="bars">Bars </option>
+            <option value="bistros">Bistros </option>
+            <option value="burgers">Burgers </option>
+            <option value="chinese">Chinese </option>
+            <option value="danish">Danish </option>
+            <option value="diners">Diners </option>
+            <option value="ethiopian">Ethiopian </option>
+            <option value="filipino">Filipino </option>
+            <option value="french">French </option>
+            <option value="georgian">Georgian </option>
+            <option value="german">German </option>
+            <option value="greek">Greek </option>
+            <option value="hotdog">Hot dog </option>
+            <option value="italian">Italian </option>
+            <option value="bistros">Bistros </option>
+            <option value="japanese">Japanese </option>
+            <option value="jewish">Jewish </option>
+            <option value="kebab">Kebab </option>
+            <option value="korean">Korean </option>
+            <option value="kosher">Kosher </option>
+            <option value="mexican">Mexican </option>
+            <option value="noodles">Noodles </option>
+            <option value="pizza">Pizza </option>
+            <option value="salad">Salad </option>
+            <option value="sandwiches">Sandwiches </option>
+            <option value="seafood">Seafood </option>
+            <option value="sushi">Sushi </option>
+            <option value="tapassmallplates">Tapas/Small plates </option>
+            <option value="vegan">vegan </option>
+            <option value="vegetarian">Vegetarian </option>
+            <option value="vietnamese">Vietnamese </option>
+            <option value="waffles">Waffles </option>
+            <option value="wraps">Wraps </option>
+          </select>
+        </div>
+        <div class="mb-4">
+              <label class="form-label">Price</label>
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" id="price_1" name="price" value="$">
+                    <label class="custom-control-label" for="price_1">$</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" id="price_2" name="price" value="$$">
+                    <label class="custom-control-label" for="price_2">$$</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" id="price_3" name="price" value="$$$">
+                    <label class="custom-control-label" for="price_3">$$$</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" id="price_4" name="price" value="$$$$">
+                    <label class="custom-control-label" for="price_4">$$$$</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          <div class="mb-4">
+            <label class="form-label">Compliant Status</label>
+            <div class="form-group">
+              <div class="custom-control custom-radio">
+                <input class="custom-control-input" id="All" name="Status" type="radio">
+                <label class="custom-control-label" for="All">All</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input class="custom-control-input" id="Compliant" name="Status" type="radio" value="Compliant">
+                <label class="custom-control-label" for="Compliant">Compliant</label>
+              </div>
+            </div>
+          </div>
+        <div class="mb-4">
+          <label class="form-label">Ratings</label>
+          <div class="text-primary" id="slider-snap"></div>
+          <div class="nouislider-values">
+            <div class="min"><span id="slider-snap-value-from"></span></div>
+            <div class="max"><span id="slider-snap-value-to"></span></div>
+          </div>
+          <input type="hidden" name="ratingfrom" id="slider-snap-input-from" value="1">
+          <input type="hidden" name="ratingto" id="slider-snap-input-to" value="5">
+        </div>
+<!--          <div class="mb-4">-->
+<!--            <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>-->
+<!--          </div>-->
+          <div class="mb-4">
+            <button class="btn btn-primary" type="submit"> <i class="fas fa-filter mr-1"></i>Filter </button>
+            <button class="btn btn-secondary" type="reset" onclick="resetForm(event, $(this));"> <i class="fas fa-filter mr-1"></i>Reset </button>
+            <script>
+                   function resetForm(e, thisobj) {
+                      thisform = thisobj.closest('form');
+                      selectbox_in_form = thisform.find('select');
+
+                      // completely remove selected when it has been assigned.
+                      selectbox_in_form.find('option:selected').removeAttr('selected');
+                      selectbox_in_form.val('');
+                      selectbox_in_form.change();
+
+                      delete selectbox_in_form;
+                      delete thisform;
+                  }// resetForm
+
+                  $(function() {
+                      // activate Select2
+                      $('.selectbox-replacement-enabler').select2();
+                  });
+            </script>
+          </div>
+      </form>
+    </div>
+    <div class="col-lg-9">
+      <div class="row">
+        <!-- venue item-->
+        <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
+          <div class="card h-100 border-0 shadow">
+            <div id="image0" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
+              <a class="tile-link" href="#" id="img0"></a>
+              <div class="card-img-overlay-bottom z-index-20"> <span>
+                      <h4 id="name0" class="text-white text-shadow">Blue Hill </h4>
+                    </span>
+                <p class="mb-2 text-xs"><i class="fa fa-star text-warning" id="star00"></i><i class="fa fa-star text-warning" id="star01"></i><i class="fa fa-star text-warning" id="star02"></i><i class="fa fa-star text-warning" id="star03"></i><i class="fa fa-star text-warning" id="star04"></i> </p>
+              </div>
+              <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                <div id="category0" class="badge badge-transparent badge-pill px-3 py-2 invisible">Restaurants</div>
+                <!--                    <a class="card-fav-icon position-relative z-index-40" href="javascript: void();">-->
+                <!--                      <i class="far fa-check-circle fa-3x" style="color: #FFFFFF" id="compliance0"></i>-->
+                <!--                        <use xlink:href="#heart-1"> </use>-->
+                <!--                    </a>-->
+              </div>
+            </div>
+            <div class="card-body">
+              <!--                  <p id="text0" class="text-sm text-muted mb-3"> Cupidatat excepteur non dolore laborum et quis nostrud veniam dolore deserunt. Pariatur dolore ut in elit id nulla. Irur...</p>-->
+              <p id="status0" class="text-sm text-muted text-uppercase mb-1">None
+                <a href="#" class="text-dark"></a>
+              </p>
+              <a class="mr-1" href="#">
+                <p id="blue0" class="text-sm mb-0"></p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- venue item-->
+        <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
+          <div class="card h-100 border-0 shadow">
+            <div id="image1" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
+              <a class="tile-link" id="img1"></a>
+              <div class="card-img-overlay-bottom z-index-20">
+                <h4 id="name1" class="text-white text-shadow">Plutorque</h4>
+                <p class="mb-2 text-xs"><i class="fa fa-star text-warning" id="star10"></i><i class="fa fa-star text-warning" id="star11"></i><i class="fa fa-star text-warning" id="star12"></i><i class="fa fa-star text-warning" id="star13"></i><i class="fa fa-star text-warning" id="star14"></i> </p>
+              </div>
+              <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                <div class="badge badge-transparent badge-pill px-3 py-2 invisible">Restaurant</div>
+                <!--                    <a class="card-fav-icon position-relative z-index-40" href="javascript: void();">-->
+                <!--                      <svg class="svg-icon text-white">-->
+                <!--                    <i class="far fa-check-circle fa-3x" style="color: #FFFFFF" id="compliance1"></i>-->
+                <!--                        <use xlink:href="#heart-1"> </use>-->
+                <!--                      </svg></a>-->
+              </div>
+            </div>
+            <div class="card-body">
+              <!--                  <p class="text-sm text-muted mb-3"> Proident irure eiusmod velit veniam consectetur id minim irure et nostrud mollit magna velit. Commodo amet proident aliq...</p>-->
+              <p id="status1" class="text-sm text-muted text-uppercase mb-1">By
+                <a href="#" class="text-dark"></a>
+              </p>
+              <a class="mr-1" href="#">
+                <p id="blue1" class="text-sm mb-0"></p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- venue item-->
+        <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e3a31e62979bf147c9">
+          <div class="card h-100 border-0 shadow">
+            <div id="image2" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
+              <a class="tile-link" id="img2"></a>
+              <div class="card-img-overlay-bottom z-index-20">
+                <h4 id="name2" class="text-white text-shadow">Junipoor</h4>
+                <p class="mb-2 text-xs"><i class="fa fa-star text-warning" id="star20"></i><i class="fa fa-star text-warning" id="star21"></i><i class="fa fa-star text-warning" id="star22"></i><i class="fa fa-star text-warning" id="star23"></i><i class="fa fa-star text-warning" id="star24"></i> </p>
+              </div>
+              <div class="card-img-overlay-top d-flex justify-content-between align-items-center invisible">
+                <div class="badge badge-transparent badge-pill px-3 py-2 invisible">Music club</div>
+                <!--                    <a class="card-fav-icon position-relative z-index-40" href="javascript: void();">-->
+                <!--                      <svg class="svg-icon text-white">-->
+                <!--                        <use xlink:href="#heart-1"> </use>-->
+                <!--                      </svg></a>-->
+                <!--                      <i class="far fa-check-circle fa-3x" style="color: #FFFFFF" id="compliance2"> </i>--></div>
+            </div>
+            <div class="card-body">
+              <!--                  <p class="text-sm text-muted mb-3"> Lorem amet ex duis in et fugiat consectetur laborum eiusmod labore. Quis cupidatat et do dolor in in magna. Eu sit quis ...</p>-->
+              <p id="status2" class="text-sm text-muted text-uppercase mb-1">By <a href="#" class="text-dark">Matt Damon</a></p>
+              <a class="mr-1" href="#">
+                <p id="blue2" class="text-sm mb-0"></p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- venue item-->
+        <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e3503eb77d487e8082">
+          <div class="card h-100 border-0 shadow">
+            <div id="image3" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
+              <a class="tile-link" href="detail.html" id="img3"></a>
+              <div class="card-img-overlay-bottom z-index-20">
+                <h4 id="name3" class="text-white text-shadow">Musix</h4>
+                <p class="mb-2 text-xs"><i class="fa fa-star text-warning" id="star30"></i><i class="fa fa-star text-warning" id="star31"></i><i class="fa fa-star text-warning" id="star32"></i><i class="fa fa-star text-gray-300" id="star33"></i><i class="fa fa-star text-gray-300" id="star34"></i> </p>
+              </div>
+              <div class="card-img-overlay-top d-flex justify-content-between align-items-center invisible">
+                <!--                    <div class="badge badge-transparent badge-pill px-3 py-2">Music club</div>-->
+                <!--                    <a class="card-fav-icon position-relative z-index-40" href="javascript: void();">-->
+                <!--                      <svg class="svg-icon text-white">-->
+                <!--                        <use xlink:href="#heart-1"> </use>-->
+                <!--                      </svg></a>-->
+                <!--                    <i class="far fa-check-circle fa-3x" style="color: #FFFFFF" id="compliance3"> </i>--></div>
+            </div>
+            <div class="card-body">
+              <!--                  <p class="text-sm text-muted mb-3"> Deserunt eiusmod Lorem proident consequat elit culpa laboris ea cupidatat. Consequat dolore proident ipsum qui sint enim...</p>-->
+              <p id="status3" class="text-sm text-muted text-uppercase mb-1">By <a href="#" class="text-dark">Matt Damon</a></p>
+              <a class="mr-1" href="#">
+                <p id="blue3" class="text-sm mb-0"></p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- venue item-->
+        <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2eed0626e485d">
+          <div class="card h-100 border-0 shadow">
+            <div id="image4" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
+              <a class="tile-link" href="detail.html" id="img4"></a>
+              <div class="card-img-overlay-bottom z-index-20">
+                <h4 id="name4" class="text-white text-shadow">Prosure</h4>
+                <p class="mb-2 text-xs"><i class="fa fa-star text-warning" id="star40"></i><i class="fa fa-star text-warning" id="star41"></i><i class="fa fa-star text-warning" id="star42"></i><i class="fa fa-star text-warning" id="star43"></i><i class="fa fa-star text-warning" id="star44"></i> </p>
+              </div>
+              <div class="card-img-overlay-top d-flex justify-content-between align-items-center invisible">
+                <div class="badge badge-transparent badge-pill px-3 py-2 invisible">Restaurant</div>
+                <!--                    <a class="card-fav-icon position-relative z-index-40" href="javascript: void();">-->
+                <!--                      <svg class="svg-icon text-white">-->
+                <!--                        <use xlink:href="#heart-1"> </use>-->
+                <!--                      </svg></a>-->
+                <!--                    <i class="far fa-check-circle fa-3x" style="color: #FFFFFF" id="compliance4"> </i>--></div>
+            </div>
+            <div class="card-body">
+              <!--                  <p class="text-sm text-muted mb-3"> Cillum sunt reprehenderit ea non irure veniam dolore commodo labore fugiat est consequat velit. Cupidatat nisi qui ad si...</p>-->
+              <p id="status4" class="text-sm text-muted text-uppercase mb-1">By <a href="#" class="text-dark">Matt Damon</a></p>
+              <a class="mr-1" href="#">
+                <p id="blue4" class="text-sm mb-0"></p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- venue item-->
+        <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2edasd626e485d">
+          <div class="card h-100 border-0 shadow">
+            <div id="image5" class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({%static '/img/photo/dine_safely_default.jpg' %}); min-height: 200px;">
+              <a class="tile-link" href="detail.html" id="img5"></a>
+              <div class="card-img-overlay-bottom z-index-20">
+                <h4 id="name5" class="text-white text-shadow">Take That</h4>
+                <p class="mb-2 text-xs"><i class="fa fa-star text-warning" id="star50"></i><i class="fa fa-star text-warning" id="star51"></i><i class="fa fa-star text-warning" id="star52"></i><i class="fa fa-star text-warning" id="star53"></i><i class="fa fa-star text-gray-300" id="star54">                    </i> </p>
+              </div>
+              <div class="card-img-overlay-top d-flex justify-content-between align-items-center invisible">
+                <div class="badge badge-transparent badge-pill px-3 py-2 invisible">Café</div>
+                <!--                    <a class="card-fav-icon position-relative z-index-40" href="javascript: void();"> -->
+                <!--                      <svg class="svg-icon text-white">-->
+                <!--                        <use xlink:href="#heart-1"> </use>-->
+                <!--                      </svg></a>-->
+                <!--                    <i class="far fa-check-circle fa-3x" style="color: #FFFFFF" id="compliance5"> </i>--></div>
+            </div>
+            <div class="card-body">
+              <!--                  <p class="text-sm text-muted mb-3"> Cillum sunt reprehenderit ea non irure veniam dolore commodo labore fugiat est consequat velit. Cupidatat nisi qui ad si...</p>-->
+              <p id="status5" class="text-sm text-muted text-uppercase mb-1">By <a href="#" class="text-dark">Matt Damon</a></p>
+              <a class="mr-1" href="#">
+                <p id="blue5" class="text-sm mb-0"></p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-template d-flex justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" id="prev"> <i class="fa fa-angle-left"></i></a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#" id="page0">1</a></li>
+          <li class="page-item"><a class="page-link" href="#" id="page1">2</a></li>
+          <li class="page-item"><a class="page-link" href="#" id="page2">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" id="next"> <i class="fa fa-angle-right"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <script>
+		var page = {{page | safe}};
+		var keyword_dict = {{ keyword | safe}};
+		var keyword = keyword_dict['keyword']
+		for(var i = 0; i < 3; i++) {
+			document.getElementById("page" + i.toString()).innerHTML = (page + i).toString();
+			if (keyword != null) {
+			  document.getElementById("page" + i.toString()).href = (page + i).toString() + "?search=" + keyword;
+			} else {
+			  document.getElementById("page" + i.toString()).href = (page + i).toString();
+			}
+
+		}
+		document.getElementById("next").href = (page + 1).toString();
+		if(page > 1) {
+			document.getElementById("prev").href = (page - 1).toString();
+		}
+		var List = {{restaurant_list | safe}};
+		for(var i = 0; i < 6; i++) {
+			if(List[i]['yelp_info'] != null) {
+				if(List[i]['yelp_info']['image_url'] != null) {
+					document.getElementById("image" + i.toString()).style.backgroundImage = "url(" + List[i]['yelp_info']['image_url'] + ")";
+					document.getElementById("img" + i.toString()).href = "../restaurant/profile/" + List[i]['id'];
+				}
+				if(List[i]['yelp_info']['categories'] != null) {
+					var categories_str = "";
+					for(var j = 0; j < List[i]['yelp_info']['categories'].length; j++) {
+						categories_str += List[i]['yelp_info']['categories'][j]['title'] + "\t";
+					}
+					document.getElementById("blue" + i.toString()).innerHTML = categories_str;
+				}
+				if(List[i]['yelp_info']['rating'] != null) {
+					for(var r = 0; r < 5; r++) {
+						if(r > List[i]['yelp_info']['rating'] - 1) {
+							document.getElementById("star" + i.toString() + r.toString()).className = "fa fa-star text-gray-300";
+						}
+					}
+				}
+			} else {
+			  document.getElementById("img" + i.toString()).href = "../restaurant/inspection_records/" + List[i]['id'];
+			}
+			if(List[i]['latest_record'] != null) {
+				document.getElementById("status" + i.toString()).innerHTML = List[i]['latest_record']['is_roadway_compliant'];
+			}
+			document.getElementById("name" + i.toString()).innerHTML = List[i]['restaurant_name'];
+			document.getElementById("name" + i.toString()).href = "../" + List[i]['id'];
+		}
+		</script>
+    <script>
+      var snapSlider = document.getElementById('slider-snap');
+
+      noUiSlider.create(snapSlider, {
+          start: [ 1, 5 ],
+          snap: false,
+          connect: true,
+          step: 1,
+          range: {
+              'min': 1,
+              'max': 5
+          }
+      });
+      var snapValues = [
+          document.getElementById('slider-snap-value-from'),
+          document.getElementById('slider-snap-value-to')
+      ];
+      var inputValues = [
+          document.getElementById('slider-snap-input-from'),
+          document.getElementById('slider-snap-input-to')
+      ];
+      snapSlider.noUiSlider.on('update', function( values, handle ) {
+          snapValues[handle].innerHTML = values[handle];
+          inputValues[handle].value = values[handle];
+      })
+    </script>
+  </div>
+</div>
+{% endblock %}

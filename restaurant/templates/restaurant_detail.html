@@ -1,0 +1,445 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Hero Section-->
+<section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" id="res_img">
+  <div class="container overlay-content">
+    <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
+      <div class="text-white mb-4 mb-lg-0">
+        <div id="res_category" class="badge badge-pill badge-transparent px-3 py-2
+        mb-4"></div>
+        <h1 id="res-name" class="text-shadow verified">}</h1>
+        <p><i class="fas fa-map-marker-alt mr-2"></i><span id="res-display-addr"></span></p>
+        <p class="mb-0 d-flex align-items-center">
+          <span id="res_rev_star">
+
+          </span>
+          &nbsp;&nbsp;<span id="res_review_count"></span><span>&nbsp;Reviews</span>
+        </p>
+      </div>
+    </div>
+    </div>
+</section>
+<section class="py-6">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="text-block">
+          <h3 class="mb-4">Compliance Data</h3>
+          <div class="list-group shadow mb-5">
+            <a class="list-group-item list-group-item-action p-4" href="/restaurant/inspection_records/{{ restaurant_id }}">
+              <div class="row">
+                <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+                  <div class="d-flex align-items-center mb-3">
+                    <span id="res_compliance_status" class="badge badge-pill p-2 badge-success-light" style="font-size: inherit;"></span>
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="row text-center">
+                    <div class="col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0">
+                      <h6 class="label-heading">Skipped Reason </h6>
+                      <p id="res_skipped_reason" class="text-sm font-weight-bold"></p>
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0">
+                      <h6 class="label-heading">Inspection Date </h6>
+                      <p id="res_last_inspection" class="text-sm font-weight-bold mb-0"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Have you been here before?
+          </button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tell us about your experience!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form class="form-validate" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                  <h2>For this restaurant:</h2>
+                  <input type="text" id="restaurant_business_id" name="restaurant_business_id" value="" hidden>
+                  <br>
+                  <p>Did you receive a temperature check?</p>
+                  <div class="form-group">
+                    <input type="radio" id="star1" name="temperature_required" value="true" />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" id="star2" name="temperature_required" value="false" />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>Were you or a member of your party required to provide contact tracing information?</p>
+                  <div class="form-group">
+                    <input type="radio" name="contact_info_required" value="true" />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" name="contact_info_required" value="false" />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>Were restaurant staff wearing masks at all times?</p>
+                  <div class="form-group">
+                    <input type="radio" name="employee_mask" value="true" />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" name="employee_mask" value="false" />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>Was in-door capacity under 25%?</p>
+                  <div class="form-group">
+                    <input type="radio" name="capacity_compliant" value="true" />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" name="capacity_compliant" value="false" />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>Were you seated at least 6 feet from the nearest party?</p>
+                  <div class="form-group">
+                    <input type="radio" name="distance_compliant" value="true" />
+                    <label for="star1" title="text">Yes</label>
+                    <input type="radio" name="distance_compliant" value="false" />
+                    <label for="star2" title="text">No</label>
+                  </div>
+                  <br>
+                  <p>How would you rate the safety level for this restaurant?</p>
+                  <div class="form-group">
+                    <input type="radio" name="safety_level" value="1" />
+                    <label for="star1" title="text">1</label>
+                    <input type="radio" name="safety_level" value="2" />
+                    <label for="star2" title="text">2</label>
+                    <input type="radio" name="safety_level" value="3" />
+                    <label for="star1" title="text">3</label>
+                    <input type="radio" name="safety_level" value="4" />
+                    <label for="star1" title="text">4</label>
+                    <input type="radio" name="safety_level" value="5" />
+                    <label for="star1" title="text">5</label>
+                  </div>
+                  <br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit" >Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="text-block">
+          <!-- Listing Location-->
+          <h3 class="mb-4">Location</h3>
+          <div class="map-wrapper-300 mb-3">
+            <div class="h-100" id="detailMap"></div>
+          </div>
+        </div>
+        <div class="text-block">
+          <!-- Gallery-->
+          <h3 class="mb-4">Gallery</h3>
+          <div id="gallery_imgs" class="row gallery ml-n1 mr-n1">
+
+          </div>
+        </div>
+        <div class="text-block">
+          <p class="subtitle text-sm text-primary">Reviews </p>
+          <h5 class="mb-4">Listing Reviews </h5>
+          <span id="review_content"></span>
+          <div class="py-5">
+            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">Leave a review</button>
+            <div class="collapse mt-4" id="leaveReview">
+              <h5 class="mb-4">Leave a review</h5>
+              <form class="form" id="contact-form" method="get" action="#">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="form-label" for="name">Your name *</label>
+                      <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required="required"> </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="form-label" for="rating">Your rating *</label>
+                      <select class="custom-select focus-shadow-0" name="rating" id="rating">
+                        <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
+                        <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
+                        <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
+                        <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
+                        <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="email">Your email *</label>
+                  <input class="form-control" type="email" name="email" id="email" placeholder="Enter your  email" required="required"> </div>
+                <div class="form-group">
+                  <label class="form-label" for="review">Review text *</label>
+                  <textarea class="form-control" rows="4" name="review" id="review" placeholder="Enter your review" required="required"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Post review</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="pl-xl-4">
+          <!-- Opening Hours      -->
+          <div class="card border-0 shadow mb-5">
+            <div class="card-header bg-gray-100 py-4 border-0">
+              <div class="media align-items-center">
+                <div class="media-body">
+<!--                  <p class="subtitle text-sm text-primary">Overnight Status : <span id="res_overnight_status"></span></p>-->
+                  <h4 class="mb-0">Opening Hours </h4> </div>
+                <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
+                  <use xlink:href="#wall-clock-1"> </use>
+                </svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="res_open_hours" class="table text-sm mb-0">
+
+              </table>
+            </div>
+          </div>
+          <!-- Contact-->
+          <div class="card border-0 shadow mb-5">
+            <div class="card-header bg-gray-100 py-4 border-0">
+              <div class="media align-items-center">
+                <div class="media-body">
+                  <p class="subtitle text-sm text-primary">Want to know more?</p>
+                  <h4 class="mb-0">Information</h4> </div>
+                <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
+                  <use xlink:href="#fountain-pen-1"> </use>
+                </svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled mb-4">
+                <li class="mb-2">
+                  <a class="text-gray-00 text-sm text-decoration-none" href="#">
+                    <i class="fas fa-phone mr-3"></i>
+                    <span id="res_display_phn" class="text-muted"></span>
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class=" text-sm text-decoration-none" href="#">
+                    <i class="fas fa-star mr-3"></i>
+                    <span class="text-muted"><span id="res_rating_info"></span>&nbsp; Ratings</span>
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class=" text-sm text-decoration-none" href="#">
+                    <i class="fas fa-money-check-alt mr-3"></i>
+                    <span id="res-price" class="text-muted"></span>
+                  </a>
+                </li>
+              </ul>
+              <div class="text-center">
+                <a class="btn btn-outline-primary btn-block" href="{{ link }}"> <i class="far fa-paper-plane mr-2"></i>Reach out</a>
+              </div>
+            </div>
+          </div>
+          <!--          <div class="text-center">-->
+          <!--            <p><a class="text-secondary" href="#"> <i class="fa fa-heart"></i> Bookmark This Listing</a></p><span>79 people bookmarked this place </span>-->
+          <!--          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Insert values into HTML-->
+<script>
+var inspection_data = {{ lasted_inspection | safe}};
+
+document.getElementById("res_compliance_status").innerHTML = inspection_data.is_roadway_compliant;
+document.getElementById("res_skipped_reason").innerHTML = "-";
+document.getElementById("res_last_inspection").innerHTML = inspection_data.inspected_on;
+
+if(inspection_data.is_roadway_compliant=="Compliant")
+  {document.getElementById("res_compliance_status").className = "badge badge-pill p-2 badge-success-light"}
+else
+  {document.getElementById("res_skipped_reason").innerHTML = inspection_data.skipped_reason;
+  document.getElementById("res_compliance_status").className = "badge badge-pill p-2 badge-danger-light"}
+
+var True = true;
+var False = false;
+var None = null;
+var yelp_info = {{ yelp_info.info | safe }};
+var keys = Object.keys(yelp_info);
+var empty1 = [];
+for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if (yelp_info[key] == "" && typeof(yelp_info[key]) != 'boolean') {
+        empty1.push(key);
+    }
+}
+switch (false) {
+    case (empty1.includes(name)):
+        document.getElementById("res-name").innerHTML = yelp_info.name;
+    case (empty1.includes(review_count)):
+        document.getElementById("res_review_count").innerHTML = yelp_info.review_count;
+    case (empty1.includes(rating)):
+        document.getElementById("res_rating_info").innerHTML = yelp_info.rating;
+    case (empty1.includes(display_address)):
+        document.getElementById("res-display-addr").innerHTML = yelp_info.location.display_address;
+    case (empty1.includes(price)):
+        document.getElementById("res-price").innerHTML = yelp_info.price;
+    case (empty1.includes(display_phone)):
+        document.getElementById("res_display_phn").innerHTML = yelp_info.display_phone;
+    case (empty1.includes(image_url)):
+        document.getElementById("res_img").style.backgroundImage = 'url(' + yelp_info.image_url + ')';
+    case (empty1.includes(longitude)): var long = yelp_info.coordinates.longitude;
+    case (empty1.includes(latitude)): var lat = yelp_info.coordinates.latitude;
+}
+
+for (i = 0; i < yelp_info.categories.length; i++) {
+    document.getElementById("res_category").innerHTML += yelp_info.categories[i]
+        .title + "&nbsp;&nbsp;&nbsp;&nbsp;";
+}
+
+var res_rev_star = document.getElementById("res_rev_star");
+var rate = yelp_info.rating;
+for (j = 0; j < Math.ceil(rate); j++) {
+    var icon = document.createElement("i");
+    icon.className = "fa fa-xs fa-star text-primary";
+    res_rev_star.appendChild(icon);
+}
+for (j = 0; j < 5 - Math.ceil(rate); j++) {
+    var icon2 = document.createElement("i");
+    icon2.className = "fa fa-xs fa-star text-gray-200 mr-4";
+    res_rev_star.appendChild(icon2);
+}
+
+function timeChangeFunc(x) {
+  var hrs = parseInt(x.slice(0,2));
+  var a = (hrs<12)?'AM':'PM';
+  var mins = x.slice(2,4);
+  hrs = hrs%12 || 12;
+  return(hrs + ":" + mins + " " + a);
+}
+
+var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+for (i = 0; i < yelp_info.hours[0].open.length; i++) {
+    var opening_hours = document.getElementById("res_open_hours");
+    var row = document.createElement("tr");
+    opening_hours.appendChild(row);
+    var thh = document.createElement("th");
+    thh.className = "pl-0";
+    thh.innerHTML = days[i];
+    row.appendChild(thh);
+    var tdd = document.createElement("td");
+    tdd.className = "pr-0 text-right";
+    tdd.innerHTML = timeChangeFunc(yelp_info.hours[0].open[i].start) + "-" + timeChangeFunc(yelp_info.hours[0].open[i].end);
+    row.appendChild(tdd);
+}
+
+for (i = 0; i < yelp_info.photos.length; i++) {
+    var gallery_imgs = document.getElementById("gallery_imgs");
+    var ele = document.createElement("div");
+    ele.className = "col-lg-4 col-6 px-1 mb-2";
+    var a = document.createElement("a");
+    a.href = yelp_info.photos[i];
+    var img = document.createElement("img");
+    img.className = "img-fluid";
+    img.src = yelp_info.photos[i];
+
+    a.appendChild(img);
+    ele.appendChild(a);
+    gallery_imgs.appendChild(ele);
+}
+
+var yelp_reviews = {{ yelp_info.reviews | safe }};
+for (i = 0; i < yelp_reviews.reviews.length; i++) {
+    var review_content = document.getElementById("review_content");
+    var ele = document.createElement("div");
+    ele.className = "media d-block d-sm-flex review";
+    review_content.appendChild(ele);
+
+    var ele2 = document.createElement("div");
+    ele2.className = "text-md-center mr-4 mr-xl-5";
+    var img = document.createElement("img");
+    img.className = "d-block avatar avatar-xl p-2 mb-2";
+
+    if(yelp_reviews.reviews[i].user.image_url)
+    {
+      img.src = yelp_reviews.reviews[i].user.image_url;
+    }
+    else
+    {
+      img.src = "https://s3-media3.fl.yelpcdn.com/photo/O8CmQtEeOUvMTFk0iMn5sw/o.jpg";
+    }
+    img.alt = yelp_reviews.reviews[i].user.name;
+    var span = document.createElement("span");
+    span.className = "text-uppercase text-muted text-sm";
+    span.innerHTML = yelp_reviews.reviews[i].time_created;
+    ele2.appendChild(img);
+    ele2.appendChild(span);
+    ele.appendChild(ele2);
+
+    var ele3 = document.createElement("div");
+    ele3.className = "media-body";
+    var h6 = document.createElement("h6");
+    h6.className = "mt-2 mb-1";
+    var a = document.createElement("a");
+    a.href = yelp_reviews.reviews[i].user.profile_url;
+    a.innerHTML = yelp_reviews.reviews[i].user.name;
+    h6.appendChild(a);
+    ele3.appendChild(h6);
+    var div4 = document.createElement("div");
+    var user_rating = yelp_reviews.reviews[i].rating;
+    div4.className = "mb-2";
+    for (j = 0; j < user_rating; j++) {
+        var icon = document.createElement("i");
+        icon.className = "fa fa-xs fa-star text-primary";
+        div4.appendChild(icon);
+    }
+    for (j = 0; j < 5 - user_rating; j++) {
+        var icon2 = document.createElement("i");
+        icon2.className = "fa fa-xs fa-star text-gray-200";
+        div4.appendChild(icon2);
+    }
+
+
+
+    ele3.appendChild(div4);
+    var p = document.createElement("p");
+    p.className = "text-muted text-sm";
+    p.innerHTML = yelp_reviews.reviews[i].text;
+    ele3.appendChild(p);
+
+
+    ele.appendChild(ele3);
+}
+
+
+
+
+console.log(inspection_data);
+function initMap() {
+  const myLatLng = { lat: lat, lng: long };
+  const map = new google.maps.Map(document.getElementById("detailMap"), {
+    zoom: 15,
+    center: myLatLng,
+  });
+  new google.maps.Marker({
+    position: myLatLng,
+    map,
+    title: yelp_info.name,
+  });
+}
+
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&callback=initMap"
+        type="text/javascript"></script>
+<script>
+  document.getElementById("restaurant_business_id").value= yelp_info.id ;
+</script>
+
+{% endblock %}
