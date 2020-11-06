@@ -450,8 +450,20 @@ class GetFilteredRestaurantsTests(TestCase):
             latitude,
             longitude,
         )
+
+        create_restaurant(
+            business_id=business_id,
+            business_address="fake addres",
+            postcode="11111",
+            restaurant_name="Test Italian Restaurant",
+        )
         filtered_restaurants = get_filtered_restaurants(
-            ["$$"], ["Upper East Side"], 2.0, ["italian"], page, limit
+            price=["$$"],
+            neighborhood=["Upper East Side"],
+            rating=4.0,
+            category=["italian"],
+            page=page,
+            limit=limit,
         )
 
         self.assertEqual(details.business_id, filtered_restaurants[0].business_id)

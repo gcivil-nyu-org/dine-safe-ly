@@ -16,7 +16,7 @@ def get_restaurant_info_yelp(business_id):
 
 
 def get_restaurant_info_yelp_local(business_id):
-    #TODO
+    # TODO
     pass
 
 
@@ -93,18 +93,24 @@ def restaurants_to_dict(restaurants):
 
 
 def get_restaurant_list(
-        page,
-        limit,
-        keyword=None,
-        neighbourhoods_filter=None,
-        categories_filter=None,
-        price_filter=None,
-        rating_filter=None,
+    page,
+    limit,
+    keyword=None,
+    neighbourhoods_filter=None,
+    categories_filter=None,
+    price_filter=None,
+    rating_filter=None,
 ):
     page = int(page) - 1
     offset = int(page) * int(limit)
 
-    if keyword or neighbourhoods_filter or categories_filter or price_filter or rating_filter:
+    if (
+        keyword
+        or neighbourhoods_filter
+        or categories_filter
+        or price_filter
+        or rating_filter
+    ):
         restaurants = get_filtered_restaurants(
             keyword,
             price_filter,
@@ -117,12 +123,20 @@ def get_restaurant_list(
         return restaurants_to_dict(restaurants)
     else:
         restaurants = Restaurant.objects.all()[
-                      offset: offset + int(limit)  # noqa: E203
-                      ]
+            offset : offset + int(limit)  # noqa: E203
+        ]
         return restaurants_to_dict(restaurants)
 
 
-def get_filtered_restaurants(keyword, price, neighborhood, rating, category, page, limit):
+def get_filtered_restaurants(
+    keyword=None,
+    price=None,
+    neighborhood=None,
+    rating=None,
+    category=None,
+    page=None,
+    limit=None,
+):
     filters = {}
     offset = page * int(limit)
     if price:
@@ -136,10 +150,10 @@ def get_filtered_restaurants(keyword, price, neighborhood, rating, category, pag
 
     keyword_filter = {}
     if keyword:
-        keyword_filter['restaurant_name__contains'] = keyword
+        keyword_filter["restaurant_name__contains"] = keyword
 
     filtered_restaurants = Restaurant.objects.filter(
-        business_id__in=YelpRestaurantDetails.objects.filter(**filters)).filter(**keyword_filter)[
-                           offset: offset + int(limit)]
+        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+    ).filter(**keyword_filter)[offset : offset + int(limit)]
 
     return filtered_restaurants
