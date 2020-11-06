@@ -10,4 +10,3 @@ flake8
 coverage
 coveralls
 pre-commit
-django-import-export
