@@ -4,7 +4,7 @@ from restaurant import views
 
 app_name = "restaurant"
 urlpatterns = [
-    path("profile/<restaurant_id>/", views.get_restaurant_profile, name="profile"),
+    path("profile/<restaurant_id>", views.get_restaurant_profile, name="profile"),
     path(
         "inspection_records/<restaurant_id>",
         views.get_inspection_info,

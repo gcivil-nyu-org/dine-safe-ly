@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from .models import Restaurant
-from .models import UserQuestionnaire
 from .forms import QuestionnaireForm
 from .utils import (
     query_yelp,
@@ -28,6 +27,8 @@ def index(request):
 def get_restaurant_profile(request, restaurant_id):
     if request.method == "POST":
         form = QuestionnaireForm(request.POST)
+        print(form.is_valid())
+        logger.info(form.is_valid())
         if form.is_valid():
             form.save()
     try:

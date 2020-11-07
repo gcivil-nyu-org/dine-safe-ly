@@ -1,6 +1,11 @@
 from django.conf import settings
 from django.forms.models import model_to_dict
-from .models import InspectionRecords, Restaurant, YelpRestaurantDetails, UserQuestionnaire
+from .models import (
+    InspectionRecords,
+    Restaurant,
+    YelpRestaurantDetails,
+    UserQuestionnaire,
+)
 import requests
 import json
 import logging
@@ -168,6 +173,6 @@ def get_average_safety_rating(business_id):
         total = 0
         for feedback in all_feedback_list:
             total += int(feedback.safety_level)
-        average_safety_rating = total/len(all_feedback_list)
+        average_safety_rating = total / len(all_feedback_list)
         return average_safety_rating
     return None
