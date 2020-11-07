@@ -1,8 +1,11 @@
 from django.test import RequestFactory, TestCase
 from django.forms.models import model_to_dict
+from django.test import Client
 from datetime import datetime
 from unittest import mock
-from .models import Restaurant, InspectionRecords, YelpRestaurantDetails, Zipcodes
+from .forms import QuestionnaireForm
+from .models import Restaurant, InspectionRecords, YelpRestaurantDetails, Zipcodes, \
+    UserQuestionnaire
 from .views import get_inspection_info, get_landing_page, get_restaurant_profile
 from .utils import (
     merge_yelp_info,
@@ -37,13 +40,13 @@ def create_restaurant(restaurant_name, business_address, postcode, business_id):
 
 
 def create_inspection_records(
-    restaurant_inspection_id,
-    restaurant_name,
-    postcode,
-    business_address,
-    is_roadway_compliant,
-    skipped_reason,
-    inspected_on,
+        restaurant_inspection_id,
+        restaurant_name,
+        postcode,
+        business_address,
+        is_roadway_compliant,
+        skipped_reason,
+        inspected_on,
 ):
     return InspectionRecords.objects.create(
         restaurant_inspection_id=restaurant_inspection_id,
@@ -57,7 +60,7 @@ def create_inspection_records(
 
 
 def create_yelp_restaurant_details(
-    business_id, neighborhood, category, price, rating, img_url, latitude, longitude
+        business_id, neighborhood, category, price, rating, img_url, latitude, longitude
 ):
     return YelpRestaurantDetails.objects.create(
         business_id=business_id,
@@ -163,6 +166,32 @@ class ModelTests(TestCase):
         self.assertEqual(neigbourhood_map.neighborhood, "Sunset Park")
         self.assertEqual(str(neigbourhood_map), "11220 Brooklyn Sunset Park")
 
+    def test_create_questionnaire(self):
+        questionnaire = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="5",
+            saved_on="",
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+        self.assertIsNotNone(questionnaire)
+        self.assertEqual(questionnaire.restaurant_business_id, "WavvLdfdP6g8aZTtbBQHTw")
+        self.assertEqual(questionnaire.user_id, "1")
+        self.assertEqual(questionnaire.safety_level, "5")
+        self.assertEqual(questionnaire.temperature_required, "True")
+        self.assertEqual(questionnaire.contact_info_required, "True")
+        self.assertEqual(questionnaire.employee_mask, "True")
+        self.assertEqual(questionnaire.capacity_compliant, "True")
+        self.assertEqual(questionnaire.distance_compliant, "True")
+        self.assertEqual(
+            str(questionnaire),
+            "WavvLdfdP6g8aZTtbBQHTw 1 5 True True True True True"
+        )
+
 
 class InspectionRecordsViewTests(TestCase):
     def setUp(self):
@@ -172,8 +201,8 @@ class InspectionRecordsViewTests(TestCase):
             restaurant_name="Tacos El Paisa",
             postcode="10040",
             business_address="1548 St. Nicholas btw West 187th street "
-            "and west 188th "
-            "street, Manhattan, NY",
+                             "and west 188th "
+                             "street, Manhattan, NY",
             is_roadway_compliant="Compliance",
             skipped_reason="No Seating",
             inspected_on=datetime(2020, 10, 21, 12, 30, 30),
@@ -181,7 +210,7 @@ class InspectionRecordsViewTests(TestCase):
         self.restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-            "street, Manhattan, NY",
+                             "street, Manhattan, NY",
             postcode="10040",
             business_id="16",
         )
@@ -200,6 +229,171 @@ class InspectionRecordsViewTests(TestCase):
         self.assertEqual(response.status_code, 404)
 
 
+class BaseTest(TestCase):
+    def setUp(self):
+        self.user_register_url = "user:register"
+        self.c = Client()
+        self.dummy_user_questionnaire = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="5",
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+
+        return super().setUp
+
+
+class UserQuestionnaireFormTests(BaseTest):
+    def test_no_business_id(self):
+        self.form_no_business_id = {
+            "restaurant_business_id": "",
+            "user_id": "1",
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_business_id)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_user_id(self):
+        self.form_no_user_id = {
+            "restaurant_business_id": "",
+            "user_id": "",
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_user_id)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_safety_level(self):
+        self.form_no_safety_level = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "safety_level": "",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_safety_level)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_temperature_required(self):
+        self.form_no_temperature_required = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "safety_level": "5",
+            "temperature_required": "",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_temperature_required)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_contact_info_required(self):
+        self.form_no_contact_info_required = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_contact_info_required)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_employee_mask(self):
+        self.form_no_employee_mask = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_employee_mask)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_capacity_compliant(self):
+        self.form_no_capacity_compliant = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_capacity_compliant)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_distance_compliant(self):
+        self.form_no_distance_compliant = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_distance_compliant)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_form_valid(self):
+        self.form_valid = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        form = QuestionnaireForm(self.form_valid)
+        self.assertTrue(form.is_valid())
+
+    def test_form_submission(self):
+        self.form = {
+            "restaurant_business_id": "U8C69ISrhGTTubjqoVgZYg",
+            "user_id": "1",
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        form = QuestionnaireForm(self.form)
+        response = self.c.post(
+            "/restaurant/1",
+            self.form
+        )
+        self.assertTrue(form.is_valid())
+        self.assertEqual(response.status_code, 200)
+
+
 class RestaurantViewTests(TestCase):
     """ Test Restaurant Views """
 
@@ -208,7 +402,7 @@ class RestaurantViewTests(TestCase):
         self.restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-            "street, Manhattan, NY",
+                             "street, Manhattan, NY",
             postcode="10040",
             business_id="16",
         )
@@ -256,30 +450,30 @@ class RestaurantUtilsTests(TestCase):
                             "id": "xAG4O7l-t1ubbwVAlPnDKg",
                             "rating": 5,
                             "text": "Went back again to this place since the last "
-                            "time i visited the bay area 5 "
-                            "months ago, and nothing has changed. Still the "
-                            "sketchy Mission, "
-                            "Still the cashier...",
+                                    "time i visited the bay area 5 "
+                                    "months ago, and nothing has changed. Still the "
+                                    "sketchy Mission, "
+                                    "Still the cashier...",
                             "time_created": "2016-08-29 00:41:13",
                         },
                         {
                             "id": "1JNmYjJXr9ZbsfZUAgkeXQ",
                             "rating": 4,
                             "text": 'The "restaurant" is inside a small deli so there '
-                            "is no sit down area. Just grab "
-                            "and go.\n\nInside, they sell individually "
-                            "packaged ingredients so that you "
-                            "can...",
+                                    "is no sit down area. Just grab "
+                                    "and go.\n\nInside, they sell individually "
+                                    "packaged ingredients so that you "
+                                    "can...",
                             "time_created": "2016-09-28 08:55:29",
                         },
                         {
                             "id": "SIoiwwVRH6R2s2ipFfs4Ww",
                             "rating": 4,
                             "text": "Dear Mission District,\n\nI miss you and your "
-                            "many delicious late night food "
-                            "establishments and vibrant atmosphere.  I miss "
-                            "the way you sound and smell on "
-                            "a...",
+                                    "many delicious late night food "
+                                    "establishments and vibrant atmosphere.  I miss "
+                                    "the way you sound and smell on "
+                                    "a...",
                             "time_created": "2016-08-10 07:56:44",
                         },
                     ],
@@ -314,7 +508,7 @@ class RestaurantUtilsTests(TestCase):
     @mock.patch("restaurant.utils.get_restaurant_reviews_yelp")
     @mock.patch("restaurant.utils.get_restaurant_info_yelp")
     def test_query_yelp(
-        self, mock_get_restaurant_info_yelp, mock_get_restaurant_reviews_yelp
+            self, mock_get_restaurant_info_yelp, mock_get_restaurant_reviews_yelp
     ):
         business_id = "WavvLdfdP6g8aZTtbBQHTw"
         mock_get_restaurant_info_yelp.return_value = MockResponse(
@@ -336,7 +530,7 @@ class RestaurantUtilsTests(TestCase):
     @mock.patch("restaurant.utils.get_latest_inspection_record")
     @mock.patch("restaurant.models.Restaurant.objects.all")
     def test_get_restaurant_list(
-        self, mock_objects, mock_get_latest_inspection_record, mock_get_yelp_info
+            self, mock_objects, mock_get_latest_inspection_record, mock_get_yelp_info
     ):
         mock_objects.return_value = [
             create_restaurant(
@@ -370,7 +564,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
         restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-            "street, Manhattan, NY",
+                             "street, Manhattan, NY",
             postcode="10040",
             business_id="16",
         )
@@ -379,7 +573,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant_name="Tacos El Paisa",
             postcode="10040",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-            "street, Manhattan, NY",
+                             "street, Manhattan, NY",
             is_roadway_compliant="Compliant",
             skipped_reason="No Seating",
             inspected_on=datetime(2020, 10, 21, 12, 30, 30),
@@ -389,7 +583,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant_name="Tacos El Paisa",
             postcode="10040",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-            "street, Manhattan, NY",
+                             "street, Manhattan, NY",
             is_roadway_compliant="Non-Compliant",
             skipped_reason="No Seating",
             inspected_on=datetime(2020, 10, 22, 12, 30, 30),
@@ -413,7 +607,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
         restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
-            "street, Manhattan, NY",
+                             "street, Manhattan, NY",
             postcode="10040",
             business_id="16",
         )
