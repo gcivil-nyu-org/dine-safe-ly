@@ -406,7 +406,7 @@ class UserQuestionnaireFormTests(BaseTest):
             "distance_compliant": "True",
         }
         form = QuestionnaireForm(self.form)
-        response = self.c.post("/restaurant/profile/1", self.form)
+        response = self.c.post("/restaurant/profile/1/", self.form)
         self.assertTrue(form.is_valid())
         self.assertEqual(response.status_code, 200)
 
