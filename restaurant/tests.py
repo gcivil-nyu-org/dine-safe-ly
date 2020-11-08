@@ -1,7 +1,7 @@
 from django.test import RequestFactory, TestCase
 from django.forms.models import model_to_dict
 from django.test import Client
-from datetime import datetime
+from datetime import datetime, timedelta
 from unittest import mock
 from .forms import QuestionnaireForm
 from .models import (
@@ -178,7 +178,7 @@ class ModelTests(TestCase):
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="5",
-            saved_on="11/7/2020, 5:05:09 PM",
+            saved_on=datetime.now(),
             temperature_required="True",
             contact_info_required="True",
             employee_mask="True",
@@ -189,7 +189,7 @@ class ModelTests(TestCase):
         self.assertEqual(questionnaire.restaurant_business_id, "WavvLdfdP6g8aZTtbBQHTw")
         self.assertEqual(questionnaire.user_id, "1")
         self.assertEqual(questionnaire.safety_level, "5")
-        self.assertEqual(questionnaire.saved_on, "11/7/2020, 5:05:09 PM")
+        self.assertIsNotNone(questionnaire.saved_on)
         self.assertEqual(questionnaire.temperature_required, "True")
         self.assertEqual(questionnaire.contact_info_required, "True")
         self.assertEqual(questionnaire.employee_mask, "True")
@@ -197,8 +197,9 @@ class ModelTests(TestCase):
         self.assertEqual(questionnaire.distance_compliant, "True")
         self.assertEqual(
             str(questionnaire),
-            "WavvLdfdP6g8aZTtbBQHTw 1 5 11/7/2020, 5:05:09 PM "
-            "True True True True True",
+            "WavvLdfdP6g8aZTtbBQHTw 1 5 "
+            + str(questionnaire.saved_on)
+            + " True True True True True",
         )
 
 
@@ -246,7 +247,7 @@ class BaseTest(TestCase):
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="5",
-            saved_on="11/7/2020, 5:05:09 PM",
+            saved_on=datetime.now(),
             temperature_required="True",
             contact_info_required="True",
             employee_mask="True",
@@ -262,6 +263,7 @@ class UserQuestionnaireFormTests(BaseTest):
         self.form_no_business_id = {
             "restaurant_business_id": "",
             "user_id": "1",
+            "saved_on": str(datetime.now()),
             "safety_level": "5",
             "temperature_required": "True",
             "contact_info_required": "True",
@@ -276,6 +278,7 @@ class UserQuestionnaireFormTests(BaseTest):
         self.form_no_user_id = {
             "restaurant_business_id": "",
             "user_id": "",
+            "saved_on": str(datetime.now()),
             "safety_level": "5",
             "temperature_required": "True",
             "contact_info_required": "True",
@@ -290,6 +293,7 @@ class UserQuestionnaireFormTests(BaseTest):
         self.form_no_safety_level = {
             "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
             "user_id": "1",
+            "saved_on": str(datetime.now()),
             "safety_level": "",
             "temperature_required": "True",
             "contact_info_required": "True",
@@ -304,6 +308,7 @@ class UserQuestionnaireFormTests(BaseTest):
         self.form_no_temperature_required = {
             "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
             "user_id": "1",
+            "saved_on": str(datetime.now()),
             "safety_level": "5",
             "temperature_required": "",
             "contact_info_required": "True",
@@ -318,6 +323,7 @@ class UserQuestionnaireFormTests(BaseTest):
         self.form_no_contact_info_required = {
             "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
             "user_id": "1",
+            "saved_on": str(datetime.now()),
             "safety_level": "5",
             "temperature_required": "True",
             "contact_info_required": "",
@@ -332,6 +338,7 @@ class UserQuestionnaireFormTests(BaseTest):
         self.form_no_employee_mask = {
             "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
             "user_id": "1",
+            "saved_on": str(datetime.now()),
             "safety_level": "5",
             "temperature_required": "True",
             "contact_info_required": "True",
@@ -346,6 +353,7 @@ class UserQuestionnaireFormTests(BaseTest):
         self.form_no_capacity_compliant = {
             "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
             "user_id": "1",
+            "saved_on": str(datetime.now()),
             "safety_level": "5",
             "temperature_required": "True",
             "contact_info_required": "True",
@@ -360,6 +368,7 @@ class UserQuestionnaireFormTests(BaseTest):
         self.form_no_distance_compliant = {
             "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
             "user_id": "1",
+            "saved_on": str(datetime.now()),
             "safety_level": "5",
             "temperature_required": "True",
             "contact_info_required": "True",
@@ -375,7 +384,7 @@ class UserQuestionnaireFormTests(BaseTest):
             "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
             "user_id": "1",
             "safety_level": "5",
-            "saved_on": "11/7/2020, 5:05:09 PM",
+            "saved_on": datetime.now(),
             "temperature_required": "True",
             "contact_info_required": "True",
             "employee_mask": "True",
@@ -398,7 +407,7 @@ class UserQuestionnaireFormTests(BaseTest):
             "restaurant_business_id": "U8C69ISrhGTTubjqoVgZYg",
             "user_id": "1",
             "safety_level": "5",
-            "saved_on": "11/7/2020, 5:05:09 PM",
+            "saved_on": datetime.now(),
             "temperature_required": "True",
             "contact_info_required": "True",
             "employee_mask": "True",
@@ -578,7 +587,7 @@ class RestaurantUtilsTests(TestCase):
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="5",
-            saved_on="11/7/2020, 8:05:09 PM",
+            saved_on=datetime.now(),
             temperature_required="True",
             contact_info_required="True",
             employee_mask="True",
@@ -589,7 +598,7 @@ class RestaurantUtilsTests(TestCase):
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="5",
-            saved_on="11/7/2020, 9:05:09 PM",
+            saved_on=datetime.now() + timedelta(hours=1),
             temperature_required="True",
             contact_info_required="True",
             employee_mask="True",
@@ -605,7 +614,7 @@ class RestaurantUtilsTests(TestCase):
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="1",
-            saved_on="11/7/2020, 8:05:09 PM",
+            saved_on=datetime.now(),
             temperature_required="True",
             contact_info_required="True",
             employee_mask="True",
@@ -616,7 +625,7 @@ class RestaurantUtilsTests(TestCase):
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="2",
-            saved_on="11/7/2020, 9:05:09 PM",
+            saved_on=datetime.now() + timedelta(hours=1),
             temperature_required="True",
             contact_info_required="True",
             employee_mask="True",
@@ -627,7 +636,7 @@ class RestaurantUtilsTests(TestCase):
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="3",
-            saved_on="11/7/2020, 10:05:09 PM",
+            saved_on=datetime.now() + timedelta(hours=2),
             temperature_required="True",
             contact_info_required="True",
             employee_mask="True",

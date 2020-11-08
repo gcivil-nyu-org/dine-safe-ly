@@ -72,7 +72,7 @@
                   <h2>For this restaurant:</h2>
                   <input type="text" id="restaurant_business_id" name="restaurant_business_id" value="" hidden>
                     <input type="text" id="user_id" name="user_id" value="{{user.id}}" hidden>
-                    <input type="text" id="saved_on" name="saved_on" value="" hidden>
+                    <input type="text" id="saved_on" name="saved_on"   hidden>
                   <br>
                   <p>Did you receive a temperature check?</p>
                   <div class="form-group">
@@ -488,11 +488,7 @@ function initMap() {
         type="text/javascript"></script>
 <script>
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
-  {#document.getElementById("user_id").value = "1";#}
-  var datetime = new Date();
-  document.getElementById("saved_on").value = datetime.toLocaleString();
-  console.log("saved on date: " + datetime.toLocaleString());
-  console.log("user id is:{{ user.id }}")
+
 
 </script>
 
