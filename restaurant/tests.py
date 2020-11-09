@@ -1,8 +1,16 @@
 from django.test import RequestFactory, TestCase
 from django.forms.models import model_to_dict
-from datetime import datetime
+from django.test import Client
+from datetime import datetime, timedelta
 from unittest import mock
-from .models import Restaurant, InspectionRecords, YelpRestaurantDetails, Zipcodes
+from .forms import QuestionnaireForm
+from .models import (
+    Restaurant,
+    InspectionRecords,
+    YelpRestaurantDetails,
+    Zipcodes,
+    UserQuestionnaire,
+)
 from .views import get_inspection_info, get_landing_page, get_restaurant_profile
 from .utils import (
     merge_yelp_info,
@@ -12,6 +20,8 @@ from .utils import (
     get_latest_inspection_record,
     get_restaurant_list,
     get_filtered_restaurants,
+    get_latest_feedback,
+    get_average_safety_rating,
 )
 
 # from getinspection import (
@@ -163,6 +173,35 @@ class ModelTests(TestCase):
         self.assertEqual(neigbourhood_map.neighborhood, "Sunset Park")
         self.assertEqual(str(neigbourhood_map), "11220 Brooklyn Sunset Park")
 
+    def test_create_questionnaire(self):
+        questionnaire = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="5",
+            saved_on=datetime.now(),
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+        self.assertIsNotNone(questionnaire)
+        self.assertEqual(questionnaire.restaurant_business_id, "WavvLdfdP6g8aZTtbBQHTw")
+        self.assertEqual(questionnaire.user_id, "1")
+        self.assertEqual(questionnaire.safety_level, "5")
+        self.assertIsNotNone(questionnaire.saved_on)
+        self.assertEqual(questionnaire.temperature_required, "True")
+        self.assertEqual(questionnaire.contact_info_required, "True")
+        self.assertEqual(questionnaire.employee_mask, "True")
+        self.assertEqual(questionnaire.capacity_compliant, "True")
+        self.assertEqual(questionnaire.distance_compliant, "True")
+        self.assertEqual(
+            str(questionnaire),
+            "WavvLdfdP6g8aZTtbBQHTw 1 5 "
+            + str(questionnaire.saved_on)
+            + " True True True True True",
+        )
+
 
 class InspectionRecordsViewTests(TestCase):
     def setUp(self):
@@ -198,6 +237,187 @@ class InspectionRecordsViewTests(TestCase):
         self.restaurant.id = -1
         response = get_inspection_info(request, self.restaurant.id)
         self.assertEqual(response.status_code, 404)
+
+
+class BaseTest(TestCase):
+    def setUp(self):
+        self.user_register_url = "user:register"
+        self.c = Client()
+        self.dummy_user_questionnaire = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="5",
+            saved_on=datetime.now(),
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+
+        return super().setUp
+
+
+class UserQuestionnaireFormTests(BaseTest):
+    def test_no_business_id(self):
+        self.form_no_business_id = {
+            "restaurant_business_id": "",
+            "user_id": "1",
+            "saved_on": str(datetime.now()),
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_business_id)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_user_id(self):
+        self.form_no_user_id = {
+            "restaurant_business_id": "",
+            "user_id": "",
+            "saved_on": str(datetime.now()),
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_user_id)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_safety_level(self):
+        self.form_no_safety_level = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "saved_on": str(datetime.now()),
+            "safety_level": "",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_safety_level)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_temperature_required(self):
+        self.form_no_temperature_required = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "saved_on": str(datetime.now()),
+            "safety_level": "5",
+            "temperature_required": "",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_temperature_required)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_contact_info_required(self):
+        self.form_no_contact_info_required = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "saved_on": str(datetime.now()),
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_contact_info_required)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_employee_mask(self):
+        self.form_no_employee_mask = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "saved_on": str(datetime.now()),
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_employee_mask)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_capacity_compliant(self):
+        self.form_no_capacity_compliant = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "saved_on": str(datetime.now()),
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "",
+            "distance_compliant": "True",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_capacity_compliant)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_no_distance_compliant(self):
+        self.form_no_distance_compliant = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "saved_on": str(datetime.now()),
+            "safety_level": "5",
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "",
+        }
+        questionnaire_form = QuestionnaireForm(self.form_no_distance_compliant)
+        self.assertFalse(questionnaire_form.is_valid())
+
+    def test_form_valid(self):
+        self.form_valid = {
+            "restaurant_business_id": "WavvLdfdP6g8aZTtbBQHTw",
+            "user_id": "1",
+            "safety_level": "5",
+            "saved_on": datetime.now(),
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        form = QuestionnaireForm(self.form_valid)
+        self.assertTrue(form.is_valid())
+
+    def test_form_submission(self):
+        print("in test_form_submission")
+        create_restaurant(
+            "random_name",
+            "random_address",
+            "random_postcode",
+            "U8C69ISrhGTTubjqoVgZYg",
+        )
+        print(Restaurant.objects.all()[0])
+        self.form = {
+            "restaurant_business_id": "U8C69ISrhGTTubjqoVgZYg",
+            "user_id": "1",
+            "safety_level": "5",
+            "saved_on": datetime.now(),
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+        }
+        form = QuestionnaireForm(self.form)
+        response = self.c.post("/restaurant/profile/1/", self.form)
+        self.assertTrue(form.is_valid())
+        self.assertEqual(response.status_code, 200)
 
 
 class RestaurantViewTests(TestCase):
@@ -361,6 +581,70 @@ class RestaurantUtilsTests(TestCase):
         data = get_restaurant_list(1, 1)
         self.assertEqual(data[0]["yelp_info"], {"id": "WavvLdfdP6g8aZTtbBQHTw"})
         self.assertEqual(data[0]["latest_record"], model_dict)
+
+    def test_get_latest_feedback(self):
+        questionnaire_old = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="5",
+            saved_on=datetime.now(),
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+        questionnaire_new = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="5",
+            saved_on=datetime.now() + timedelta(hours=1),
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+        latest_feedback = get_latest_feedback("WavvLdfdP6g8aZTtbBQHTw")
+        self.assertEqual(latest_feedback, model_to_dict(questionnaire_new))
+        self.assertNotEqual(latest_feedback, model_to_dict(questionnaire_old))
+
+    def test_get_average_safety_rating(self):
+        UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="1",
+            saved_on=datetime.now(),
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+        UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="2",
+            saved_on=datetime.now() + timedelta(hours=1),
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+        UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="3",
+            saved_on=datetime.now() + timedelta(hours=2),
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+        average_safety = get_average_safety_rating("WavvLdfdP6g8aZTtbBQHTw")
+        self.assertEqual(average_safety, 2)
 
 
 class IntegratedInspectionRestaurantsTests(TestCase):

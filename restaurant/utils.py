@@ -1,6 +1,11 @@
 from django.conf import settings
 from django.forms.models import model_to_dict
-from .models import InspectionRecords, Restaurant, YelpRestaurantDetails
+from .models import (
+    InspectionRecords,
+    Restaurant,
+    YelpRestaurantDetails,
+    UserQuestionnaire,
+)
 import requests
 import json
 import logging
@@ -157,3 +162,27 @@ def get_filtered_restaurants(
     ).filter(**keyword_filter)[offset : offset + int(limit)]
 
     return filtered_restaurants
+
+
+def get_latest_feedback(business_id):
+    all_feedback_list = UserQuestionnaire.objects.filter(
+        restaurant_business_id=business_id,
+    ).order_by("-saved_on")
+    if len(all_feedback_list) >= 1:
+        latest_feedback = model_to_dict(all_feedback_list[0])
+        return latest_feedback
+
+    return None
+
+
+def get_average_safety_rating(business_id):
+    all_feedback_list = UserQuestionnaire.objects.filter(
+        restaurant_business_id=business_id,
+    )
+    if len(all_feedback_list) >= 1:
+        total = 0
+        for feedback in all_feedback_list:
+            total += int(feedback.safety_level)
+        average_safety_rating = total / len(all_feedback_list)
+        return average_safety_rating
+    return None
