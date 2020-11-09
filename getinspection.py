@@ -7,6 +7,7 @@ from sodapy import Socrata
 import requests
 import json
 import logging
+
 # from apscheduler.schedulers.blocking import BlockingScheduler
 
 # import dateutil.parser
@@ -15,11 +16,12 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
 
 from restaurant.models import Restaurant, InspectionRecords  # noqa: E402
-from yelprestaurantdetails import save_yelp_restaurant_details
+from yelprestaurantdetails import save_yelp_restaurant_details  # noqa: E402
 
 
 # sched = BlockingScheduler()
 logger = logging.getLogger(__name__)
+
 
 def match_on_yelp(restaurant_name, restaurant_location):
     location_list = restaurant_location.split(", ")
@@ -84,9 +86,9 @@ def clean_inspection_data(results_df):
 
 def save_restaurants(restaurant_df, inspection_df):
     for index, row in inspection_df.iterrows():
-        count=0
+        count = 0
         try:
-            
+
             response = json.loads(
                 match_on_yelp(row["restaurantname"], row["businessaddress"])
             )
@@ -100,20 +102,20 @@ def save_restaurants(restaurant_df, inspection_df):
                 business_address=row["businessaddress"],
                 postcode=row["postcode"],
                 business_id=b_id,
-                compliant_status = row["isroadwaycompliant"]
+                compliant_status=row["isroadwaycompliant"],
             )
             if b_id:
-                if not Restaurant.objects.filter(business_id = b_id).exists():
+                if not Restaurant.objects.filter(business_id=b_id).exists():
                     r.save()
                     logger.info(
-                        "Restaurant details successfully saved: {}".format(
-                            b_id
-                        )
+                        "Restaurant details successfully saved: {}".format(b_id)
                     )
                     save_inspections(row, b_id)
                     save_yelp_restaurant_details(b_id)
                 else:
-                    Restaurant.objects.filter(business_id = b_id).update(compliant_status=row["isroadwaycompliant"])
+                    Restaurant.objects.filter(business_id=b_id).update(
+                        compliant_status=row["isroadwaycompliant"]
+                    )
                     save_inspections(row, b_id)
             else:
                 r.save()
@@ -122,12 +124,11 @@ def save_restaurants(restaurant_df, inspection_df):
 
         except Exception as e:
             logger.error(
-            "Error while saving to table Restaurant: {} {}".format(
-                b_id, e)
+                "Error while saving to table Restaurant: {} {}".format(b_id, e)
             )
-            if(count > 10):
+            if count > 10:
                 break
-            count+=1
+            count += 1
             # raise
     return
 
@@ -144,7 +145,7 @@ def save_inspections(row, business_id):
             postcode=row["postcode"],
             skipped_reason=row["skippedreason"],
             inspected_on=row["inspectedon"],
-            business_id = business_id
+            business_id=business_id,
         )
         inspect_record.save()
 
@@ -155,9 +156,8 @@ def save_inspections(row, business_id):
 
 # @sched.scheduled_job("interval", minutes=1)
 def get_inspection_data():
-    ir = InspectionRecords.objects.all().count()
+    # ir = InspectionRecords.objects.all().count()
     lastInspection = InspectionRecords.objects.order_by("-inspected_on")[0:1]
-    
 
     client = Socrata(
         "data.cityofnewyork.us",

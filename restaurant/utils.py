@@ -146,14 +146,18 @@ def get_filtered_restaurants(
     if rating:
         filters["rating__gte"] = rating
     if category:
-        filters["category__in"] = category
+        filters["category__parent_category__in"] = category
 
     keyword_filter = {}
     if keyword:
         keyword_filter["restaurant_name__contains"] = keyword
 
-    filtered_restaurants = Restaurant.objects.filter(
-        business_id__in=YelpRestaurantDetails.objects.filter(**filters)).distinct(
-        ).filter(**keyword_filter)[offset : offset + int(limit)]
+    filtered_restaurants = (
+        Restaurant.objects.filter(
+            business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+        )
+        .distinct()
+        .filter(**keyword_filter)[offset : offset + int(limit)]
+    )
 
     return filtered_restaurants

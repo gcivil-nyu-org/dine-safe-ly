@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
 
 from django.conf import settings
-from restaurant.models import Zipcodes, YelpRestaurantDetails, Restaurant, Categories
+from restaurant.models import Zipcodes, YelpRestaurantDetails, Categories
 from restaurant.utils import query_yelp
 
 logger = logging.getLogger(__name__)
@@ -36,7 +36,7 @@ def map_zipcode_to_neighbourhood():
                 )
             )
 
-            
+
 def save_yelp_categories():
     access_token = settings.YELP_ACESS_TOKEN_BETA
     headers = {"Authorization": "bearer %s" % access_token}
@@ -48,21 +48,21 @@ def save_yelp_categories():
         try:
             alias = c["alias"]
             parent = None
-            
+
             if c["parent_aliases"] and c["parent_aliases"][0] == "restaurants":
                 parent = alias
             elif c["parent_aliases"]:
                 parent = c["parent_aliases"][0]
-        
-            cat = Categories(category=alias, parent_category = parent)
-            cat.save()
-            print(alias,parent)
-        except Exception as e:
-            print("ERROR")
-            continue
-        
 
-    
+            cat = Categories(category=alias, parent_category=parent)
+            cat.save()
+            print(alias, parent)
+        except Exception as e:
+            logger.error("Error while getting categories for  Restaurant: {}".format(e))
+
+            continue
+
+
 def get_neighbourhood(zip):
     area = Zipcodes.objects.get(zipcode=zip)
     if area:
@@ -90,7 +90,7 @@ def get_cuisine(categories):
         #     return c["alias"]
         # else:
         #     return category["category"]["parent_aliases"][0]
-        cuisine = Categories.objects.get(category = c["alias"])
+        cuisine = Categories.objects.get(category=c["alias"])
         # print(cuisine)
         cuisines.append(cuisine)
     return cuisines
@@ -165,10 +165,8 @@ def save_yelp_restaurant_details(business_id):
                 details.save()
 
             logger.info(
-                "Yelp restaurant details successfully saved: {}".format(
-                    business_id
-                )
-            )    
+                "Yelp restaurant details successfully saved: {}".format(business_id)
+            )
     except Exception as e:
         logger.error(
             "Error while saving to table YelpRestaurantDetails: {} {}".format(
