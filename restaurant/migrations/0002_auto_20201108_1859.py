@@ -7,18 +7,18 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('restaurant', '0001_initial'),
+        ("restaurant", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='userquestionnaire',
-            name='saved_on',
+            model_name="userquestionnaire",
+            name="saved_on",
             field=models.DateTimeField(blank=True, default=django.utils.timezone.now),
         ),
         migrations.AddField(
-            model_name='userquestionnaire',
-            name='user_id',
-            field=models.CharField(default='', max_length=200),
+            model_name="userquestionnaire",
+            name="user_id",
+            field=models.CharField(default="", max_length=200),
         ),
     ]
