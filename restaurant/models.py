@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 
 
 class Restaurant(models.Model):
@@ -46,7 +46,7 @@ class UserQuestionnaire(models.Model):
     restaurant_business_id = models.CharField(max_length=200, null=False)
     user_id = models.CharField(max_length=200, null=False, default="")
     safety_level = models.CharField(max_length=1)
-    saved_on = models.DateTimeField(default=datetime.now(), null=False, blank=True)
+    saved_on = models.DateTimeField(default=timezone.now, null=False, blank=True)
     temperature_required = models.CharField(max_length=5, null=False, default="False")
     contact_info_required = models.CharField(max_length=5, null=False, default="False")
     employee_mask = models.CharField(max_length=5, null=False, default="False")
