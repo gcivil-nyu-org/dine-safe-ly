@@ -34,3 +34,67 @@ class QuestionnaireForm(forms.Form):
             distance_compliant=self.cleaned_data.get("distance_compliant"),
         )
         return questionnaire
+
+
+class SearchFilterForm(forms.Form):
+    CHOICES_NEIGHBOURHOOD = [
+        ("Southwest Queens", "Southwest Queens "),
+        ("Rockaways", "Rockaways ")
+    ]
+    CHOICES_CATEGORY = []
+    CHOICES_COMPLIANCE = [('All', 'All'), ('Compliant', 'Compliant')]
+
+    keyword = forms.CharField(label="keyword", required=False)
+    neighbourhood = forms.MultipleChoiceField(label="neighbourhood", choices=CHOICES_NEIGHBOURHOOD, required=False)
+    category = forms.MultipleChoiceField(label="category", choices=CHOICES_CATEGORY, required=False)
+    price_1 = forms.BooleanField(label="price_1", required=False)
+    price_2 = forms.BooleanField(label="price_2", required=False)
+    price_3 = forms.BooleanField(label="price_3", required=False)
+    price_4 = forms.BooleanField(label="price_4", required=False)
+
+    All = forms.ChoiceField(label="All", widget=forms.RadioSelect, choices=CHOICES_COMPLIANCE, required=False)
+    Compliant = forms.ChoiceField(label="Compliant", widget=forms.RadioSelect, choices=CHOICES_COMPLIANCE, required=False)
+
+    slider_snap_input_from = forms.CharField(label="slider_snap_input_from", required=False)
+    slider_snap_input_to = forms.CharField(label="slider_snap_input_to", required=False)
+
+    def clean_keyword(self):
+        keyword = self.cleaned_data.get('keyword')
+        if keyword == "":
+            return None
+        return keyword
+
+    def clean_neighbourhood(self):
+        neighbourhood = self.cleaned_data.get('neighbourhood')
+        # Check if Empty list
+        if neighbourhood is not None and len(neighbourhood) == 0:
+            return None
+        return neighbourhood
+
+    def clean_category(self):
+        category = self.cleaned_data.get('category')
+        if category is not None and len(category) == 0:
+            return None
+        return category
+
+    def get_price_filter(self):
+        price_filter = []
+        if self.cleaned_data.get('price_1'):
+            price_filter.append(self.cleaned_data.get('price_1'))
+        if self.cleaned_data.get('price_2'):
+            price_filter.append(self.cleaned_data.get('price_2'))
+        if self.cleaned_data.get('price_3'):
+            price_filter.append(self.cleaned_data.get('price_3'))
+        if self.cleaned_data.get('price_4'):
+            price_filter.append(self.cleaned_data.get('price_4'))
+        return price_filter
+
+    def get_rating_filter(self):
+        rating_filter = []
+        if self.cleaned_data.get('slider_snap_input_from'):
+            rating_filter.append(self.cleaned_data.get('slider_snap_input_from'))
+        if self.cleaned_data.get('slider_snap_input_to'):
+            rating_filter.append(self.cleaned_data.get('slider_snap_input_to'))
+        return rating_filter
+        
+
