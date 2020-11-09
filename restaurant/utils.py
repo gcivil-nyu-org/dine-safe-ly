@@ -153,7 +153,7 @@ def get_filtered_restaurants(
         keyword_filter["restaurant_name__contains"] = keyword
 
     filtered_restaurants = Restaurant.objects.filter(
-        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
-    ).filter(**keyword_filter)[offset : offset + int(limit)]
+        business_id__in=YelpRestaurantDetails.objects.filter(**filters)).distinct(
+        ).filter(**keyword_filter)[offset : offset + int(limit)]
 
     return filtered_restaurants
