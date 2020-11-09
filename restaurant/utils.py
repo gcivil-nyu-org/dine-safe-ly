@@ -15,6 +15,11 @@ def get_restaurant_info_yelp(business_id):
     return requests.get(url, headers=headers)
 
 
+def get_restaurant_info_yelp_local(business_id):
+    # TODO
+    pass
+
+
 def get_restaurant_reviews_yelp(business_id):
     access_token = settings.YELP_TOKEN_1
     headers = {"Authorization": "bearer %s" % access_token}
@@ -70,52 +75,8 @@ def query_inspection_record(business_name, business_address, postcode):
     return result
 
 
-def get_restaurant_list(
-    page,
-    limit,
-    keyword=None,
-    neighbourhoods_filter=None,
-    categories_filter=None,
-    price_filter=None,
-    rating_filter=None,
-):
-    page = int(page) - 1
-    offset = int(page) * int(limit)
-    if keyword:
-        restaurants = Restaurant.objects.filter(restaurant_name__contains=keyword)[
-            offset : offset + int(limit)  # noqa: E203
-        ]
+def restaurants_to_dict(restaurants):
     result = []
-    if neighbourhoods_filter or categories_filter or price_filter or rating_filter:
-        filtered_restaurants = get_filtered_restaurants(
-            price_filter,
-            neighbourhoods_filter,
-            rating_filter,
-            categories_filter,
-            page,
-            limit,
-        )
-        for rest in filtered_restaurants:
-            restaurant = Restaurant.objects.filter(business_id=rest.business_id)
-            restaurant_dict = model_to_dict(restaurant[0])
-            restaurant_dict["yelp_info"] = (
-                json.loads(get_restaurant_info_yelp(rest.business_id).content)
-                if rest.business_id
-                else None
-            )
-            latest_inspection_record = get_latest_inspection_record(
-                restaurant[0].restaurant_name,
-                restaurant[0].business_address,
-                restaurant[0].postcode,
-            )
-            restaurant_dict["latest_record"] = latest_inspection_record
-            result.append(restaurant_dict)
-        return result
-
-    else:
-        restaurants = Restaurant.objects.all()[
-            offset : offset + int(limit)  # noqa: E203
-        ]
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)
         restaurant_dict["yelp_info"] = (
@@ -131,7 +92,51 @@ def get_restaurant_list(
     return result
 
 
-def get_filtered_restaurants(price, neighborhood, rating, category, page, limit):
+def get_restaurant_list(
+    page,
+    limit,
+    keyword=None,
+    neighbourhoods_filter=None,
+    categories_filter=None,
+    price_filter=None,
+    rating_filter=None,
+):
+    page = int(page) - 1
+    offset = int(page) * int(limit)
+
+    if (
+        keyword
+        or neighbourhoods_filter
+        or categories_filter
+        or price_filter
+        or rating_filter
+    ):
+        restaurants = get_filtered_restaurants(
+            keyword,
+            price_filter,
+            neighbourhoods_filter,
+            rating_filter,
+            categories_filter,
+            page,
+            limit,
+        )
+        return restaurants_to_dict(restaurants)
+    else:
+        restaurants = Restaurant.objects.all()[
+            offset : offset + int(limit)  # noqa: E203
+        ]
+        return restaurants_to_dict(restaurants)
+
+
+def get_filtered_restaurants(
+    keyword=None,
+    price=None,
+    neighborhood=None,
+    rating=None,
+    category=None,
+    page=None,
+    limit=None,
+):
     filters = {}
     offset = page * int(limit)
     if price:
@@ -143,7 +148,12 @@ def get_filtered_restaurants(price, neighborhood, rating, category, page, limit)
     if category:
         filters["category__in"] = category
 
-    filtered_restaurants = YelpRestaurantDetails.objects.filter(**filters)[
-        offset : offset + int(limit)
-    ]
+    keyword_filter = {}
+    if keyword:
+        keyword_filter["restaurant_name__contains"] = keyword
+
+    filtered_restaurants = Restaurant.objects.filter(
+        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+    ).filter(**keyword_filter)[offset : offset + int(limit)]
+
     return filtered_restaurants
