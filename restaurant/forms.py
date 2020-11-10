@@ -30,10 +30,91 @@ class QuestionnaireForm(forms.Form):
 
 class SearchFilterForm(forms.Form):
     CHOICES_NEIGHBOURHOOD = [
-        ("Southwest Queens", "Southwest Queens "),
-        ("Rockaways", "Rockaways ")
+        ("Chelsea and Clinton", "Chelsea and Clinton"),
+        ("Lower East Side", "Lower East Side"),
+        ("Gramercy Park and Murray Hill", "Gramercy Park and Murray Hill"),
+        ("Greenwich Village and Soho", "Greenwich Village and Soho"),
+        ("Upper West Side", "Upper West Side"),
+        ("Central Harlem", "Central Harlem"),
+        ("Upper East Side", "Upper East Side"),
+        ("East Harlem", "East Harlem"),
+        ("Inwood and Washington Heights", "Inwood and Washington Heights"),
+        ("Lower Manhattan", "Lower Manhattan"),
+        ("Stapleton and St. George", "Stapleton and St. George"),
+        ("Tribeca", "Tribeca"),
+        ("Port Richmond", "Port Richmond"),
+        ("South Shore", "South Shore"),
+        ("Mid-Island", "Mid-Island"),
+        ("High Bridge and Morrisania", "High Bridge and Morrisania"),
+        ("Central Bronx", "Central Bronx"),
+        ("Hunts Point and Mott Haven", "Hunts Point and Mott Haven"),
+        ("Bronx Park and Fordham", "Bronx Park and Fordham"),
+        ("Southeast Bronx", "Southeast Bronx"),
+        ("Northeast Bronx", "Northeast Bronx"),
+        ("Kingsbridge and Riverdale", "Kingsbridge and Riverdale"),
+        ("Southeast Queens", "Southeast Queens"),
+        ("Northwest Queens", "Northwest Queens"),
+        ("Long Island City", "Long Island City"),
+        ("Northwest Brooklyn", "Northwest Brooklyn"),
+        ("Bushwick and Williamsburg", "Bushwick and Williamsburg"),
+        ("East New York and New Lots", "East New York and New Lots"),
+        ("Southwest Brooklyn", "Southwest Brooklyn"),
+        ("Flatbush", "Flatbush"),
+        ("Greenpoint", "Greenpoint"),
+        ("Central Brooklyn", "Central Brooklyn"),
+        ("Borough Park", "Borough Park"),
+        ("Sunset Park", "Sunset Park"),
+        ("Bushwick and Williamsburg", "Bushwick and Williamsburg"),
+        ("Southern Brooklyn", "Southern Brooklyn"),
+        ("Canarsie and Flatlands", "Canarsie and Flatlands"),
+        ("North Queens", "North Queens"),
+        ("Northeast Queens", "Northeast Queens"),
+        ("Central Queens", "Central Queens"),
+        ("West Queens", "West Queens"),
+        ("West Central Queens", "West Central Queens"),
+        ("Southeast Queens", "Southeast Queens"),
+        ("Jamaica", "Jamaica"),
+        ("Southwest Queens", "Southwest Queens"),
+        ("Rockaways", "Rockaways")
     ]
-    CHOICES_CATEGORY = []
+    CHOICES_CATEGORY = [
+        ("newamerican", "newamerican"),
+        ("armenian", "armenian"),
+        ("barbeque", "barbeque"),
+        ("bars", "bars"),
+        ("bistros", "bistros"),
+        ("burgers", "burgers"),
+        ("chinese", "chinese"),
+        ("danish", "danish"),
+        ("diners", "diners"),
+        ("ethiopian", "ethiopian"),
+        ("filipino", "filipino"),
+        ("french", "french"),
+        ("georgian", "georgian"),
+        ("german", "german"),
+        ("greek", "greek"),
+        ("hotdog", "hotdog"),
+        ("italian", "italian"),
+        ("bistros", "bistros"),
+        ("japanese", "japanese"),
+        ("jewish", "jewish"),
+        ("kebab", "kebab"),
+        ("korean", "korean"),
+        ("kosher", "kosher"),
+        ("mexican", "mexican"),
+        ("noodles", "noodles"),
+        ("pizza", "pizza"),
+        ("salad", "salad"),
+        ("sandwiches", "sandwiches"),
+        ("seafood", "seafood"),
+        ("sushi", "sushi"),
+        ("tapassmallplates", "tapassmallplates"),
+        ("vegan", "vegan"),
+        ("vegetarian", "vegetarian"),
+        ("vietnamese", "vietnamese"),
+        ("waffles", "waffles"),
+        ("wraps", "wraps"),
+    ]
     CHOICES_COMPLIANCE = [('All', 'All'), ('Compliant', 'Compliant')]
 
     keyword = forms.CharField(label="keyword", required=False)
@@ -72,13 +153,13 @@ class SearchFilterForm(forms.Form):
     def get_price_filter(self):
         price_filter = []
         if self.cleaned_data.get('price_1'):
-            price_filter.append(self.cleaned_data.get('price_1'))
+            price_filter.append("$")
         if self.cleaned_data.get('price_2'):
-            price_filter.append(self.cleaned_data.get('price_2'))
+            price_filter.append("$$")
         if self.cleaned_data.get('price_3'):
-            price_filter.append(self.cleaned_data.get('price_3'))
+            price_filter.append("$$$")
         if self.cleaned_data.get('price_4'):
-            price_filter.append(self.cleaned_data.get('price_4'))
+            price_filter.append("$$$$")
         return price_filter
 
     def get_rating_filter(self):
@@ -88,5 +169,9 @@ class SearchFilterForm(forms.Form):
         if self.cleaned_data.get('slider_snap_input_to'):
             rating_filter.append(self.cleaned_data.get('slider_snap_input_to'))
         return rating_filter
-        
+
+    def get_compliant_filter(self):
+        if self.cleaned_data.get('Compliant') is not None:
+            return 'Compliant'
+        return None
 

@@ -220,24 +220,23 @@
                             class="fas fa-filter mr-1"></i>Reset
                     </button>
                     <script>
-                   function resetForm(e, thisobj) {
-                      thisform = thisobj.closest('form');
-                      selectbox_in_form = thisform.find('select');
+                     function resetForm(e, thisobj) {
+                        thisform = thisobj.closest('form');
+                        selectbox_in_form = thisform.find('select');
 
-                      // completely remove selected when it has been assigned.
-                      selectbox_in_form.find('option:selected').removeAttr('selected');
-                      selectbox_in_form.val('');
-                      selectbox_in_form.change();
+                        // completely remove selected when it has been assigned.
+                        selectbox_in_form.find('option:selected').removeAttr('selected');
+                        selectbox_in_form.val('');
+                        selectbox_in_form.change();
 
-                      delete selectbox_in_form;
-                      delete thisform;
-                  }// resetForm
+                        delete selectbox_in_form;
+                        delete thisform;
+                    }// resetForm
 
-                  $(function() {
-                      // activate Select2
-                      $('.selectbox-replacement-enabler').select2();
-                  });
-
+                    $(function() {
+                        // activate Select2
+                        $('.selectbox-replacement-enabler').select2();
+                    });
                     </script>
                 </div>
             </form>
@@ -261,22 +260,7 @@
             <div id="res_list_group" class="row">
 
             </div>
-            <!-- Pagination -->
-            <!--      <nav aria-label="Page navigation example">-->
-            <!--        <ul class="pagination pagination-template d-flex justify-content-center">-->
-            <!--          <li class="page-item">-->
-            <!--            <a class="page-link" href="#" id="prev"> <i class="fa fa-angle-left"></i></a>-->
-            <!--          </li>-->
-            <!--          <li class="page-item active"><a class="page-link" href="#" id="page0">1</a></li>-->
-            <!--          <li class="page-item"><a class="page-link" href="#" id="page1">2</a></li>-->
-            <!--          <li class="page-item"><a class="page-link" href="#" id="page2">3</a></li>-->
-            <!--          <li class="page-item">-->
-            <!--            <a class="page-link" href="#" id="next"> <i class="fa fa-angle-right"></i></a>-->
-            <!--          </li>-->
-            <!--        </ul>-->
-            <!--      </nav>-->
-            <!-- Load more button     -->
-            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="load_more()">Load More</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="load_more()" id="load_button">Load More</button>
         </div>
         <script>
 		var page_global = 1; // Global page number
@@ -293,21 +277,18 @@
                 contentType: false,
                 // handle a successful response
                 success : function(json) {
-                    //$('#post-text').val(''); // remove the value from the input
                     restaurant_content_list = json
                     page_global += 1;
                     console.log(restaurant_content_list.restaurant_list)
                     loadRestaurant(restaurant_content_list.restaurant_list, json.restaurant_number)
                     console.log(restaurant_content_list); // log the returned json to the console
                     console.log("success"); // another sanity check
+
                 },
 
                 // handle a non-successful response
                 error : function(xhr,errmsg,err) {
-                    //$('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                    //    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                    //console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                  console.log('CNM')
+                  console.log('Ajax request error')
                 }
             });
         };
@@ -317,7 +298,8 @@
           function clearRestaurant() {
             var res_list_group = document.getElementById("res_list_group");
             res_list_group.innerHTML = "";
-            page_global = 0;
+            page_global = 1;
+            document.getElementById('load_button').style.visibility = 'visible';
           }
           function loadRestaurant(restaurant_list_json, restaurant_number) {
              var restaurant_list = [];
@@ -414,20 +396,49 @@
 
                 res_list_group.appendChild(div1);
           }
+          if(restaurant_list.length < 6) {
+            document.getElementById('load_button').style.visibility = 'hidden';
+          }
          }
 
         </script>
         <script>
-          window.onload = function () {
+         var snapSlider = document.getElementById('slider-snap');
+
+          noUiSlider.create(snapSlider, {
+              start: [ 1, 5 ],
+              snap: false,
+              connect: true,
+              step: 1,
+              range: {
+                  'min': 1,
+                  'max': 5
+              }
+          });
+          var snapValues = [
+              document.getElementById('slider-snap-value-from'),
+              document.getElementById('slider-snap-value-to')
+          ];
+          var inputValues = [
+              document.getElementById('slider-snap-input-from'),
+              document.getElementById('slider-snap-input-to')
+          ];
+          snapSlider.noUiSlider.on('update', function( values, handle ) {
+              snapValues[handle].innerHTML = values[handle];
+              inputValues[handle].value = values[handle];
+          })
+
+        </script>
+    </div>
+    <script>
+        window.onload = function () {
           var loaded = 0;
             if (loaded == 0) {
-              /** Your code here... **/
               create_post();
               loaded = 1;
             }
           };
-
-        </script>
-    </div>
+    </script>
 </div>
+
 {% endblock %}

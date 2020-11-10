@@ -82,14 +82,6 @@ def get_restaurants_list(request, page):
     if request.method == "POST":
         form = SearchFilterForm(request.POST)
         if form.is_valid():
-            # Test print
-            print(form.cleaned_data.get('keyword') is None)
-            print(form.cleaned_data.get('neighbourhood') is None)
-            print(form.cleaned_data.get('price_1'))
-            print(form.cleaned_data.get('All'))
-            print(form.cleaned_data.get('Compliant'))
-            print(form.cleaned_data.get('slider_snap_input_from'))
-            print(form.cleaned_data.get('slider_snap_input_to'))
             restaurant_list = get_restaurant_list(
                 page,
                 6,
@@ -98,6 +90,7 @@ def get_restaurants_list(request, page):
                 form.cleaned_data.get('category'),
                 form.get_price_filter(),
                 form.get_rating_filter(),
+                form.get_compliant_filter(),
             )
             restaurant_number = get_total_restaurant_number(
                 form.cleaned_data.get('keyword'),
@@ -105,6 +98,7 @@ def get_restaurants_list(request, page):
                 form.cleaned_data.get('category'),
                 form.get_price_filter(),
                 form.get_rating_filter(),
+                form.get_compliant_filter(),
             )
             parameter_dict = {
                 "restaurant_number": restaurant_number,
