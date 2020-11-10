@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
 
 from django.conf import settings
-from restaurant.models import Zipcodes, YelpRestaurantDetails, Restaurant
+from restaurant.models import Zipcodes, YelpRestaurantDetails, Categories
 from restaurant.utils import query_yelp
 
 logger = logging.getLogger(__name__)
@@ -37,9 +37,38 @@ def map_zipcode_to_neighbourhood():
             )
 
 
+def save_yelp_categories():
+    access_token = settings.YELP_ACESS_TOKEN_BETA
+    headers = {"Authorization": "bearer %s" % access_token}
+    url = settings.YELP_CATEGORY_API
+    response = requests.get(url, headers=headers)
+    categories = json.loads(response.content)
+
+    for c in categories["categories"]:
+        try:
+            alias = c["alias"]
+            parent = None
+
+            if c["parent_aliases"] and c["parent_aliases"][0] == "restaurants":
+                parent = alias
+            elif c["parent_aliases"]:
+                parent = c["parent_aliases"][0]
+
+            cat = Categories(category=alias, parent_category=parent)
+            cat.save()
+            print(alias, parent)
+        except Exception as e:
+            logger.error("Error while getting categories for  Restaurant: {}".format(e))
+
+            continue
+
+
 def get_neighbourhood(zip):
     area = Zipcodes.objects.get(zipcode=zip)
-    return area.neighborhood
+    if area:
+        return area.neighborhood
+    else:
+        return None
 
 
 def get_restaurant_category_yelp(alias):
@@ -51,16 +80,20 @@ def get_restaurant_category_yelp(alias):
 
 
 def get_cuisine(categories):
-
+    cuisines = list()
     for c in categories:
-        category = get_restaurant_category_yelp(c["alias"])
-        if (
-            not category["category"]["parent_aliases"]
-            or category["category"]["parent_aliases"][0] == "restaurants"
-        ):
-            return c["alias"]
-        else:
-            return category["category"]["parent_aliases"][0]
+        # category = get_restaurant_category_yelp(c["alias"])
+        # if (
+        #     not category["category"]["parent_aliases"]
+        #     or category["category"]["parent_aliases"][0] == "restaurants"
+        # ):
+        #     return c["alias"]
+        # else:
+        #     return category["category"]["parent_aliases"][0]
+        cuisine = Categories.objects.get(category=c["alias"])
+        # print(cuisine)
+        cuisines.append(cuisine)
+    return cuisines
 
 
 def validate_fields(restaurant_info):
@@ -104,43 +137,46 @@ def validate_fields(restaurant_info):
     return restaurant_data
 
 
-def save_yelp_restaurant_details():
+def save_yelp_restaurant_details(business_id):
 
-    for r in Restaurant.objects.all():
-        try:
-            if r.business_id:
-                restaurant_info = query_yelp(r.business_id)
+    # for r in Restaurant.objects.all():
+    try:
+        if business_id:
+            restaurant_info = query_yelp(business_id)
 
-                restaurant_data = validate_fields(restaurant_info)
+            restaurant_data = validate_fields(restaurant_info)
 
-                details = YelpRestaurantDetails(
-                    business_id=r.business_id,
-                    neighborhood=restaurant_data["neighborhood"],
-                    category=restaurant_data["category"],
-                    price=restaurant_data["price"],
-                    rating=restaurant_data["rating"],
-                    img_url=restaurant_data["img_url"],
-                    latitude=restaurant_data["latitude"],
-                    longitude=restaurant_data["longitude"],
-                )
+            details = YelpRestaurantDetails(
+                business_id=business_id,
+                neighborhood=restaurant_data["neighborhood"],
+                # category=restaurant_data["category"],
+                price=restaurant_data["price"],
+                rating=restaurant_data["rating"],
+                img_url=restaurant_data["img_url"],
+                latitude=restaurant_data["latitude"],
+                longitude=restaurant_data["longitude"],
+            )
 
+            # print(details)
+            details.save()
+            for cat in restaurant_data["category"]:
+                # print(cat)
+                details.category.add(cat)
                 details.save()
 
-                logger.info(
-                    "Yelp restaurant details successfully saved: {}".format(
-                        r.business_id
-                    )
-                )
-            else:
-                continue
-        except Exception as e:
-            logger.error(
-                "Error while saving to table YelpRestaurantDetails: {} {}".format(
-                    r.business_id, e
-                )
+            logger.info(
+                "Yelp restaurant details successfully saved: {}".format(business_id)
             )
+    except Exception as e:
+        logger.error(
+            "Error while saving to table YelpRestaurantDetails: {} {}".format(
+                business_id, e
+            )
+        )
 
 
 if __name__ == "__main__":
     # map_zipcode_to_neighbourhood()
-    save_yelp_restaurant_details()
+    # save_yelp_restaurant_details()
+    # save_yelp_categories()
+    save_yelp_restaurant_details("-7PnG_cD9VY-IfHGWzynmQ")

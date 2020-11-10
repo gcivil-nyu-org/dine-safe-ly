@@ -105,6 +105,7 @@ def get_restaurant_list(
     categories_filter=None,
     price_filter=None,
     rating_filter=None,
+    compliant_filter=None,
 ):
     page = int(page) - 1
     offset = int(page) * int(limit)
@@ -115,6 +116,7 @@ def get_restaurant_list(
         or categories_filter
         or price_filter
         or rating_filter
+        or compliant_filter
     ):
         restaurants = get_filtered_restaurants(
             keyword,
@@ -122,6 +124,7 @@ def get_restaurant_list(
             neighbourhoods_filter,
             rating_filter,
             categories_filter,
+            compliant_filter,
             page,
             limit,
         )
@@ -139,6 +142,7 @@ def get_filtered_restaurants(
     neighborhood=None,
     rating=None,
     category=None,
+    compliant=None,
     page=None,
     limit=None,
 ):
@@ -151,15 +155,21 @@ def get_filtered_restaurants(
     if rating:
         filters["rating__gte"] = rating
     if category:
-        filters["category__in"] = category
+        filters["category__parent_category__in"] = category
 
     keyword_filter = {}
     if keyword:
         keyword_filter["restaurant_name__contains"] = keyword
+    if compliant == "Compliant":
+        keyword_filter["compliant_status__iexact"] = compliant
 
-    filtered_restaurants = Restaurant.objects.filter(
-        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
-    ).filter(**keyword_filter)[offset : offset + int(limit)]
+    filtered_restaurants = (
+        Restaurant.objects.filter(
+            business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+        )
+        .distinct()
+        .filter(**keyword_filter)[offset : offset + int(limit)]
+    )
 
     return filtered_restaurants
 
