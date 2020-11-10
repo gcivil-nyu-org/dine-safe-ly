@@ -156,6 +156,8 @@ def get_filtered_restaurants(
     keyword_filter = {}
     if keyword:
         keyword_filter["restaurant_name__contains"] = keyword
+    if compliant = "Compliant":
+        keyword_filter["compliant_status__iexact"] = compliant
 
     filtered_restaurants = (
         Restaurant.objects.filter(

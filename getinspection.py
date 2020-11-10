@@ -8,9 +8,9 @@ import requests
 import json
 import logging
 
-# from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
-# import dateutil.parser
+import dateutil.parser
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
@@ -19,7 +19,7 @@ from restaurant.models import Restaurant, InspectionRecords  # noqa: E402
 from yelprestaurantdetails import save_yelp_restaurant_details  # noqa: E402
 
 
-# sched = BlockingScheduler()
+sched = BlockingScheduler()
 logger = logging.getLogger(__name__)
 
 
@@ -86,7 +86,6 @@ def clean_inspection_data(results_df):
 
 def save_restaurants(restaurant_df, inspection_df):
     for index, row in inspection_df.iterrows():
-        count = 0
         try:
 
             response = json.loads(
@@ -120,15 +119,12 @@ def save_restaurants(restaurant_df, inspection_df):
             else:
                 r.save()
                 save_inspections(row, b_id)
-            count = 0
 
         except Exception as e:
             logger.error(
                 "Error while saving to table Restaurant: {} {}".format(b_id, e)
             )
-            if count > 10:
-                break
-            count += 1
+            
             # raise
     return
 
@@ -154,7 +150,7 @@ def save_inspections(row, business_id):
     return
 
 
-# @sched.scheduled_job("interval", minutes=1)
+@sched.scheduled_job("interval", hours=12)
 def get_inspection_data():
     # ir = InspectionRecords.objects.all().count()
     lastInspection = InspectionRecords.objects.order_by("-inspected_on")[0:1]
@@ -187,7 +183,7 @@ def get_inspection_data():
         # save_inspections(inspection_df)
 
 
-# sched.start()
+sched.start()
 
 
 def populate_restaurant_with_yelp_id():
