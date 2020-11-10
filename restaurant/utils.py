@@ -20,9 +20,31 @@ def get_restaurant_info_yelp(business_id):
     return requests.get(url, headers=headers)
 
 
-def get_restaurant_info_yelp_local(business_id):
-    # TODO
-    pass
+def default_info_page(restaurant_name):
+    return {
+        'restaurant_name': restaurant_name,
+        'img_url': settings.DEFAULT_IMAGE,
+        'rating': 0
+    }
+
+
+def get_restaurant_info_yelp_local(business_id, restaurant_name):
+    yelp_detail = YelpRestaurantDetails.objects.get(business_id=business_id)
+    yelp_dict = model_to_dict(yelp_detail) if yelp_detail else None
+    if yelp_dict:
+        # Format the info
+        yelp_dict['id'] = yelp_dict['business_id']
+        yelp_dict['name'] = restaurant_name
+        yelp_dict['image_url'] = yelp_dict['img_url'] if yelp_dict['img_url'] else settings.DEFAULT_IMAGE
+        category_list = []
+        for category in yelp_dict['category']:
+            category_list.append({
+                'title': category.parent_category
+            })
+        del yelp_dict['category']
+        yelp_dict['categories'] = category_list
+
+    return yelp_dict
 
 
 def get_restaurant_reviews_yelp(business_id):
@@ -85,10 +107,14 @@ def restaurants_to_dict(restaurants):
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)
         restaurant_dict["yelp_info"] = (
-            json.loads(get_restaurant_info_yelp(restaurant.business_id).content)
+            get_restaurant_info_yelp_local(restaurant.business_id, restaurant.restaurant_name)
             if restaurant.business_id
             else None
         )
+
+        if not restaurant_dict["yelp_info"]:
+            restaurant_dict["yelp_info"] = default_info_page(restaurant.restaurant_name)
+
         latest_inspection_record = get_latest_inspection_record(
             restaurant.restaurant_name, restaurant.business_address, restaurant.postcode
         )
