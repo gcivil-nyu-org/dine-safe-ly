@@ -211,8 +211,7 @@ def get_filtered_restaurants(
     if neighborhood:
         filters["neighborhood__in"] = neighborhood
     if rating:
-        filters["rating__lte"] = rating[1]
-        filters["rating__gte"] = rating[0]
+        filters["rating__in"] = rating
     if category:
         filters["category__parent_category__in"] = category
 

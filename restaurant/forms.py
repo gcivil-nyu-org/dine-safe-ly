@@ -116,6 +116,7 @@ class SearchFilterForm(forms.Form):
         ("wraps", "wraps"),
     ]
     CHOICES_COMPLIANCE = [('All', 'All'), ('Compliant', 'Compliant')]
+    CHOICES_RATING = [("5", "5"), ("4", "4"), ("3", "3"), ("2", "2"), ("1", "1")]
 
     keyword = forms.CharField(label="keyword", required=False)
     neighbourhood = forms.MultipleChoiceField(label="neighbourhood", choices=CHOICES_NEIGHBOURHOOD, required=False)
@@ -128,8 +129,7 @@ class SearchFilterForm(forms.Form):
     All = forms.ChoiceField(label="All", widget=forms.RadioSelect, choices=CHOICES_COMPLIANCE, required=False)
     Compliant = forms.ChoiceField(label="Compliant", widget=forms.RadioSelect, choices=CHOICES_COMPLIANCE, required=False)
 
-    slider_snap_input_from = forms.CharField(label="slider_snap_input_from", required=False)
-    slider_snap_input_to = forms.CharField(label="slider_snap_input_to", required=False)
+    rating = forms.MultipleChoiceField(label="rating", choices=CHOICES_RATING, required=False)
 
     def clean_keyword(self):
         keyword = self.cleaned_data.get('keyword')
@@ -164,10 +164,10 @@ class SearchFilterForm(forms.Form):
 
     def get_rating_filter(self):
         rating_filter = []
-        if self.cleaned_data.get('slider_snap_input_from'):
-            rating_filter.append(self.cleaned_data.get('slider_snap_input_from'))
-        if self.cleaned_data.get('slider_snap_input_to'):
-            rating_filter.append(self.cleaned_data.get('slider_snap_input_to'))
+        if self.cleaned_data.get('rating'):
+            for rating in self.cleaned_data.get('rating'):
+                rating_filter.append(rating)
+                rating_filter.append(str(float(rating) - 0.5))
         return rating_filter
 
     def get_compliant_filter(self):

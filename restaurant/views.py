@@ -81,6 +81,7 @@ def get_inspection_info(request, restaurant_id):
 def get_restaurants_list(request, page):
     if request.method == "POST":
         form = SearchFilterForm(request.POST)
+
         if form.is_valid():
             restaurant_list = get_restaurant_list(
                 page,

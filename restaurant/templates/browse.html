@@ -163,15 +163,16 @@
                 </div>
                 <div class="mb-4">
                     <label class="form-label">Ratings</label>
-                    <div class="text-primary" id="slider-snap"></div>
-                    <div class="nouislider-values">
-                        <div class="min"><span id="slider-snap-value-from"></span></div>
-                        <div class="max"><span id="slider-snap-value-to"></span></div>
+                    <div class="form-group">
+                      <label class="form-label" for="rating">Your rating *</label>
+                      <select class="selectpicker form-control" name="rating" id="rating" multiple data-style="btn-selectpicker" title="">
+                        <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
+                        <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
+                        <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
+                        <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
+                        <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
+                      </select>
                     </div>
-                    <input type="hidden" name="slider_snap_input_from" id="slider_snap_input_from" value="1">
-                    <label class="invisible custom-control-label" for="slider_snap_input_from"></label>
-                    <input type="hidden" name="slider_snap_input_to" id="slider_snap_input_to" value="5">
-                    <label class="invisible custom-control-label" for="slider_snap_input_to"></label>
                 </div>
                 <!--          <div class="mb-4">-->
                 <!--            <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>-->
