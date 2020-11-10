@@ -22,9 +22,9 @@ def get_restaurant_info_yelp(business_id):
 
 def default_info_page(restaurant_name):
     return {
-        'restaurant_name': restaurant_name,
-        'img_url': settings.DEFAULT_IMAGE,
-        'rating': 0
+        "restaurant_name": restaurant_name,
+        "img_url": settings.DEFAULT_IMAGE,
+        "rating": 0,
     }
 
 
@@ -36,16 +36,16 @@ def get_restaurant_info_yelp_local(business_id, restaurant_name):
     yelp_dict = model_to_dict(yelp_detail) if yelp_detail else None
     if yelp_dict:
         # Format the info
-        yelp_dict['id'] = yelp_dict['business_id']
-        yelp_dict['name'] = restaurant_name
-        yelp_dict['image_url'] = yelp_dict['img_url'] if yelp_dict['img_url'] else settings.DEFAULT_IMAGE
+        yelp_dict["id"] = yelp_dict["business_id"]
+        yelp_dict["name"] = restaurant_name
+        yelp_dict["image_url"] = (
+            yelp_dict["img_url"] if yelp_dict["img_url"] else settings.DEFAULT_IMAGE
+        )
         category_list = []
-        for category in yelp_dict['category']:
-            category_list.append({
-                'title': category.parent_category
-            })
-        del yelp_dict['category']
-        yelp_dict['categories'] = category_list
+        for category in yelp_dict["category"]:
+            category_list.append({"title": category.parent_category})
+        del yelp_dict["category"]
+        yelp_dict["categories"] = category_list
 
     return yelp_dict
 
@@ -110,7 +110,9 @@ def restaurants_to_dict(restaurants):
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)
         restaurant_dict["yelp_info"] = (
-            get_restaurant_info_yelp_local(restaurant.business_id, restaurant.restaurant_name)
+            get_restaurant_info_yelp_local(
+                restaurant.business_id, restaurant.restaurant_name
+            )
             if restaurant.business_id
             else None
         )
@@ -151,7 +153,6 @@ def get_total_restaurant_number(
             compliant_filter,
         )
         return restaurants.count()
-
 
 
 def get_restaurant_list(

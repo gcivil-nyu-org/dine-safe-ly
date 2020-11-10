@@ -86,17 +86,17 @@ def get_restaurants_list(request, page):
             restaurant_list = get_restaurant_list(
                 page,
                 6,
-                form.cleaned_data.get('keyword'),
-                form.cleaned_data.get('neighbourhood'),
-                form.cleaned_data.get('category'),
+                form.cleaned_data.get("keyword"),
+                form.cleaned_data.get("neighbourhood"),
+                form.cleaned_data.get("category"),
                 form.get_price_filter(),
                 form.get_rating_filter(),
                 form.get_compliant_filter(),
             )
             restaurant_number = get_total_restaurant_number(
-                form.cleaned_data.get('keyword'),
-                form.cleaned_data.get('neighbourhood'),
-                form.cleaned_data.get('category'),
+                form.cleaned_data.get("keyword"),
+                form.cleaned_data.get("neighbourhood"),
+                form.cleaned_data.get("category"),
                 form.get_price_filter(),
                 form.get_rating_filter(),
                 form.get_compliant_filter(),
@@ -109,7 +109,7 @@ def get_restaurants_list(request, page):
             return JsonResponse(parameter_dict)
         else:
             print(form.errors)
-            print('Invalid')
+            print("Invalid")
     return HttpResponse("cnm")
 
 
