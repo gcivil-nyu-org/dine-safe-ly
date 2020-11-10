@@ -29,7 +29,7 @@ def default_info_page(restaurant_name):
 
 
 def get_restaurant_info_yelp_local(business_id, restaurant_name):
-    yelp_detail_set = YelpRestaurantDetails.objects.filter(business_id=business_id)[0: 1]
+    yelp_detail_set = YelpRestaurantDetails.objects.filter(business_id=business_id)[0:1]
     if yelp_detail_set.count() == 0:
         return json.loads(get_restaurant_info_yelp(business_id).content)
     yelp_detail = yelp_detail_set[0]

@@ -3,7 +3,7 @@ from django.forms.models import model_to_dict
 from django.test import Client
 from datetime import datetime, timedelta
 from unittest import mock
-from .forms import QuestionnaireForm, SearchFilterForm
+from .forms import QuestionnaireForm
 from .models import (
     Restaurant,
     InspectionRecords,
@@ -55,7 +55,7 @@ def create_inspection_records(
     is_roadway_compliant,
     skipped_reason,
     inspected_on,
-    business_id=None
+    business_id=None,
 ):
     return InspectionRecords.objects.create(
         restaurant_inspection_id=restaurant_inspection_id,
@@ -441,7 +441,9 @@ class SearchFilterFormTests(BaseTest):
             "rating": [1, 2, 3],
             "All": "Compliant",
         }
-        response = self.c.post("/restaurant/search_filter/restaurants_list/1", search_filter_form)
+        response = self.c.post(
+            "/restaurant/search_filter/restaurants_list/1", search_filter_form
+        )
         self.assertEqual(response.status_code, 200)
 
 
@@ -578,7 +580,9 @@ class RestaurantUtilsTests(TestCase):
         self.assertEqual(query_yelp(business_id), None)
 
     def test_get_restaurant_list(self):
-        create_restaurant("Gary Danko", "somewhere in LIC", "11101", "WavvLdfdP6g8aZTtbBQHTw")
+        create_restaurant(
+            "Gary Danko", "somewhere in LIC", "11101", "WavvLdfdP6g8aZTtbBQHTw"
+        )
         create_inspection_records(
             restaurant_inspection_id="27555",
             restaurant_name="Gary Danko",
@@ -589,9 +593,9 @@ class RestaurantUtilsTests(TestCase):
             inspected_on=datetime(2020, 10, 24, 17, 36),
             business_id="WavvLdfdP6g8aZTtbBQHTw",
         )
-        YelpRestaurantDetails.objects.create(business_id ='WavvLdfdP6g8aZTtbBQHTw')
+        YelpRestaurantDetails.objects.create(business_id="WavvLdfdP6g8aZTtbBQHTw")
         data = get_restaurant_list(1, 1)
-        self.assertEqual(data[0]["yelp_info"]['id'], "WavvLdfdP6g8aZTtbBQHTw")
+        self.assertEqual(data[0]["yelp_info"]["id"], "WavvLdfdP6g8aZTtbBQHTw")
 
     def test_get_latest_feedback(self):
         questionnaire_old = UserQuestionnaire.objects.create(

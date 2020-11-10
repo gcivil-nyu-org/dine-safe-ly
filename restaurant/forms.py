@@ -75,7 +75,7 @@ class SearchFilterForm(forms.Form):
         ("Southeast Queens", "Southeast Queens"),
         ("Jamaica", "Jamaica"),
         ("Southwest Queens", "Southwest Queens"),
-        ("Rockaways", "Rockaways")
+        ("Rockaways", "Rockaways"),
     ]
     CHOICES_CATEGORY = [
         ("newamerican", "newamerican"),
@@ -115,12 +115,16 @@ class SearchFilterForm(forms.Form):
         ("waffles", "waffles"),
         ("wraps", "wraps"),
     ]
-    CHOICES_COMPLIANCE = [('All', 'All'), ('Compliant', 'Compliant')]
+    CHOICES_COMPLIANCE = [("All", "All"), ("Compliant", "Compliant")]
     CHOICES_RATING = [("5", "5"), ("4", "4"), ("3", "3"), ("2", "2"), ("1", "1")]
 
     keyword = forms.CharField(label="keyword", required=False)
-    neighbourhood = forms.MultipleChoiceField(label="neighbourhood", choices=CHOICES_NEIGHBOURHOOD, required=False)
-    category = forms.MultipleChoiceField(label="category", choices=CHOICES_CATEGORY, required=False)
+    neighbourhood = forms.MultipleChoiceField(
+        label="neighbourhood", choices=CHOICES_NEIGHBOURHOOD, required=False
+    )
+    category = forms.MultipleChoiceField(
+        label="category", choices=CHOICES_CATEGORY, required=False
+    )
     price_1 = forms.BooleanField(label="price_1", required=False)
     price_2 = forms.BooleanField(label="price_2", required=False)
     price_3 = forms.BooleanField(label="price_3", required=False)
@@ -139,49 +143,50 @@ class SearchFilterForm(forms.Form):
         required=False,
     )
 
-    rating = forms.MultipleChoiceField(label="rating", choices=CHOICES_RATING, required=False)
+    rating = forms.MultipleChoiceField(
+        label="rating", choices=CHOICES_RATING, required=False
+    )
 
     def clean_keyword(self):
-        keyword = self.cleaned_data.get('keyword')
+        keyword = self.cleaned_data.get("keyword")
         if keyword == "":
             return None
         return keyword
 
     def clean_neighbourhood(self):
-        neighbourhood = self.cleaned_data.get('neighbourhood')
+        neighbourhood = self.cleaned_data.get("neighbourhood")
         # Check if Empty list
         if neighbourhood is not None and len(neighbourhood) == 0:
             return None
         return neighbourhood
 
     def clean_category(self):
-        category = self.cleaned_data.get('category')
+        category = self.cleaned_data.get("category")
         if category is not None and len(category) == 0:
             return None
         return category
 
     def get_price_filter(self):
         price_filter = []
-        if self.cleaned_data.get('price_1'):
+        if self.cleaned_data.get("price_1"):
             price_filter.append("$")
-        if self.cleaned_data.get('price_2'):
+        if self.cleaned_data.get("price_2"):
             price_filter.append("$$")
-        if self.cleaned_data.get('price_3'):
+        if self.cleaned_data.get("price_3"):
             price_filter.append("$$$")
-        if self.cleaned_data.get('price_4'):
+        if self.cleaned_data.get("price_4"):
             price_filter.append("$$$$")
         return price_filter
 
     def get_rating_filter(self):
         rating_filter = []
-        if self.cleaned_data.get('rating'):
-            for rating in self.cleaned_data.get('rating'):
+        if self.cleaned_data.get("rating"):
+            for rating in self.cleaned_data.get("rating"):
                 rating_filter.append(rating)
                 rating_filter.append(str(float(rating) - 0.5))
         return rating_filter
 
     def get_compliant_filter(self):
-        if self.cleaned_data.get('All') == 'Compliant':
-            return 'Compliant'
-        return 'All'
-
+        if self.cleaned_data.get("All") == "Compliant":
+            return "Compliant"
+        return "All"
