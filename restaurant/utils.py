@@ -29,7 +29,10 @@ def default_info_page(restaurant_name):
 
 
 def get_restaurant_info_yelp_local(business_id, restaurant_name):
-    yelp_detail = YelpRestaurantDetails.objects.get(business_id=business_id)
+    yelp_detail_set = YelpRestaurantDetails.objects.filter(business_id=business_id)[0: 1]
+    if yelp_detail_set.count() == 0:
+        return json.loads(get_restaurant_info_yelp(business_id).content)
+    yelp_detail = yelp_detail_set[0]
     yelp_dict = model_to_dict(yelp_detail) if yelp_detail else None
     if yelp_dict:
         # Format the info

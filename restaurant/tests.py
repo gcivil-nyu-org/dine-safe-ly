@@ -55,6 +55,7 @@ def create_inspection_records(
     is_roadway_compliant,
     skipped_reason,
     inspected_on,
+    business_id=None
 ):
     return InspectionRecords.objects.create(
         restaurant_inspection_id=restaurant_inspection_id,
@@ -64,6 +65,7 @@ def create_inspection_records(
         is_roadway_compliant=is_roadway_compliant,
         skipped_reason=skipped_reason,
         inspected_on=inspected_on,
+        business_id=business_id,
     )
 
 
@@ -558,35 +560,21 @@ class RestaurantUtilsTests(TestCase):
         business_id = None
         self.assertEqual(query_yelp(business_id), None)
 
-    @mock.patch("restaurant.utils.json.loads")
-    @mock.patch("restaurant.utils.get_latest_inspection_record")
-    @mock.patch("restaurant.models.Restaurant.objects.all")
-    def test_get_restaurant_list(
-        self, mock_objects, mock_get_latest_inspection_record, mock_get_yelp_info
-    ):
-        mock_objects.return_value = [
-            create_restaurant(
-                "Gary Danko", "800 N Point St", "94109", "WavvLdfdP6g8aZTtbBQHTw"
-            )
-        ]
-        print(mock_objects.return_value[0:1])
-        model_dict = model_to_dict(
-            create_inspection_records(
-                "11157",
-                "Tacos El Paisa",
-                "10040",
-                "1548 St. Nicholas btw West 187th street and west 188th street,"
-                "Manhattan, NY",
-                "Skipped Inspection",
-                "No Seating",
-                "2020-07-16 18:09:42",
-            )
+    def test_get_restaurant_list(self):
+        create_restaurant("Gary Danko", "somewhere in LIC", "11101", "WavvLdfdP6g8aZTtbBQHTw")
+        create_inspection_records(
+            restaurant_inspection_id="27555",
+            restaurant_name="Gary Danko",
+            postcode="11101",
+            business_address="somewhere in LIC",
+            is_roadway_compliant="Compliant",
+            skipped_reason="Nan",
+            inspected_on=datetime(2020, 10, 24, 17, 36),
+            business_id="WavvLdfdP6g8aZTtbBQHTw",
         )
-        mock_get_latest_inspection_record.return_value = model_dict
-        mock_get_yelp_info.return_value = {"id": "WavvLdfdP6g8aZTtbBQHTw"}
+        YelpRestaurantDetails.objects.create(business_id ='WavvLdfdP6g8aZTtbBQHTw')
         data = get_restaurant_list(1, 1)
-        self.assertEqual(data[0]["yelp_info"], {"id": "WavvLdfdP6g8aZTtbBQHTw"})
-        self.assertEqual(data[0]["latest_record"], model_dict)
+        self.assertEqual(data[0]["yelp_info"]['id'], "WavvLdfdP6g8aZTtbBQHTw")
 
     def test_get_latest_feedback(self):
         questionnaire_old = UserQuestionnaire.objects.create(
@@ -751,7 +739,7 @@ class GetFilteredRestaurantsTests(TestCase):
         filtered_restaurants = get_filtered_restaurants(
             price=["$$"],
             neighborhood=["Upper East Side"],
-            rating=4.0,
+            rating=[4.0],
             page=page,
             limit=limit,
         )

@@ -126,8 +126,18 @@ class SearchFilterForm(forms.Form):
     price_3 = forms.BooleanField(label="price_3", required=False)
     price_4 = forms.BooleanField(label="price_4", required=False)
 
-    All = forms.ChoiceField(label="All", widget=forms.RadioSelect, choices=CHOICES_COMPLIANCE, required=False)
-    Compliant = forms.ChoiceField(label="Compliant", widget=forms.RadioSelect, choices=CHOICES_COMPLIANCE, required=False)
+    All = forms.ChoiceField(
+        label="All",
+        widget=forms.RadioSelect,
+        choices=CHOICES_COMPLIANCE,
+        required=False,
+    )
+    Compliant = forms.ChoiceField(
+        label="All",
+        widget=forms.RadioSelect,
+        choices=CHOICES_COMPLIANCE,
+        required=False,
+    )
 
     rating = forms.MultipleChoiceField(label="rating", choices=CHOICES_RATING, required=False)
 
@@ -171,7 +181,7 @@ class SearchFilterForm(forms.Form):
         return rating_filter
 
     def get_compliant_filter(self):
-        if self.cleaned_data.get('Compliant') is not None:
+        if self.cleaned_data.get('All') == 'Compliant':
             return 'Compliant'
-        return None
+        return 'All'
 
