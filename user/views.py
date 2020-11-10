@@ -117,6 +117,4 @@ def forget_password(request):
 
 
 def update_profile(request):
-    return render(
-        request=request, template_name="profile.html", context={}
-    )
+    return render(request=request, template_name="profile.html", context={})
