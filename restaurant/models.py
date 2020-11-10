@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Restaurant(models.Model):
@@ -51,8 +52,9 @@ class InspectionRecords(models.Model):
 
 class UserQuestionnaire(models.Model):
     restaurant_business_id = models.CharField(max_length=200, null=False)
+    user_id = models.CharField(max_length=200, null=False, default="")
     safety_level = models.CharField(max_length=1)
-
+    saved_on = models.DateTimeField(default=timezone.now, null=False, blank=True)
     temperature_required = models.CharField(max_length=5, null=False, default="False")
     contact_info_required = models.CharField(max_length=5, null=False, default="False")
     employee_mask = models.CharField(max_length=5, null=False, default="False")
@@ -60,9 +62,11 @@ class UserQuestionnaire(models.Model):
     distance_compliant = models.CharField(max_length=5, null=False, default="False")
 
     def __str__(self):
-        return "{} {} {} {} {} {} {}".format(
+        return "{} {} {} {} {} {} {} {} {}".format(
             self.restaurant_business_id,
+            self.user_id,
             self.safety_level,
+            self.saved_on,
             self.temperature_required,
             self.contact_info_required,
             self.employee_mask,

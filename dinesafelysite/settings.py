@@ -136,6 +136,10 @@ YELP_ACCESS_TOKE = (
     "-C_MJFtAbrzfm7YF7bo72TxpOmrrn-zYnQ8xHBh_E4WEO39Z7IdKwbzCkBkCy0fjB6CX3Yx "
 )
 
+YELP_TOKEN_CHUANQI = (
+    "xZS5Fvlspgk0IPac1_PTGHXShab3SErcTgweJcsDH77lXTDNbyaCFuH7c393oK41qXr0s_AnHb8fQ_"
+    "PgsTUsFxhQqwuRqtCPiZu51OWevYAql7syUQuxc3AQC_-lX3Yx "
+)
 
 # Yelp categories
 YELP_CATEGORY_API = "https://api.yelp.com/v3/categories"
