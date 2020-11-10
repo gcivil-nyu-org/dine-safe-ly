@@ -81,6 +81,7 @@ def get_restaurants_list(request, page):
     if request.method == "POST":
         form = SearchFilterForm(request.POST)
         if form.is_valid():
+            # Test print
             print(form.cleaned_data.get('keyword') is None)
             print(form.cleaned_data.get('neighbourhood') is None)
             print(form.cleaned_data.get('price_1'))
