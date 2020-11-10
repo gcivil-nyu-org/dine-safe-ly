@@ -108,8 +108,7 @@ def get_restaurants_list(request, page):
             }
             return JsonResponse(parameter_dict)
         else:
-            print(form.errors)
-            print("Invalid")
+            logger.error(form.errors)
     return HttpResponse("cnm")
 
 

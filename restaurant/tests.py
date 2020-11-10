@@ -3,7 +3,7 @@ from django.forms.models import model_to_dict
 from django.test import Client
 from datetime import datetime, timedelta
 from unittest import mock
-from .forms import QuestionnaireForm
+from .forms import QuestionnaireForm, SearchFilterForm
 from .models import (
     Restaurant,
     InspectionRecords,
@@ -425,6 +425,23 @@ class UserQuestionnaireFormTests(BaseTest):
         form = QuestionnaireForm(self.form)
         response = self.c.post("/restaurant/profile/1/", self.form)
         self.assertTrue(form.is_valid())
+        self.assertEqual(response.status_code, 200)
+
+
+class SearchFilterFormTests(BaseTest):
+    def test_search_filter(self):
+        search_filter_form = {
+            "keyword": "chicken",
+            "neighbourhood": ["Chelsea and Clinton"],
+            "category": ["korean"],
+            "price_1": True,
+            "price_2": True,
+            "price_3": True,
+            "price_4": True,
+            "rating": [1, 2, 3],
+            "All": "Compliant",
+        }
+        response = self.c.post("/restaurant/search_filter/restaurants_list/1", search_filter_form)
         self.assertEqual(response.status_code, 200)
 
 
