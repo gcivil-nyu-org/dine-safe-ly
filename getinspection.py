@@ -10,8 +10,6 @@ import logging
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-import dateutil.parser
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
 
@@ -124,7 +122,7 @@ def save_restaurants(restaurant_df, inspection_df):
             logger.error(
                 "Error while saving to table Restaurant: {} {}".format(b_id, e)
             )
-            
+
             # raise
     return
 
@@ -163,7 +161,6 @@ def get_inspection_data():
     )
     if lastInspection:
         date = str(lastInspection[0].inspected_on)
-        print(date)
         date = date.replace(" ", "T")
         date_query = "inspectedon > '" + date + "'"
         results = client.get("4dx7-axux", where=date_query)

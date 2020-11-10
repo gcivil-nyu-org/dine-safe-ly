@@ -81,6 +81,7 @@ def get_landing_page(request, page=1):
     categories_filter = request.GET.getlist("category")
     price_filter = request.GET.getlist("price")
     rating_filter = None
+    compliant_filter = None
     if request.GET.getlist("ratingfrom"):
         rating_filter = float(request.GET.getlist("ratingfrom")[0])
     keyword = request.GET.get("search")
@@ -93,6 +94,7 @@ def get_landing_page(request, page=1):
         categories_filter,
         price_filter,
         rating_filter,
+        compliant_filter,
     )
 
     parameter_dict = {
