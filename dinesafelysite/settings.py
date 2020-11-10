@@ -136,9 +136,13 @@ YELP_ACCESS_TOKE = (
     "-C_MJFtAbrzfm7YF7bo72TxpOmrrn-zYnQ8xHBh_E4WEO39Z7IdKwbzCkBkCy0fjB6CX3Yx "
 )
 
+YELP_TOKEN_CHUANQI = (
+    "xZS5Fvlspgk0IPac1_PTGHXShab3SErcTgweJcsDH77lXTDNbyaCFuH7c393oK41qXr0s_AnHb8fQ_"
+    "PgsTUsFxhQqwuRqtCPiZu51OWevYAql7syUQuxc3AQC_-lX3Yx "
+)
 
 # Yelp categories
-YELP_CATEGORY_API = "https://api.yelp.com/v3/categories/"
+YELP_CATEGORY_API = "https://api.yelp.com/v3/categories"
 YELP_ACESS_TOKEN_BETA = (
     "Rp2eX_CuQVgaBc0Zk3sKRbFroy_s3_4eUtnNutojHg2G745uXH6-IakxKebxmc"
     "EcM2lIoOhGAjPcb_SoKx0evgi3YeRRre2Ago-9SWh_yGluXMwGAi03y9kIfEueX3Yx"

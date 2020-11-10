@@ -7,6 +7,8 @@ from .utils import (
     query_inspection_record,
     get_latest_inspection_record,
     get_restaurant_list,
+    get_latest_feedback,
+    get_average_safety_rating,
 )
 
 # from django.http import HttpRequest
@@ -26,6 +28,8 @@ def index(request):
 def get_restaurant_profile(request, restaurant_id):
     if request.method == "POST":
         form = QuestionnaireForm(request.POST)
+        print(form.is_valid())
+        logger.info(form.is_valid())
         if form.is_valid():
             form.save()
     try:
@@ -34,10 +38,14 @@ def get_restaurant_profile(request, restaurant_id):
         latest_inspection = get_latest_inspection_record(
             restaurant.restaurant_name, restaurant.business_address, restaurant.postcode
         )
+        feedback = get_latest_feedback(restaurant.business_id)
+        average_safety_rating = get_average_safety_rating(restaurant.business_id)
         parameter_dict = {
             "yelp_info": response_yelp,
             "lasted_inspection": latest_inspection,
             "restaurant_id": restaurant_id,
+            "latest_feedback": feedback,
+            "average_safety_rating": average_safety_rating,
         }
 
         return render(request, "restaurant_detail.html", parameter_dict)
@@ -105,6 +113,7 @@ def get_landing_page(request, page=1):
     categories_filter = request.GET.getlist("category")
     price_filter = request.GET.getlist("price")
     rating_filter = None
+    compliant_filter = None
     if request.GET.getlist("ratingfrom"):
         rating_filter = float(request.GET.getlist("ratingfrom")[0])
     keyword = request.GET.get("search")
@@ -117,6 +126,7 @@ def get_landing_page(request, page=1):
         categories_filter,
         price_filter,
         rating_filter,
+        compliant_filter,
     )
 
     parameter_dict = {
