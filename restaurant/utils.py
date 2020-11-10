@@ -1,6 +1,11 @@
 from django.conf import settings
 from django.forms.models import model_to_dict
-from .models import InspectionRecords, Restaurant, YelpRestaurantDetails
+from .models import (
+    InspectionRecords,
+    Restaurant,
+    YelpRestaurantDetails,
+    UserQuestionnaire,
+)
 import requests
 import json
 import logging
@@ -15,9 +20,31 @@ def get_restaurant_info_yelp(business_id):
     return requests.get(url, headers=headers)
 
 
-def get_restaurant_info_yelp_local(business_id):
-    # TODO
-    pass
+def default_info_page(restaurant_name):
+    return {
+        "restaurant_name": restaurant_name,
+        "img_url": settings.DEFAULT_IMAGE,
+        "rating": 0,
+    }
+
+
+def get_restaurant_info_yelp_local(business_id, restaurant_name):
+    yelp_detail = YelpRestaurantDetails.objects.get(business_id=business_id)
+    yelp_dict = model_to_dict(yelp_detail) if yelp_detail else None
+    if yelp_dict:
+        # Format the info
+        yelp_dict["id"] = yelp_dict["business_id"]
+        yelp_dict["name"] = restaurant_name
+        yelp_dict["image_url"] = (
+            yelp_dict["img_url"] if yelp_dict["img_url"] else settings.DEFAULT_IMAGE
+        )
+        category_list = []
+        for category in yelp_dict["category"]:
+            category_list.append({"title": category.parent_category})
+        del yelp_dict["category"]
+        yelp_dict["categories"] = category_list
+
+    return yelp_dict
 
 
 def get_restaurant_reviews_yelp(business_id):
@@ -80,16 +107,49 @@ def restaurants_to_dict(restaurants):
     for restaurant in restaurants:
         restaurant_dict = model_to_dict(restaurant)
         restaurant_dict["yelp_info"] = (
-            json.loads(get_restaurant_info_yelp(restaurant.business_id).content)
+            get_restaurant_info_yelp_local(
+                restaurant.business_id, restaurant.restaurant_name
+            )
             if restaurant.business_id
             else None
         )
+
+        if not restaurant_dict["yelp_info"]:
+            restaurant_dict["yelp_info"] = default_info_page(restaurant.restaurant_name)
+
         latest_inspection_record = get_latest_inspection_record(
             restaurant.restaurant_name, restaurant.business_address, restaurant.postcode
         )
         restaurant_dict["latest_record"] = latest_inspection_record
         result.append(restaurant_dict)
     return result
+
+
+def get_total_restaurant_number(
+    keyword=None,
+    neighbourhoods_filter=None,
+    categories_filter=None,
+    price_filter=None,
+    rating_filter=None,
+    compliant_filter=None,
+):
+    if (
+        keyword
+        or neighbourhoods_filter
+        or categories_filter
+        or price_filter
+        or rating_filter
+        or compliant_filter
+    ):
+        restaurants = get_filtered_restaurants(
+            keyword,
+            price_filter,
+            neighbourhoods_filter,
+            rating_filter,
+            categories_filter,
+            compliant_filter,
+        )
+        return restaurants.count()
 
 
 def get_restaurant_list(
@@ -100,6 +160,7 @@ def get_restaurant_list(
     categories_filter=None,
     price_filter=None,
     rating_filter=None,
+    compliant_filter=None,
 ):
     page = int(page) - 1
     offset = int(page) * int(limit)
@@ -110,6 +171,7 @@ def get_restaurant_list(
         or categories_filter
         or price_filter
         or rating_filter
+        or compliant_filter
     ):
         restaurants = get_filtered_restaurants(
             keyword,
@@ -117,6 +179,7 @@ def get_restaurant_list(
             neighbourhoods_filter,
             rating_filter,
             categories_filter,
+            compliant_filter,
             page,
             limit,
         )
@@ -134,26 +197,62 @@ def get_filtered_restaurants(
     neighborhood=None,
     rating=None,
     category=None,
-    page=None,
+    compliant=None,
+    page=0,
     limit=None,
 ):
     filters = {}
+
+    if not limit:
+        limit = Restaurant.objects.all().count()
+
     offset = page * int(limit)
     if price:
         filters["price__in"] = price
     if neighborhood:
         filters["neighborhood__in"] = neighborhood
     if rating:
-        filters["rating__gte"] = rating
+        filters["rating__lte"] = rating[1]
+        filters["rating__gte"] = rating[0]
     if category:
-        filters["category__in"] = category
+        filters["category__parent_category__in"] = category
 
     keyword_filter = {}
     if keyword:
         keyword_filter["restaurant_name__contains"] = keyword
+    if compliant == "Compliant":
+        keyword_filter["compliant_status__iexact"] = compliant
 
-    filtered_restaurants = Restaurant.objects.filter(
-        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
-    ).filter(**keyword_filter)[offset : offset + int(limit)]
+    filtered_restaurants = (
+        Restaurant.objects.filter(
+            business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+        )
+        .distinct()
+        .filter(**keyword_filter)[offset : offset + int(limit)]
+    )
 
     return filtered_restaurants
+
+
+def get_latest_feedback(business_id):
+    all_feedback_list = UserQuestionnaire.objects.filter(
+        restaurant_business_id=business_id,
+    ).order_by("-saved_on")
+    if len(all_feedback_list) >= 1:
+        latest_feedback = model_to_dict(all_feedback_list[0])
+        return latest_feedback
+
+    return None
+
+
+def get_average_safety_rating(business_id):
+    all_feedback_list = UserQuestionnaire.objects.filter(
+        restaurant_business_id=business_id,
+    )
+    if len(all_feedback_list) >= 1:
+        total = 0
+        for feedback in all_feedback_list:
+            total += int(feedback.safety_level)
+        average_safety_rating = total / len(all_feedback_list)
+        return average_safety_rating
+    return None

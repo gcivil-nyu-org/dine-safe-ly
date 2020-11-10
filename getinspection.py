@@ -6,18 +6,19 @@ from sodapy import Socrata
 
 import requests
 import json
+import logging
 
-# from apscheduler.schedulers.blocking import BlockingScheduler
-
-# import dateutil.parser
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
 
 from restaurant.models import Restaurant, InspectionRecords  # noqa: E402
+from yelprestaurantdetails import save_yelp_restaurant_details  # noqa: E402
 
 
-# sched = BlockingScheduler()
+sched = BlockingScheduler()
+logger = logging.getLogger(__name__)
 
 
 def match_on_yelp(restaurant_name, restaurant_location):
@@ -81,61 +82,76 @@ def clean_inspection_data(results_df):
     return restaurant_df, inspection_df
 
 
-def save_restaurants(restaurant_df):
-    for index, row in restaurant_df.iterrows():
-        try:
-            response = json.loads(
-                match_on_yelp(row["restaurantname"], row["businessaddress"])
-            )
-            if next(iter(response)) == "error":
-                continue
-            elif not response["businesses"]:
-                continue
-            # else:
-            #     b_id = response["businesses"][0]["id"]
-
-            # r = Restaurant(
-            #     restaurant_name=row["restaurantname"],
-            #     business_address=row["businessaddress"],
-            #     postcode=row["postcode"],
-            #     # legal_business_name=row["legalbusinessname"],
-            #     # business_id=b_id,
-            # )
-            # r.save()
-        except OSError:
-            print("save_restaurant failed")
-            raise
-    return
-
-
-def save_inspections(inspection_df):
+def save_restaurants(restaurant_df, inspection_df):
     for index, row in inspection_df.iterrows():
         try:
 
-            inspect_record = InspectionRecords(
+            response = json.loads(
+                match_on_yelp(row["restaurantname"], row["businessaddress"])
+            )
+            if next(iter(response)) == "error" or not response["businesses"]:
+                b_id = None
+            else:
+                b_id = response["businesses"][0]["id"]
+
+            r = Restaurant(
                 restaurant_name=row["restaurantname"],
-                restaurant_inspection_id=row["restaurantinspectionid"],
-                is_roadway_compliant=row["isroadwaycompliant"],
                 business_address=row["businessaddress"],
                 postcode=row["postcode"],
-                skipped_reason=row["skippedreason"],
-                inspected_on=row["inspectedon"],
+                business_id=b_id,
+                compliant_status=row["isroadwaycompliant"],
             )
-            inspect_record.save()
+            if b_id:
+                if not Restaurant.objects.filter(business_id=b_id).exists():
+                    r.save()
+                    logger.info(
+                        "Restaurant details successfully saved: {}".format(b_id)
+                    )
+                    save_inspections(row, b_id)
+                    save_yelp_restaurant_details(b_id)
+                else:
+                    Restaurant.objects.filter(business_id=b_id).update(
+                        compliant_status=row["isroadwaycompliant"]
+                    )
+                    save_inspections(row, b_id)
+            else:
+                r.save()
+                save_inspections(row, b_id)
 
         except Exception as e:
-            print(e)
+            logger.error(
+                "Error while saving to table Restaurant: {} {}".format(b_id, e)
+            )
+
+            # raise
     return
 
 
-# @sched.scheduled_job("interval", minutes=1)
+def save_inspections(row, business_id):
+    # for index, row in inspection_df.iterrows():
+    try:
+
+        inspect_record = InspectionRecords(
+            restaurant_name=row["restaurantname"],
+            restaurant_inspection_id=row["restaurantinspectionid"],
+            is_roadway_compliant=row["isroadwaycompliant"],
+            business_address=row["businessaddress"],
+            postcode=row["postcode"],
+            skipped_reason=row["skippedreason"],
+            inspected_on=row["inspectedon"],
+            business_id=business_id,
+        )
+        inspect_record.save()
+
+    except Exception as e:
+        print(e)
+    return
+
+
+@sched.scheduled_job("interval", hours=12)
 def get_inspection_data():
     # ir = InspectionRecords.objects.all().count()
-    # lastInspection = InspectionRecords.objects.order_by("-inspected_on")[0:1]
-    # date = str(lastInspection[0].inspected_on)
-    # print(date)
-    # date = date.replace(" ", "T")
-    # date_query = "inspectedon > '" + date + "'"
+    lastInspection = InspectionRecords.objects.order_by("-inspected_on")[0:1]
 
     client = Socrata(
         "data.cityofnewyork.us",
@@ -143,25 +159,28 @@ def get_inspection_data():
         username="cx657@nyu.edu",
         password="Dinesafely123",
     )
-
-    # results = client.get("4dx7-axux", where=date_query)
-    results = client.get("4dx7-axux", limit=30000)
+    if lastInspection:
+        date = str(lastInspection[0].inspected_on)
+        date = date.replace(" ", "T")
+        date_query = "inspectedon > '" + date + "'"
+        results = client.get("4dx7-axux", where=date_query)
+    else:
+        results = client.get("4dx7-axux", limit=30000)
 
     # Convert to pandas DataFrame
 
     results_df = pd.DataFrame.from_records(results)
-    # results_df = pd.read_csv('/Users/xiechenwei/Downloads/opendata_restaurant.csv')
     print(results_df.shape)
     print(results_df.columns)
 
     if results_df.shape[0] > 0:
         restaurant_df, inspection_df = clean_inspection_data(results_df)
-        save_restaurants(restaurant_df)
+        save_restaurants(restaurant_df, inspection_df)
         # print(inspection_df)
-        save_inspections(inspection_df)
+        # save_inspections(inspection_df)
 
 
-# sched.start()
+sched.start()
 
 
 def populate_restaurant_with_yelp_id():
@@ -191,5 +210,5 @@ def populate_restaurant_with_yelp_id():
 
 
 if __name__ == "__main__":
-    populate_restaurant_with_yelp_id()
-    # get_inspection_data()
+    # populate_restaurant_with_yelp_id()
+    get_inspection_data()
