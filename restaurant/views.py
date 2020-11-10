@@ -9,6 +9,7 @@ from .utils import (
     get_restaurant_list,
     get_latest_feedback,
     get_average_safety_rating,
+    get_total_restaurant_number,
 )
 
 # from django.http import HttpRequest
@@ -98,7 +99,15 @@ def get_restaurants_list(request, page):
                 form.get_price_filter(),
                 form.get_rating_filter(),
             )
+            restaurant_number = get_total_restaurant_number(
+                form.cleaned_data.get('keyword'),
+                form.cleaned_data.get('neighbourhood'),
+                form.cleaned_data.get('category'),
+                form.get_price_filter(),
+                form.get_rating_filter(),
+            )
             parameter_dict = {
+                "restaurant_number": restaurant_number,
                 "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),
                 "page": page,
             }

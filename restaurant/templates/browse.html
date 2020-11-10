@@ -188,11 +188,10 @@
                       contentType: false,
                       // handle a successful response
                       success : function(json) {
-                          restaurant_content_list = json
                           page_global += 1;
-                          console.log(restaurant_content_list.restaurant_list)
-                          loadRestaurant(restaurant_content_list.restaurant_list)
-                          console.log(restaurant_content_list); // log the returned json to the console
+                          console.log(json.restaurant_list)
+                          loadRestaurant(json.restaurant_list, json.restaurant_number)
+                          console.log(json); // log the returned json to the console
                           console.log("success"); // another sanity check
                       },
 
@@ -284,7 +283,7 @@
                     restaurant_content_list = json
                     page_global += 1;
                     console.log(restaurant_content_list.restaurant_list)
-                    loadRestaurant(restaurant_content_list.restaurant_list)
+                    loadRestaurant(restaurant_content_list.restaurant_list, json.restaurant_number)
                     console.log(restaurant_content_list); // log the returned json to the console
                     console.log("success"); // another sanity check
                 },
@@ -302,12 +301,13 @@
     <script type="text/javascript">
     function clearRestaurant() {
       var res_list_group = document.getElementById("res_list_group");
-      res_list_group.innerHTML = ""
+      res_list_group.innerHTML = "";
+      page_global = 0;
     }
-    function loadRestaurant(restaurant_list_json) {
+    function loadRestaurant(restaurant_list_json, restaurant_number) {
        var restaurant_list = [];
        restaurant_list = JSON.parse(restaurant_list_json);
-       document.getElementById("res_count").innerHTML = restaurant_list.length;
+       document.getElementById("res_count").innerHTML = restaurant_number;
        for(var i = 0; i < restaurant_list.length; i++)
        {
           if(restaurant_list[i].yelp_info == null || restaurant_list[i].yelp_info.error != null) {continue;}

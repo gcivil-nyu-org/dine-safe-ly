@@ -123,6 +123,34 @@ def restaurants_to_dict(restaurants):
     return result
 
 
+def get_total_restaurant_number(
+    keyword=None,
+    neighbourhoods_filter=None,
+    categories_filter=None,
+    price_filter=None,
+    rating_filter=None,
+    compliant_filter=None,
+):
+    if (
+        keyword
+        or neighbourhoods_filter
+        or categories_filter
+        or price_filter
+        or rating_filter
+        or compliant_filter
+    ):
+        restaurants = get_filtered_restaurants(
+            keyword,
+            price_filter,
+            neighbourhoods_filter,
+            rating_filter,
+            categories_filter,
+            compliant_filter,
+        )
+        return restaurants.count()
+
+
+
 def get_restaurant_list(
     page,
     limit,
@@ -169,10 +197,14 @@ def get_filtered_restaurants(
     rating=None,
     category=None,
     compliant=None,
-    page=None,
+    page=0,
     limit=None,
 ):
     filters = {}
+
+    if not limit:
+        limit = Restaurant.objects.all().count()
+
     offset = page * int(limit)
     if price:
         filters["price__in"] = price
