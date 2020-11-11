@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 def user_login(request):
     if request.user.is_authenticated:
-        return redirect("restaurant:browse")
+        return redirect("index")
     if request.method == "POST":
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
@@ -28,7 +28,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("restaurant:browse")
+                return redirect("user:register")
 
     else:
         form = AuthenticationForm()
@@ -37,7 +37,7 @@ def user_login(request):
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect("restaurant:browse")
+        return redirect("index")
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -59,7 +59,7 @@ def post_logout(request):
 # @login_required()
 def account_details(request):
     if not request.user.is_authenticated:
-        return redirect("restaurant:browse")
+        return redirect("user:login")
 
     if request.method == "POST":
         user = request.user
