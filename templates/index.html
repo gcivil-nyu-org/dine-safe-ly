@@ -15,8 +15,9 @@
         <form action="#">
             <div class="row">
                 <div class="col-lg-4 d-flex align-items-center form-group">
-                    <input class="form-control border-0 shadow-0" type="search" name="search" placeholder="What are you searching for?">
+                    <input class="form-control border-0 shadow-0" type="search" name="search"  id="search-keyword" placeholder="What are you searching for?">
                 </div>
+
                 <div class="col-md-6 col-lg-3 d-flex align-items-center form-group">
                     <div class="input-label-absolute input-label-absolute-right w-100">
                         <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i>
@@ -34,12 +35,20 @@
                     </select>
                 </div>
                 <div class="col-lg-2 form-group mb-0">
-                    <button class="btn btn-primary btn-block h-100" type="submit">Search </button>
+                    <a class="btn btn-primary btn-block h-100" onclick="search_keyword()">Search</a>
                 </div>
+                <script>
+                    function search_keyword(){
+                        var keyword = $("#search-keyword").val();
+                        console.log(keyword);
+                        window.location.href="./restaurant/1?search=" + keyword;
+                    };
+                </script>
             </div>
         </form>
     </div>
 </div>
+
 <!-- Our picks section-->
 <!--<section class="py-6">-->
 <!--    <div class="container">-->
