@@ -11,3 +11,4 @@ coverage
 coveralls
 pre-commit
 python-dotenv
+django-allauth
