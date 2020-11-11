@@ -222,16 +222,8 @@
                     </button>
                     <script>
                      function resetForm(e, thisobj) {
-                        thisform = thisobj.closest('form');
-                        selectbox_in_form = thisform.find('select');
-
-                        // completely remove selected when it has been assigned.
-                        selectbox_in_form.find('option:selected').removeAttr('selected');
-                        selectbox_in_form.val('');
-                        selectbox_in_form.change();
-
-                        delete selectbox_in_form;
-                        delete thisform;
+                        var search_filter_form = document.getElementById("search_filter_form");
+                        search_filter_form.reset();
                         clearRestaurant();
                         create_post();
                     }// resetForm
@@ -296,8 +288,16 @@
           function clearRestaurant() {
             var res_list_group = document.getElementById("res_list_group");
             res_list_group.innerHTML = "";
+
             page_global = 1;
             document.getElementById('load_button').style.visibility = 'visible';
+
+            var query = window.location.search.substring(1)
+            if(query.length) {
+               if(window.history != undefined && window.history.pushState != undefined) {
+                    window.history.pushState({}, document.title, window.location.pathname);
+               }
+            }
           }
           function loadRestaurant(restaurant_list_json, restaurant_number) {
              var restaurant_list = [];
@@ -439,10 +439,13 @@
           };
         function load_filter(){
            const queryString = window.location.search;
-           const urlParams = new URLSearchParams(queryString);
-           const keyword = urlParams.get('search')
-           document.getElementById('keyword').value = keyword;
-           console.log(document.getElementById('keyword').value);
+           if(queryString.length) {
+               const urlParams = new URLSearchParams(queryString);
+               const keyword = urlParams.get('search')
+               document.getElementById('keyword').value = keyword;
+               console.log(document.getElementById('keyword').value);
+           }
+
         };
     </script>
 </div>
