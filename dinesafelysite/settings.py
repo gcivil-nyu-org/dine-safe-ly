@@ -148,6 +148,11 @@ YELP_ACESS_TOKEN_BETA = (
     "EcM2lIoOhGAjPcb_SoKx0evgi3YeRRre2Ago-9SWh_yGluXMwGAi03y9kIfEueX3Yx"
 )
 
+DEFAULT_IMAGE = (
+    "https://www.theskinnypignyc.com/wp-content/uploads/2019/05/what"
+    "shouldwedo-cecconis-750x430.jpg"
+)
+
 django_heroku.settings(locals(), test_runner=False)
 
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
