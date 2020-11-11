@@ -12,87 +12,42 @@
 </section>
 <div class="container">
     <div class="search-bar rounded p-3 p-lg-4 position-relative mt-n5 z-index-20">
-        <form action="#">
+        <form action="{% url 'restaurant:browse' %}">
             <div class="row">
-                <div class="col-lg-4 d-flex align-items-center form-group">
-                    <input class="form-control border-0 shadow-0" type="search" name="search" placeholder="What are you searching for?">
+                <div class="col-lg-10 d-flex align-items-center form-group">
+                    <input class="form-control border-0 shadow-0" type="search" name="search"  id="search-keyword" placeholder="What are you searching for?">
                 </div>
-                <div class="col-md-6 col-lg-3 d-flex align-items-center form-group">
-                    <div class="input-label-absolute input-label-absolute-right w-100">
-                        <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i>
-                            <div class="sr-only">City</div>
-                        </label>
-                        <input class="form-control border-0 shadow-0" type="text" name="location" placeholder="Location" id="location">
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 d-flex align-items-center form-group no-divider">
-                    <select class="selectpicker" title="Categories" data-style="btn-form-control">
-                        <option value="small">Restaurants</option>
-                        <option value="medium">Cafes</option>
-                        <option value="large">Bars</option>
-                        <option value="x-large">Food Stalls</option>
-                    </select>
-                </div>
+
+<!--                <div class="col-md-6 col-lg-3 d-flex align-items-center form-group">-->
+<!--                    <div class="input-label-absolute input-label-absolute-right w-100">-->
+<!--                        <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i>-->
+<!--                            <div class="sr-only">City</div>-->
+<!--                        </label>-->
+<!--                        <input class="form-control border-0 shadow-0" type="text" name="location" placeholder="Location" id="location">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-6 col-lg-3 d-flex align-items-center form-group no-divider">-->
+<!--                    <select class="selectpicker" title="Categories" data-style="btn-form-control">-->
+<!--                        <option value="small">Restaurants</option>-->
+<!--                        <option value="medium">Cafes</option>-->
+<!--                        <option value="large">Bars</option>-->
+<!--                        <option value="x-large">Food Stalls</option>-->
+<!--                    </select>-->
+<!--                </div>-->
                 <div class="col-lg-2 form-group mb-0">
-                    <button class="btn btn-primary btn-block h-100" type="submit">Search </button>
+                    <a class="btn btn-primary btn-block h-100" onclick="search_keyword()">Search</a>
                 </div>
+                <script>
+                    function search_keyword(){
+                        var keyword = $("#search-keyword").val();
+                        console.log(keyword);
+                        window.location.href="./restaurant/1?search=" + keyword;
+                    };
+                </script>
             </div>
         </form>
     </div>
 </div>
-<!-- Our picks section-->
-<!--<section class="py-6">-->
-<!--    <div class="container">-->
-<!--        <div class="row mb-5">-->
-<!--            <div class="col-md-8">-->
-<!--                <p class="subtitle text-primary">Latest Compliant Restaurants</p>-->
-<!--                <h2>What's New?</h2>-->
-<!--            </div>-->
-<!--            <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="category.html">-->
-<!--                See all restaurants<i class="fas fa-angle-double-right-->
-<!--                ml-2"></i></a></div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--            <div class="d-flex align-items-lg-stretch mb-4 col-lg-8">-->
-<!--                <div class="card shadow-lg border-0 w-100 border-0 hover-animate" style="background: center center url(https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1449034446853-66c86144b0ad.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="category.html"> </a>-->
-<!--                    <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">-->
-<!--                        <h3 class="text-shadow text-uppercase mb-0">San Francisco</h3>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">-->
-<!--                <div class="card shadow-lg border-0 w-100 border-0 hover-animate" style="background: center center url(https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1429554429301-1c7d5ae2d42e.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="category.html"> </a>-->
-<!--                    <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">-->
-<!--                        <h3 class="text-shadow text-uppercase mb-0">Los Angeles</h3>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--            <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">-->
-<!--                <div class="card shadow-lg border-0 w-100 border-0 hover-animate" style="background: center center url(https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1523430410476-0185cb1f6ff9.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="category.html"> </a>-->
-<!--                    <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">-->
-<!--                        <h3 class="text-shadow text-uppercase mb-0">Santa Monica</h3>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">-->
-<!--                <div class="card shadow-lg border-0 w-100 border-0 hover-animate" style="background: center center url(https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1505245208761-ba872912fac0.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="category.html"> </a>-->
-<!--                    <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">-->
-<!--                        <h3 class="text-shadow text-uppercase mb-0">San Diego</h3>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">-->
-<!--                <div class="card shadow-lg border-0 w-100 border-0 hover-animate" style="background: center center url(https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1519867850-74775a87e783.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="category.html"> </a>-->
-<!--                    <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">-->
-<!--                        <h3 class="text-shadow text-uppercase mb-0">Fresno</h3>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
 <section class="py-6 bg-gray-100">
     <div class="container">
         <div class="text-center pb-lg-4">
@@ -200,50 +155,6 @@
         </div>
     </div>
 </section>
-
-<!-- Divider Section-->
-<!--<section class="py-6 py-lg-7 position-relative dark-overlay"><img class="bg-image" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1507915135761-41a0a222c709.jpg" alt="">-->
-<!--    <div class="container">-->
-<!--        <div class="overlay-content text-white py-lg-5 text-center">-->
-<!--            <p class="subtitle text-white letter-spacing-4 mb-4">Find the best spots</p>-->
-<!--            <h3 class="display-3 font-weight-bold text-serif text-shadow mb-5">Travel & Explore</h3>-->
-<!--            <p class="lead text-shadow mb-5">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections</p><a class="btn btn-primary" href="category-rooms.html">Get started</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-<!-- Brands Section-->
-<!--<section class="py-6">-->
-<!--    <div class="container">-->
-<!--        <h5 class="text-center text-uppercase letter-spacing-3 mb-5">Our brands</h5>-->
-<!--        &lt;!&ndash; Brands Slider&ndash;&gt;-->
-<!--        <div class="swiper-container brands-slider">-->
-<!--            <div class="swiper-wrapper pb-5">-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-1.svg" alt="Brand 1"></div>-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-2.svg" alt="Brand 2"></div>-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-3.svg" alt="Brand 3"></div>-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-4.svg" alt="Brand 4"></div>-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-5.svg" alt="Brand 5"></div>-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-6.svg" alt="Brand 6"></div>-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-1.svg" alt="Brand 1"></div>-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-2.svg" alt="Brand 2"></div>-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-3.svg" alt="Brand 3"></div>-->
-<!--                &lt;!&ndash; item&ndash;&gt;-->
-<!--                <div class="swiper-slide h-auto d-flex align-items-center justify-content-center"><img class="img-fluid w-6rem opacity-7" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/brand/brand-4.svg" alt="Brand 4"></div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-<!-- Divider Section-->
-
 <section class="py-6 bg-gray-100">
     <div class="container">
         <div class="row">
@@ -265,37 +176,6 @@
         </div>
     </div>
 </section>
-
-
-<!--&lt;!&ndash; Instagram&ndash;&gt;-->
-<!--<section>-->
-<!--    <div class="container-fluid px-0">-->
-<!--        <div class="swiper-container instagram-slider">-->
-<!--            <div class="swiper-wrapper">-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-1.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-2.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-3.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-4.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-5.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-6.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-7.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-8.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-9.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-10.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-11.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-12.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-13.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-14.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-10.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-11.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-12.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-13.jpg" alt=" "></a></div>-->
-<!--                <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/instagram/instagram-14.jpg" alt=" "></a></div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-
 <script type="text/javascript">
 
 var restaurant_list = {{restaurant_list | safe}};
@@ -309,19 +189,19 @@ var restaurant_list = {{restaurant_list | safe}};
 			div1.className = "swiper-slide h-auto px-2";
 
 			var div2 = document.createElement("div");
-			div2.className = "w-100 h-80 hover-animate";
+			div2.className = "w-100 h-100 hover-animate";
 
 			var div3 = document.createElement("div");
 			div3.className = "card h-100 border-0 shadow";
+
+			var a1 = document.createElement("a");
+			a1.className = "title-link";
+			a1.href = "../restaurant/profile/" + restaurant_list[i].id;
 
 			var div4 = document.createElement("div");
 			div4.className = "card-img-top overflow-hidden dark-overlay bg-cover";
 			div4.id = "res_card_img"+ i.toString();
 			div4.style = "min-height: 200px";
-
-			var a1 = document.createElement("a");
-			a1.className = "title-link";
-			a1.href = restaurant_list[i].yelp_info.url;
 
 			var div5 = document.createElement("div");
 			div5.className = "card-img-overlay-bottom z-index-20";
@@ -351,8 +231,9 @@ var restaurant_list = {{restaurant_list | safe}};
 
 
 
-			div4.appendChild(a1);
+
 			div4.appendChild(div5);
+			a1.appendChild(div4);
 			//div4.appendChild(div_svg);
 
 			var div6 = document.createElement("div");
@@ -363,8 +244,8 @@ var restaurant_list = {{restaurant_list | safe}};
 
 			var a2 = document.createElement("a");
 			a2.className = "text-dark";
-			a2.href = restaurant_list[i].yelp_info.url;
-			a2.innerHTML = "Compliant";
+			a2.href = "../restaurant/inspection_records/" + restaurant_list[i].id ;
+			a2.innerHTML = restaurant_list[i].latest_record.is_roadway_compliant;
 
 			p_1.appendChild(a2);
 
@@ -374,16 +255,19 @@ var restaurant_list = {{restaurant_list | safe}};
 
 			var a3 = document.createElement("a");
 			a3.className = "mr-1 disabled";
-			for (var p = 0; p < restaurant_list[i].yelp_info.categories.length; p++) {
-		    	a3.innerHTML += restaurant_list[i].yelp_info.categories[p].title + "&nbsp&nbsp";
-				}
+			var str = "";
+              for (var p = 0; p < restaurant_list[i].yelp_info.categories.length; p++) {
+                 str += restaurant_list[i].yelp_info.categories[p].title + ", ";
+              }
+              str = str.slice(0, -2);
+              a3.innerHTML = str;
 
 			p_2.appendChild(a3);
 
 			div6.appendChild(p_1);
 			div6.appendChild(p_2);
 
-			div3.appendChild(div4);
+			div3.appendChild(a1);
 			div3.appendChild(div6);
 
 			div2.appendChild(div3);
@@ -394,8 +278,6 @@ var restaurant_list = {{restaurant_list | safe}};
 			document.getElementById("res_card_img"+ i.toString()).style.backgroundImage = "url(" + restaurant_list[i].yelp_info.image_url + ")";
         }
 
-
-</script>
 
 </script>
 {% endblock %}

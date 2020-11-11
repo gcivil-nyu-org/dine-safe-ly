@@ -47,11 +47,15 @@
               </div>
             </a>
           </div>
-          <!-- Button trigger modal -->
+            {% if user.is_authenticated %}
+                <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Have you been here before?
           </button>
+            {% endif %}
+
         </div>
+
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -67,12 +71,14 @@
                 <div class="modal-body">
                   <h2>For this restaurant:</h2>
                   <input type="text" id="restaurant_business_id" name="restaurant_business_id" value="" hidden>
+                    <input type="text" id="user_id" name="user_id" value="{{user.id}}" hidden>
+                    <input type="text" id="saved_on" name="saved_on"   hidden>
                   <br>
                   <p>Did you receive a temperature check?</p>
                   <div class="form-group">
-                    <input type="radio" id="star1" name="temperature_required" value="true" />
+                    <input type="radio" name="temperature_required" value="true" />
                     <label for="star1" title="text">Yes</label>
-                    <input type="radio" id="star2" name="temperature_required" value="false" />
+                    <input type="radio" name="temperature_required" value="false" />
                     <label for="star2" title="text">No</label>
                   </div>
                   <br>
@@ -214,7 +220,8 @@
               <div class="media align-items-center">
                 <div class="media-body">
                   <p class="subtitle text-sm text-primary">Want to know more?</p>
-                  <h4 class="mb-0">Information</h4> </div>
+                  <h4 class="mb-0">Information</h4>
+                </div>
                 <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
                   <use xlink:href="#fountain-pen-1"> </use>
                 </svg>
@@ -246,9 +253,47 @@
               </div>
             </div>
           </div>
-          <!--          <div class="text-center">-->
-          <!--            <p><a class="text-secondary" href="#"> <i class="fa fa-heart"></i> Bookmark This Listing</a></p><span>79 people bookmarked this place </span>-->
-          <!--          </div>-->
+<!--          recent user feedback-->
+            <div class="card border-0 shadow mb-5">
+            <div class="card-header bg-gray-100 py-4 border-0">
+              <div class="media align-items-center">
+                <div class="media-body">
+                  <p class="subtitle text-sm text-primary">Most Recent User Feedback</p>
+                  <h6 class="mb-0">Average Safety Rating: {{ average_safety_rating }}</h6>
+                </div>
+              </div>
+                </div>
+            <div class="card-body">
+              <ul class="list-unstyled mb-4">
+                <li class="mb-2">
+                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
+                    <p id="temperature_check">Temperature Check: {{ latest_feedback.temperature_required }}</p>
+                   </a>
+                </li>
+                <li class="mb-2">
+                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
+                    <p id="contact_info">Contact Info Tracing: {{ latest_feedback.contact_info_required }}</p>
+                   </a>
+                </li>
+                <li class="mb-2">
+                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
+                    <p id="staff_mask">Staff Wearing Mask: {{ latest_feedback.employee_mask }}</p>
+                  </a>
+                </li>
+                  <li class="mb-2">
+                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
+                    <p id="capacity_compliance">Capacity under 25%: {{ latest_feedback.capacity_compliant }}</p>
+                   </a>
+                </li>
+                  <li class="mb-2">
+                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
+                    <p id="distance_compliance">Distance Compliant: {{ latest_feedback.distance_compliant }}</p>
+                  </a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -299,10 +344,13 @@ switch (false) {
     case (empty1.includes(latitude)): var lat = yelp_info.coordinates.latitude;
 }
 
+var res_category = document.getElementById("res_category");
+var str = "";
 for (i = 0; i < yelp_info.categories.length; i++) {
-    document.getElementById("res_category").innerHTML += yelp_info.categories[i]
-        .title + "&nbsp;&nbsp;&nbsp;&nbsp;";
+    str += yelp_info.categories[i].title + ", ";
 }
+str = str.slice(0, -2);
+res_category.innerHTML = str;
 
 var res_rev_star = document.getElementById("res_rev_star");
 var rate = yelp_info.rating;
@@ -439,7 +487,10 @@ function initMap() {
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&callback=initMap"
         type="text/javascript"></script>
 <script>
-  document.getElementById("restaurant_business_id").value= yelp_info.id ;
+  document.getElementById("restaurant_business_id").value = yelp_info.id ;
+
+
 </script>
+
 
 {% endblock %}

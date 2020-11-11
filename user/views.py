@@ -52,7 +52,7 @@ def post_logout(request):
     return redirect("user:login")
 
 
-def update_password(request):
+def account_details(request):
     if not request.user.is_authenticated:
         return redirect("restaurant:browse")
 
@@ -66,14 +66,14 @@ def update_password(request):
             return redirect("user:login")
         return render(
             request=request,
-            template_name="update_password.html",
+            template_name="account_details.html",
             context={"form": form},
         )
     else:
         form = ResetPasswordForm()
         return render(
             request=request,
-            template_name="update_password.html",
+            template_name="account_details.html",
             context={"form": form},
         )
 
