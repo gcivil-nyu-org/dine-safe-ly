@@ -13,12 +13,6 @@ def main():
     load_dotenv(dotenv_path=env_path)
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
-    load_dotenv()
-
-    load_dotenv(verbose=True)
-
-    env_path = Path(".") / "dinesafelysite" / ".env"
-    load_dotenv(dotenv_path=env_path)
 
     try:
         from django.core.management import execute_from_command_line
