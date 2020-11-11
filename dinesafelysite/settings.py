@@ -11,9 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import django_heroku
 from pathlib import Path
-from dotenv import load_dotenv
 import os
-
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,8 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+load_dotenv(verbose=True)
+
+
+env_path = Path(".") / ".env"
+load_dotenv(dotenv_path=env_path)
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "4-wo^xhkbz@y1q7i*_yluq8p^pzl*k&7mm2df)b@v*e*@*6mwm"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -88,7 +93,7 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation"
-                ".UserAttributeSimilarityValidator",
+        ".UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -122,26 +127,19 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
+YELP_TOKEN_1 = os.environ.get("YELP_TOKEN_1")
 
-load_dotenv()
+YELP_ACCESS_TOKEN2 = os.environ.get("YELP_ACCESS_TOKEN2")
 
-load_dotenv(verbose=True)
+YELP_ACCESS_TOKE = os.environ.get("YELP_ACCESS_TOKE")
 
-env_path = Path('.') / '.env'
-load_dotenv(dotenv_path=env_path)
-
-YELP_TOKEN_1 = os.getenv("YELP_TOKEN_1")
-YELP_ACCESS_TOKEN2 = os.getenv("YELP_ACCESS_TOKEN2")
-YELP_ACCESS_TOKE = os.getenv("YELP_ACCESS_TOKE")
-YELP_TOKEN_CHUANQI = os.getenv("YELP_TOKEN_CHUANQI")
+YELP_TOKEN_CHUANQI = os.environ.get("YELP_TOKEN_CHUANQI")
 
 # Yelp categories
 YELP_CATEGORY_API = "https://api.yelp.com/v3/categories"
-YELP_ACESS_TOKEN_BETA = (
-    "Rp2eX_CuQVgaBc0Zk3sKRbFroy_s3_4eUtnNutojHg2G745uXH6-IakxKebxmc"
-    "EcM2lIoOhGAjPcb_SoKx0evgi3YeRRre2Ago-9SWh_yGluXMwGAi03y9kIfEueX3Yx"
-)
+YELP_ACESS_TOKEN_BETA = os.environ.get("YELP_ACESS_TOKEN_BETA")
 
 DEFAULT_IMAGE = (
     "https://www.theskinnypignyc.com/wp-content/uploads/2019/05/what"
@@ -176,6 +174,6 @@ LOGOUT_REDIRECT_URL = "browse"
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "dinesafely.nyc@gmail.com"
-EMAIL_HOST_PASSWORD = "Nyucs2020"
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587

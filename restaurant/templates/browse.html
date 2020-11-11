@@ -164,7 +164,6 @@
                 <div class="mb-4">
                     <label class="form-label">Ratings</label>
                     <div class="form-group">
-                      <label class="form-label" for="rating">Your rating *</label>
                       <select class="selectpicker form-control" name="rating" id="rating" multiple data-style="btn-selectpicker" title="">
                         <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
                         <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
@@ -222,7 +221,7 @@
                     </button>
                     <script>
                      function resetForm(e, thisobj) {
-                        thisform = thisobj.closest('form');
+                      thisform = thisobj.closest('form');
                         selectbox_in_form = thisform.find('select');
 
                         // completely remove selected when it has been assigned.
@@ -232,12 +231,11 @@
 
                         delete selectbox_in_form;
                         delete thisform;
-                    }// resetForm
-
-                    $(function() {
-                        // activate Select2
-                        $('.selectbox-replacement-enabler').select2();
-                    });
+                        var search_filter_form = document.getElementById("search_filter_form");
+                        search_filter_form.reset();
+                        clearRestaurant();
+                        create_post();
+                  }// resetForm
                     </script>
                 </div>
             </form>
@@ -250,18 +248,20 @@
                 <div>
                     <label class="form-label mr-2" for="form_sort">Sort by</label>
                     <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
-                        <option value="sortBy_0">Most popular</option>
-                        <option value="sortBy_1">Recommended</option>
-                        <option value="sortBy_2">Newest</option>
-                        <option value="sortBy_3">Oldest</option>
-                        <option value="sortBy_4">Closest</option>
+                        <option value="sortBy_0">Recommended</option>
+                        <option value="sortBy_1">Highest Rated</option>
+                        <option value="sortBy_2">Highest Price</option>
+                        <option value="sortBy_3">Lowest Price</option>
+                        <option value="sortBy_4">Near By</option>
                     </select>
                 </div>
             </div>
             <div id="res_list_group" class="row">
 
             </div>
-            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="load_more()" id="load_button">Load More</button>
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-primary mb-4" onclick="load_more()" id="load_button">Load More</button>
+            </div>
         </div>
         <script>
 		var page_global = 1; // Global page number
@@ -299,8 +299,16 @@
           function clearRestaurant() {
             var res_list_group = document.getElementById("res_list_group");
             res_list_group.innerHTML = "";
+
             page_global = 1;
             document.getElementById('load_button').style.visibility = 'visible';
+
+            var query = window.location.search.substring(1)
+            if(query.length) {
+               if(window.history != undefined && window.history.pushState != undefined) {
+                    window.history.pushState({}, document.title, window.location.pathname);
+               }
+            }
           }
           function loadRestaurant(restaurant_list_json, restaurant_number) {
              var restaurant_list = [];
@@ -435,10 +443,21 @@
         window.onload = function () {
           var loaded = 0;
             if (loaded == 0) {
+              load_filter();
               create_post();
               loaded = 1;
             }
           };
+        function load_filter(){
+           const queryString = window.location.search;
+           if(queryString.length) {
+               const urlParams = new URLSearchParams(queryString);
+               const keyword = urlParams.get('search')
+               document.getElementById('keyword').value = keyword;
+               console.log(document.getElementById('keyword').value);
+           }
+
+        };
     </script>
 </div>
 

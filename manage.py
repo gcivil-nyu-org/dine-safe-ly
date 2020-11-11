@@ -8,6 +8,10 @@ from pathlib import Path
 
 def main():
     """Run administrative tasks."""
+    load_dotenv(verbose=True)
+    env_path = Path(".") / ".env"
+    load_dotenv(dotenv_path=env_path)
+
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
     load_dotenv()
 
