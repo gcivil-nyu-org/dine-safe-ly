@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .utils import send_reset_password_email
 from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
+from allauth.socialaccount.forms import DisconnectForm
 
 import logging
 
@@ -114,3 +115,17 @@ def forget_password(request):
         return render(
             request=request, template_name="reset_email.html", context={"form": form}
         )
+
+
+class MyCustomSocialDisconnectForm(DisconnectForm):
+    def save(self):
+
+        # Add your own processing here if you do need access to the
+        # socialaccount being deleted.
+
+        # Ensure you call the parent class's save.
+        # .save() does not return anything
+        super(MyCustomSocialDisconnectForm, self).save()
+
+        # Add your own processing here if you don't need access to the
+        # socialaccount being deleted.

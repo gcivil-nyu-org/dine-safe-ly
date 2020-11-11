@@ -192,6 +192,8 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
+SOCIALACCOUNT_FORMS = {"disconnect": "mysite.forms.MyCustomSocialDisconnectForm"}
+
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "SCOPE": [
