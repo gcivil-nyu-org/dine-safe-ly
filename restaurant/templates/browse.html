@@ -435,10 +435,18 @@
         window.onload = function () {
           var loaded = 0;
             if (loaded == 0) {
+              load_filter();
               create_post();
               loaded = 1;
             }
           };
+        function load_filter(){
+           const queryString = window.location.search;
+           const urlParams = new URLSearchParams(queryString);
+           const keyword = urlParams.get('search')
+           document.getElementById('keyword').value = keyword;
+           console.log(document.getElementById('keyword').value);
+        };
     </script>
 </div>
 
