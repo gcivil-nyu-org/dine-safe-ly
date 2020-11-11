@@ -66,14 +66,14 @@ def update_password(request):
             return redirect("user:login")
         return render(
             request=request,
-            template_name="update_password.html",
+            template_name="account_details.html",
             context={"form": form},
         )
     else:
         form = ResetPasswordForm()
         return render(
             request=request,
-            template_name="update_password.html",
+            template_name="account_details.html",
             context={"form": form},
         )
 
@@ -114,7 +114,3 @@ def forget_password(request):
         return render(
             request=request, template_name="reset_email.html", context={"form": form}
         )
-
-
-def update_profile(request):
-    return render(request=request, template_name="profile.html", context={})
