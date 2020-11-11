@@ -255,6 +255,6 @@ def get_average_safety_rating(business_id):
         total = 0
         for feedback in all_feedback_list:
             total += int(feedback.safety_level)
-        average_safety_rating = total / len(all_feedback_list)
+        average_safety_rating = str(round(total / len(all_feedback_list), 2))
         return average_safety_rating
     return None
