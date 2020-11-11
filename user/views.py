@@ -52,7 +52,7 @@ def post_logout(request):
     return redirect("user:login")
 
 
-def update_password(request):
+def account_details(request):
     if not request.user.is_authenticated:
         return redirect("restaurant:browse")
 
