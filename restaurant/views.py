@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from .models import Restaurant
-from .forms import QuestionnaireForm
+from .forms import QuestionnaireForm, SearchFilterForm
 from .utils import (
     query_yelp,
     query_inspection_record,
@@ -8,6 +9,7 @@ from .utils import (
     get_restaurant_list,
     get_latest_feedback,
     get_average_safety_rating,
+    get_total_restaurant_number,
 )
 
 # from django.http import HttpRequest
@@ -74,6 +76,40 @@ def get_inspection_info(request, restaurant_id):
         return HttpResponseNotFound(
             "Restaurant ID {} does not exist".format(restaurant_id)
         )
+
+
+def get_restaurants_list(request, page):
+    if request.method == "POST":
+        form = SearchFilterForm(request.POST)
+
+        if form.is_valid():
+            restaurant_list = get_restaurant_list(
+                page,
+                6,
+                form.cleaned_data.get("keyword"),
+                form.cleaned_data.get("neighbourhood"),
+                form.cleaned_data.get("category"),
+                form.get_price_filter(),
+                form.get_rating_filter(),
+                form.get_compliant_filter(),
+            )
+            restaurant_number = get_total_restaurant_number(
+                form.cleaned_data.get("keyword"),
+                form.cleaned_data.get("neighbourhood"),
+                form.cleaned_data.get("category"),
+                form.get_price_filter(),
+                form.get_rating_filter(),
+                form.get_compliant_filter(),
+            )
+            parameter_dict = {
+                "restaurant_number": restaurant_number,
+                "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),
+                "page": page,
+            }
+            return JsonResponse(parameter_dict)
+        else:
+            logger.error(form.errors)
+    return HttpResponse("cnm")
 
 
 def get_landing_page(request, page=1):
