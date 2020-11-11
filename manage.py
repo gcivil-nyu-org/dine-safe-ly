@@ -2,11 +2,20 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from dotenv import load_dotenv
+from pathlib import Path
 
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
+    load_dotenv()
+
+    load_dotenv(verbose=True)
+
+    env_path = Path('.') / 'dinesafelysite' / '.env'
+    load_dotenv(dotenv_path=env_path)
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
