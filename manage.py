@@ -17,7 +17,7 @@ def main():
 
     load_dotenv(verbose=True)
 
-    env_path = Path('.') / 'dinesafelysite' / '.env'
+    env_path = Path(".") / "dinesafelysite" / ".env"
     load_dotenv(dotenv_path=env_path)
 
     try:
