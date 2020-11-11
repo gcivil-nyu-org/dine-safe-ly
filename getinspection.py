@@ -7,6 +7,7 @@ from sodapy import Socrata
 import requests
 import json
 import logging
+from django.conf import settings
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -28,16 +29,7 @@ def match_on_yelp(restaurant_name, restaurant_location):
     state = "NY"
     country = "US"
 
-    # YELP_ACCESS_TOKE = (
-    #     "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"
-    #     "-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq"
-    #     "-R_mEX3Yx "
-    # )
-    YELP_ACCESS_TOKE = (
-        "A_V_V4rxelsvDsI2uFW1kT2mP2lUjd75GTEEsEcLnnvVOK5ssemrbw"
-        "-R49czpANtS2ZtAeCl6FaapQrp1_30cRt9YKao3pFL1I6304sAtwKwKJk"
-        "F1JBgF88FZl1_X3Yx "
-    )
+    YELP_ACCESS_TOKE = settings.YELP_ACCESS_TOKEN2
     headers = {"Authorization": "Bearer %s" % YELP_ACCESS_TOKE}
     url = "https://api.yelp.com/v3/businesses/matches"
     params = {
@@ -85,38 +77,54 @@ def clean_inspection_data(results_df):
 def save_restaurants(restaurant_df, inspection_df):
     for index, row in inspection_df.iterrows():
         try:
-
-            response = json.loads(
-                match_on_yelp(row["restaurantname"], row["businessaddress"])
-            )
-            if next(iter(response)) == "error" or not response["businesses"]:
-                b_id = None
-            else:
-                b_id = response["businesses"][0]["id"]
-
-            r = Restaurant(
+            b_id = None
+            if Restaurant.objects.filter(
                 restaurant_name=row["restaurantname"],
                 business_address=row["businessaddress"],
                 postcode=row["postcode"],
-                business_id=b_id,
-                compliant_status=row["isroadwaycompliant"],
-            )
-            if b_id:
-                if not Restaurant.objects.filter(business_id=b_id).exists():
-                    r.save()
-                    logger.info(
-                        "Restaurant details successfully saved: {}".format(b_id)
-                    )
-                    save_inspections(row, b_id)
-                    save_yelp_restaurant_details(b_id)
-                else:
-                    Restaurant.objects.filter(business_id=b_id).update(
-                        compliant_status=row["isroadwaycompliant"]
-                    )
-                    save_inspections(row, b_id)
+            ).exists():
+                rt = Restaurant.objects.get(
+                    restaurant_name=row["restaurantname"],
+                    business_address=row["businessaddress"],
+                    postcode=row["postcode"],
+                )
+                save_inspections(row, rt.business_id)
+                logger.info(
+                    "Inspection record for restaurant saved successfully: {}".format(rt)
+                )
             else:
-                r.save()
-                save_inspections(row, b_id)
+
+                response = json.loads(
+                    match_on_yelp(row["restaurantname"], row["businessaddress"])
+                )
+                if next(iter(response)) == "error" or not response["businesses"]:
+                    b_id = None
+                else:
+                    b_id = response["businesses"][0]["id"]
+
+                r = Restaurant(
+                    restaurant_name=row["restaurantname"],
+                    business_address=row["businessaddress"],
+                    postcode=row["postcode"],
+                    business_id=b_id,
+                    compliant_status=row["isroadwaycompliant"],
+                )
+                if b_id:
+                    if not Restaurant.objects.filter(business_id=b_id).exists():
+                        r.save()
+                        logger.info(
+                            "Restaurant details successfully saved: {}".format(b_id)
+                        )
+                        save_inspections(row, b_id)
+                        save_yelp_restaurant_details(b_id)
+                    else:
+                        Restaurant.objects.filter(business_id=b_id).update(
+                            compliant_status=row["isroadwaycompliant"]
+                        )
+                        save_inspections(row, b_id)
+                else:
+                    r.save()
+                    save_inspections(row, b_id)
 
         except Exception as e:
             logger.error(
@@ -163,7 +171,7 @@ def get_inspection_data():
         date = str(lastInspection[0].inspected_on)
         date = date.replace(" ", "T")
         date_query = "inspectedon > '" + date + "'"
-        results = client.get("4dx7-axux", where=date_query)
+        results = client.get("4dx7-axux", where=date_query, limit=30000)
     else:
         results = client.get("4dx7-axux", limit=30000)
 
@@ -209,6 +217,6 @@ def populate_restaurant_with_yelp_id():
     print(count)
 
 
-if __name__ == "__main__":
-    # populate_restaurant_with_yelp_id()
-    get_inspection_data()
+# if __name__ == "__main__":
+#     # populate_restaurant_with_yelp_id()
+#     get_inspection_data()
