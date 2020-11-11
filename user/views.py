@@ -1,4 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
+
+# from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
@@ -8,7 +10,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .utils import send_reset_password_email
 from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
-from allauth.socialaccount.forms import DisconnectForm
+
 
 import logging
 
@@ -48,11 +50,13 @@ def register(request):
     )
 
 
+# @login_required()
 def post_logout(request):
     logout(request)
     return redirect("user:login")
 
 
+# @login_required()
 def account_details(request):
     if not request.user.is_authenticated:
         return redirect("restaurant:browse")
@@ -115,17 +119,3 @@ def forget_password(request):
         return render(
             request=request, template_name="reset_email.html", context={"form": form}
         )
-
-
-class MyCustomSocialDisconnectForm(DisconnectForm):
-    def save(self):
-
-        # Add your own processing here if you do need access to the
-        # socialaccount being deleted.
-
-        # Ensure you call the parent class's save.
-        # .save() does not return anything
-        super(MyCustomSocialDisconnectForm, self).save()
-
-        # Add your own processing here if you don't need access to the
-        # socialaccount being deleted.
