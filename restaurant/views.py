@@ -124,7 +124,7 @@ def get_landing_page(request, page=1):
 
     restaurant_list = get_restaurant_list(
         page,
-        6,
+        12,
         keyword,
         neighbourhoods_filter,
         categories_filter,

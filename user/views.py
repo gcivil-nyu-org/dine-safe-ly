@@ -114,3 +114,7 @@ def forget_password(request):
         return render(
             request=request, template_name="reset_email.html", context={"form": form}
         )
+
+
+def update_profile(request):
+    return render(request=request, template_name="profile.html", context={})

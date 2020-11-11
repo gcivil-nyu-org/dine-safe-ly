@@ -347,10 +347,13 @@ switch (false) {
     case (empty1.includes(latitude)): var lat = yelp_info.coordinates.latitude;
 }
 
+var res_category = document.getElementById("res_category");
+var str = "";
 for (i = 0; i < yelp_info.categories.length; i++) {
-    document.getElementById("res_category").innerHTML += yelp_info.categories[i]
-        .title + "&nbsp;&nbsp;&nbsp;&nbsp;";
+    str += yelp_info.categories[i].title + ", ";
 }
+str = str.slice(0, -2);
+res_category.innerHTML = str;
 
 var res_rev_star = document.getElementById("res_rev_star");
 var rate = yelp_info.rating;

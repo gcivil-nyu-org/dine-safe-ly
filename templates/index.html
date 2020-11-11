@@ -309,19 +309,19 @@ var restaurant_list = {{restaurant_list | safe}};
 			div1.className = "swiper-slide h-auto px-2";
 
 			var div2 = document.createElement("div");
-			div2.className = "w-100 h-80 hover-animate";
+			div2.className = "w-100 h-100 hover-animate";
 
 			var div3 = document.createElement("div");
 			div3.className = "card h-100 border-0 shadow";
+
+			var a1 = document.createElement("a");
+			a1.className = "title-link";
+			a1.href = "../restaurant/profile/" + restaurant_list[i].id;
 
 			var div4 = document.createElement("div");
 			div4.className = "card-img-top overflow-hidden dark-overlay bg-cover";
 			div4.id = "res_card_img"+ i.toString();
 			div4.style = "min-height: 200px";
-
-			var a1 = document.createElement("a");
-			a1.className = "title-link";
-			a1.href = restaurant_list[i].yelp_info.url;
 
 			var div5 = document.createElement("div");
 			div5.className = "card-img-overlay-bottom z-index-20";
@@ -351,8 +351,9 @@ var restaurant_list = {{restaurant_list | safe}};
 
 
 
-			div4.appendChild(a1);
+
 			div4.appendChild(div5);
+			a1.appendChild(div4);
 			//div4.appendChild(div_svg);
 
 			var div6 = document.createElement("div");
@@ -363,8 +364,8 @@ var restaurant_list = {{restaurant_list | safe}};
 
 			var a2 = document.createElement("a");
 			a2.className = "text-dark";
-			a2.href = restaurant_list[i].yelp_info.url;
-			a2.innerHTML = "Compliant";
+			a2.href = "../restaurant/inspection_records/" + restaurant_list[i].id ;
+			a2.innerHTML = restaurant_list[i].latest_record.is_roadway_compliant;
 
 			p_1.appendChild(a2);
 
@@ -374,16 +375,19 @@ var restaurant_list = {{restaurant_list | safe}};
 
 			var a3 = document.createElement("a");
 			a3.className = "mr-1 disabled";
-			for (var p = 0; p < restaurant_list[i].yelp_info.categories.length; p++) {
-		    	a3.innerHTML += restaurant_list[i].yelp_info.categories[p].title + "&nbsp&nbsp";
-				}
+			var str = "";
+              for (var p = 0; p < restaurant_list[i].yelp_info.categories.length; p++) {
+                 str += restaurant_list[i].yelp_info.categories[p].title + ", ";
+              }
+              str = str.slice(0, -2);
+              a3.innerHTML = str;
 
 			p_2.appendChild(a3);
 
 			div6.appendChild(p_1);
 			div6.appendChild(p_2);
 
-			div3.appendChild(div4);
+			div3.appendChild(a1);
 			div3.appendChild(div6);
 
 			div2.appendChild(div3);
