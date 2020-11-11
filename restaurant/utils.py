@@ -154,6 +154,7 @@ def get_total_restaurant_number(
         )
         return restaurants.count()
 
+    return Restaurant.objects.all().count()
 
 def get_restaurant_list(
     page,
