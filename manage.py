@@ -13,6 +13,7 @@ def main():
     load_dotenv(dotenv_path=env_path)
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

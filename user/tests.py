@@ -220,13 +220,13 @@ class TestUserLoginView(BaseTest):
 
 class TestUpdatePasswordView(BaseTest):
     def test_no_user_logged_in(self):
-        response = self.c.get("/user/update_password")
+        response = self.c.get("/user/account_details")
         self.assertEqual(response.status_code, 302)
 
     def test_update_password_no_user(self):
         self.c.force_login(self.dummy_user)
         response = self.c.post(
-            "/user/update_password",
+            "/user/account_details",
             {
                 "password_current": "pass123",
                 "password_new": "pass123",
@@ -240,7 +240,7 @@ class TestUpdatePasswordView(BaseTest):
         self.c.force_login(self.dummy_user)
         mock_password.return_value = True
         response = self.c.post(
-            "/user/update_password",
+            "/user/account_details",
             {
                 "password_current": "pass123",
                 "password_new": "pass123",
@@ -254,7 +254,7 @@ class TestUpdatePasswordView(BaseTest):
         self.c.force_login(self.dummy_user)
         mock_password.return_value = True
         response = self.c.post(
-            "/user/update_password",
+            "/user/account_details",
             {
                 "password_current": "pass123",
                 "password_new": "pass123",
@@ -266,7 +266,7 @@ class TestUpdatePasswordView(BaseTest):
     def test_update_password_not_post(self):
         self.c.force_login(self.dummy_user)
         response = self.c.get(
-            "/user/update_password",
+            "/user/account_details",
             {
                 "password_current": "pass123",
                 "password_new": "pass123",
