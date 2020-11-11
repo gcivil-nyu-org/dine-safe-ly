@@ -189,4 +189,4 @@ class SearchFilterForm(forms.Form):
     def get_compliant_filter(self):
         if self.cleaned_data.get("All") == "Compliant":
             return "Compliant"
-        return "All"
+        return None
