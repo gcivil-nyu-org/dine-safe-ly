@@ -20,8 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+load_dotenv(verbose=True)
+
+
+env_path = Path(".") / ".env"
+load_dotenv(dotenv_path=env_path)
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "4-wo^xhkbz@y1q7i*_yluq8p^pzl*k&7mm2df)b@v*e*@*6mwm"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -122,13 +128,6 @@ STATICFILES_DIRS = [
 ]
 
 
-# OR, the same with increased verbosity
-load_dotenv(verbose=True)
-
-
-env_path = Path(".") / ".env"
-load_dotenv(dotenv_path=env_path)
-
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
 YELP_TOKEN_1 = os.environ.get("YELP_TOKEN_1")
 
@@ -175,6 +174,6 @@ LOGOUT_REDIRECT_URL = "browse"
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "dinesafely.nyc@gmail.com"
-EMAIL_HOST_PASSWORD = "Nyucs2020"
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
