@@ -644,7 +644,7 @@ class RestaurantUtilsTests(TestCase):
             distance_compliant="True",
         )
         average_safety = get_average_safety_rating("WavvLdfdP6g8aZTtbBQHTw")
-        self.assertEqual(average_safety, 2)
+        self.assertEqual(average_safety, "2.0")
 
 
 class IntegratedInspectionRestaurantsTests(TestCase):
