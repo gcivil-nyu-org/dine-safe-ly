@@ -232,12 +232,9 @@
 
                         delete selectbox_in_form;
                         delete thisform;
+                        clearRestaurant();
+                        create_post();
                     }// resetForm
-
-                    $(function() {
-                        // activate Select2
-                        $('.selectbox-replacement-enabler').select2();
-                    });
                     </script>
                 </div>
             </form>
@@ -250,18 +247,18 @@
                 <div>
                     <label class="form-label mr-2" for="form_sort">Sort by</label>
                     <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
-                        <option value="sortBy_0">Most popular</option>
-                        <option value="sortBy_1">Recommended</option>
-                        <option value="sortBy_2">Newest</option>
-                        <option value="sortBy_3">Oldest</option>
-                        <option value="sortBy_4">Closest</option>
+                        <option value="sortBy_0">Recommended</option>
+                        <option value="sortBy_1">Highest Rated</option>
+                        <option value="sortBy_2">Highest Price</option>
+                        <option value="sortBy_3">Lowest Price</option>
+                        <option value="sortBy_4">Near By</option>
                     </select>
                 </div>
             </div>
             <div id="res_list_group" class="row">
 
             </div>
-            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="load_more()" id="load_button">Load More</button>
+            <button type="button" class="btn btn-primary" onclick="load_more()" id="load_button">Load More</button>
         </div>
         <script>
 		var page_global = 1; // Global page number

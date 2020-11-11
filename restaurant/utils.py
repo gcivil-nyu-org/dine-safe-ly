@@ -222,8 +222,8 @@ def get_filtered_restaurants(
 
     keyword_filter = {}
     if keyword:
-        keyword_filter["restaurant_name__contains"] = keyword
-    if compliant and compliant == "Compliant":
+        keyword_filter["restaurant_name__icontains"] = keyword
+    if compliant == "Compliant":
         keyword_filter["compliant_status__iexact"] = compliant
 
     filtered_restaurants = (
@@ -256,6 +256,6 @@ def get_average_safety_rating(business_id):
         total = 0
         for feedback in all_feedback_list:
             total += int(feedback.safety_level)
-        average_safety_rating = total / len(all_feedback_list)
+        average_safety_rating = str(round(total / len(all_feedback_list), 2))
         return average_safety_rating
     return None
