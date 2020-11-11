@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="container-fluid py-5 px-lg-5">
     <div class="row border-bottom mb-4">
         <div class="col-12">
@@ -404,30 +404,30 @@
 
         </script>
         <script>
-         var snapSlider = document.getElementById('slider-snap');
+<!--         var snapSlider = document.getElementById('slider-snap');-->
 
-          noUiSlider.create(snapSlider, {
-              start: [ 1, 5 ],
-              snap: false,
-              connect: true,
-              step: 1,
-              range: {
-                  'min': 1,
-                  'max': 5
-              }
-          });
-          var snapValues = [
-              document.getElementById('slider-snap-value-from'),
-              document.getElementById('slider-snap-value-to')
-          ];
-          var inputValues = [
-              document.getElementById('slider-snap-input-from'),
-              document.getElementById('slider-snap-input-to')
-          ];
-          snapSlider.noUiSlider.on('update', function( values, handle ) {
-              snapValues[handle].innerHTML = values[handle];
-              inputValues[handle].value = values[handle];
-          })
+<!--          noUiSlider.create(snapSlider, {-->
+<!--              start: [ 1, 5 ],-->
+<!--              snap: false,-->
+<!--              connect: true,-->
+<!--              step: 1,-->
+<!--              range: {-->
+<!--                  'min': 1,-->
+<!--                  'max': 5-->
+<!--              }-->
+<!--          });-->
+<!--          var snapValues = [-->
+<!--              document.getElementById('slider-snap-value-from'),-->
+<!--              document.getElementById('slider-snap-value-to')-->
+<!--          ];-->
+<!--          var inputValues = [-->
+<!--              document.getElementById('slider-snap-input-from'),-->
+<!--              document.getElementById('slider-snap-input-to')-->
+<!--          ];-->
+<!--          snapSlider.noUiSlider.on('update', function( values, handle ) {-->
+<!--              snapValues[handle].innerHTML = values[handle];-->
+<!--              inputValues[handle].value = values[handle];-->
+<!--          })-->
 
         </script>
     </div>
