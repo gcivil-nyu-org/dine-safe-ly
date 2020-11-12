@@ -302,7 +302,6 @@
 var inspection_data = {{ lasted_inspection | safe}};
 
 document.getElementById("res_compliance_status").innerHTML = inspection_data.is_roadway_compliant;
-document.getElementById("res_skipped_reason").innerHTML = "-";
 document.getElementById("res_last_inspection").innerHTML = inspection_data.inspected_on;
 
 if(inspection_data.is_roadway_compliant=="Compliant")
@@ -310,6 +309,7 @@ if(inspection_data.is_roadway_compliant=="Compliant")
 else
   {document.getElementById("res_skipped_reason").innerHTML = inspection_data.skipped_reason;
   document.getElementById("res_compliance_status").className = "badge badge-pill p-2 badge-danger-light"}
+if(inspection_data.skipped_reason == "nan"){document.getElementById("res_skipped_reason").innerHTML = "-";}
 
 var True = true;
 var False = false;
