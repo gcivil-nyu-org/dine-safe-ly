@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}{% load mathfilters %}
 <section class="d-flex align-items-center dark-overlay bg-cover" style="background-image: url(https://d19m59y37dris4.cloudfront.net/directory/1-6/img/photo/photo-1525610553991-2bede1a236e2.jpg);">
     <div class="container py-6 py-lg-7 text-white overlay-content text-center">
         <div class="row">
@@ -18,22 +18,22 @@
                     <input class="form-control border-0 shadow-0" type="search" name="search"  id="search-keyword" placeholder="What are you searching for?">
                 </div>
 
-<!--                <div class="col-md-6 col-lg-3 d-flex align-items-center form-group">-->
-<!--                    <div class="input-label-absolute input-label-absolute-right w-100">-->
-<!--                        <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i>-->
-<!--                            <div class="sr-only">City</div>-->
-<!--                        </label>-->
-<!--                        <input class="form-control border-0 shadow-0" type="text" name="location" placeholder="Location" id="location">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-6 col-lg-3 d-flex align-items-center form-group no-divider">-->
-<!--                    <select class="selectpicker" title="Categories" data-style="btn-form-control">-->
-<!--                        <option value="small">Restaurants</option>-->
-<!--                        <option value="medium">Cafes</option>-->
-<!--                        <option value="large">Bars</option>-->
-<!--                        <option value="x-large">Food Stalls</option>-->
-<!--                    </select>-->
-<!--                </div>-->
+                <!--                <div class="col-md-6 col-lg-3 d-flex align-items-center form-group">-->
+                <!--                    <div class="input-label-absolute input-label-absolute-right w-100">-->
+                <!--                        <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i>-->
+                <!--                            <div class="sr-only">City</div>-->
+                <!--                        </label>-->
+                <!--                        <input class="form-control border-0 shadow-0" type="text" name="location" placeholder="Location" id="location">-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="col-md-6 col-lg-3 d-flex align-items-center form-group no-divider">-->
+                <!--                    <select class="selectpicker" title="Categories" data-style="btn-form-control">-->
+                <!--                        <option value="small">Restaurants</option>-->
+                <!--                        <option value="medium">Cafes</option>-->
+                <!--                        <option value="large">Bars</option>-->
+                <!--                        <option value="x-large">Food Stalls</option>-->
+                <!--                    </select>-->
+                <!--                </div>-->
                 <div class="col-lg-2 form-group mb-0">
                     <a class="btn btn-primary btn-block h-100" onclick="search_keyword()">Search</a>
                 </div>
@@ -59,10 +59,49 @@
         <!-- Slider main container-->
         <div class="swiper-container swiper-container-mx-negative items-slider-full px-lg-5 pt-3">
             <!-- Additional required wrapper-->
-            <div id="res_list_group" class="swiper-wrapper pb-5">
-                <!-- Slides-->
-
-
+            <div class="swiper-wrapper pb-5">
+                {% for restaurant in restaurant_list %}
+                <div class="swiper-slide h-auto px-2">
+                    <!-- venue item-->
+                    <div class="w-100 h-100 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
+                        <div class="card h-100 border-0 shadow">
+                            <div class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({{ restaurant.yelp_info.image_url }}); min-height: 200px;"><a class="tile-link" href="../restaurant/profile/{{restaurant.id}}"></a>
+                                <div class="card-img-overlay-bottom z-index-20">
+                                    <h4 class="text-white text-shadow">{{ restaurant.yelp_info.name }}</h4>
+                                    <p class="mb-2 text-xs">
+                                        {% for i in "x"|ljust:restaurant.yelp_info.rating %}
+                                            <i class="fa fa-star text-warning"></i>
+                                        {% endfor %}
+                                        {% with restaurant.yelp_info.rating|add:-5|abs as aa %}
+                                        {% if aa == 0 %}
+                                        {% else %}
+                                        {% for i in "x"|ljust:aa %}
+                                        <i class="fa fa-star text-gray-300"></i>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endwith %}
+                                    </p>
+                                </div>
+                                <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                    <div class="badge badge-transparent badge-pill px-3 py-2 invisible">Restaurant</div>
+                                    <a class="card-fav-icon position-relative z-index-40" href="javascript: void();">
+                                        <svg class="svg-icon text-white">
+                                            <use xlink:href="#heart-1"> </use>
+                                        </svg></a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-sm text-muted text-uppercase mb-1"><a href="../restaurant/inspection_records/{{restaurant.id}}" class="text-dark">{{ restaurant.latest_record.is_roadway_compliant }}</a></p>
+                                <p class="text-sm mb-0">
+                                    {% for cat in restaurant.yelp_info.categories %}
+                                    <a class="mr-1 disabled" href="">{{ cat.title}}</a>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
             <!-- If we need pagination-->
             <div class="swiper-pagination"></div>
@@ -88,7 +127,7 @@
                     <p class="text-muted text-sm">We are now in Phase 4 of reopening,
                         which means NYC restaurants and bars have reopened to allow take-out, delivery, outdoor, and now indoor dining.
                         <br> <br>
-                    <a href="https://www1.nyc.gov/html/dot/html/pedestrians/openrestaurants.shtml">Get the latest updates here</a>
+                        <a href="https://www1.nyc.gov/html/dot/html/pedestrians/openrestaurants.shtml">Get the latest updates here</a>
                     </p>
                 </div>
             </div>
@@ -101,14 +140,14 @@
                     </div>
                     <h3 class="h6 text-uppercase">Outdoor Seating</h3>
                     <p class="text-muted text-sm"> Mandatory guidelines:
-                        <li class="text-muted text-sm">Diners must be seated at least
-                    6 ft from any other table, patrons, or walkway. </li>
-                        <li class="text-muted text-sm">Employees must wear face
-                            coverings at all times.</li>
-                        <li class="text-muted text-sm">Provide hand hygiene stations
-                            or hand sanitizer containing +60% alcohol concentration.</li>
-                        <li class="text-muted text-sm">No more than 10 persons per
-                            outdoor table.</li>
+                    <li class="text-muted text-sm">Diners must be seated at least
+                        6 ft from any other table, patrons, or walkway. </li>
+                    <li class="text-muted text-sm">Employees must wear face
+                        coverings at all times.</li>
+                    <li class="text-muted text-sm">Provide hand hygiene stations
+                        or hand sanitizer containing +60% alcohol concentration.</li>
+                    <li class="text-muted text-sm">No more than 10 persons per
+                        outdoor table.</li>
 
                     <br>
                     <a href="https://www.governor.ny.gov/sites/governor.ny.gov/files/atoms/files/OutdoorTakeoutDeliveryFoodServicesSummaryGuidance.pdf">For more information</a>
@@ -145,7 +184,7 @@
                     <h3 class="h6 text-uppercase">Safety first</h3>
                     <p class="text-muted text-sm">Most importantly, your safety
                         comes first!
-                        <li class="text-muted text-sm">Stay home if sick.</li>
+                    <li class="text-muted text-sm">Stay home if sick.</li>
                     <li class="text-muted text-sm">Maintain social distancing.</li>
                     <li class="text-muted text-sm">Wear a face covering.</li>
                     <li class="text-muted text-sm">Practice healthy hand hygiene.</li>
@@ -161,7 +200,7 @@
             <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-left">
                 <p class="subtitle text-secondary">Start using Dine Safe.ly</p>
                 <p class="text-lg">Dine Safe.ly is the easiest way to find & discover COVID compliant restaurants.</p>
-<!--                <p class="text-muted mb-0">One morning, when Alex woke from troubled dreams, he had this amazing idea of Dine Safely..</p>-->
+                <!--                <p class="text-muted mb-0">One morning, when Alex woke from troubled dreams, he had this amazing idea of Dine Safely..</p>-->
             </div>
             <div class="col-lg-6 d-flex align-items-center justify-content-center">
                 <div class="text-center">
@@ -176,108 +215,4 @@
         </div>
     </div>
 </section>
-<script type="text/javascript">
-
-var restaurant_list = {{restaurant_list | safe}};
-	for(var i = 0; i < 12; i++)
-	{
-			if(restaurant_list[i].yelp_info == null) {continue;}
-
-			var res_list_group = document.getElementById("res_list_group");
-
-			var div1 = document.createElement("div");
-			div1.className = "swiper-slide h-auto px-2";
-
-			var div2 = document.createElement("div");
-			div2.className = "w-100 h-100 hover-animate";
-
-			var div3 = document.createElement("div");
-			div3.className = "card h-100 border-0 shadow";
-
-			var a1 = document.createElement("a");
-			a1.className = "title-link";
-			a1.href = "../restaurant/profile/" + restaurant_list[i].id;
-
-			var div4 = document.createElement("div");
-			div4.className = "card-img-top overflow-hidden dark-overlay bg-cover";
-			div4.id = "res_card_img"+ i.toString();
-			div4.style = "min-height: 200px";
-
-			var div5 = document.createElement("div");
-			div5.className = "card-img-overlay-bottom z-index-20";
-
-			var h4 = document.createElement("h4");
-			h4.className ="text-white text-shadow";
-			h4.innerHTML = restaurant_list[i].yelp_info.name;
-
-			var p = document.createElement("p");
-			p.id = "res_rating";
-			p.className = "mb-2 text-xs";
-
-			var rate = restaurant_list[i].yelp_info.rating;
-				for (var j = 0; j < Math.ceil(rate); j++) {
-				    var icon = document.createElement("i");
-				    icon.className = "fa fa-star text-warning";
-				    p.appendChild(icon);
-				}
-				for (var j = 0; j < 5 - Math.ceil(rate); j++) {
-				    var icon2 = document.createElement("i");
-				    icon2.className = "fa fa-star text-gray-300";
-				    p.appendChild(icon2);
-				}
-
-			div5.appendChild(h4);
-			div5.appendChild(p);
-
-
-
-
-			div4.appendChild(div5);
-			a1.appendChild(div4);
-			//div4.appendChild(div_svg);
-
-			var div6 = document.createElement("div");
-			div6.className = "card-body";
-
-			var p_1 = document.createElement("p");
-			p_1.className = "text-sm text-muted text-uppercase mb-1";
-
-			var a2 = document.createElement("a");
-			a2.className = "text-dark";
-			a2.href = "../restaurant/inspection_records/" + restaurant_list[i].id ;
-			a2.innerHTML = restaurant_list[i].latest_record.is_roadway_compliant;
-
-			p_1.appendChild(a2);
-
-			var p_2 = document.createElement("p");
-			p_2.id = "res_category";
-			p_2.className = "text-sm mb-0";
-
-			var a3 = document.createElement("a");
-			a3.className = "mr-1 disabled";
-			var str = "";
-              for (var p = 0; p < restaurant_list[i].yelp_info.categories.length; p++) {
-                 str += restaurant_list[i].yelp_info.categories[p].title + ", ";
-              }
-              str = str.slice(0, -2);
-              a3.innerHTML = str;
-
-			p_2.appendChild(a3);
-
-			div6.appendChild(p_1);
-			div6.appendChild(p_2);
-
-			div3.appendChild(a1);
-			div3.appendChild(div6);
-
-			div2.appendChild(div3);
-
-			div1.appendChild(div2);
-
-			res_list_group.appendChild(div1);
-			document.getElementById("res_card_img"+ i.toString()).style.backgroundImage = "url(" + restaurant_list[i].yelp_info.image_url + ")";
-        }
-
-
-</script>
 {% endblock %}
