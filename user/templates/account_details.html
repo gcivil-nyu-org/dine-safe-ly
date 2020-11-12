@@ -181,7 +181,7 @@
                         <div class="col-sm-8">
                             <h6>Facebook</h6>
                             {% if accounts.facebook %}
-                                <p class="text-sm text-muted">Connected</p>
+                                <p class="text-sm text-primary pl-0">Connected</p>
                             {% else %}
                                 <p class="text-sm text-muted">Not connected</p>
                             {% endif %}
@@ -191,7 +191,7 @@
                         <div class="col-sm-8">
                             <h6>Google</h6>
                             {% if accounts.google %}
-                                <p class="text-sm text-muted">Connected</p>
+                                <p class="text-sm text-primary pl-0">Connected</p>
                             {% else %}
                                 <p class="text-sm text-muted">Not connected</p>
                             {% endif %}
@@ -210,6 +210,9 @@
                                 <use xlink:href="#shield-security-1"> </use>
                             </svg>
                         </div>
+                        {% if not accounts.google %}
+                            <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="{% provider_login_url "google" process="connect" method="oauth2" %}">Connect</a></div>
+                        {% endif %}
                     </div>
                     <div class="card-body p-4">
                         <h6 class="card-text">Your account security: </h6>
