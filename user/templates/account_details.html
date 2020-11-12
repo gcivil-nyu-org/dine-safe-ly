@@ -176,7 +176,6 @@
                 <div class="text-block">
                     <h3 class="mb-4">Social accounts</h3>
                     {% load socialaccount %}
-{#                    {% providers_media_js %}#}
                     {% get_social_accounts user as accounts %}
                     <div class="row">
                         <div class="col-sm-8">
@@ -187,9 +186,7 @@
                                 <p class="text-sm text-muted">Not connected</p>
                             {% endif %}
                         </div>
-                        {% if accounts.facebook %}
-                            <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="#">Disconnect</a></div>
-                        {% else %}
+                        {% if not accounts.facebook %}
                             <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="{% provider_login_url "facebook" process="connect" method="oauth2" %}">Connect</a></div>
                         {% endif %}
                     </div>
@@ -202,9 +199,7 @@
                                 <p class="text-sm text-muted">Not connected</p>
                             {% endif %}
                         </div>
-                        {% if accounts.google %}
-                            <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="#">Disconnect</a></div>
-                        {% else %}
+                        {% if not accounts.google %}
                             <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="{% provider_login_url "google" process="connect" method="oauth2" %}">Connect</a></div>
                         {% endif %}
                     </div>

@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.facebook",
 ]
 
-SITE_ID = 4
+SITE_ID = os.environ.get("SITE_ID")
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
@@ -193,8 +193,6 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
-SOCIALACCOUNT_FORMS = {"disconnect": "mysite.forms.MyCustomSocialDisconnectForm"}
-
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "SCOPE": [
@@ -202,7 +200,7 @@ SOCIALACCOUNT_PROVIDERS = {
             "email",
         ],
         "AUTH_PARAMS": {
-            "access_type": "online",
+            "access_type": "offline",
         },
     },
     "facebook": {
