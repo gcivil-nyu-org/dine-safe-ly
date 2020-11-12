@@ -187,7 +187,7 @@
                             {% endif %}
                         </div>
                         {% if not accounts.facebook %}
-                            <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="{% provider_login_url "facebook" process="connect" method="oauth2" %}">Connect</a></div>
+                            <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="{% provider_login_url "facebook" method="oauth2" %}">Connect</a></div>
                         {% endif %}
                     </div>
                     <div class="row">
