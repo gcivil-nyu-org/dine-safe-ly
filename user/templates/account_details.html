@@ -186,9 +186,6 @@
                                 <p class="text-sm text-muted">Not connected</p>
                             {% endif %}
                         </div>
-                        {% if not accounts.facebook %}
-                            <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="{% provider_login_url "facebook" method="oauth2" %}">Connect</a></div>
-                        {% endif %}
                     </div>
                     <div class="row">
                         <div class="col-sm-8">
@@ -199,9 +196,6 @@
                                 <p class="text-sm text-muted">Not connected</p>
                             {% endif %}
                         </div>
-                        {% if not accounts.google %}
-                            <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="{% provider_login_url "google" process="connect" method="oauth2" %}">Connect</a></div>
-                        {% endif %}
                     </div>
                 </div>
             </div>
