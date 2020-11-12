@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "mathfilters",
 ]
 
-SITE_ID = 3
+SITE_ID = os.environ.get("SITE_ID")
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
@@ -194,7 +194,11 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
-SOCIALACCOUNT_FORMS = {"disconnect": "mysite.forms.MyCustomSocialDisconnectForm"}
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
+SOCIALACCOUNT_QUERY_EMAIL = False
+SOCIALACCOUNT_EMAIL_REQUIRED = False
+SOCIALACCOUNT_STORE_TOKENS = False
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
@@ -203,7 +207,7 @@ SOCIALACCOUNT_PROVIDERS = {
             "email",
         ],
         "AUTH_PARAMS": {
-            "access_type": "online",
+            "access_type": "offline",
         },
     },
     "facebook": {
