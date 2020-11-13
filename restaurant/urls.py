@@ -12,4 +12,9 @@ urlpatterns = [
     ),
     path("", views.get_landing_page, name="browse"),
     path("<page>", views.get_landing_page, name="browse"),
+    path(
+        "search_filter/restaurants_list/<page>",
+        views.get_restaurants_list,
+        name="restaurants_list",
+    ),
 ]

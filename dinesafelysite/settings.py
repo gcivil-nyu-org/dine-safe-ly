@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import django_heroku
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,8 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+load_dotenv(verbose=True)
+
+
+env_path = Path(".") / ".env"
+load_dotenv(dotenv_path=env_path)
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "4-wo^xhkbz@y1q7i*_yluq8p^pzl*k&7mm2df)b@v*e*@*6mwm"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,7 +46,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "import_export",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.facebook",
+]
+
+SITE_ID = os.environ.get("SITE_ID")
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 MIDDLEWARE = [
@@ -121,33 +141,23 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
-YELP_TOKEN_1 = (
-    "JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr"
-    "-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq"
-    "-R_mEX3Yx "
-)
-YELP_ACCESS_TOKEN2 = (
-    "A_V_V4rxelsvDsI2uFW1kT2mP2lUjd75GTEEsEcLnnvVOK5ssemrbw"
-    "-R49czpANtS2ZtAeCl6FaapQrp1_30cRt9YKao3pFL1I6304sAtwKwKJk"
-    "F1JBgF88FZl1_X3Yx "
-)
+YELP_TOKEN_1 = os.environ.get("YELP_TOKEN_1")
 
-YELP_ACCESS_TOKE = (
-    "w5fGYpYDI6NYJOBI47KjmEJcROpCxq1VK841olTs0tSGOeGBNDuIIj8zF"
-    "-C_MJFtAbrzfm7YF7bo72TxpOmrrn-zYnQ8xHBh_E4WEO39Z7IdKwbzCkBkCy0fjB6CX3Yx "
-)
+YELP_ACCESS_TOKEN2 = os.environ.get("YELP_ACCESS_TOKEN2")
 
-YELP_TOKEN_CHUANQI = (
-    "xZS5Fvlspgk0IPac1_PTGHXShab3SErcTgweJcsDH77lXTDNbyaCFuH7c393oK41qXr0s_AnHb8fQ_"
-    "PgsTUsFxhQqwuRqtCPiZu51OWevYAql7syUQuxc3AQC_-lX3Yx "
-)
+YELP_ACCESS_TOKE = os.environ.get("YELP_ACCESS_TOKE")
+
+YELP_TOKEN_CHUANQI = os.environ.get("YELP_TOKEN_CHUANQI")
 
 # Yelp categories
-YELP_CATEGORY_API = "https://api.yelp.com/v3/categories/"
-YELP_ACESS_TOKEN_BETA = (
-    "Rp2eX_CuQVgaBc0Zk3sKRbFroy_s3_4eUtnNutojHg2G745uXH6-IakxKebxmc"
-    "EcM2lIoOhGAjPcb_SoKx0evgi3YeRRre2Ago-9SWh_yGluXMwGAi03y9kIfEueX3Yx"
+YELP_CATEGORY_API = "https://api.yelp.com/v3/categories"
+YELP_ACESS_TOKEN_BETA = os.environ.get("YELP_ACESS_TOKEN_BETA")
+
+DEFAULT_IMAGE = (
+    "https://www.theskinnypignyc.com/wp-content/uploads/2019/05/what"
+    "shouldwedo-cecconis-750x430.jpg"
 )
 
 django_heroku.settings(locals(), test_runner=False)
@@ -174,10 +184,52 @@ LOGGING = {
     "loggers": {"": {"level": "INFO", "handlers": ["console", "file"]}},
 }
 
-LOGOUT_REDIRECT_URL = "browse"
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "index"
+LOGOUT_REDIRECT_URL = "index"
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "dinesafely.nyc@gmail.com"
-EMAIL_HOST_PASSWORD = "Nyucs2020"
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
+SOCIALACCOUNT_QUERY_EMAIL = False
+SOCIALACCOUNT_EMAIL_REQUIRED = False
+SOCIALACCOUNT_STORE_TOKENS = False
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "offline",
+        },
+    },
+    "facebook": {
+        "METHOD": "oauth2",
+        "SCOPE": ["email", "public_profile"],
+        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
+        "FIELDS": [
+            "id",
+            "email",
+            "name",
+            "first_name",
+            "last_name",
+            "verified",
+            "locale",
+            "timezone",
+            "link",
+            "gender",
+            "updated_time",
+        ],
+        "EXCHANGE_TOKEN": True,
+        "LOCALE_FUNC": "path.to.callable",
+        "VERIFIED_EMAIL": False,
+        "VERSION": "v2.4",
+    },
+}

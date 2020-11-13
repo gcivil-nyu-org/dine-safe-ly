@@ -1,4 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
+
+# from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
@@ -9,6 +11,7 @@ from django.http import HttpResponse
 from .utils import send_reset_password_email
 from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
 
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -16,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 def user_login(request):
     if request.user.is_authenticated:
-        return redirect("restaurant:browse")
+        return redirect("index")
     if request.method == "POST":
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
@@ -25,7 +28,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("restaurant:browse")
+                return redirect("user:register")
 
     else:
         form = AuthenticationForm()
@@ -34,7 +37,7 @@ def user_login(request):
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect("restaurant:browse")
+        return redirect("index")
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -47,14 +50,16 @@ def register(request):
     )
 
 
+# @login_required()
 def post_logout(request):
     logout(request)
     return redirect("user:login")
 
 
-def update_password(request):
+# @login_required()
+def account_details(request):
     if not request.user.is_authenticated:
-        return redirect("restaurant:browse")
+        return redirect("user:login")
 
     if request.method == "POST":
         user = request.user
@@ -66,14 +71,14 @@ def update_password(request):
             return redirect("user:login")
         return render(
             request=request,
-            template_name="update_password.html",
+            template_name="account_details.html",
             context={"form": form},
         )
     else:
         form = ResetPasswordForm()
         return render(
             request=request,
-            template_name="update_password.html",
+            template_name="account_details.html",
             context={"form": form},
         )
 
