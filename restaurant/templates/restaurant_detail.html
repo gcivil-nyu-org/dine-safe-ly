@@ -48,13 +48,40 @@
             </a>
           </div>
             {% if user.is_authenticated %}
-                <!-- Button trigger modal -->
+                <!-- Button trigger questionnaire modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Have you been here before?
           </button>
+                <!-- Button trigger save restaurant as favorite -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save_favorite">
+            Do you like this restaurant?
+          </button>
             {% endif %}
-
         </div>
+
+                <!-- Save Favorite Restaurant -->
+        <div class="modal fade" id="save_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form class="form-validate" method="POST">
+                  {% csrf_token %}
+              <div class="modal-header">
+                <h5 class="modal-title" id="save_favorite_label">Save this restaurant to your favorite list?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <input type="text" id="restaurant_business_id_save_favorite" name="restaurant_business_id" value="" hidden>
+                <input type="text" id="user_id_save_favorite" name="user_id" value="{{user.id}}" hidden>
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button class="btn btn-primary" type="submit" name="save_favorite_form">Yes</button>
+                </div>
+             </form>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -131,14 +158,12 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button class="btn btn-primary" type="submit" >Submit</button>
+                  <button class="btn btn-primary" type="submit" name="questionnaire_form">Submit</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-
-
         <div class="text-block">
           <!-- Listing Location-->
           <h3 class="mb-4">Location</h3>
@@ -488,6 +513,7 @@ function initMap() {
         type="text/javascript"></script>
 <script>
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
+  document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
 
 
 </script>

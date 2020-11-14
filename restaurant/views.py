@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Restaurant
-from .forms import QuestionnaireForm, SearchFilterForm
+from django.contrib.auth import get_user_model
+from .forms import QuestionnaireForm, SearchFilterForm, SaveFavoriteForm
 from .utils import (
     query_yelp,
     query_inspection_record,
@@ -27,12 +28,24 @@ def index(request):
 
 
 def get_restaurant_profile(request, restaurant_id):
-    if request.method == "POST":
+    if request.method == "POST" and "save_favorite_form" in request.POST:
+        form = SaveFavoriteForm(request.POST)
+        print("save_favorite form is valid: ", form.is_valid())
+        if form.is_valid():
+            # form.save()
+            user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
+            user.favorite_restaurants.add(
+                Restaurant.objects.get(
+                    business_id=form.cleaned_data.get("restaurant_business_id")
+                )
+            )
+
+    if request.method == "POST" and "questionnaire_form" in request.POST:
         form = QuestionnaireForm(request.POST)
-        print(form.is_valid())
-        logger.info(form.is_valid())
+        print("questionnaire form is valid: ", form.is_valid())
         if form.is_valid():
             form.save()
+
     try:
         restaurant = Restaurant.objects.get(pk=restaurant_id)
         response_yelp = query_yelp(restaurant.business_id)

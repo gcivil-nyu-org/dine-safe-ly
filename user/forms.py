@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -11,14 +11,14 @@ class UserCreationForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data["username"].lower()
-        r = User.objects.filter(username=username)
+        r = get_user_model().objects.filter(username=username)
         if r.count():
             raise ValidationError("Username already exists")
         return username
 
     def clean_email(self):
         email = self.cleaned_data["email"].lower()
-        r = User.objects.filter(email=email)
+        r = get_user_model().objects.filter(email=email)
         if r.count():
             raise ValidationError("Email already exists")
         return email
@@ -33,7 +33,7 @@ class UserCreationForm(forms.Form):
         return password2
 
     def save(self, commit=True):
-        user = User.objects.create_user(
+        user = get_user_model().objects.create_user(
             username=self.cleaned_data["username"],
             email=self.cleaned_data["email"],
             password=self.cleaned_data["password1"],
@@ -55,7 +55,7 @@ class ResetPasswordForm(forms.Form):
         return password2
 
     def save(self, uid, commit=True):
-        user = User.objects.get(pk=uid)
+        user = get_user_model().objects.get(pk=uid)
         user.set_password(self.cleaned_data["password1"])
         user.save()
         return user
@@ -100,7 +100,7 @@ class GetEmailForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data["email"].lower()
-        r = User.objects.filter(email=email)
+        r = get_user_model().objects.filter(email=email)
         if r.count() == 0:
             raise ValidationError("Email doesn't exists")
         return email
