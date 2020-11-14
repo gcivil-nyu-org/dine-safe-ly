@@ -2,7 +2,12 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Restaurant
 from django.contrib.auth import get_user_model
-from .forms import QuestionnaireForm, SearchFilterForm, SaveFavoriteForm
+from .forms import (
+    QuestionnaireForm,
+    SearchFilterForm,
+    SaveFavoriteForm,
+    DeleteFavoriteForm,
+)
 from .utils import (
     query_yelp,
     query_inspection_record,
@@ -35,6 +40,17 @@ def get_restaurant_profile(request, restaurant_id):
             # form.save()
             user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
             user.favorite_restaurants.add(
+                Restaurant.objects.get(
+                    business_id=form.cleaned_data.get("restaurant_business_id")
+                )
+            )
+    if request.method == "POST" and "delete_favorite_form" in request.POST:
+        form = DeleteFavoriteForm(request.POST)
+        print("delete_favorite form is valid: ", form.is_valid())
+        if form.is_valid():
+            # form.save()
+            user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
+            user.favorite_restaurants.remove(
                 Restaurant.objects.get(
                     business_id=form.cleaned_data.get("restaurant_business_id")
                 )

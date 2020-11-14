@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from .forms import UserCreationForm, ResetPasswordForm, GetEmailForm, UpdatePasswordForm
 from .utils import send_reset_password_email
 from django.test import Client
@@ -18,7 +18,7 @@ class BaseTest(TestCase):
     def setUp(self):
         self.user_register_url = "user:register"
         self.c = Client()
-        self.dummy_user = User.objects.create(
+        self.dummy_user = get_user_model().objects.create(
             username="myuser",
             email="abcd@gmail.com",
             password="pass123",
@@ -29,7 +29,7 @@ class BaseTest(TestCase):
 
 class TestUserModel(BaseTest):
     def test_create_user(self):
-        temp_user = User.objects.create_user("xiong")
+        temp_user = get_user_model().objects.create_user("xiong")
         self.assertEqual(temp_user.username, "xiong")
 
 
@@ -206,7 +206,7 @@ class TestUserLoginView(BaseTest):
             "email": "abcdefg@gmail.com",
             "password": "pass123",
         }
-        User.objects.create_user(**self.credentials)
+        get_user_model().objects.create_user(**self.credentials)
         response = self.c.post("/user/login", self.credentials)
 
         self.assertEqual(response.status_code, 302)

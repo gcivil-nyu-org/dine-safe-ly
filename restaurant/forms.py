@@ -33,6 +33,11 @@ class SaveFavoriteForm(forms.Form):
     user_id = forms.CharField(label="user_id")
 
 
+class DeleteFavoriteForm(forms.Form):
+    restaurant_business_id = forms.CharField(label="restaurant_id")
+    user_id = forms.CharField(label="user_id")
+
+
 class SearchFilterForm(forms.Form):
     CHOICES_NEIGHBOURHOOD = [
         ("Chelsea and Clinton", "Chelsea and Clinton"),
