@@ -66,7 +66,7 @@ def get_inspection_info(request, restaurant_id):
         )
 
         parameter_dict = {
-            "inspection_list": json.dumps(inspection_data_list, cls=DjangoJSONEncoder),
+            "inspection_list": inspection_data_list,
             "restaurant_id": restaurant_id,
         }
 

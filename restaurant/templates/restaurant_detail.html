@@ -26,11 +26,9 @@
           <h3 class="mb-4">Compliance Data</h3>
           <div class="list-group shadow mb-5">
             <a class="list-group-item list-group-item-action p-4" href="/restaurant/inspection_records/{{ restaurant_id }}">
-              <div class="row">
+              <div class="row text-center">
                 <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
-                  <div class="d-flex align-items-center mb-3">
-                    <span id="res_compliance_status" class="badge badge-pill p-2 badge-success-light" style="font-size: inherit;"></span>
-                  </div>
+                  <span id="res_compliance_status" class="badge badge-pill p-2 badge-success-light" style="font-size: inherit;"></span>
                 </div>
                 <div class="col-lg-8">
                   <div class="row text-center">
@@ -38,7 +36,7 @@
                       <h6 class="label-heading">Skipped Reason </h6>
                       <p id="res_skipped_reason" class="text-sm font-weight-bold"></p>
                     </div>
-                    <div class="col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0">
+                    <div class="col-6 col-md-6 col-lg-6 py-3">
                       <h6 class="label-heading">Inspection Date </h6>
                       <p id="res_last_inspection" class="text-sm font-weight-bold mb-0"></p>
                     </div>
@@ -115,17 +113,14 @@
                   </div>
                   <br>
                   <p>How would you rate the safety level for this restaurant?</p>
-                  <div class="form-group">
-                    <input type="radio" name="safety_level" value="1" />
-                    <label for="star1" title="text">1</label>
-                    <input type="radio" name="safety_level" value="2" />
-                    <label for="star2" title="text">2</label>
-                    <input type="radio" name="safety_level" value="3" />
-                    <label for="star1" title="text">3</label>
-                    <input type="radio" name="safety_level" value="4" />
-                    <label for="star1" title="text">4</label>
-                    <input type="radio" name="safety_level" value="5" />
-                    <label for="star1" title="text">5</label>
+                  <div class="form-group" style="width: 200px;">
+                    <select class="selectpicker form-control" name="safety_level" data-style="btn-selectpicker" title="">
+                      <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
+                      <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
+                      <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
+                      <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
+                      <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
+                    </select>
                   </div>
                   <br>
                 </div>
@@ -304,7 +299,6 @@
 var inspection_data = {{ lasted_inspection | safe}};
 
 document.getElementById("res_compliance_status").innerHTML = inspection_data.is_roadway_compliant;
-document.getElementById("res_skipped_reason").innerHTML = "-";
 document.getElementById("res_last_inspection").innerHTML = inspection_data.inspected_on;
 
 if(inspection_data.is_roadway_compliant=="Compliant")
@@ -312,6 +306,7 @@ if(inspection_data.is_roadway_compliant=="Compliant")
 else
   {document.getElementById("res_skipped_reason").innerHTML = inspection_data.skipped_reason;
   document.getElementById("res_compliance_status").className = "badge badge-pill p-2 badge-danger-light"}
+if(inspection_data.skipped_reason == "nan"){document.getElementById("res_skipped_reason").innerHTML = "-";}
 
 var True = true;
 var False = false;
