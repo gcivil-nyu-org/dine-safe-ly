@@ -1,0 +1,123 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>NYC heat map</title>
+<!-- Style Section for the Window -->
+<style>
+html { height: 610px; width: 575px; }
+body { height: 610px; width:575px; margin: 0; padding: 0 }
+#map-canvas { height: 604px; width: 566px;}
+}
+</style>
+<!-- Calling the Google Map API version 3 -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<!-- Styling the Custom Main Map -->
+<script>
+var data = {{ data | safe }};
+var lat = {{ lat | safe }};
+var long = {{ long | safe }};
+var addMarkerToMap = function (map, latData, lngData) {
+    var marker = new google.maps.Marker({
+        position: {
+            lat: latData,
+            lng: lngData,
+        },
+        map: map
+    });
+}
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    zoom: 10,
+    center: {lat: 40.732268, lng: -73.956510}
+  });
+
+
+  map.data.loadGeoJson('https://dine-safely.s3.amazonaws.com/MODZCTA_2010_WGS1984.geo.json');
+  map.data.setStyle({
+        fillColor: 'gray',
+        strokeWeight: 1,
+        strokeColor: 'white',
+    });
+
+  addMarkerToMap(map, parseFloat(lat), parseFloat(long));
+
+  var infowindow = new google.maps.InfoWindow({maxWidth: 320});
+
+  map.data.setStyle((feature) => {
+    let color = "LightGreen";
+
+    record = data[feature.getProperty("MODZCTA").toString()]
+
+    if (record) {
+        if (parseFloat(record[1]) != null && parseFloat(record[1]) < 1.0) {
+          color = "LightGreen";
+        }
+        if (parseFloat(record[1]) >= 1 && parseFloat(record[1]) < 2) {
+          color = "NavajoWhite";
+        }
+        if (parseFloat(record[1]) >= 2 && parseFloat(record[1]) < 3) {
+          color = "Orange";
+        }
+        if (parseFloat(record[1]) >= 4) {
+          color = "Red";
+        }
+    }
+    return {
+      fillColor: color,
+      strokeColor: 'white',
+      strokeWeight: 0.5,
+      fillOpacity: 1
+    };
+  });
+
+  map.data.addListener("click", (event) => {
+  });
+
+  map.data.addListener("mouseover", (event) => {
+    map.data.revertStyle();
+    map.data.overrideStyle(event.feature, { strokeWeight: 2 });
+    record = data[event.feature.getProperty("MODZCTA").toString()]
+    infowindow.setContent("<div style='width:240px;'>"+"Details:<br>" + "Area: " + record[0] + "<br>percent positivity 7day: " + record[1] + "<br>People tested: " + record[2] + "<br>People positive " + record[3] +"</div>");
+    infowindow.setPosition(event.feature.getProperty("bounds").getCenter());
+    infowindow.setOptions({pixelOffset: new google.maps.Size(10,-50)});
+    infowindow.open(map);
+  });
+  map.data.addListener("mouseout", (event) => {
+    map.data.revertStyle();
+    infowindow.close()
+  });
+
+  google.maps.event.addListener(map.data,'addfeature',function(e){
+      //check for a polygon
+      if(e.feature.getGeometry().getType()==='Polygon'){
+          var bounds=new google.maps.LatLngBounds();
+          e.feature.getGeometry().getArray().forEach(function(path){
+             path.getArray().forEach(function(latLng){
+               bounds.extend(latLng);
+             });
+          });
+          e.feature.setProperty('bounds',bounds);
+        }
+      });
+
+
+}
+
+google.maps.event.addDomListener(window, 'load', initMap);
+
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&callback=initMap"
+    type="text/javascript">
+</script>
+
+</head>
+
+<body>
+<div id="map-canvas"></div>
+</body>
+</html>
+
+
+{% endblock %}
