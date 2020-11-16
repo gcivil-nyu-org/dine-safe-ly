@@ -35,6 +35,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
+AUTH_USER_MODEL = "user.DineSafelyUser"
 
 INSTALLED_APPS = [
     "restaurant.apps.RestaurantConfig",

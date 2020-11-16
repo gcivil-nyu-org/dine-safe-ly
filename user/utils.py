@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_bytes
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 def send_reset_password_email(request, email):
-    user = User.objects.get(email=email)
+    user = get_user_model().objects.get(email=email)
     host_name = request.get_host()
     base_url = "http://" + host_name + "/user/reset_password/"
     c = {

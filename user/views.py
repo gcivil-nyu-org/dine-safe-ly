@@ -5,8 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
-from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .utils import send_reset_password_email
 from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
@@ -61,25 +61,32 @@ def account_details(request):
     if not request.user.is_authenticated:
         return redirect("user:login")
 
+    user = request.user
+
+    favorite_restaurant_list = user.favorite_restaurants.all()
     if request.method == "POST":
-        user = request.user
-        if not user:
-            return HttpResponse("This is invalid!")
         form = UpdatePasswordForm(user=user, data=request.POST)
         if form.is_valid():
             form.save(user)
             return redirect("user:login")
+        logger.error(form.errors)
         return render(
             request=request,
             template_name="account_details.html",
-            context={"form": form},
+            context={
+                "form": form,
+                "favorite_restaurant_list": favorite_restaurant_list,
+            },
         )
     else:
         form = ResetPasswordForm()
         return render(
             request=request,
             template_name="account_details.html",
-            context={"form": form},
+            context={
+                "form": form,
+                "favorite_restaurant_list": favorite_restaurant_list,
+            },
         )
 
 
@@ -88,7 +95,7 @@ def reset_password_link(request, base64_id, token):
 
         uid = force_text(urlsafe_base64_decode(base64_id))
 
-        user = User.objects.get(pk=uid)
+        user = get_user_model().objects.get(pk=uid)
         if not user or not PasswordResetTokenGenerator().check_token(user, token):
             return HttpResponse("This is invalid!")
         form = ResetPasswordForm(request.POST)
