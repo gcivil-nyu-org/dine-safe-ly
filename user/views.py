@@ -62,15 +62,14 @@ def account_details(request):
         return redirect("user:login")
 
     user = request.user
-    if not user:
-        return HttpResponse("This is invalid!")
-    print(user.favorite_restaurants.all())
+
     favorite_restaurant_list = user.favorite_restaurants.all()
     if request.method == "POST":
         form = UpdatePasswordForm(user=user, data=request.POST)
         if form.is_valid():
             form.save(user)
             return redirect("user:login")
+        logger.error(form.errors)
         return render(
             request=request,
             template_name="account_details.html",

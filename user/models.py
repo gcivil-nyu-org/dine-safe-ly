@@ -4,5 +4,4 @@ from restaurant.models import Restaurant
 
 
 class DineSafelyUser(AbstractUser):
-
     favorite_restaurants = models.ManyToManyField(Restaurant, blank=True)
