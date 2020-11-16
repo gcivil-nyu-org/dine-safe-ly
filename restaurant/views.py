@@ -70,12 +70,14 @@ def get_restaurant_profile(request, restaurant_id):
         )
         feedback = get_latest_feedback(restaurant.business_id)
         average_safety_rating = get_average_safety_rating(restaurant.business_id)
+        user = request.user
         parameter_dict = {
             "yelp_info": response_yelp,
             "lasted_inspection": latest_inspection,
             "restaurant_id": restaurant_id,
             "latest_feedback": feedback,
             "average_safety_rating": average_safety_rating,
+            "saved_restaurants": True if len(user.favorite_restaurants.all().filter(id=restaurant_id))>0 else False,
         }
 
         return render(request, "restaurant_detail.html", parameter_dict)

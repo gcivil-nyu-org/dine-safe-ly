@@ -50,16 +50,22 @@
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Have you been here before?
           </button>
+
+              {% if saved_restaurants %}
+              <!-- Button trigger delete restaurant from favorite -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete_favorite">
+                Remove from favorite
+              </button>
+              {% else %}
                 <!-- Button trigger save restaurant as favorite -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save_favorite">
-            Do you like this restaurant?
-          </button>
-                <!-- Button trigger delete restaurant from favorite -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete_favorite">
-            Remove from favorite
-          </button>
-            {% endif %}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save_favorite">
+                  Do you like this restaurant?
+                </button>
+
+              {% endif %}
+          {% endif %}
         </div>
+
 
                 <!-- Save Favorite Restaurant -->
         <div class="modal fade" id="save_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
