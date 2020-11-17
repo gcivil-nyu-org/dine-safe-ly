@@ -36,7 +36,7 @@ jobs:
       uses: AndreMiras/coveralls-python-action@develop
 
   coveralls_finish:
-    needs: test
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls Finished
