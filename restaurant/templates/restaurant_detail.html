@@ -520,6 +520,7 @@ for (i = 0; i < yelp_reviews.reviews.length; i++) {
 
 
 var data = {{ data | safe }};
+
 var addMarkerToMap = function (map, latData, lngData) {
     var marker = new google.maps.Marker({
         position: {
@@ -599,10 +600,12 @@ function initMap() {
     map2.data.revertStyle();
     map2.data.overrideStyle(event.feature, { strokeWeight: 2 });
     record = data[event.feature.getProperty("MODZCTA").toString()]
-    infowindow.setContent("<div style='width:240px;'>"+"Details:<br>" + "Area: " + record[0] + "<br>percent positivity 7day: " + record[1] + "%" + "<br>People tested: " + record[2] + "<br>People positive " + record[3] +"</div>");
-    infowindow.setPosition(event.feature.getProperty("bounds").getCenter());
-    infowindow.setOptions({pixelOffset: new google.maps.Size(10,-50)});
-    infowindow.open(map2);
+  if (record != null) {
+      infowindow.setContent("<div style='width:240px;'>"+"Details:<br>" + "Area: " + record[0] + "<br>percent positivity 7day: " + record[1] + "%" + "<br>People tested: " + record[2] + "<br>People positive " + record[3] +"</div>");
+      infowindow.setPosition(event.feature.getProperty("bounds").getCenter());
+      infowindow.setOptions({pixelOffset: new google.maps.Size(10,-50)});
+      infowindow.open(map2);
+    }
   });
   map2.data.addListener("mouseout", (event) => {
     map2.data.revertStyle();
@@ -626,7 +629,7 @@ function initMap() {
 
 
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&map_ids=53f009f8d1f2f7a9&callback=initMap"
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{google_key}}&map_ids={{google_map_id}}&callback=initMap"
     type="text/javascript">
 </script>
   document.getElementById("restaurant_business_id").value = yelp_info.id ;

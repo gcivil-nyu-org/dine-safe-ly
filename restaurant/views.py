@@ -23,6 +23,7 @@ from .utils import (
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
+from django.conf import settings
 import json
 import logging
 
@@ -87,6 +88,8 @@ def get_restaurant_profile(request, restaurant_id):
         feedback = get_latest_feedback(restaurant.business_id)
         average_safety_rating = get_average_safety_rating(restaurant.business_id)
         parameter_dict = {
+            "google_key": settings.GOOGLE_MAP_KEY,
+            "google_map_id": settings.GOOGLE_MAP_ID,
             "data": json.dumps(result, cls=DjangoJSONEncoder),
             "yelp_info": response_yelp,
             "lasted_inspection": latest_inspection,
