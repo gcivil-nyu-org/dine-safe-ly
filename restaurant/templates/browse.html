@@ -368,8 +368,17 @@
                 var div_hidden = document.createElement("div");
                 div_hidden.className = "badge badge-transparent badge-pill px-3 py-2 invisible";
 
+                var form_save_fav = document.createElement("form");
+                form_save_fav.className = "save_fav_res";
+                form_save_fav.setAttribute("method", "post");
+
+                var res_id = document.createElement("input");
+                res_id.setAttribute("type", "hidden");
+                res_id.setAttribute("value", restaurant_list[i].id);
+
                 var a_svg = document.createElement("a");
                 a_svg.className = "card-fav-icon position-relative z-index-40";
+                a_svg.onclick="this.closest('form').submit();return false";
                 a_svg.href = "";
                 a_svg.innerHTML = "";
 
@@ -384,8 +393,11 @@
                 }
                 a_svg.appendChild(fav_icon);
 
+                form_save_fav.appendChild(res_id);
+                form_save_fav.appendChild(a_svg);
+
                 div_svg.appendChild(div_hidden);
-                div_svg.appendChild(a_svg);
+                div_svg.appendChild(form_save_fav);
 
                 div3.appendChild(div4);
                 div3.appendChild(div_svg);
@@ -430,6 +442,9 @@
                 div1.appendChild(div2);
 
                 res_list_group.appendChild(div1);
+
+
+
           }
           if(restaurant_list.length < 6) {
             document.getElementById('load_button').style.visibility = 'hidden';
