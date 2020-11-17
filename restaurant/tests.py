@@ -3,7 +3,8 @@ from django.forms.models import model_to_dict
 from django.test import Client
 from datetime import datetime, timedelta
 from unittest import mock
-from .forms import QuestionnaireForm, SaveFavoriteForm
+from .forms import QuestionnaireForm, SaveFavoriteForm, DeleteFavoriteForm
+from django.contrib.auth import get_user_model
 from .models import (
     Restaurant,
     InspectionRecords,
@@ -251,6 +252,12 @@ class BaseTest(TestCase):
     def setUp(self):
         self.user_register_url = "user:register"
         self.c = Client()
+        self.dummy_user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
+        self.dummy_user.set_password("pass123")
+        self.dummy_user.save()
         self.dummy_user_questionnaire = UserQuestionnaire.objects.create(
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
@@ -403,14 +410,12 @@ class UserQuestionnaireFormTests(BaseTest):
         self.assertTrue(form.is_valid())
 
     def test_form_submission(self):
-        # print("in test_form_submission")
         create_restaurant(
             "random_name",
             "random_address",
             "random_postcode",
             "U8C69ISrhGTTubjqoVgZYg",
         )
-        # print(Restaurant.objects.all()[0])
         self.form = {
             "restaurant_business_id": "U8C69ISrhGTTubjqoVgZYg",
             "user_id": "1",
@@ -430,14 +435,12 @@ class UserQuestionnaireFormTests(BaseTest):
 
 class SaveFavoriteFormTests(BaseTest):
     def test_save_favorite_form_submission(self):
-        # print("in save_favorite_form_submission")
         create_restaurant(
             "random_name",
             "random_address",
             "random_postcode",
             "U8C69ISrhGTTubjqoVgZYg",
         )
-        # print(Restaurant.objects.all()[0])
         self.save_fav_form = {
             "restaurant_business_id": "1",
             "user_id": "1",
@@ -450,14 +453,12 @@ class SaveFavoriteFormTests(BaseTest):
 
 class DeleteFavoriteFormTests(BaseTest):
     def test_delete_favorite_form_submission(self):
-        # print("in save_favorite_form_submission")
         create_restaurant(
             "random_name",
             "random_address",
             "random_postcode",
             "U8C69ISrhGTTubjqoVgZYg",
         )
-        # print(Restaurant.objects.all()[0])
         self.delete_fav_form = {
             "restaurant_business_id": "1",
             "user_id": "1",
@@ -484,6 +485,74 @@ class SearchFilterFormTests(BaseTest):
         response = self.c.post(
             "/restaurant/search_filter/restaurants_list/1", search_filter_form
         )
+        self.assertEqual(response.status_code, 200)
+
+
+class RestaurantViewFormTests(BaseTest):
+    def test_restaurant_profile_view_save_favorite(self):
+        create_restaurant(
+            "random_name",
+            "random_address",
+            "random_postcode",
+            "U8C69ISrhGTTubjqoVgZYg",
+        )
+        self.save_fav_form = {
+            "restaurant_business_id": "U8C69ISrhGTTubjqoVgZYg",
+            "user_id": "1",
+            "save_favorite_form": "",
+        }
+        form = SaveFavoriteForm(self.save_fav_form)
+        # print(Restaurant.objects.all().filter(business_id="U8C69ISrhGTTubjqoVgZYg"))
+        response = self.c.post("/restaurant/profile/1/", self.save_fav_form)
+        self.assertTrue(form.is_valid())
+        self.assertEqual(response.status_code, 200)
+        user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
+        # print("count is : ", user.favorite_restaurants.all().count())
+        self.assertTrue(user.favorite_restaurants.all().count() == 1)
+
+    def test_restaurant_profile_view_delete_favorite(self):
+        create_restaurant(
+            "random_name",
+            "random_address",
+            "random_postcode",
+            "U8C69ISrhGTTubjqoVgZYg",
+        )
+        self.delete_fav_form = {
+            "restaurant_business_id": "U8C69ISrhGTTubjqoVgZYg",
+            "user_id": "1",
+            "delete_favorite_form": "",
+        }
+        form = DeleteFavoriteForm(self.delete_fav_form)
+        # print(Restaurant.objects.all().filter(business_id="U8C69ISrhGTTubjqoVgZYg"))
+        response = self.c.post("/restaurant/profile/1/", self.delete_fav_form)
+        self.assertTrue(form.is_valid())
+        self.assertEqual(response.status_code, 200)
+        user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
+        # print("count is : ", user.favorite_restaurants.all().count())
+        self.assertTrue(user.favorite_restaurants.all().count() == 0)
+
+    def test_restaurant_profile_view_questionnaire(self):
+        create_restaurant(
+            "random_name",
+            "random_address",
+            "random_postcode",
+            "U8C69ISrhGTTubjqoVgZYg",
+        )
+        self.questionnaire_form = {
+            "restaurant_business_id": "U8C69ISrhGTTubjqoVgZYg",
+            "user_id": "1",
+            "safety_level": "5",
+            "saved_on": datetime.now(),
+            "temperature_required": "True",
+            "contact_info_required": "True",
+            "employee_mask": "True",
+            "capacity_compliant": "True",
+            "distance_compliant": "True",
+            "questionnaire_form": "",
+        }
+        form = QuestionnaireForm(self.questionnaire_form)
+        response = self.c.post("/restaurant/profile/1/", self.questionnaire_form)
+        self.assertTrue(form.is_valid())
         self.assertEqual(response.status_code, 200)
 
 
