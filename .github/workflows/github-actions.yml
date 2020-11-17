@@ -1,4 +1,4 @@
-name: Coveralls GitHub Action
+name: CI/CD GitHub Actions
 on: ["push", "pull_request"]
 jobs:
   build:
@@ -22,6 +22,15 @@ jobs:
       env:
         SECRET_KEY: 897ecc098cfe033fdb8f63f67899c3c9f52acfa89d55eaffe8
       run: python manage.py migrate
+
+    - name: Black
+      steps:
+        - uses: actions/checkout@v2
+        - uses: actions/setup-python@v2
+        - uses: psf/black@stable
+
+    - name: Flake8
+      uses: cclauss/GitHub-Action-for-Flake8@v0.5.0
 
     - name: Run tests
       env:
