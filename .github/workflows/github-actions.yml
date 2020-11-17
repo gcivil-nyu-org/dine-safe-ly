@@ -30,7 +30,8 @@ jobs:
         YELP_TOKEN_1: JaekzvTTKsWGtQ96HUiwAXOUwRt6Ndbqzch4zc2XFnOEBxwTmwr-esm1uWo2QFvFJtXS8nY2dXx51cfAnMqVHpHRcp8N7QtP7LNVCcoxJWV_9NJrmZWSMiq-R_mEX3Yx
       run: |
         coverage run --source=restaurant,user manage.py test
-        coveralls
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Coveralls
       uses: AndreMiras/coveralls-python-action@develop
