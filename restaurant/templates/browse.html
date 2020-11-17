@@ -309,12 +309,14 @@
                }
             }
           }
+
           function loadRestaurant(restaurant_list_json, restaurant_number) {
              var restaurant_list = [];
              restaurant_list = JSON.parse(restaurant_list_json);
              document.getElementById("res_count").innerHTML = restaurant_number;
              for(var i = 0; i < restaurant_list.length; i++)
              {
+
                 if(restaurant_list[i].yelp_info == null || restaurant_list[i].yelp_info.error != null) {continue;}
 
                 var res_list_group = document.getElementById("res_list_group");
@@ -373,6 +375,13 @@
 
                 var fav_icon = document.createElement("i");
                 fav_icon.className = "fa fa-heart";
+                //fav_icon.style.color = 'red'
+                console.log(restaurant_list[i]);
+
+                console.log(restaurant_list[i].saved_by_user);
+                if(restaurant_list[i].saved_by_user != null && restaurant_list[i].saved_by_user) {
+                    fav_icon.style.color = 'red'
+                }
                 a_svg.appendChild(fav_icon);
 
                 div_svg.appendChild(div_hidden);
