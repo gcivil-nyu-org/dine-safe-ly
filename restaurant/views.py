@@ -17,7 +17,7 @@ from .utils import (
     get_average_safety_rating,
     get_total_restaurant_number,
     get_csv_from_s3,
-    check_restaurant_saved
+    check_restaurant_saved,
 )
 
 from django.http import HttpResponse
@@ -33,6 +33,7 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     return HttpResponse("Hello, this is restaurant.")
+
 
 def get_restaurant_profile(request, restaurant_id):
     if request.method == "POST" and "save_favorite_form" in request.POST:
@@ -91,7 +92,10 @@ def get_restaurant_profile(request, restaurant_id):
                 "restaurant_id": restaurant_id,
                 "latest_feedback": feedback,
                 "average_safety_rating": average_safety_rating,
-                "saved_restaurants": len(user.favorite_restaurants.all().filter(id=restaurant_id)) > 0,
+                "saved_restaurants": len(
+                    user.favorite_restaurants.all().filter(id=restaurant_id)
+                )
+                > 0,
             }
         else:
             parameter_dict = {
@@ -152,7 +156,9 @@ def get_restaurants_list(request, page):
 
             if request.user:
                 for restaurant in restaurant_list:
-                    restaurant['saved_by_user'] = check_restaurant_saved(request.user, restaurant['id'])
+                    restaurant["saved_by_user"] = check_restaurant_saved(
+                        request.user, restaurant["id"]
+                    )
 
             restaurant_number = get_total_restaurant_number(
                 form.cleaned_data.get("keyword"),
@@ -205,10 +211,6 @@ def get_landing_page(request, page=1):
 def save_favorite_restaurant(request, business_id):
     if request.method == "POST":
         user = request.user
-        user.favorite_restaurants.add(
-            Restaurant.objects.get(
-                business_id=business_id
-            )
-        )
+        user.favorite_restaurants.add(Restaurant.objects.get(business_id=business_id))
         logger.info(business_id)
     return HttpResponse("success")
