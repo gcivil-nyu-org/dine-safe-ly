@@ -19,7 +19,6 @@ from .utils import (
     get_csv_from_s3,
 )
 
-# from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
