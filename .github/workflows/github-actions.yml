@@ -19,9 +19,13 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run migrations
+      env:
+        SECRET_KEY: 897ecc098cfe033fdb8f63f67899c3c9f52acfa89d55eaffe8
       run: python manage.py migrate
 
     - name: Run tests
+      env:
+        SECRET_KEY: 897ecc098cfe033fdb8f63f67899c3c9f52acfa89d55eaffe8
       run: python manage.py test
 
     - name: Coveralls
