@@ -16,6 +16,5 @@ urlpatterns = [
         "search_filter/restaurants_list/<page>",
         views.get_restaurants_list,
         name="restaurants_list",
-    ),
-    path("map/covid_cases", views.test_nyc, name="maps")
+    )
 ]

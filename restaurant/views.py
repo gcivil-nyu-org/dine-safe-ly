@@ -181,17 +181,3 @@ def get_landing_page(request, page=1):
     }
     return render(request, "browse.html", parameter_dict)
 
-
-def test_nyc(request):
-    csv_file = get_csv_from_s3()
-    result = {}
-    for idx, row in csv_file.iterrows():
-        if idx == 0:
-            continue
-        result[row['modzcta']] = [row['modzcta_name'], row['percentpositivity_7day'], row['people_tested'], row['people_positive'], row['median_daily_test_rate'], row['adequately_tested']]
-    parameter_dict = {
-        "lat": 40.732268,
-        "long": -73.956510,
-        "data": json.dumps(result, cls=DjangoJSONEncoder),
-    }
-    return render(request, "nyc_heat_map.html", parameter_dict)
