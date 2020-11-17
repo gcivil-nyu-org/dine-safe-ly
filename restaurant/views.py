@@ -19,7 +19,6 @@ from .utils import (
     get_csv_from_s3,
 )
 
-# from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
@@ -40,7 +39,6 @@ def get_restaurant_profile(request, restaurant_id):
         form = SaveFavoriteForm(request.POST)
         print("save_favorite form is valid: ", form.is_valid())
         if form.is_valid():
-            # form.save()
             user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
             user.favorite_restaurants.add(
                 Restaurant.objects.get(
@@ -51,7 +49,6 @@ def get_restaurant_profile(request, restaurant_id):
         form = DeleteFavoriteForm(request.POST)
         print("delete_favorite form is valid: ", form.is_valid())
         if form.is_valid():
-            # form.save()
             user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
             user.favorite_restaurants.remove(
                 Restaurant.objects.get(
