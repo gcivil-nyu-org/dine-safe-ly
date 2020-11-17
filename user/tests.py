@@ -1,14 +1,11 @@
 from django.test import TestCase
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from .forms import UserCreationForm, ResetPasswordForm, GetEmailForm, UpdatePasswordForm
 from .utils import send_reset_password_email
 from django.test import Client
-
-# from unittest import mock
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_bytes
-from unittest import mock
 
 
 # Create your tests here.
@@ -18,18 +15,18 @@ class BaseTest(TestCase):
     def setUp(self):
         self.user_register_url = "user:register"
         self.c = Client()
-        self.dummy_user = User.objects.create(
+        self.dummy_user = get_user_model().objects.create(
             username="myuser",
             email="abcd@gmail.com",
-            password="pass123",
         )
-
+        self.dummy_user.set_password("pass123")
+        self.dummy_user.save()
         return super().setUp
 
 
 class TestUserModel(BaseTest):
     def test_create_user(self):
-        temp_user = User.objects.create_user("xiong")
+        temp_user = get_user_model().objects.create_user("xiong")
         self.assertEqual(temp_user.username, "xiong")
 
 
@@ -206,7 +203,7 @@ class TestUserLoginView(BaseTest):
             "email": "abcdefg@gmail.com",
             "password": "pass123",
         }
-        User.objects.create_user(**self.credentials)
+        get_user_model().objects.create_user(**self.credentials)
         response = self.c.post("/user/login", self.credentials)
 
         self.assertEqual(response.status_code, 302)
@@ -220,41 +217,25 @@ class TestUserLoginView(BaseTest):
 
 class TestUpdatePasswordView(BaseTest):
     def test_no_user_logged_in(self):
-        response = self.c.get("/user/update_password")
+        response = self.c.get("/user/account_details")
         self.assertEqual(response.status_code, 302)
 
-    def test_update_password_no_user(self):
-        self.c.force_login(self.dummy_user)
+    def test_update_password_save(self):
+        self.c.login(username=self.dummy_user.username, password="pass123")
         response = self.c.post(
-            "/user/update_password",
+            "/user/account_details",
             {
                 "password_current": "pass123",
-                "password_new": "pass123",
-                "password_confirm": "pass123",
-            },
-        )
-        self.assertEqual(response.status_code, 200)
-
-    @mock.patch("user.forms.User.check_password")
-    def test_update_password_save(self, mock_password):
-        self.c.force_login(self.dummy_user)
-        mock_password.return_value = True
-        response = self.c.post(
-            "/user/update_password",
-            {
-                "password_current": "pass123",
-                "password_new": "pass123",
-                "password_confirm": "pass123",
+                "password_new": "pass1234",
+                "password_confirm": "pass1234",
             },
         )
         self.assertEqual(response.status_code, 302)
 
-    @mock.patch("user.forms.User.check_password")
-    def test_update_password_invalid_form(self, mock_password):
+    def test_update_password_invalid_form(self):
         self.c.force_login(self.dummy_user)
-        mock_password.return_value = True
         response = self.c.post(
-            "/user/update_password",
+            "/user/account_details",
             {
                 "password_current": "pass123",
                 "password_new": "pass123",
@@ -266,7 +247,7 @@ class TestUpdatePasswordView(BaseTest):
     def test_update_password_not_post(self):
         self.c.force_login(self.dummy_user)
         response = self.c.get(
-            "/user/update_password",
+            "/user/account_details",
             {
                 "password_current": "pass123",
                 "password_new": "pass123",

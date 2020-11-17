@@ -149,7 +149,7 @@
                                         <option value="seafood">Seafood</option>
                                         <option value="sushi">Sushi</option>
                                         <option value="tapassmallplates">Tapas/Small plates</option>
-                                        <option value="vegan">vegan</option>
+                                        <option value="vegan">Vegan</option>
                                         <option value="vegetarian">Vegetarian</option>
                                         <option value="vietnamese">Vietnamese</option>
                                         <option value="waffles">Waffles</option>
@@ -173,21 +173,57 @@
                         </form>
                     </div>
                 </div>
+
+<!--                favorite restaurants list-->
+                <div class="text-block">
+                    <div class="row mb-3">
+                        <div class="col-sm-9">
+                            <h3>Favorite Restaurants</h3>
+                        </div>
+                        <div class="col-sm-3 text-right">
+                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#restaurant_list" aria-expanded="false" aria-controls="restaurant">edit</button>
+                        </div>
+                    </div>
+                    <p class="text-sm text-muted">
+                        {% for restaurant in favorite_restaurant_list %}
+                        <i class="text"></i>{{ restaurant.restaurant_name }}<br>
+                        {% endfor %}
+                    </p>
+                    <div class="collapse" id="restaurant_list">
+<!--                        <form action="#">-->
+                            <div class="row pt-4">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label" for="pcategory">Restaurants</label>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary mb-4" type="submit">Save</button>
+<!--                        </form>-->
+                    </div>
+                </div>
+
                 <div class="text-block">
                     <h3 class="mb-4">Social accounts</h3>
+                    {% load socialaccount %}
+                    {% get_social_accounts user as accounts %}
                     <div class="row">
                         <div class="col-sm-8">
                             <h6>Facebook</h6>
-                            <p class="text-sm text-muted">Not connected</p>
+                            {% if accounts.facebook %}
+                                <p class="text-sm text-primary pl-0">Connected</p>
+                            {% else %}
+                                <p class="text-sm text-muted">Not connected</p>
+                            {% endif %}
                         </div>
-                        <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="#">Connect</a></div>
                     </div>
                     <div class="row">
                         <div class="col-sm-8">
                             <h6>Google</h6>
-                            <p class="text-sm text-muted">Not connected</p>
+                            {% if accounts.google %}
+                                <p class="text-sm text-primary pl-0">Connected</p>
+                            {% else %}
+                                <p class="text-sm text-muted">Not connected</p>
+                            {% endif %}
                         </div>
-                        <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="#">Connect</a></div>
                     </div>
                 </div>
             </div>
@@ -202,6 +238,9 @@
                                 <use xlink:href="#shield-security-1"> </use>
                             </svg>
                         </div>
+                        {% if not accounts.google %}
+                            <div class="col text-right"><a class="btn btn-text text-primary pl-0" href="{% provider_login_url "google" process="connect" method="oauth2" %}">Connect</a></div>
+                        {% endif %}
                     </div>
                     <div class="card-body p-4">
                         <h6 class="card-text">Your account security: </h6>

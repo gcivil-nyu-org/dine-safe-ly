@@ -26,11 +26,9 @@
           <h3 class="mb-4">Compliance Data</h3>
           <div class="list-group shadow mb-5">
             <a class="list-group-item list-group-item-action p-4" href="/restaurant/inspection_records/{{ restaurant_id }}">
-              <div class="row">
+              <div class="row text-center">
                 <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
-                  <div class="d-flex align-items-center mb-3">
-                    <span id="res_compliance_status" class="badge badge-pill p-2 badge-success-light" style="font-size: inherit;"></span>
-                  </div>
+                  <span id="res_compliance_status" class="badge badge-pill p-2 badge-success-light" style="font-size: inherit;"></span>
                 </div>
                 <div class="col-lg-8">
                   <div class="row text-center">
@@ -38,7 +36,7 @@
                       <h6 class="label-heading">Skipped Reason </h6>
                       <p id="res_skipped_reason" class="text-sm font-weight-bold"></p>
                     </div>
-                    <div class="col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0">
+                    <div class="col-6 col-md-6 col-lg-6 py-3">
                       <h6 class="label-heading">Inspection Date </h6>
                       <p id="res_last_inspection" class="text-sm font-weight-bold mb-0"></p>
                     </div>
@@ -48,13 +46,67 @@
             </a>
           </div>
             {% if user.is_authenticated %}
-                <!-- Button trigger modal -->
+                <!-- Button trigger questionnaire modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Have you been here before?
           </button>
+                <!-- Button trigger save restaurant as favorite -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save_favorite">
+            Do you like this restaurant?
+          </button>
+                <!-- Button trigger delete restaurant from favorite -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete_favorite">
+            Remove from favorite
+          </button>
             {% endif %}
-
         </div>
+
+                <!-- Save Favorite Restaurant -->
+        <div class="modal fade" id="save_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form class="form-validate" method="POST">
+                  {% csrf_token %}
+              <div class="modal-header">
+                <h5 class="modal-title" id="save_favorite_label">Save this restaurant to your favorite list?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <input type="text" id="restaurant_business_id_save_favorite" name="restaurant_business_id" value="" hidden>
+                <input type="text" id="user_id_save_favorite" name="user_id" value="{{user.id}}" hidden>
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button class="btn btn-primary" type="submit" name="save_favorite_form">Yes</button>
+                </div>
+             </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delete Favorite Restaurant -->
+        <div class="modal fade" id="delete_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form class="form-validate" method="POST">
+                  {% csrf_token %}
+              <div class="modal-header">
+                <h5 class="modal-title" id="delete_favorite_label">Delete this restaurant from your favorite list?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <input type="text" id="restaurant_business_id_delete_favorite" name="restaurant_business_id" value="" hidden>
+                <input type="text" id="user_id_delete_favorite" name="user_id" value="{{user.id}}" hidden>
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button class="btn btn-primary" type="submit" name="delete_favorite_form">Yes</button>
+                </div>
+             </form>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -115,30 +167,25 @@
                   </div>
                   <br>
                   <p>How would you rate the safety level for this restaurant?</p>
-                  <div class="form-group">
-                    <input type="radio" name="safety_level" value="1" />
-                    <label for="star1" title="text">1</label>
-                    <input type="radio" name="safety_level" value="2" />
-                    <label for="star2" title="text">2</label>
-                    <input type="radio" name="safety_level" value="3" />
-                    <label for="star1" title="text">3</label>
-                    <input type="radio" name="safety_level" value="4" />
-                    <label for="star1" title="text">4</label>
-                    <input type="radio" name="safety_level" value="5" />
-                    <label for="star1" title="text">5</label>
+                  <div class="form-group" style="width: 200px;">
+                    <select class="selectpicker form-control" name="safety_level" data-style="btn-selectpicker" title="">
+                      <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
+                      <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
+                      <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
+                      <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
+                      <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
+                    </select>
                   </div>
                   <br>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button class="btn btn-primary" type="submit" >Submit</button>
+                  <button class="btn btn-primary" type="submit" name="questionnaire_form">Submit</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-
-
         <div class="text-block">
           <!-- Listing Location-->
           <h3 class="mb-4">Location</h3>
@@ -304,7 +351,6 @@
 var inspection_data = {{ lasted_inspection | safe}};
 
 document.getElementById("res_compliance_status").innerHTML = inspection_data.is_roadway_compliant;
-document.getElementById("res_skipped_reason").innerHTML = "-";
 document.getElementById("res_last_inspection").innerHTML = inspection_data.inspected_on;
 
 if(inspection_data.is_roadway_compliant=="Compliant")
@@ -312,6 +358,7 @@ if(inspection_data.is_roadway_compliant=="Compliant")
 else
   {document.getElementById("res_skipped_reason").innerHTML = inspection_data.skipped_reason;
   document.getElementById("res_compliance_status").className = "badge badge-pill p-2 badge-danger-light"}
+if(inspection_data.skipped_reason == "nan"){document.getElementById("res_skipped_reason").innerHTML = "-";}
 
 var True = true;
 var False = false;
@@ -488,7 +535,8 @@ function initMap() {
         type="text/javascript"></script>
 <script>
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
-
+  document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
+  document.getElementById("restaurant_business_id_delete_favorite").value = yelp_info.id ;
 
 </script>
 
