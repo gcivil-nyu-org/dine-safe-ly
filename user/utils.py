@@ -18,9 +18,9 @@ def send_reset_password_email(request, email):
     c = {
         "base_url": base_url,
         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': PasswordResetTokenGenerator().make_token(user),
+        "token": PasswordResetTokenGenerator().make_token(user),
     }
-    htmltemp = template.loader.get_template('reset_password_template.html')
+    htmltemp = template.loader.get_template("reset_password_template.html")
     html_content = htmltemp.render(c)
     email_subject = "Reset Your Dine-safe-ly Password!"
     logger.info("Send email to: %s", user.email)
