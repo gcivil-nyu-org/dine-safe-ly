@@ -370,9 +370,14 @@
 
                 var form_save_fav = document.createElement("form");
                 form_save_fav.className = "save_fav_res";
-                form_save_fav.setAttribute("method", "post");
+                form_save_fav.setAttribute("method", "POST");
+                form_save_fav.setAttribute("onsubmit", "return false;");
+                form_save_fav.setAttribute("name", "save_form");
+                form_save_fav.setAttribute("restaurant_business_id", restaurant_list[i].business_id);
 
                 var res_id = document.createElement("input");
+                res_id.id = "restaurant_save" + restaurant_list[i].id;
+                res_id.setAttribute("name", "restaurant_business_id");
                 res_id.setAttribute("type", "hidden");
                 res_id.setAttribute("value", restaurant_list[i].id);
 
@@ -389,6 +394,7 @@
                 a_svg.className = "card-fav-icon position-relative z-index-40";
 
                 var fav_icon = document.createElement("i");
+                fav_icon.id = restaurant_list[i].business_id;
                 fav_icon.className = "fa fa-heart";
                 //fav_icon.style.color = 'red'
                 console.log(restaurant_list[i]);
@@ -459,22 +465,70 @@
             document.getElementById('load_button').style.visibility = 'hidden';
           }
          }
-
          function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
                 }
             }
-        }
-        return cookieValue;
-    }
+            return cookieValue;
+            }
+
+      </script>
+        <script>
+            $('body').on('submit', "form[name='save_form']", function(event) {
+                console.log("AJAX");
+                var currentForm = $(this);
+                event.preventDefault();
+                var formData = currentForm.serialize();
+                $.ajaxSetup({
+                     beforeSend: function(xhr, settings) {
+                         function getCookie(name) {
+                             var cookieValue = null;
+                             if (document.cookie && document.cookie != '') {
+                                 var cookies = document.cookie.split(';');
+                                 for (var i = 0; i < cookies.length; i++) {
+                                     var cookie = jQuery.trim(cookies[i]);
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                         break;
+                                     }
+                                 }
+                             }
+                             return cookieValue;
+                         }
+                         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                         }
+                     }
+                });
+
+                $.ajax({
+                  type: 'POST',
+                  url: "save/favorite/restaurant/" + currentForm.attr("restaurant_business_id"),
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  // handle a successful response
+                  success : function(json) {
+                      $('#'+currentForm.attr("restaurant_business_id")).css("color", "red");
+                      console.log("success"); // another sanity check
+                  },
+                  error : function(xhr,errmsg,err) {
+                    console.log('Error')
+                  }
+                });
+            });
+
+
+
 
         </script>
         <script>

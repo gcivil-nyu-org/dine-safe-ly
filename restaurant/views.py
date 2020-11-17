@@ -207,3 +207,15 @@ def get_landing_page(request, page=1):
         "keyword": json.dumps({"keyword": keyword}),
     }
     return render(request, "browse.html", parameter_dict)
+
+
+def save_favorite_restaurant(request, business_id):
+    if request.method == "POST":
+        user = request.user
+        user.favorite_restaurants.add(
+            Restaurant.objects.get(
+                business_id=business_id
+            )
+        )
+        logger.info(business_id)
+    return HttpResponse("success")

@@ -30,7 +30,7 @@ class QuestionnaireForm(forms.Form):
 
 class SaveFavoriteForm(forms.Form):
     restaurant_business_id = forms.CharField(label="restaurant_id")
-    user_id = forms.CharField(label="user_id")
+    user_id = forms.CharField(label="user_id", required=False)
 
 
 class DeleteFavoriteForm(forms.Form):
