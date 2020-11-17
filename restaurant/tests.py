@@ -25,18 +25,7 @@ from .utils import (
     get_average_safety_rating,
 )
 
-# from getinspection import (
-#     clean_inspection_data,
-#     match_on_yelp,
-#     save_restaurants,
-#     save_inspections,
-# )
-# import pandas as pd
 import json
-
-
-# from pandas.util.testing import assert_frame_equal
-
 
 def create_restaurant(restaurant_name, business_address, postcode, business_id):
     return Restaurant.objects.create(
