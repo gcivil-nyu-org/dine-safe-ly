@@ -267,6 +267,6 @@ def get_average_safety_rating(business_id):
 def get_csv_from_s3():
     bucket = "dine-safely"
     file_name = "last7days-by-modzcta.csv"
-    s3 = boto3.client('s3')
+    s3 = boto3.client("s3")
     obj = s3.get_object(Bucket=bucket, Key=file_name)
-    return pd.read_csv(obj['Body'])
+    return pd.read_csv(obj["Body"])

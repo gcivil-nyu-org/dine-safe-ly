@@ -16,7 +16,7 @@ from .utils import (
     get_latest_feedback,
     get_average_safety_rating,
     get_total_restaurant_number,
-    get_csv_from_s3
+    get_csv_from_s3,
 )
 
 # from django.http import HttpRequest
@@ -70,8 +70,14 @@ def get_restaurant_profile(request, restaurant_id):
         for idx, row in csv_file.iterrows():
             if idx == 0:
                 continue
-            result[row['modzcta']] = [row['modzcta_name'], row['percentpositivity_7day'], row['people_tested'],
-                                      row['people_positive'], row['median_daily_test_rate'], row['adequately_tested']]
+            result[row["modzcta"]] = [
+                row["modzcta_name"],
+                row["percentpositivity_7day"],
+                row["people_tested"],
+                row["people_positive"],
+                row["median_daily_test_rate"],
+                row["adequately_tested"],
+            ]
 
         restaurant = Restaurant.objects.get(pk=restaurant_id)
         response_yelp = query_yelp(restaurant.business_id)
@@ -179,4 +185,3 @@ def get_landing_page(request, page=1):
         "keyword": json.dumps({"keyword": keyword}),
     }
     return render(request, "browse.html", parameter_dict)
-

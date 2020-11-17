@@ -16,5 +16,5 @@ urlpatterns = [
         "search_filter/restaurants_list/<page>",
         views.get_restaurants_list,
         name="restaurants_list",
-    )
+    ),
 ]
