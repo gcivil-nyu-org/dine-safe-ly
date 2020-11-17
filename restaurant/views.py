@@ -167,6 +167,8 @@ def get_landing_page(request, page=1):
     price_filter = request.GET.getlist("price")
     rating_filter = None
     compliant_filter = None
+    sort_option = None
+    favorite_filter = None
     if request.GET.getlist("ratingfrom"):
         rating_filter = float(request.GET.getlist("ratingfrom")[0])
     keyword = request.GET.get("search")
@@ -180,6 +182,8 @@ def get_landing_page(request, page=1):
         price_filter,
         rating_filter,
         compliant_filter,
+        sort_option,
+        favorite_filter = None
     )
 
     parameter_dict = {

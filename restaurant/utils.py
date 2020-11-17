@@ -168,6 +168,8 @@ def get_restaurant_list(
     price_filter=None,
     rating_filter=None,
     compliant_filter=None,
+    sort_option=None,
+    favorite_filter = None,
 ):
     page = int(page) - 1
     offset = int(page) * int(limit)
@@ -179,6 +181,8 @@ def get_restaurant_list(
         or price_filter
         or rating_filter
         or compliant_filter
+        or sort_option
+        or favorite_filter
     ):
         restaurants = get_filtered_restaurants(
             keyword,
@@ -189,6 +193,9 @@ def get_restaurant_list(
             compliant_filter,
             page,
             limit,
+            sort_option,
+            favorite_filter
+
         )
         return restaurants_to_dict(restaurants)
     else:
@@ -207,6 +214,9 @@ def get_filtered_restaurants(
     compliant=None,
     page=0,
     limit=None,
+    sort_option=None,
+    favorite_filter = None
+
 ):
     filters = {}
 
@@ -229,13 +239,34 @@ def get_filtered_restaurants(
     if compliant == "Compliant":
         keyword_filter["compliant_status__iexact"] = compliant
 
-    filtered_restaurants = (
+    value = None
+    if sort_option:
+        if sort_option == "ratedhigh":
+            value = "rating"
+        elif sort_option == "ratedlow":
+            value = "-rating"
+        elif sort_option == "pricehigh":
+            value = "price"
+        elif sort_option == "pricelow":
+            value = "-price"
+ 
+
+    if value:
+        filtered_restaurants = (
         Restaurant.objects.filter(
-            business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+            business_id__in=YelpRestaurantDetails.objects.filter(**filters).order_by(value)
         )
         .distinct()
-        .filter(**keyword_filter)[offset : offset + int(limit)]
-    )
+        .filter(**keyword_filter).order_by("-id")[offset : offset + int(limit)]
+        )
+    else:
+        filtered_restaurants = (
+            Restaurant.objects.filter(
+                business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+            )
+            .distinct()
+            .filter(**keyword_filter).order_by("-id")[offset : offset + int(limit)]
+        )
 
     return filtered_restaurants
 
