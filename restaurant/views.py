@@ -16,6 +16,7 @@ from .utils import (
     get_latest_feedback,
     get_average_safety_rating,
     get_total_restaurant_number,
+    get_csv_from_s3
 )
 
 # from django.http import HttpRequest
@@ -25,6 +26,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 import logging
 import csv
+
 
 logger = logging.getLogger(__name__)
 
@@ -64,6 +66,14 @@ def get_restaurant_profile(request, restaurant_id):
             form.save()
 
     try:
+        csv_file = get_csv_from_s3()
+        result = {}
+        for idx, row in csv_file.iterrows():
+            if idx == 0:
+                continue
+            result[row['modzcta']] = [row['modzcta_name'], row['percentpositivity_7day'], row['people_tested'],
+                                      row['people_positive'], row['median_daily_test_rate'], row['adequately_tested']]
+
         restaurant = Restaurant.objects.get(pk=restaurant_id)
         response_yelp = query_yelp(restaurant.business_id)
         latest_inspection = get_latest_inspection_record(
@@ -72,6 +82,7 @@ def get_restaurant_profile(request, restaurant_id):
         feedback = get_latest_feedback(restaurant.business_id)
         average_safety_rating = get_average_safety_rating(restaurant.business_id)
         parameter_dict = {
+            "data": json.dumps(result, cls=DjangoJSONEncoder),
             "yelp_info": response_yelp,
             "lasted_inspection": latest_inspection,
             "restaurant_id": restaurant_id,
@@ -172,11 +183,12 @@ def get_landing_page(request, page=1):
 
 
 def test_nyc(request):
-    csvFile = open("last7days-by-modzcta.csv", "r")
-    reader = csv.reader(csvFile)
+    csv_file = get_csv_from_s3()
     result = {}
-    for item in reader:
-        result[item[0]] = [item[1], item[2], item[3], item[4], item[5]]
+    for idx, row in csv_file.iterrows():
+        if idx == 0:
+            continue
+        result[row['modzcta']] = [row['modzcta_name'], row['percentpositivity_7day'], row['people_tested'], row['people_positive'], row['median_daily_test_rate'], row['adequately_tested']]
     parameter_dict = {
         "lat": 40.732268,
         "long": -73.956510,
