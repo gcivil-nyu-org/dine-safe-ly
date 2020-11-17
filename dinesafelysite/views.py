@@ -3,8 +3,7 @@ from restaurant.utils import (
     get_restaurant_list,
 )
 
-from django.core.serializers.json import DjangoJSONEncoder
-import json
+
 import logging
 
 logger = logging.getLogger(__name__)
