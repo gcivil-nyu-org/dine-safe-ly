@@ -193,10 +193,28 @@
           </div>
         </div>
         <div class="text-block">
-          <!-- Listing Location-->
-          <h3 class="mb-4">Location</h3>
-          <div class="map-wrapper-300 mb-3">
-            <div class="h-100" id="detailMap"></div>
+          <div class="mb-3">
+              <h3 class="mb-4">Map</h3>
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item"><a class="nav-link active" id="tab1" data-toggle="tab" href="#tab-Location" role="tab" aria-controls="tab1-content" aria-selected="true">Location</a></li>
+                <li class="nav-item"><a class="nav-link" id="tab2" data-toggle="tab" href="#tab-heatmap" role="tab" aria-controls="tab2-content" aria-selected="false">Heat Map</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade active show" id="tab-Location" role="tabpanel" aria-labelledby="tab-Location">
+                  <!-- Listing Location-->
+<!--                  <h3 class="mb-4">Location</h3>-->
+                  <div class="map-wrapper-300 mb-3">
+                    <div class="h-100" id="detailMap"></div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="tab-heatmap" role="tabpanel" aria-labelledby="tab-heatmap">
+                  <!-- Listing Location-->
+<!--                  <h3 class="mb-4">Heat Map</h3>-->
+                  <div class="map-wrapper-300 mb-3">
+                    <div class="h-100" id="detailMap2"></div>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
         <div class="text-block">
@@ -312,36 +330,26 @@
               <div class="media align-items-center">
                 <div class="media-body">
                   <p class="subtitle text-sm text-primary">Most Recent User Feedback</p>
-                  <h6 class="mb-0">Average Safety Rating: {{ average_safety_rating }}</h6>
+                  <h6 class="mb-0">Average Safety Rating: <span class="badge badge-primary">{{ average_safety_rating }}</span></h6>
                 </div>
               </div>
                 </div>
             <div class="card-body">
-              <ul class="list-unstyled mb-4">
-                <li class="mb-2">
-                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
-                    <p id="temperature_check">Temperature Check: {{ latest_feedback.temperature_required }}</p>
-                   </a>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <p id="temperature_check">Temperature Check: <span class="badge badge-primary">{{ latest_feedback.temperature_required }}</span></p>
                 </li>
-                <li class="mb-2">
-                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
-                    <p id="contact_info">Contact Info Tracing: {{ latest_feedback.contact_info_required }}</p>
-                   </a>
+                <li class="list-group-item">
+                  <p id="contact_info">Contact Info Tracing: <span class="badge badge-primary">{{ latest_feedback.contact_info_required }}</span></p>
                 </li>
-                <li class="mb-2">
-                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
-                    <p id="staff_mask">Staff Wearing Mask: {{ latest_feedback.employee_mask }}</p>
-                  </a>
+                <li class="list-group-item">
+                  <p id="staff_mask">Staff Wearing Mask: <span class="badge badge-primary">{{ latest_feedback.employee_mask }}</span></p>
                 </li>
-                  <li class="mb-2">
-                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
-                    <p id="capacity_compliance">Capacity under 25%: {{ latest_feedback.capacity_compliant }}</p>
-                   </a>
+                <li class="list-group-item">
+                  <p id="capacity_compliance">Capacity under 25%: <span class="badge badge-primary">{{ latest_feedback.capacity_compliant }}</span></p>
                 </li>
-                  <li class="mb-2">
-                  <a class="text-gray-00 text-sm text-decoration-none disabled" href="#">
-                    <p id="distance_compliance">Distance Compliant: {{ latest_feedback.distance_compliant }}</p>
-                  </a>
+                <li class="list-group-item">
+                  <p id="distance_compliance">Distance Compliant: <span class="badge badge-primary">{{ latest_feedback.distance_compliant }}</span></p>
                 </li>
               </ul>
 
@@ -520,7 +528,19 @@ for (i = 0; i < yelp_reviews.reviews.length; i++) {
 }
 
 
+var data = {{ data | safe }};
 
+var addMarkerToMap = function (map, latData, lngData) {
+    var marker = new google.maps.Marker({
+        position: {
+            lat: lat,
+            lng: long,
+        },
+        map: map,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    });
+    marker.setAnimation(google.maps.Animation.DROP);
+}
 
 console.log(inspection_data);
 function initMap() {
@@ -534,11 +554,93 @@ function initMap() {
     map,
     title: yelp_info.name,
   });
+
+
+
+    var map2 = new google.maps.Map(document.getElementById('detailMap2'), {
+    zoom: 13,
+    center: { lat: lat, lng: long },
+     mapId: '53f009f8d1f2f7a9'
+  });
+
+
+  map2.data.loadGeoJson('https://dine-safely.s3.amazonaws.com/MODZCTA_2010_WGS1984.geo.json');
+  map2.data.setStyle({
+        fillColor: 'gray',
+        strokeWeight: 1,
+        strokeColor: 'white',
+    });
+
+  addMarkerToMap(map2, parseFloat(lat), parseFloat(long));
+
+  var infowindow = new google.maps.InfoWindow({maxWidth: 320});
+
+  map2.data.setStyle((feature) => {
+    let color = "#91E012";
+
+    record = data[feature.getProperty("MODZCTA").toString()]
+
+    if (record) {
+        if (parseFloat(record[1]) > 0 && parseFloat(record[1]) < 1.0) {
+          color = "#D7E012";
+        }
+        if (parseFloat(record[1]) >= 1 && parseFloat(record[1]) < 2) {
+          color = "#E0A312";
+        }
+        if (parseFloat(record[1]) >= 2 && parseFloat(record[1]) < 3) {
+          color = "#E05C12";
+        }
+        if (parseFloat(record[1]) >= 3) {
+          color = "#E01412";
+        }
+    }
+    return {
+      fillColor: color,
+      strokeColor: color,
+      strokeWeight: 0.1,
+      fillOpacity: 0.8
+    };
+  });
+
+  map2.data.addListener("click", (event) => {
+  });
+
+  map2.data.addListener("mouseover", (event) => {
+    map2.data.revertStyle();
+    map2.data.overrideStyle(event.feature, { strokeWeight: 2 });
+    record = data[event.feature.getProperty("MODZCTA").toString()]
+  if (record != null) {
+      infowindow.setContent("<div style='width:240px;'>"+"Details:<br>" + "Area: " + record[0] + "<br>percent positivity 7day: " + record[1] + "%" + "<br>People tested: " + record[2] + "<br>People positive " + record[3] +"</div>");
+      infowindow.setPosition(event.feature.getProperty("bounds").getCenter());
+      infowindow.setOptions({pixelOffset: new google.maps.Size(10,-50)});
+      infowindow.open(map2);
+    }
+  });
+  map2.data.addListener("mouseout", (event) => {
+    map2.data.revertStyle();
+    infowindow.close()
+  });
+
+  google.maps.event.addListener(map2.data,'addfeature',function(e){
+      //check for a polygon
+      if(e.feature.getGeometry().getType()==='Polygon'){
+          var bounds=new google.maps.LatLngBounds();
+          e.feature.getGeometry().getArray().forEach(function(path){
+             path.getArray().forEach(function(latLng){
+               bounds.extend(latLng);
+             });
+          });
+          e.feature.setProperty('bounds',bounds);
+        }
+      });
 }
 
+
+
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&callback=initMap"
-        type="text/javascript"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{google_key}}&map_ids={{google_map_id}}&callback=initMap"
+    type="text/javascript">
+</script>
 <script>
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;

@@ -16,14 +16,17 @@ from .utils import (
     get_latest_feedback,
     get_average_safety_rating,
     get_total_restaurant_number,
+    get_csv_from_s3,
 )
 
 # from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
+from django.conf import settings
 import json
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -63,6 +66,20 @@ def get_restaurant_profile(request, restaurant_id):
             form.save()
 
     try:
+        csv_file = get_csv_from_s3()
+        result = {}
+        for idx, row in csv_file.iterrows():
+            if idx == 0:
+                continue
+            result[row["modzcta"]] = [
+                row["modzcta_name"],
+                row["percentpositivity_7day"],
+                row["people_tested"],
+                row["people_positive"],
+                row["median_daily_test_rate"],
+                row["adequately_tested"],
+            ]
+
         restaurant = Restaurant.objects.get(pk=restaurant_id)
         response_yelp = query_yelp(restaurant.business_id)
         latest_inspection = get_latest_inspection_record(
@@ -72,6 +89,9 @@ def get_restaurant_profile(request, restaurant_id):
         average_safety_rating = get_average_safety_rating(restaurant.business_id)
         user = request.user
         parameter_dict = {
+            "google_key": settings.GOOGLE_MAP_KEY,
+            "google_map_id": settings.GOOGLE_MAP_ID,
+            "data": json.dumps(result, cls=DjangoJSONEncoder),
             "yelp_info": response_yelp,
             "lasted_inspection": latest_inspection,
             "restaurant_id": restaurant_id,
