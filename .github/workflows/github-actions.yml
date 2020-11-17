@@ -32,11 +32,9 @@ jobs:
         coverage run --rcfile=.coveragerc --source=restaurant,user manage.py test
 
     - name: Black
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-python@v2
-        - uses: psf/black@stable
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: psf/black@stable
 
     - name: Coveralls
       uses: AndreMiras/coveralls-python-action@develop
