@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from dinesafelysite import views
 
 urlpatterns = [
-    path('restaurant/', include('restaurant.urls')),
-    path('admin/', admin.site.urls),
+    path("", views.index, name="index"),
+    path("restaurant/", include("restaurant.urls")),
+    path("admin/", admin.site.urls),
+    path("user/", include("user.urls")),
+    path("accounts/", include("allauth.urls")),
 ]

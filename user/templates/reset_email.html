@@ -1,0 +1,48 @@
+{% extends 'base-static.html' %} {% load static %} {% block content %}
+
+<body>
+<div class="container-fluid px-3">
+    <div class="row min-vh-100">
+        <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
+            <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
+                <div class="mb-5">
+                    <h2>Find your password back</h2>
+                </div>
+                <form class="form-validate" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {% if form.errors %}
+                        {% for field in form %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <label class="form-label" for="email"> email</label>
+                        <input class="form-control" name="email" id="email" placeholder="email" autocomplete="off" required data-msg="Please enter your email">
+                    </div>
+                    <!-- Submit-->
+                    <button class="btn btn-lg btn-block btn-primary" type="submit">Send email</button>
+                    <!--                    <hr class="my-3 hr-text letter-spacing-2" data-content="OR">-->
+                    <!--                    <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>-->
+                    <!--                    <button class="btn btn btn-outline-muted btn-block btn-social mb-3"><i class="fa-2x fa-google fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Google</span></button>-->
+                    <hr class="my-4">
+                    <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="/user/register">Sign Up </a></small></p>
+                    <p class="text-center"><small class="text-muted text-center">Don't want to login? <a href="/restaurant/1">Exit</a></small></p>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
+            <!-- Image-->
+            <div class="bg-cover h-100 mr-n3" style="background-image: url(https://i1.wp.com/trendland.com/wp-content/uploads/2015/08/Vanessa_Rees_Protein_Nija-5.jpg);"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

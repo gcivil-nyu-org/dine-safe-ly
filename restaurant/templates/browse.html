@@ -1,0 +1,463 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="container-fluid py-5 px-lg-5">
+    <div class="row border-bottom mb-4">
+        <div class="col-12">
+            <p class="lead text-muted">Browse local NYC restaurants based on COVID-19 seating
+                compliance</p></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 pt-3">
+            <form class="pr-xl-3" action="" method="POST" id="search_filter_form">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label class="form-label" for="keyword">Search by restaurant name</label>
+                    <div class="input-label-absolute input-label-absolute-right">
+                        <div class="label-absolute"><i class="fa fa-search"></i></div>
+                        <input class="form-control pr-4" type="search" name="keyword" placeholder="Restaurant Name"
+                               id="keyword"></div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="neighbourhood">Neighbourhood</label>
+                    <select class="selectpicker form-control" name="neighbourhood" id="neighbourhood" multiple
+                            data-style="btn-selectpicker" data-live-search="true"
+                            data-selected-text-format="count &gt; 1" title="">
+                        <option value="Chelsea and Clinton">Chelsea and Clinton</option>
+                        <option value="Lower East Side">Lower East Side</option>
+                        <option value="Gramercy Park and Murray Hill">Gramercy Park and Murray Hill</option>
+                        <option value="Greenwich Village and Soho">Greenwich Village and Soho</option>
+                        <option value="Upper West Side">Upper West Side</option>
+                        <option value="Central Harlem">Central Harlem</option>
+                        <option value="Upper East Side">Upper East Side</option>
+                        <option value="East Harlem">East Harlem</option>
+                        <option value="Inwood and Washington Heights">Inwood and Washington Heights</option>
+                        <option value="Lower Manhattan">Lower Manhattan</option>
+                        <option value="Stapleton and St. George">Stapleton and St. George</option>
+                        <option value="Tribeca">Tribeca</option>
+                        <option value="Port Richmond">Port Richmond</option>
+                        <option value="South Shore">South Shore</option>
+                        <option value="Mid-Island">Mid-Island</option>
+                        <option value="High Bridge and Morrisania">High Bridge and Morrisania</option>
+                        <option value="Central Bronx">Central Bronx</option>
+                        <option value="Hunts Point and Mott Haven">Hunts Point and Mott Haven</option>
+                        <option value="Bronx Park and Fordham">Bronx Park and Fordham</option>
+                        <option value="Southeast Bronx">Southeast Bronx</option>
+                        <option value="Northeast Bronx">Northeast Bronx</option>
+                        <option value="Kingsbridge and Riverdale">Kingsbridge and Riverdale</option>
+                        <option value="Southeast Queens">Southeast Queens</option>
+                        <option value="Northwest Queens">Northwest Queens</option>
+                        <option value="Long Island City">Long Island City</option>
+                        <option value="Northwest Brooklyn">Northwest Brooklyn</option>
+                        <option value="Bushwick and Williamsburg">Bushwick and Williamsburg</option>
+                        <option value="East New York and New Lots">East New York and New Lots</option>
+                        <option value="Southwest Brooklyn">Southwest Brooklyn</option>
+                        <option value="Flatbush">Flatbush</option>
+                        <option value="Greenpoint">Greenpoint</option>
+                        <option value="Central Brooklyn">Central Brooklyn</option>
+                        <option value="Borough Park">Borough Park</option>
+                        <option value="Sunset Park">Sunset Park</option>
+                        <option value="Bushwick and Williamsburg">Bushwick and Williamsburg</option>
+                        <option value="Southern Brooklyn">Southern Brooklyn</option>
+                        <option value="Canarsie and Flatlands">Canarsie and Flatlands</option>
+                        <option value="North Queens">North Queens</option>
+                        <option value="Northeast Queens">Northeast Queens</option>
+                        <option value="Central Queens">Central Queens</option>
+                        <option value="West Queens">West Queens</option>
+                        <option value="West Central Queens">West Central Queens</option>
+                        <option value="Southeast Queens">Southeast Queens</option>
+                        <option value="Jamaica">Jamaica</option>
+                        <option value="Southwest Queens">Southwest Queens</option>
+                        <option value="Rockaways">Rockaways</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="category">Category</label>
+                    <select class="selectpicker form-control" name="category" id="category" multiple
+                            data-style="btn-selectpicker" data-live-search="true"
+                            data-selected-text-format="count &gt; 1" title="">
+                        <option value="newamerican">New American</option>
+                        <option value="armenian">Armenian</option>
+                        <option value="barbeque">Barbeque</option>
+                        <option value="bars">Bars</option>
+                        <option value="bistros">Bistros</option>
+                        <option value="burgers">Burgers</option>
+                        <option value="chinese">Chinese</option>
+                        <option value="danish">Danish</option>
+                        <option value="diners">Diners</option>
+                        <option value="ethiopian">Ethiopian</option>
+                        <option value="filipino">Filipino</option>
+                        <option value="french">French</option>
+                        <option value="georgian">Georgian</option>
+                        <option value="german">German</option>
+                        <option value="greek">Greek</option>
+                        <option value="hotdog">Hot dog</option>
+                        <option value="italian">Italian</option>
+                        <option value="bistros">Bistros</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="jewish">Jewish</option>
+                        <option value="kebab">Kebab</option>
+                        <option value="korean">Korean</option>
+                        <option value="kosher">Kosher</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="noodles">Noodles</option>
+                        <option value="pizza">Pizza</option>
+                        <option value="salad">Salad</option>
+                        <option value="sandwiches">Sandwiches</option>
+                        <option value="seafood">Seafood</option>
+                        <option value="sushi">Sushi</option>
+                        <option value="tapassmallplates">Tapas/Small plates</option>
+                        <option value="vegan">vegan</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vietnamese">Vietnamese</option>
+                        <option value="waffles">Waffles</option>
+                        <option value="wraps">Wraps</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Price</label>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="price_1" name="price_1"
+                                       value="$">
+                                <label class="custom-control-label" for="price_1">$</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="price_2" name="price_2"
+                                       value="$$">
+                                <label class="custom-control-label" for="price_2">$$</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="price_3" name="price_3"
+                                       value="$$$">
+                                <label class="custom-control-label" for="price_3">$$$</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="price_4" name="price_4"
+                                       value="$$$$">
+                                <label class="custom-control-label" for="price_4">$$$$</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Compliant Status</label>
+                    <div class="form-group">
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input" id="All" name="All" type="radio" value="All">
+                            <label class="custom-control-label" for="All">All</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input" id="Compliant" name="All" type="radio"
+                                   value="Compliant">
+                            <label class="custom-control-label" for="Compliant">Compliant</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Ratings</label>
+                    <div class="form-group">
+                      <select class="selectpicker form-control" name="rating" id="rating" multiple data-style="btn-selectpicker" title="">
+                        <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
+                        <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
+                        <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
+                        <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
+                        <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
+                      </select>
+                    </div>
+                </div>
+                <!--          <div class="mb-4">-->
+                <!--            <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>-->
+                <!--          </div>-->
+                <div class="mb-4">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-filter mr-1"></i>Filter</button>
+                    <script>
+              var restaurant_content_list = null;
+            // Submit post on submit
+              $('#search_filter_form').on('submit', function(event){
+                  event.preventDefault();
+                  console.log("form submitted!")  // sanity check
+                  clearRestaurant();
+                  create_post();
+              });
+              function create_post() {
+                  console.log("create post") // sanity check
+                  var form = new FormData(document.getElementById("search_filter_form"));
+                  $.ajax({
+                      url : "search_filter/restaurants_list/1", // the endpoint
+                      type : "POST", // http method
+                      data : form, // data sent with the post request
+                      processData: false,
+                      contentType: false,
+                      // handle a successful response
+                      success : function(json) {
+                          page_global += 1;
+                          console.log(json.restaurant_list)
+                          loadRestaurant(json.restaurant_list, json.restaurant_number)
+                          console.log(json); // log the returned json to the console
+                          console.log("success"); // another sanity check
+                      },
+
+                      // handle a non-successful response
+                      error : function(xhr,errmsg,err) {
+                          //$('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                          //    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                          //console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                        console.log('CNM')
+                      }
+                  });
+              };
+
+                    </script>
+                    <button class="btn btn-secondary" type="reset" onclick="resetForm(event, $(this));"><i
+                            class="fas fa-filter mr-1"></i>Reset
+                    </button>
+                    <script>
+                     function resetForm(e, thisobj) {
+                      thisform = thisobj.closest('form');
+                        selectbox_in_form = thisform.find('select');
+
+                        // completely remove selected when it has been assigned.
+                        selectbox_in_form.find('option:selected').removeAttr('selected');
+                        selectbox_in_form.val('');
+                        selectbox_in_form.change();
+
+                        delete selectbox_in_form;
+                        delete thisform;
+                        var search_filter_form = document.getElementById("search_filter_form");
+                        search_filter_form.reset();
+                        clearRestaurant();
+                        create_post();
+                  }// resetForm
+                    </script>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-9">
+            <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
+                <div class="mr-3">
+                    <p class="mb-3 mb-md-0"><strong id="res_count"></strong> results found</p>
+                </div>
+                <div>
+                    <label class="form-label mr-2" for="form_sort">Sort by</label>
+                    <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
+                        <option value="sortBy_0">Recommended</option>
+                        <option value="sortBy_1">Highest Rated</option>
+                        <option value="sortBy_2">Highest Price</option>
+                        <option value="sortBy_3">Lowest Price</option>
+                        <option value="sortBy_4">Near By</option>
+                    </select>
+                </div>
+            </div>
+            <div id="res_list_group" class="row">
+
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-primary mb-4" onclick="load_more()" id="load_button">Load More</button>
+            </div>
+        </div>
+        <script>
+		var page_global = 1; // Global page number
+        var restaurant_content_list = null;
+
+        function load_more() {
+            console.log("create post") // sanity check
+            var form = new FormData(document.getElementById("search_filter_form"));
+            $.ajax({
+                url : "search_filter/restaurants_list/" + page_global.toString(), // the endpoint
+                type : "POST", // http method
+                data : form, // data sent with the post request
+                processData: false,
+                contentType: false,
+                // handle a successful response
+                success : function(json) {
+                    restaurant_content_list = json
+                    page_global += 1;
+                    console.log(restaurant_content_list.restaurant_list)
+                    loadRestaurant(restaurant_content_list.restaurant_list, json.restaurant_number)
+                    console.log(restaurant_content_list); // log the returned json to the console
+                    console.log("success"); // another sanity check
+
+                },
+
+                // handle a non-successful response
+                error : function(xhr,errmsg,err) {
+                  console.log('Ajax request error')
+                }
+            });
+        };
+
+        </script>
+        <script type="text/javascript">
+          function clearRestaurant() {
+            var res_list_group = document.getElementById("res_list_group");
+            res_list_group.innerHTML = "";
+
+            page_global = 1;
+            document.getElementById('load_button').style.visibility = 'visible';
+
+            var query = window.location.search.substring(1)
+            if(query.length) {
+               if(window.history != undefined && window.history.pushState != undefined) {
+                    window.history.pushState({}, document.title, window.location.pathname);
+               }
+            }
+          }
+          function loadRestaurant(restaurant_list_json, restaurant_number) {
+             var restaurant_list = [];
+             restaurant_list = JSON.parse(restaurant_list_json);
+             document.getElementById("res_count").innerHTML = restaurant_number;
+             for(var i = 0; i < restaurant_list.length; i++)
+             {
+                if(restaurant_list[i].yelp_info == null || restaurant_list[i].yelp_info.error != null) {continue;}
+
+                var res_list_group = document.getElementById("res_list_group");
+
+                var div1 = document.createElement("div");
+                div1.className = "col-sm-6 col-xl-4 mb-5 hover-animate";
+
+                var div2 = document.createElement("div");
+                div2.className = "card h-100 border-0 shadow";
+
+                var a1 = document.createElement("a");
+                a1.className = "title-link";
+                a1.href = "../restaurant/profile/" + restaurant_list[i].id;
+
+                var div3 = document.createElement("div");
+                div3.className = "card-img-top overflow-hidden dark-overlay bg-cover";
+                div3.id = "res_card_img"+ i.toString();
+                div3.style = "background-image:" + "url(" + restaurant_list[i].yelp_info.image_url + "); " + "min-height: 200px";
+
+                var div4 = document.createElement("div");
+                div4.className = "card-img-overlay-bottom z-index-20";
+
+                var h4 = document.createElement("h4");
+                h4.className ="text-white text-shadow";
+                h4.innerHTML = restaurant_list[i].yelp_info.name;
+
+                var p = document.createElement("p");
+                p.id = "res_rating";
+                p.className = "mb-2 text-xs";
+
+                var rate = restaurant_list[i].yelp_info.rating;
+                   for (var j = 0; j < Math.ceil(rate); j++) {
+                         var icon = document.createElement("i");
+                         icon.className = "fa fa-star text-warning";
+                         p.appendChild(icon);
+                   }
+                   for (var j = 0; j < 5 - Math.ceil(rate); j++) {
+                         var icon2 = document.createElement("i");
+                         icon2.className = "fa fa-star text-gray-300";
+                         p.appendChild(icon2);
+                   }
+
+                div4.appendChild(h4);
+                div4.appendChild(p);
+
+
+                div3.appendChild(div4);
+                a1.appendChild(div3);
+                var div5 = document.createElement("div");
+                div5.className = "card-body";
+
+                var p_1 = document.createElement("p");
+                p_1.className = "text-sm text-muted text-uppercase mb-1";
+
+                var a2 = document.createElement("a");
+                a2.className = "text-dark";
+                a2.href = "../restaurant/inspection_records/" + restaurant_list[i].id ;
+                a2.innerHTML = restaurant_list[i].latest_record.is_roadway_compliant;
+
+                p_1.appendChild(a2);
+
+                var p_2 = document.createElement("p");
+                p_2.id = "res_category";
+                p_2.className = "text-sm mb-0";
+
+                var a3 = document.createElement("a");
+                a3.className = "mr-1 disabled";
+                var str = "";
+                if (restaurant_list[i].yelp_info.categories != null) {
+                  for (var p = 0; p < restaurant_list[i].yelp_info.categories.length; p++) {
+                     str += restaurant_list[i].yelp_info.categories[p].title + ", ";
+                  }
+                  str = str.slice(0, -2);
+                  a3.innerHTML = str;
+                }
+
+
+                p_2.appendChild(a3);
+
+                div5.appendChild(p_1);
+                div5.appendChild(p_2);
+
+                div2.appendChild(a1);
+                div2.appendChild(div5);
+
+                div1.appendChild(div2);
+
+                res_list_group.appendChild(div1);
+          }
+          if(restaurant_list.length < 6) {
+            document.getElementById('load_button').style.visibility = 'hidden';
+          }
+         }
+
+        </script>
+        <script>
+<!--         var snapSlider = document.getElementById('slider-snap');-->
+
+<!--          noUiSlider.create(snapSlider, {-->
+<!--              start: [ 1, 5 ],-->
+<!--              snap: false,-->
+<!--              connect: true,-->
+<!--              step: 1,-->
+<!--              range: {-->
+<!--                  'min': 1,-->
+<!--                  'max': 5-->
+<!--              }-->
+<!--          });-->
+<!--          var snapValues = [-->
+<!--              document.getElementById('slider-snap-value-from'),-->
+<!--              document.getElementById('slider-snap-value-to')-->
+<!--          ];-->
+<!--          var inputValues = [-->
+<!--              document.getElementById('slider-snap-input-from'),-->
+<!--              document.getElementById('slider-snap-input-to')-->
+<!--          ];-->
+<!--          snapSlider.noUiSlider.on('update', function( values, handle ) {-->
+<!--              snapValues[handle].innerHTML = values[handle];-->
+<!--              inputValues[handle].value = values[handle];-->
+<!--          })-->
+
+        </script>
+    </div>
+    <script>
+        window.onload = function () {
+          var loaded = 0;
+            if (loaded == 0) {
+              load_filter();
+              create_post();
+              loaded = 1;
+            }
+          };
+        function load_filter(){
+           const queryString = window.location.search;
+           if(queryString.length) {
+               const urlParams = new URLSearchParams(queryString);
+               const keyword = urlParams.get('search')
+               document.getElementById('keyword').value = keyword;
+               console.log(document.getElementById('keyword').value);
+           }
+
+        };
+    </script>
+</div>
+
+{% endblock %}
