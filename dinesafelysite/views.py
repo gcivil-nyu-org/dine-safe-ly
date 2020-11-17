@@ -3,7 +3,6 @@ from restaurant.utils import (
     get_restaurant_list,
 )
 
-
 import logging
 
 logger = logging.getLogger(__name__)
