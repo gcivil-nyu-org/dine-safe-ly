@@ -3,7 +3,6 @@
 <div class="container-fluid py-5 px-lg-5">
     <div class="row border-bottom mb-4">
         <div class="col-12">
-            <h1 class="display-4 font-weight-bold text-serif mb-4">Dine Safe.ly</h1>
             <p class="lead text-muted">Browse local NYC restaurants based on COVID-19 seating
                 compliance</p></div>
     </div>
@@ -164,13 +163,13 @@
                 <div class="mb-4">
                     <label class="form-label">Ratings</label>
                     <div class="form-group">
-                      <select class="selectpicker form-control" name="rating" id="rating" multiple data-style="btn-selectpicker" title="">
-                        <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
-                        <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
-                        <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
-                        <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
-                        <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
-                      </select>
+                        <select class="selectpicker form-control" name="rating" id="rating" multiple data-style="btn-selectpicker" title="">
+                            <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
+                            <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
+                            <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
+                            <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
+                            <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
+                        </select>
                     </div>
                 </div>
                 <!--          <div class="mb-4">-->
@@ -260,7 +259,7 @@
 
             </div>
             <div class="text-center">
-                <button type="button" class="btn btn-outline-primary mb-4" onclick="load_more()" id="load_button">Load More</button>
+                <button type="button" class="btn btn-light mb-2" onclick="load_more()" id="load_button">Load More</button>
             </div>
         </div>
         <script>
@@ -310,12 +309,14 @@
                }
             }
           }
+
           function loadRestaurant(restaurant_list_json, restaurant_number) {
              var restaurant_list = [];
              restaurant_list = JSON.parse(restaurant_list_json);
              document.getElementById("res_count").innerHTML = restaurant_number;
              for(var i = 0; i < restaurant_list.length; i++)
              {
+
                 if(restaurant_list[i].yelp_info == null || restaurant_list[i].yelp_info.error != null) {continue;}
 
                 var res_list_group = document.getElementById("res_list_group");
@@ -361,8 +362,54 @@
                 div4.appendChild(h4);
                 div4.appendChild(p);
 
+                var div_svg = document.createElement("div");
+                div_svg.className = "card-img-overlay-top d-flex justify-content-between align-items-center";
+
+                var div_hidden = document.createElement("div");
+                div_hidden.className = "badge badge-transparent badge-pill px-3 py-2 invisible";
+
+                var form_save_fav = document.createElement("form");
+                form_save_fav.className = "save_fav_res";
+                form_save_fav.setAttribute("method", "post");
+
+                var res_id = document.createElement("input");
+                res_id.setAttribute("type", "hidden");
+                res_id.setAttribute("value", restaurant_list[i].id);
+
+                var csrf_token_input = document.createElement("input");
+                csrf_token_input.setAttribute("type", "hidden");
+                csrf_token_input.setAttribute("name", "csrfmiddlewaretoken")
+                csrf_token_input.setAttribute("value", getCookie('csrftoken'));
+
+                var save_btn = document.createElement("button");
+                save_btn.setAttribute("type", "submit");
+                save_btn.className = "btn btn-link mb-2";
+
+                var a_svg = document.createElement("a");
+                a_svg.className = "card-fav-icon position-relative z-index-40";
+
+                var fav_icon = document.createElement("i");
+                fav_icon.className = "fa fa-heart";
+                //fav_icon.style.color = 'red'
+                console.log(restaurant_list[i]);
+
+                console.log(restaurant_list[i].saved_by_user);
+                if(restaurant_list[i].saved_by_user != null && restaurant_list[i].saved_by_user) {
+                    fav_icon.style.color = 'red'
+                }
+
+                a_svg.appendChild(fav_icon);
+                save_btn.appendChild(a_svg);
+
+                form_save_fav.appendChild(res_id);
+                form_save_fav.appendChild(csrf_token_input);
+                form_save_fav.appendChild(save_btn);
+
+                div_svg.appendChild(div_hidden);
+                div_svg.appendChild(form_save_fav);
 
                 div3.appendChild(div4);
+                div3.appendChild(div_svg);
                 a1.appendChild(div3);
                 var div5 = document.createElement("div");
                 div5.className = "card-body";
@@ -404,11 +451,30 @@
                 div1.appendChild(div2);
 
                 res_list_group.appendChild(div1);
+
+
+
           }
           if(restaurant_list.length < 6) {
             document.getElementById('load_button').style.visibility = 'hidden';
           }
          }
+
+         function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
         </script>
         <script>
