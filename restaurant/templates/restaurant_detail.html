@@ -192,6 +192,11 @@
           <div class="map-wrapper-300 mb-3">
             <div class="h-100" id="detailMap"></div>
           </div>
+          <!-- Listing Location-->
+          <h3 class="mb-4">Heat Map</h3>
+          <div class="map-wrapper-300 mb-3">
+            <div class="h-100" id="detailMap2"></div>
+          </div>
         </div>
         <div class="text-block">
           <!-- Gallery-->
@@ -514,7 +519,19 @@ for (i = 0; i < yelp_reviews.reviews.length; i++) {
 }
 
 
+var data = {{ data | safe }};
 
+var addMarkerToMap = function (map, latData, lngData) {
+    var marker = new google.maps.Marker({
+        position: {
+            lat: lat,
+            lng: long,
+        },
+        map: map,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    });
+    marker.setAnimation(google.maps.Animation.DROP);
+}
 
 console.log(inspection_data);
 function initMap() {
@@ -528,11 +545,93 @@ function initMap() {
     map,
     title: yelp_info.name,
   });
+
+
+
+    var map2 = new google.maps.Map(document.getElementById('detailMap2'), {
+    zoom: 13,
+    center: { lat: lat, lng: long },
+     mapId: '53f009f8d1f2f7a9'
+  });
+
+
+  map2.data.loadGeoJson('https://dine-safely.s3.amazonaws.com/MODZCTA_2010_WGS1984.geo.json');
+  map2.data.setStyle({
+        fillColor: 'gray',
+        strokeWeight: 1,
+        strokeColor: 'white',
+    });
+
+  addMarkerToMap(map2, parseFloat(lat), parseFloat(long));
+
+  var infowindow = new google.maps.InfoWindow({maxWidth: 320});
+
+  map2.data.setStyle((feature) => {
+    let color = "#91E012";
+
+    record = data[feature.getProperty("MODZCTA").toString()]
+
+    if (record) {
+        if (parseFloat(record[1]) > 0 && parseFloat(record[1]) < 1.0) {
+          color = "#D7E012";
+        }
+        if (parseFloat(record[1]) >= 1 && parseFloat(record[1]) < 2) {
+          color = "#E0A312";
+        }
+        if (parseFloat(record[1]) >= 2 && parseFloat(record[1]) < 3) {
+          color = "#E05C12";
+        }
+        if (parseFloat(record[1]) >= 3) {
+          color = "#E01412";
+        }
+    }
+    return {
+      fillColor: color,
+      strokeColor: color,
+      strokeWeight: 0.1,
+      fillOpacity: 0.8
+    };
+  });
+
+  map2.data.addListener("click", (event) => {
+  });
+
+  map2.data.addListener("mouseover", (event) => {
+    map2.data.revertStyle();
+    map2.data.overrideStyle(event.feature, { strokeWeight: 2 });
+    record = data[event.feature.getProperty("MODZCTA").toString()]
+  if (record != null) {
+      infowindow.setContent("<div style='width:240px;'>"+"Details:<br>" + "Area: " + record[0] + "<br>percent positivity 7day: " + record[1] + "%" + "<br>People tested: " + record[2] + "<br>People positive " + record[3] +"</div>");
+      infowindow.setPosition(event.feature.getProperty("bounds").getCenter());
+      infowindow.setOptions({pixelOffset: new google.maps.Size(10,-50)});
+      infowindow.open(map2);
+    }
+  });
+  map2.data.addListener("mouseout", (event) => {
+    map2.data.revertStyle();
+    infowindow.close()
+  });
+
+  google.maps.event.addListener(map2.data,'addfeature',function(e){
+      //check for a polygon
+      if(e.feature.getGeometry().getType()==='Polygon'){
+          var bounds=new google.maps.LatLngBounds();
+          e.feature.getGeometry().getArray().forEach(function(path){
+             path.getArray().forEach(function(latLng){
+               bounds.extend(latLng);
+             });
+          });
+          e.feature.setProperty('bounds',bounds);
+        }
+      });
 }
 
+
+
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Jwc67bu6z0yLnOeYBUo1ujOq4XvLSFw&callback=initMap"
-        type="text/javascript"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{google_key}}&map_ids={{google_map_id}}&callback=initMap"
+    type="text/javascript">
+</script>
 <script>
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
