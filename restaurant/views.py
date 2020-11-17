@@ -18,6 +18,7 @@ from django.http import HttpResponseNotFound
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 import logging
+import csv
 
 logger = logging.getLogger(__name__)
 
@@ -139,3 +140,17 @@ def get_landing_page(request, page=1):
         "keyword": json.dumps({"keyword": keyword}),
     }
     return render(request, "browse.html", parameter_dict)
+
+
+def test_nyc(request):
+    csvFile = open("last7days-by-modzcta.csv", "r")
+    reader = csv.reader(csvFile)
+    result = {}
+    for item in reader:
+        result[item[0]] = [item[1], item[2], item[3], item[4], item[5]]
+    parameter_dict = {
+        "lat": 40.732268,
+        "long": -73.956510,
+        "data": json.dumps(result, cls=DjangoJSONEncoder),
+    }
+    return render(request, "nyc_heat_map.html", parameter_dict)
