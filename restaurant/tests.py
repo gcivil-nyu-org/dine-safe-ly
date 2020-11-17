@@ -27,6 +27,7 @@ from .utils import (
 
 import json
 
+
 def create_restaurant(restaurant_name, business_address, postcode, business_id):
     return Restaurant.objects.create(
         restaurant_name=restaurant_name,
