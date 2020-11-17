@@ -9,6 +9,8 @@ from .models import (
 import requests
 import json
 import logging
+import pandas as pd
+import boto3
 
 logger = logging.getLogger(__name__)
 
@@ -260,3 +262,11 @@ def get_average_safety_rating(business_id):
         average_safety_rating = str(round(total / len(all_feedback_list), 2))
         return average_safety_rating
     return None
+
+
+def get_csv_from_s3():
+    bucket = "dine-safely"
+    file_name = "last7days-by-modzcta.csv"
+    s3 = boto3.client("s3")
+    obj = s3.get_object(Bucket=bucket, Key=file_name)
+    return pd.read_csv(obj["Body"])
