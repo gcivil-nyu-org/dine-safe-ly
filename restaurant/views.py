@@ -17,6 +17,7 @@ from .utils import (
     get_average_safety_rating,
     get_total_restaurant_number,
     get_csv_from_s3,
+    check_restaurant_saved
 )
 
 # from django.http import HttpRequest
@@ -97,7 +98,7 @@ def get_restaurant_profile(request, restaurant_id):
             "restaurant_id": restaurant_id,
             "latest_feedback": feedback,
             "average_safety_rating": average_safety_rating,
-            "saved_restaurants": True if len(user.favorite_restaurants.all().filter(id=restaurant_id))>0 else False,
+            "saved_restaurants": len(user.favorite_restaurants.all().filter(id=restaurant_id)) > 0,
         }
 
         return render(request, "restaurant_detail.html", parameter_dict)
@@ -144,6 +145,11 @@ def get_restaurants_list(request, page):
                 form.get_rating_filter(),
                 form.get_compliant_filter(),
             )
+
+            if request.user:
+                for restaurant in restaurant_list:
+                    restaurant['saved_by_user'] = check_restaurant_saved(request.user, restaurant['id'])
+
             restaurant_number = get_total_restaurant_number(
                 form.cleaned_data.get("keyword"),
                 form.cleaned_data.get("neighbourhood"),
