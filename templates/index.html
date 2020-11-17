@@ -91,7 +91,13 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <p class="text-sm text-muted text-uppercase mb-1"><a href="../restaurant/inspection_records/{{restaurant.id}}" class="text-dark">{{ restaurant.latest_record.is_roadway_compliant }}</a></p>
+                                <p class="text-sm text-muted text-uppercase mb-1"><a
+                                        href=".
+                                        ./restaurant/inspection_records/{{restaurant.id}}" class="text-dark">{{ restaurant.latest_record.is_roadway_compliant }}</a>
+                                    {% if restaurant.latest_record.is_roadway_compliant == "Compliant" %}
+                                        <i class="fas fa-check-circle" style="color:#596ff8"></i>
+                                    {% endif %}
+                                </p>
                                 <p class="text-sm mb-0">
                                     {% for cat in restaurant.yelp_info.categories %}
                                     <a class="mr-1 disabled" href="">{{ cat.title}}</a>
