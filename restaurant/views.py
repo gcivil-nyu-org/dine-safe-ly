@@ -35,7 +35,6 @@ logger = logging.getLogger(__name__)
 def index(request):
     return HttpResponse("Hello, this is restaurant.")
 
-
 def get_restaurant_profile(request, restaurant_id):
     if request.method == "POST" and "save_favorite_form" in request.POST:
         form = SaveFavoriteForm(request.POST)
@@ -88,18 +87,30 @@ def get_restaurant_profile(request, restaurant_id):
         )
         feedback = get_latest_feedback(restaurant.business_id)
         average_safety_rating = get_average_safety_rating(restaurant.business_id)
-        user = request.user
-        parameter_dict = {
-            "google_key": settings.GOOGLE_MAP_KEY,
-            "google_map_id": settings.GOOGLE_MAP_ID,
-            "data": json.dumps(result, cls=DjangoJSONEncoder),
-            "yelp_info": response_yelp,
-            "lasted_inspection": latest_inspection,
-            "restaurant_id": restaurant_id,
-            "latest_feedback": feedback,
-            "average_safety_rating": average_safety_rating,
-            "saved_restaurants": len(user.favorite_restaurants.all().filter(id=restaurant_id)) > 0,
-        }
+        if request.user.is_authenticated:
+            user = request.user
+            parameter_dict = {
+                "google_key": settings.GOOGLE_MAP_KEY,
+                "google_map_id": settings.GOOGLE_MAP_ID,
+                "data": json.dumps(result, cls=DjangoJSONEncoder),
+                "yelp_info": response_yelp,
+                "lasted_inspection": latest_inspection,
+                "restaurant_id": restaurant_id,
+                "latest_feedback": feedback,
+                "average_safety_rating": average_safety_rating,
+                "saved_restaurants": len(user.favorite_restaurants.all().filter(id=restaurant_id)) > 0,
+            }
+        else:
+            parameter_dict = {
+                "google_key": settings.GOOGLE_MAP_KEY,
+                "google_map_id": settings.GOOGLE_MAP_ID,
+                "data": json.dumps(result, cls=DjangoJSONEncoder),
+                "yelp_info": response_yelp,
+                "lasted_inspection": latest_inspection,
+                "restaurant_id": restaurant_id,
+                "latest_feedback": feedback,
+                "average_safety_rating": average_safety_rating,
+            }
 
         return render(request, "restaurant_detail.html", parameter_dict)
     except Restaurant.DoesNotExist:
