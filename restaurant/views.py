@@ -28,12 +28,12 @@ from django.conf import settings
 import json
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 
 def index(request):
     return HttpResponse("Hello, this is restaurant.")
+
 
 def get_restaurant_profile(request, restaurant_id):
     if request.method == "POST" and "save_favorite_form" in request.POST:
@@ -218,4 +218,16 @@ def save_favorite_restaurant(request, business_id):
             )
         )
         logger.info(business_id)
-    return HttpResponse("success")
+    return HttpResponse("Saved")
+
+
+def delete_favorite_restaurant(request, business_id):
+    if request.method == "POST":
+        user = request.user
+        user.favorite_restaurants.remove(
+            Restaurant.objects.get(
+                business_id=business_id
+            )
+        )
+        logger.info(business_id)
+        return HttpResponse("Deleted")

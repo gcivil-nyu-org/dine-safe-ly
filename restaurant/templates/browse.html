@@ -510,16 +510,26 @@
                      }
                 });
 
+                var url = "";
+                if (document.getElementById(currentForm.attr("restaurant_business_id")).style.color == "red") {
+                    url = "delete/favorite/restaurant/" + currentForm.attr("restaurant_business_id");
+                } else {
+                    url = "save/favorite/restaurant/" + currentForm.attr("restaurant_business_id");
+                }
+
                 $.ajax({
                   type: 'POST',
-                  url: "save/favorite/restaurant/" + currentForm.attr("restaurant_business_id"),
+                  url: url,
                   data: formData,
                   processData: false,
                   contentType: false,
                   // handle a successful response
-                  success : function(json) {
-                      $('#'+currentForm.attr("restaurant_business_id")).css("color", "red");
-                      console.log("success"); // another sanity check
+                  success : function(response) {
+                      if (response == "Saved") {
+                        $('#'+currentForm.attr("restaurant_business_id")).css("color", "red");
+                      } else {
+                        $('#'+currentForm.attr("restaurant_business_id")).css("color", "");
+                      }
                   },
                   error : function(xhr,errmsg,err) {
                     console.log('Error')
