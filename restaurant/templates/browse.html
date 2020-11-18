@@ -406,12 +406,11 @@
                 var a_svg = document.createElement("a");
                 a_svg.className = "card-fav-icon position-relative z-index-40";
                 a_svg.style = "opacity: 0.8";
-
-                $(".card-fav-icon").hover(function(){
-                  $(this).css("color", "red");
-                  }, function(){
-                  $(this).css("color", "");
-                });
+                var a = "{{request.user.is_authenticated}}";
+                if(!a)
+                {
+                    a_svg.href = "/login";
+                }
 
                 var fav_icon = document.createElement("i");
                 fav_icon.id = restaurant_list[i].business_id;
@@ -493,9 +492,15 @@
 
                 res_list_group.appendChild(div1);
 
-
-
           }
+
+          $(".card-fav-icon").hover(function(){
+                  $(this).css("color", "red");
+                  }, function(){
+                  $(this).css("color", "");
+                });
+
+
           if(restaurant_list.length < 6) {
             document.getElementById('load_button').style.visibility = 'hidden';
           }
