@@ -153,7 +153,7 @@ def get_restaurants_list(request, page):
                 form.get_compliant_filter(),
             )
 
-            if request.user:
+            if request.user.is_authenticated:
                 for restaurant in restaurant_list:
                     restaurant["saved_by_user"] = check_restaurant_saved(
                         request.user, restaurant["id"]
