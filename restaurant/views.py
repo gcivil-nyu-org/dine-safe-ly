@@ -155,7 +155,6 @@ def get_restaurants_list(request, page):
                 form.cleaned_data.get("fav"),
                 request.user,
             )
-            logger.info("IN Views")
 
             if request.user.is_authenticated:
                 for restaurant in restaurant_list:

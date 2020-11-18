@@ -260,7 +260,6 @@ def get_filtered_restaurants(
             value = "price"
         elif sort_option == "pricelow":
             value = "-price"
-    logger.info("Sort_option is {}".format(value))
     if favorite_filter:
         if user.is_authenticated:
             if value:
@@ -295,7 +294,6 @@ def get_filtered_restaurants(
             .distinct()
             .filter(**keyword_filter)[offset : offset + int(limit)]
         )
-        # print(filtered_restaurants)
     else:
         filtered_restaurants = (
             Restaurant.objects.filter(
