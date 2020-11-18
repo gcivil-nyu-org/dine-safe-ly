@@ -181,9 +181,6 @@
                         </select>
                     </div>
                 </div>
-                <!--          <div class="mb-4">-->
-                <!--            <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>-->
-                <!--          </div>-->
                 <div class="mb-4">
                     <button class="btn btn-primary" id="filterbtn" type="submit"><i class="fas fa-filter mr-1"></i>Filter</button>
                     <script>
@@ -191,34 +188,23 @@
             // Submit post on submit
               $('#search_filter_form').on('submit', function(event){
                   event.preventDefault();
-                  console.log("form submitted!")  // sanity check
                   clearRestaurant();
                   create_post();
               });
               function create_post() {
-                  console.log("create post") // sanity check
                   var form = new FormData(document.getElementById("search_filter_form"));
                   $.ajax({
-                      url : "search_filter/restaurants_list/1", // the endpoint
-                      type : "POST", // http method
-                      data : form, // data sent with the post request
+                      url : "search_filter/restaurants_list/1",
+                      type : "POST",
+                      data : form,
                       processData: false,
                       contentType: false,
-                      // handle a successful response
                       success : function(json) {
                           page_global += 1;
-                          console.log(json.restaurant_list)
                           loadRestaurant(json.restaurant_list, json.restaurant_number)
-                          console.log(json); // log the returned json to the console
-                          console.log("success"); // another sanity check
                       },
-
-                      // handle a non-successful response
                       error : function(xhr,errmsg,err) {
-                          //$('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                          //    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                          //console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                        console.log('CNM')
+                        console.log('Error')
                       }
                   });
               };
@@ -279,26 +265,18 @@
         var restaurant_content_list = null;
 
         function load_more() {
-            console.log("create post") // sanity check
             var form = new FormData(document.getElementById("search_filter_form"));
             $.ajax({
-                url : "search_filter/restaurants_list/" + page_global.toString(), // the endpoint
-                type : "POST", // http method
-                data : form, // data sent with the post request
+                url : "search_filter/restaurants_list/" + page_global.toString(),
+                type : "POST",
+                data : form,
                 processData: false,
                 contentType: false,
-                // handle a successful response
                 success : function(json) {
                     restaurant_content_list = json
                     page_global += 1;
-                    console.log(restaurant_content_list.restaurant_list)
                     loadRestaurant(restaurant_content_list.restaurant_list, json.restaurant_number)
-                    console.log(restaurant_content_list); // log the returned json to the console
-                    console.log("success"); // another sanity check
-
                 },
-
-                // handle a non-successful response
                 error : function(xhr,errmsg,err) {
                   console.log('Ajax request error')
                 }
@@ -409,9 +387,7 @@
                 fav_icon.id = restaurant_list[i].business_id;
                 fav_icon.className = "fa fa-heart fa-2x";
                 fav_icon.style = "padding-top: 10px; padding-left: 2px;";
-                console.log(restaurant_list[i]);
 
-                console.log(restaurant_list[i].saved_by_user);
                 if(restaurant_list[i].saved_by_user != null && restaurant_list[i].saved_by_user) {
                     fav_icon.style.color = 'red'
                 }
@@ -453,9 +429,6 @@
                 {
                     p_1.appendChild(a2);
                 }
-
-
-
 
                 var p_2 = document.createElement("p");
                 p_2.id = "res_category";
@@ -502,7 +475,6 @@
       </script>
         <script>
             $('body').on('submit', "form[name='save_form']", function(event) {
-                console.log("AJAX");
                 var currentForm = $(this);
                 event.preventDefault();
                 var formData = currentForm.serialize();
@@ -554,37 +526,6 @@
                   }
                 });
             });
-
-
-
-
-        </script>
-        <script>
-<!--         var snapSlider = document.getElementById('slider-snap');-->
-
-<!--          noUiSlider.create(snapSlider, {-->
-<!--              start: [ 1, 5 ],-->
-<!--              snap: false,-->
-<!--              connect: true,-->
-<!--              step: 1,-->
-<!--              range: {-->
-<!--                  'min': 1,-->
-<!--                  'max': 5-->
-<!--              }-->
-<!--          });-->
-<!--          var snapValues = [-->
-<!--              document.getElementById('slider-snap-value-from'),-->
-<!--              document.getElementById('slider-snap-value-to')-->
-<!--          ];-->
-<!--          var inputValues = [-->
-<!--              document.getElementById('slider-snap-input-from'),-->
-<!--              document.getElementById('slider-snap-input-to')-->
-<!--          ];-->
-<!--          snapSlider.noUiSlider.on('update', function( values, handle ) {-->
-<!--              snapValues[handle].innerHTML = values[handle];-->
-<!--              inputValues[handle].value = values[handle];-->
-<!--          })-->
-
         </script>
     </div>
     <script>
@@ -602,7 +543,6 @@
                const urlParams = new URLSearchParams(queryString);
                const keyword = urlParams.get('search')
                document.getElementById('keyword').value = keyword;
-               console.log(document.getElementById('keyword').value);
            }
 
         };
