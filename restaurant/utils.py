@@ -301,3 +301,7 @@ def get_csv_from_s3():
     s3 = boto3.client("s3")
     obj = s3.get_object(Bucket=bucket, Key=file_name)
     return pd.read_csv(obj["Body"])
+
+
+def check_restaurant_saved(user, restaurant_id):
+    return len(user.favorite_restaurants.all().filter(id=restaurant_id)) > 0
