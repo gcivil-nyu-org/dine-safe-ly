@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3 pt-3">
-            <form class="pr-xl-3" action="" method="POST" id="search_filter_form">
+            <form class="pr-xl-3" action="" method="POST" id="search_filter_form" name="search_filter_form">
                 {% csrf_token %}
                 <div class="mb-4">
                     <label class="form-label" for="keyword">Search by restaurant name</label>
@@ -185,7 +185,7 @@
                 <!--            <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>-->
                 <!--          </div>-->
                 <div class="mb-4">
-                    <button class="btn btn-primary" type="submit"><i class="fas fa-filter mr-1"></i>Filter</button>
+                    <button class="btn btn-primary" id="filterbtn" type="submit"><i class="fas fa-filter mr-1"></i>Filter</button>
                     <script>
               var restaurant_content_list = null;
             // Submit post on submit
@@ -255,7 +255,7 @@
                 </div>
                 <div>
                     <label class="form-label mr-2" for="form_sort">Sort by</label>
-                    <select form="search_filter_form" class="selectpicker" name="form_sort" id="form_sort" data-style="btn-selectpicker" title="choose">
+                    <select form="search_filter_form" class="selectpicker" name="form_sort" id="form_sort" data-style="btn-selectpicker" title="Select" onchange="document.getElementById('filterbtn').click();">
                         <option value="none">None</option>
                         <option value="ratedhigh">Highest Rated</option>
                         <option value="ratedlow">Lowest Rated</option>
@@ -271,6 +271,9 @@
                 <button type="button" class="btn btn-dark mb-2" onclick="load_more()" id="load_button">Load More</button>
             </div>
         </div>
+        <script>
+
+        </script>
         <script>
 		var page_global = 1; // Global page number
         var restaurant_content_list = null;
