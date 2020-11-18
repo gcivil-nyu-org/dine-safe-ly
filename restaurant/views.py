@@ -151,7 +151,12 @@ def get_restaurants_list(request, page):
                 form.get_price_filter(),
                 form.get_rating_filter(),
                 form.get_compliant_filter(),
+                form.cleaned_data.get("form_sort"),
+                form.cleaned_data.get("fav"),
+                request.user
+                
             )
+            logger.info("IN Views")
 
             if request.user.is_authenticated:
                 for restaurant in restaurant_list:
@@ -166,6 +171,9 @@ def get_restaurants_list(request, page):
                 form.get_price_filter(),
                 form.get_rating_filter(),
                 form.get_compliant_filter(),
+                form.cleaned_data.get("form_sort"),
+                form.cleaned_data.get("fav"),
+                request.user
             )
             parameter_dict = {
                 "restaurant_number": restaurant_number,
@@ -186,6 +194,9 @@ def get_landing_page(request, page=1):
     compliant_filter = None
     sort_option = None
     favorite_filter = None
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
     if request.GET.getlist("ratingfrom"):
         rating_filter = float(request.GET.getlist("ratingfrom")[0])
     keyword = request.GET.get("search")
@@ -200,7 +211,8 @@ def get_landing_page(request, page=1):
         rating_filter,
         compliant_filter,
         sort_option,
-        favorite_filter = None
+        favorite_filter,
+        user
     )
 
     parameter_dict = {
