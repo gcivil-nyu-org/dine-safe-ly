@@ -578,6 +578,10 @@ class RestaurantViewTests(TestCase):
 
     def test_valid_get_landing_page(self):
         request = self.factory.get("restaurant:browse")
+        request.user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
         response = get_landing_page(request, 6)
         self.assertEqual(response.status_code, 200)
 
