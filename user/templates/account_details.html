@@ -187,12 +187,21 @@
                             <h3>Favorite Restaurants</h3>
                             <div class="row pt-4">
                                 {% for restaurant in favorite_restaurant_list %}
-                                {{ restaurant.restaurant_name }}<br>
+                                {% csrf_token %}
+                                <ul class="list-group">
+                                    <li id="{{ restaurant.business_id }}" class="list-group-item">{{ restaurant.restaurant_name }}&nbsp&nbsp
+                                        <form name="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="{{ restaurant.business_id }}" method="POST">
+                                            <button type="submit" class="btn btn-link">
+                                                Remove
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
                                 {% endfor %}
                             </div>
                         </div>
                         <div class="col-sm-3 text-right">
-                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#restaurant_list" aria-expanded="false" aria-controls="restaurant">edit</button>
+<!--                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#restaurant_list" aria-expanded="false" aria-controls="restaurant">edit</button>-->
                         </div>
                     </div>
                     <div class="collapse" id="restaurant_list">
@@ -244,4 +253,48 @@
         </div>
     </div>
 </section>
+<script>
+            $('body').on('submit', "form[name='saved_res_remove']", function(event) {
+                var currentForm = $(this);
+                event.preventDefault();
+                var formData = currentForm.serialize();
+
+                $.ajaxSetup({
+                     beforeSend: function(xhr, settings) {
+                         function getCookie(name) {
+                             var cookieValue = null;
+                             if (document.cookie && document.cookie != '') {
+                                 var cookies = document.cookie.split(';');
+                                 for (var i = 0; i < cookies.length; i++) {
+                                     var cookie = jQuery.trim(cookies[i]);
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                         break;
+                                     }
+                                 }
+                             }
+                             return cookieValue;
+                         }
+                         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                         }
+                     }
+                });
+
+                $.ajax({
+                  type: 'POST',
+                  url: "../restaurant/delete/favorite/restaurant/" + currentForm.attr("res_business_id"),
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  // handle a successful response
+                  success : function(response) {
+                       $('#'+currentForm.attr('res_business_id')).hide();
+                  },
+                  error : function(xhr,errmsg,err) {
+                    console.log('Error')
+                  }
+                });
+            });
+        </script>
 {% endblock %}
