@@ -158,10 +158,14 @@
                                    value="Compliant">
                             <label class="custom-control-label" for="Compliant">Compliant</label>
                         </div>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="fav" name="All" type="radio"
-                                   value="fav">
-                            <label class="custom-control-label" for="fav">Saved Restaurants</label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Saved Restaurants</label>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="fav" name="fav" value="fav">
+                            <label class="custom-control-label" for="fav" >Saved</label>
                         </div>
                     </div>
                 </div>
@@ -251,19 +255,13 @@
                 </div>
                 <div>
                     <label class="form-label mr-2" for="form_sort">Sort by</label>
-                    <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" onchange="changeFunc();">
+                    <select form="search_filter_form" class="selectpicker" name="form_sort" id="form_sort" data-style="btn-selectpicker" title="choose">
+                        <option value="none">None</option>
                         <option value="ratedhigh">Highest Rated</option>
                         <option value="ratedlow">Lowest Rated</option>
                         <option value="pricehigh">Highest Price</option>
                         <option value="pricelow">Lowest Price</option>
                     </select>
-                    <script>
-                        function changeFunc() {
-                        var selectBox = document.getElementById("form_sort");
-                        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-                        console.log(selectedValue);
-                       }
-                    </script>
                 </div>
             </div>
             <div id="res_list_group" class="row">
