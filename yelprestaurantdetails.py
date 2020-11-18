@@ -8,7 +8,13 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dinesafelysite.settings")
 django.setup()
 
 from django.conf import settings
-from restaurant.models import Zipcodes, YelpRestaurantDetails, Categories, Restaurant, InspectionRecords
+from restaurant.models import (
+    Zipcodes,
+    YelpRestaurantDetails,
+    Categories,
+    Restaurant,
+    InspectionRecords,
+)
 from restaurant.utils import query_yelp
 
 logger = logging.getLogger(__name__)
@@ -174,31 +180,42 @@ def save_yelp_restaurant_details(business_id):
             )
         )
 
+
 def update_restuarant_inspection(restaurant):
     if restaurant.business_id:
-        record = InspectionRecords.objects.filter(business_id=restaurant.business_id).order_by("-inspected_on")[0:1]
+        record = InspectionRecords.objects.filter(
+            business_id=restaurant.business_id
+        ).order_by("-inspected_on")[0:1]
         if record:
-            Restaurant.objects.filter(
-                business_id=restaurant.business_id
-            ).update(compliant_status=record[0].is_roadway_compliant)
+            Restaurant.objects.filter(business_id=restaurant.business_id).update(
+                compliant_status=record[0].is_roadway_compliant
+            )
 
-            logger.info("Compliance updated: {}  {}".format(restaurant.business_id, record[0].is_roadway_compliant))
-            
+            logger.info(
+                "Compliance updated: {}  {}".format(
+                    restaurant.business_id, record[0].is_roadway_compliant
+                )
+            )
+
     else:
         record = InspectionRecords.objects.filter(
-        restaurant_name=restaurant.restaurant_name,
-        business_address=restaurant.business_address,
-        postcode=restaurant.postcode,
+            restaurant_name=restaurant.restaurant_name,
+            business_address=restaurant.business_address,
+            postcode=restaurant.postcode,
         ).order_by("-inspected_on")[0:1]
 
         if record:
             Restaurant.objects.filter(
-                    restaurant_name=restaurant.restaurant_name,
-                    business_address=restaurant.business_address,
-                    postcode=restaurant.postcode,
-                    ).update(compliant_status=record[0].is_roadway_compliant)
-        
-            logger.info("Compliance updated: {}  {}".format(restaurant.restaurant_name, record[0].is_roadway_compliant))
+                restaurant_name=restaurant.restaurant_name,
+                business_address=restaurant.business_address,
+                postcode=restaurant.postcode,
+            ).update(compliant_status=record[0].is_roadway_compliant)
+
+            logger.info(
+                "Compliance updated: {}  {}".format(
+                    restaurant.restaurant_name, record[0].is_roadway_compliant
+                )
+            )
 
 
 if __name__ == "__main__":

@@ -153,8 +153,7 @@ def get_restaurants_list(request, page):
                 form.get_compliant_filter(),
                 form.cleaned_data.get("form_sort"),
                 form.cleaned_data.get("fav"),
-                request.user
-                
+                request.user,
             )
             logger.info("IN Views")
 
@@ -173,7 +172,7 @@ def get_restaurants_list(request, page):
                 form.get_compliant_filter(),
                 form.cleaned_data.get("form_sort"),
                 form.cleaned_data.get("fav"),
-                request.user
+                request.user,
             )
             parameter_dict = {
                 "restaurant_number": restaurant_number,
@@ -212,7 +211,7 @@ def get_landing_page(request, page=1):
         compliant_filter,
         sort_option,
         favorite_filter,
-        user
+        user,
     )
 
     parameter_dict = {
