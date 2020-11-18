@@ -138,8 +138,8 @@ def get_total_restaurant_number(
     rating_filter=None,
     compliant_filter=None,
     sort_option=None,
-    favorite_filter = None,
-    user = None
+    favorite_filter=None,
+    user=None,
 ):
     if (
         keyword
@@ -162,7 +162,7 @@ def get_total_restaurant_number(
             None,
             None,
             favorite_filter,
-            user
+            user,
         )
         return restaurants.count()
 
@@ -179,8 +179,8 @@ def get_restaurant_list(
     rating_filter=None,
     compliant_filter=None,
     sort_option=None,
-    favorite_filter = None,
-    user = None
+    favorite_filter=None,
+    user=None,
 ):
     page = int(page) - 1
     offset = int(page) * int(limit)
@@ -206,8 +206,7 @@ def get_restaurant_list(
             limit,
             sort_option,
             favorite_filter,
-            user
-
+            user,
         )
         return restaurants_to_dict(restaurants)
     else:
@@ -227,8 +226,8 @@ def get_filtered_restaurants(
     page=0,
     limit=None,
     sort_option=None,
-    favorite_filter = None,
-    user = None
+    favorite_filter=None,
+    user=None,
 ):
     filters = {}
 
@@ -252,7 +251,7 @@ def get_filtered_restaurants(
         keyword_filter["compliant_status__iexact"] = compliant
 
     value = None
-    if sort_option and sort_option != "none":
+    if sort_option:
         if sort_option == "ratedhigh":
             value = "rating"
         elif sort_option == "ratedlow":
@@ -266,22 +265,35 @@ def get_filtered_restaurants(
         if user.is_authenticated:
             if value:
                 filtered_restaurants = user.favorite_restaurants.all()
-                filtered_restaurants = filtered_restaurants.filter(
-                    business_id__in=YelpRestaurantDetails.objects.filter(**filters).order_by(value)
-                ).distinct().filter(**keyword_filter)[offset : offset + int(limit)]
+                filtered_restaurants = (
+                    filtered_restaurants.filter(
+                        business_id__in=YelpRestaurantDetails.objects.filter(
+                            **filters
+                        ).order_by(value)
+                    )
+                    .distinct()
+                    .filter(**keyword_filter)[offset : offset + int(limit)]
+                )
             else:
                 filtered_restaurants = user.favorite_restaurants.all()
-                filtered_restaurants = filtered_restaurants.filter(
-                    business_id__in=YelpRestaurantDetails.objects.filter(**filters)
-                ).distinct().filter(**keyword_filter).order_by("-id")[offset : offset + int(limit)]
+                filtered_restaurants = (
+                    filtered_restaurants.filter(
+                        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+                    )
+                    .distinct()
+                    .filter(**keyword_filter)
+                    .order_by("-id")[offset : offset + int(limit)]
+                )
 
     elif value:
         filtered_restaurants = (
-        Restaurant.objects.filter(
-            business_id__in=YelpRestaurantDetails.objects.filter(**filters).order_by(value)
-        )
-        .distinct()
-        .filter(**keyword_filter)[offset : offset + int(limit)]
+            Restaurant.objects.filter(
+                business_id__in=YelpRestaurantDetails.objects.filter(
+                    **filters
+                ).order_by(value)
+            )
+            .distinct()
+            .filter(**keyword_filter)[offset : offset + int(limit)]
         )
         # print(filtered_restaurants)
     else:
@@ -290,7 +302,8 @@ def get_filtered_restaurants(
                 business_id__in=YelpRestaurantDetails.objects.filter(**filters)
             )
             .distinct()
-            .filter(**keyword_filter).order_by("-id")[offset : offset + int(limit)]
+            .filter(**keyword_filter)
+            .order_by("-id")[offset : offset + int(limit)]
         )
 
     return filtered_restaurants
