@@ -406,11 +406,6 @@
                 var a_svg = document.createElement("a");
                 a_svg.className = "card-fav-icon position-relative z-index-40";
                 a_svg.style = "opacity: 0.8";
-                var a = "{{request.user.is_authenticated}}";
-                if(!a)
-                {
-                    a_svg.href = "/login";
-                }
 
                 var fav_icon = document.createElement("i");
                 fav_icon.id = restaurant_list[i].business_id;
