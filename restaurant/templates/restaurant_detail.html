@@ -28,6 +28,7 @@
             <a class="list-group-item list-group-item-action p-4" href="/restaurant/inspection_records/{{ restaurant_id }}">
               <div class="row text-center">
                 <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+                    <h6 class="label-heading">Most Recent Status</h6>
                   <span id="res_compliance_status" class="badge badge-pill p-2 badge-success-light" style="font-size: inherit;"></span>
                 </div>
                 <div class="col-lg-8">
@@ -222,44 +223,9 @@
           </div>
         </div>
         <div class="text-block">
-          <p class="subtitle text-sm text-primary">Reviews </p>
-          <h5 class="mb-4">Yelp Reviews </h5>
+          <p class="subtitle text-sm text-primary">Yelp </p>
+          <h5 class="mb-4">Recent Reviews </h5>
           <span id="review_content"></span>
-{#          <div class="py-5">#}
-{#            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">Leave a review</button>#}
-{#            <div class="collapse mt-4" id="leaveReview">#}
-{#              <h5 class="mb-4">Leave a review</h5>#}
-{#              <form class="form" id="contact-form" method="get" action="#">#}
-{#                <div class="row">#}
-{#                  <div class="col-sm-6">#}
-{#                    <div class="form-group">#}
-{#                      <label class="form-label" for="name">Your name *</label>#}
-{#                      <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required="required"> </div>#}
-{#                  </div>#}
-{#                  <div class="col-sm-6">#}
-{#                    <div class="form-group">#}
-{#                      <label class="form-label" for="rating">Your rating *</label>#}
-{#                      <select class="custom-select focus-shadow-0" name="rating" id="rating">#}
-{#                        <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>#}
-{#                        <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>#}
-{#                        <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>#}
-{#                        <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>#}
-{#                        <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>#}
-{#                      </select>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="form-group">#}
-{#                  <label class="form-label" for="email">Your email *</label>#}
-{#                  <input class="form-control" type="email" name="email" id="email" placeholder="Enter your  email" required="required"> </div>#}
-{#                <div class="form-group">#}
-{#                  <label class="form-label" for="review">Review text *</label>#}
-{#                  <textarea class="form-control" rows="4" name="review" id="review" placeholder="Enter your review" required="required"></textarea>#}
-{#                </div>#}
-{#                <button class="btn btn-primary" type="submit">Post review</button>#}
-{#              </form>#}
-{#            </div>#}
-{#          </div>#}
         </div>
       </div>
       <div class="col-lg-4">
@@ -306,7 +272,8 @@
                 <li class="mb-2">
                   <a class=" text-sm text-decoration-none" href="#">
                     <i class="fas fa-star mr-3"></i>
-                    <span class="text-muted"><span id="res_rating_info"></span>&nbsp; Ratings</span>
+                    <span class="text-muted"><span id="res_rating_info"></span>
+                        Reviews</span>
                   </a>
                 </li>
                 <li class="mb-2">
@@ -316,9 +283,6 @@
                   </a>
                 </li>
               </ul>
-              <div class="text-center">
-                <a class="btn btn-outline-primary btn-block" href="{{ link }}"> <i class="far fa-paper-plane mr-2"></i>Reach out</a>
-              </div>
             </div>
           </div>
 <!--          recent user feedback-->
@@ -326,8 +290,10 @@
             <div class="card-header bg-gray-100 py-4 border-0">
               <div class="media align-items-center">
                 <div class="media-body">
-                  <p class="subtitle text-sm text-primary">Most Recent User Feedback</p>
-                  <h6 class="mb-0">Average Safety Rating: <span class="badge badge-primary">{{ average_safety_rating }}</span></h6>
+                  <p class="subtitle text-sm text-primary">Most Recent User
+                      Feedback</p><br>
+                  <h6 class="mb-0">Average Safety Rating: &#160;<span class="badge
+                  badge-primary">{{ average_safety_rating }}</span></h6>
                 </div>
               </div>
                 </div>
