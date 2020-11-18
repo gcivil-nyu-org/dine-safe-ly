@@ -201,15 +201,13 @@
               </ul>
               <div class="tab-content">
                 <div class="tab-pane fade active show" id="tab-Location" role="tabpanel" aria-labelledby="tab-Location">
-                  <!-- Listing Location-->
-<!--                  <h3 class="mb-4">Location</h3>-->
+
                   <div class="map-wrapper-300 mb-3">
                     <div class="h-100" id="detailMap"></div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="tab-heatmap" role="tabpanel" aria-labelledby="tab-heatmap">
-                  <!-- Listing Location-->
-<!--                  <h3 class="mb-4">Heat Map</h3>-->
+
                   <div class="map-wrapper-300 mb-3">
                     <div class="h-100" id="detailMap2"></div>
                   </div>
@@ -218,7 +216,6 @@
           </div>
         </div>
         <div class="text-block">
-          <!-- Gallery-->
           <h3 class="mb-4">Gallery</h3>
           <div id="gallery_imgs" class="row gallery ml-n1 mr-n1">
 
@@ -226,43 +223,43 @@
         </div>
         <div class="text-block">
           <p class="subtitle text-sm text-primary">Reviews </p>
-          <h5 class="mb-4">Listing Reviews </h5>
+          <h5 class="mb-4">Yelp Reviews </h5>
           <span id="review_content"></span>
-          <div class="py-5">
-            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">Leave a review</button>
-            <div class="collapse mt-4" id="leaveReview">
-              <h5 class="mb-4">Leave a review</h5>
-              <form class="form" id="contact-form" method="get" action="#">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="form-label" for="name">Your name *</label>
-                      <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required="required"> </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="form-label" for="rating">Your rating *</label>
-                      <select class="custom-select focus-shadow-0" name="rating" id="rating">
-                        <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
-                        <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
-                        <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
-                        <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
-                        <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="email">Your email *</label>
-                  <input class="form-control" type="email" name="email" id="email" placeholder="Enter your  email" required="required"> </div>
-                <div class="form-group">
-                  <label class="form-label" for="review">Review text *</label>
-                  <textarea class="form-control" rows="4" name="review" id="review" placeholder="Enter your review" required="required"></textarea>
-                </div>
-                <button class="btn btn-primary" type="submit">Post review</button>
-              </form>
-            </div>
-          </div>
+{#          <div class="py-5">#}
+{#            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">Leave a review</button>#}
+{#            <div class="collapse mt-4" id="leaveReview">#}
+{#              <h5 class="mb-4">Leave a review</h5>#}
+{#              <form class="form" id="contact-form" method="get" action="#">#}
+{#                <div class="row">#}
+{#                  <div class="col-sm-6">#}
+{#                    <div class="form-group">#}
+{#                      <label class="form-label" for="name">Your name *</label>#}
+{#                      <input class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required="required"> </div>#}
+{#                  </div>#}
+{#                  <div class="col-sm-6">#}
+{#                    <div class="form-group">#}
+{#                      <label class="form-label" for="rating">Your rating *</label>#}
+{#                      <select class="custom-select focus-shadow-0" name="rating" id="rating">#}
+{#                        <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>#}
+{#                        <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>#}
+{#                        <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>#}
+{#                        <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>#}
+{#                        <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>#}
+{#                      </select>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                  <label class="form-label" for="email">Your email *</label>#}
+{#                  <input class="form-control" type="email" name="email" id="email" placeholder="Enter your  email" required="required"> </div>#}
+{#                <div class="form-group">#}
+{#                  <label class="form-label" for="review">Review text *</label>#}
+{#                  <textarea class="form-control" rows="4" name="review" id="review" placeholder="Enter your review" required="required"></textarea>#}
+{#                </div>#}
+{#                <button class="btn btn-primary" type="submit">Post review</button>#}
+{#              </form>#}
+{#            </div>#}
+{#          </div>#}
         </div>
       </div>
       <div class="col-lg-4">
