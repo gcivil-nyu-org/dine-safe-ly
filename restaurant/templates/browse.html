@@ -3,13 +3,12 @@
 <div class="container-fluid py-5 px-lg-5">
     <div class="row border-bottom mb-4">
         <div class="col-12">
-            <h1 class="display-4 font-weight-bold text-serif mb-4">Dine Safe.ly</h1>
             <p class="lead text-muted">Browse local NYC restaurants based on COVID-19 seating
                 compliance</p></div>
     </div>
     <div class="row">
         <div class="col-lg-3 pt-3">
-            <form class="pr-xl-3" action="" method="POST" id="search_filter_form">
+            <form class="pr-xl-3" action="" method="POST" id="search_filter_form" name="search_filter_form">
                 {% csrf_token %}
                 <div class="mb-4">
                     <label class="form-label" for="keyword">Search by restaurant name</label>
@@ -162,55 +161,50 @@
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label class="form-label">Ratings</label>
+                    <label class="form-label">Saved Restaurants</label>
                     <div class="form-group">
-                      <select class="selectpicker form-control" name="rating" id="rating" multiple data-style="btn-selectpicker" title="">
-                        <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
-                        <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
-                        <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
-                        <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
-                        <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
-                      </select>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="fav" name="fav" value="fav">
+                            <label class="custom-control-label" for="fav" >Saved</label>
+                        </div>
                     </div>
                 </div>
-                <!--          <div class="mb-4">-->
-                <!--            <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>-->
-                <!--          </div>-->
                 <div class="mb-4">
-                    <button class="btn btn-primary" type="submit"><i class="fas fa-filter mr-1"></i>Filter</button>
+                    <label class="form-label">Ratings</label>
+                    <div class="form-group">
+                        <select class="selectpicker form-control" name="rating" id="rating" multiple data-style="btn-selectpicker" title="">
+                            <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
+                            <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
+                            <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
+                            <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
+                            <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <button class="btn btn-primary" id="filterbtn" type="submit"><i class="fas fa-filter mr-1"></i>Filter</button>
                     <script>
               var restaurant_content_list = null;
             // Submit post on submit
               $('#search_filter_form').on('submit', function(event){
                   event.preventDefault();
-                  console.log("form submitted!")  // sanity check
                   clearRestaurant();
                   create_post();
               });
               function create_post() {
-                  console.log("create post") // sanity check
                   var form = new FormData(document.getElementById("search_filter_form"));
                   $.ajax({
-                      url : "search_filter/restaurants_list/1", // the endpoint
-                      type : "POST", // http method
-                      data : form, // data sent with the post request
+                      url : "search_filter/restaurants_list/1",
+                      type : "POST",
+                      data : form,
                       processData: false,
                       contentType: false,
-                      // handle a successful response
                       success : function(json) {
                           page_global += 1;
-                          console.log(json.restaurant_list)
                           loadRestaurant(json.restaurant_list, json.restaurant_number)
-                          console.log(json); // log the returned json to the console
-                          console.log("success"); // another sanity check
                       },
-
-                      // handle a non-successful response
                       error : function(xhr,errmsg,err) {
-                          //$('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                          //    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                          //console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                        console.log('CNM')
+                        console.log('Error')
                       }
                   });
               };
@@ -247,12 +241,12 @@
                 </div>
                 <div>
                     <label class="form-label mr-2" for="form_sort">Sort by</label>
-                    <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
-                        <option value="sortBy_0">Recommended</option>
-                        <option value="sortBy_1">Highest Rated</option>
-                        <option value="sortBy_2">Highest Price</option>
-                        <option value="sortBy_3">Lowest Price</option>
-                        <option value="sortBy_4">Near By</option>
+                    <select form="search_filter_form" class="selectpicker" name="form_sort" id="form_sort" data-style="btn-selectpicker" title="Select" onchange="document.getElementById('filterbtn').click();">
+                        <option value="none">None</option>
+                        <option value="ratedhigh">Highest Rated</option>
+                        <option value="ratedlow">Lowest Rated</option>
+                        <option value="pricehigh">Highest Price</option>
+                        <option value="pricelow">Lowest Price</option>
                     </select>
                 </div>
             </div>
@@ -260,34 +254,29 @@
 
             </div>
             <div class="text-center">
-                <button type="button" class="btn btn-outline-primary mb-4" onclick="load_more()" id="load_button">Load More</button>
+                <button type="button" class="btn btn-dark mb-2" onclick="load_more()" id="load_button">Load More</button>
             </div>
         </div>
+        <script>
+
+        </script>
         <script>
 		var page_global = 1; // Global page number
         var restaurant_content_list = null;
 
         function load_more() {
-            console.log("create post") // sanity check
             var form = new FormData(document.getElementById("search_filter_form"));
             $.ajax({
-                url : "search_filter/restaurants_list/" + page_global.toString(), // the endpoint
-                type : "POST", // http method
-                data : form, // data sent with the post request
+                url : "search_filter/restaurants_list/" + page_global.toString(),
+                type : "POST",
+                data : form,
                 processData: false,
                 contentType: false,
-                // handle a successful response
                 success : function(json) {
                     restaurant_content_list = json
                     page_global += 1;
-                    console.log(restaurant_content_list.restaurant_list)
                     loadRestaurant(restaurant_content_list.restaurant_list, json.restaurant_number)
-                    console.log(restaurant_content_list); // log the returned json to the console
-                    console.log("success"); // another sanity check
-
                 },
-
-                // handle a non-successful response
                 error : function(xhr,errmsg,err) {
                   console.log('Ajax request error')
                 }
@@ -310,12 +299,14 @@
                }
             }
           }
+
           function loadRestaurant(restaurant_list_json, restaurant_number) {
              var restaurant_list = [];
              restaurant_list = JSON.parse(restaurant_list_json);
              document.getElementById("res_count").innerHTML = restaurant_number;
              for(var i = 0; i < restaurant_list.length; i++)
              {
+
                 if(restaurant_list[i].yelp_info == null || restaurant_list[i].yelp_info.error != null) {continue;}
 
                 var res_list_group = document.getElementById("res_list_group");
@@ -361,21 +352,83 @@
                 div4.appendChild(h4);
                 div4.appendChild(p);
 
+                var div_svg = document.createElement("div");
+                div_svg.className = "card-img-overlay-top d-flex justify-content-between align-items-center";
+
+                var div_hidden = document.createElement("div");
+                div_hidden.className = "badge badge-transparent badge-pill px-3 py-2 invisible";
+                div_hidden.innerHTML = "Restaurant";
+
+                var form_save_fav = document.createElement("form");
+                form_save_fav.className = "save_fav_res";
+                form_save_fav.setAttribute("method", "POST");
+                form_save_fav.setAttribute("onsubmit", "return false;");
+                form_save_fav.setAttribute("name", "save_form");
+                form_save_fav.setAttribute("restaurant_business_id", restaurant_list[i].business_id);
+
+                var res_id = document.createElement("input");
+                res_id.id = "restaurant_save" + restaurant_list[i].id;
+                res_id.setAttribute("name", "restaurant_business_id");
+                res_id.setAttribute("type", "hidden");
+                res_id.setAttribute("value", restaurant_list[i].id);
+
+                var csrf_token_input = document.createElement("input");
+                csrf_token_input.setAttribute("type", "hidden");
+
+                var save_btn = document.createElement("button");
+                save_btn.setAttribute("type", "submit");
+                save_btn.className = "btn btn-link mb-2";
+
+                var a_svg = document.createElement("a");
+                a_svg.className = "card-fav-icon position-relative z-index-40";
+                a_svg.style = "opacity: 0.8";
+
+                var fav_icon = document.createElement("i");
+                fav_icon.id = restaurant_list[i].business_id;
+                fav_icon.className = "fa fa-heart fa-2x";
+                fav_icon.style = "padding-top: 10px; padding-left: 2px;";
+
+                if(restaurant_list[i].saved_by_user != null && restaurant_list[i].saved_by_user) {
+                    fav_icon.style.color = 'red'
+                }
+
+                a_svg.appendChild(fav_icon);
+                save_btn.appendChild(a_svg);
+
+                form_save_fav.appendChild(res_id);
+                form_save_fav.appendChild(csrf_token_input);
+                form_save_fav.appendChild(save_btn);
+
+                div_svg.appendChild(div_hidden);
+                div_svg.appendChild(form_save_fav);
 
                 div3.appendChild(div4);
+                div3.appendChild(div_svg);
                 a1.appendChild(div3);
                 var div5 = document.createElement("div");
                 div5.className = "card-body";
 
                 var p_1 = document.createElement("p");
-                p_1.className = "text-sm text-muted text-uppercase mb-1";
+                p_1.className = "text-sm text-uppercase mb-1";
 
                 var a2 = document.createElement("a");
                 a2.className = "text-dark";
                 a2.href = "../restaurant/inspection_records/" + restaurant_list[i].id ;
                 a2.innerHTML = restaurant_list[i].latest_record.is_roadway_compliant;
 
-                p_1.appendChild(a2);
+                if(restaurant_list[i].latest_record.is_roadway_compliant == "Compliant")
+                {
+                    a2.innerHTML += "&nbsp";
+                    var itick = document.createElement("i");
+                    itick.className = "fas fa-check-circle";
+                    itick.style = "color:#596ff8";
+                    p_1.appendChild(a2);
+                    p_1.appendChild(itick);
+                }
+                else
+                {
+                    p_1.appendChild(a2);
+                }
 
                 var p_2 = document.createElement("p");
                 p_2.id = "res_category";
@@ -404,39 +457,75 @@
                 div1.appendChild(div2);
 
                 res_list_group.appendChild(div1);
+
           }
+
+          $(".card-fav-icon").hover(function(){
+                  $(this).css("color", "red");
+                  }, function(){
+                  $(this).css("color", "");
+                });
+
+
           if(restaurant_list.length < 6) {
             document.getElementById('load_button').style.visibility = 'hidden';
           }
          }
 
-        </script>
+      </script>
         <script>
-<!--         var snapSlider = document.getElementById('slider-snap');-->
+            $('body').on('submit', "form[name='save_form']", function(event) {
+                var currentForm = $(this);
+                event.preventDefault();
+                var formData = currentForm.serialize();
+                $.ajaxSetup({
+                     beforeSend: function(xhr, settings) {
+                         function getCookie(name) {
+                             var cookieValue = null;
+                             if (document.cookie && document.cookie != '') {
+                                 var cookies = document.cookie.split(';');
+                                 for (var i = 0; i < cookies.length; i++) {
+                                     var cookie = jQuery.trim(cookies[i]);
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                         break;
+                                     }
+                                 }
+                             }
+                             return cookieValue;
+                         }
+                         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                         }
+                     }
+                });
 
-<!--          noUiSlider.create(snapSlider, {-->
-<!--              start: [ 1, 5 ],-->
-<!--              snap: false,-->
-<!--              connect: true,-->
-<!--              step: 1,-->
-<!--              range: {-->
-<!--                  'min': 1,-->
-<!--                  'max': 5-->
-<!--              }-->
-<!--          });-->
-<!--          var snapValues = [-->
-<!--              document.getElementById('slider-snap-value-from'),-->
-<!--              document.getElementById('slider-snap-value-to')-->
-<!--          ];-->
-<!--          var inputValues = [-->
-<!--              document.getElementById('slider-snap-input-from'),-->
-<!--              document.getElementById('slider-snap-input-to')-->
-<!--          ];-->
-<!--          snapSlider.noUiSlider.on('update', function( values, handle ) {-->
-<!--              snapValues[handle].innerHTML = values[handle];-->
-<!--              inputValues[handle].value = values[handle];-->
-<!--          })-->
+                var url = "";
+                if (document.getElementById(currentForm.attr("restaurant_business_id")).style.color == "red") {
+                    url = "delete/favorite/restaurant/" + currentForm.attr("restaurant_business_id");
+                } else {
+                    url = "save/favorite/restaurant/" + currentForm.attr("restaurant_business_id");
+                }
 
+                $.ajax({
+                  type: 'POST',
+                  url: url,
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  // handle a successful response
+                  success : function(response) {
+                      if (response == "Saved") {
+                        $('#'+currentForm.attr("restaurant_business_id")).css("color", "red");
+                      } else {
+                        $('#'+currentForm.attr("restaurant_business_id")).css("color", "");
+                      }
+                  },
+                  error : function(xhr,errmsg,err) {
+                    console.log('Error')
+                  }
+                });
+            });
         </script>
     </div>
     <script>
@@ -454,7 +543,6 @@
                const urlParams = new URLSearchParams(queryString);
                const keyword = urlParams.get('search')
                document.getElementById('keyword').value = keyword;
-               console.log(document.getElementById('keyword').value);
            }
 
         };

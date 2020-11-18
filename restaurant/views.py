@@ -17,6 +17,7 @@ from .utils import (
     get_average_safety_rating,
     get_total_restaurant_number,
     get_csv_from_s3,
+    check_restaurant_saved,
 )
 
 from django.http import HttpResponse
@@ -25,7 +26,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.conf import settings
 import json
 import logging
-
 
 logger = logging.getLogger(__name__)
 
@@ -80,16 +80,33 @@ def get_restaurant_profile(request, restaurant_id):
         )
         feedback = get_latest_feedback(restaurant.business_id)
         average_safety_rating = get_average_safety_rating(restaurant.business_id)
-        parameter_dict = {
-            "google_key": settings.GOOGLE_MAP_KEY,
-            "google_map_id": settings.GOOGLE_MAP_ID,
-            "data": json.dumps(result, cls=DjangoJSONEncoder),
-            "yelp_info": response_yelp,
-            "lasted_inspection": latest_inspection,
-            "restaurant_id": restaurant_id,
-            "latest_feedback": feedback,
-            "average_safety_rating": average_safety_rating,
-        }
+        if request.user.is_authenticated:
+            user = request.user
+            parameter_dict = {
+                "google_key": settings.GOOGLE_MAP_KEY,
+                "google_map_id": settings.GOOGLE_MAP_ID,
+                "data": json.dumps(result, cls=DjangoJSONEncoder),
+                "yelp_info": response_yelp,
+                "lasted_inspection": latest_inspection,
+                "restaurant_id": restaurant_id,
+                "latest_feedback": feedback,
+                "average_safety_rating": average_safety_rating,
+                "saved_restaurants": len(
+                    user.favorite_restaurants.all().filter(id=restaurant_id)
+                )
+                > 0,
+            }
+        else:
+            parameter_dict = {
+                "google_key": settings.GOOGLE_MAP_KEY,
+                "google_map_id": settings.GOOGLE_MAP_ID,
+                "data": json.dumps(result, cls=DjangoJSONEncoder),
+                "yelp_info": response_yelp,
+                "lasted_inspection": latest_inspection,
+                "restaurant_id": restaurant_id,
+                "latest_feedback": feedback,
+                "average_safety_rating": average_safety_rating,
+            }
 
         return render(request, "restaurant_detail.html", parameter_dict)
     except Restaurant.DoesNotExist:
@@ -135,6 +152,13 @@ def get_restaurants_list(request, page):
                 form.get_rating_filter(),
                 form.get_compliant_filter(),
             )
+
+            if request.user.is_authenticated:
+                for restaurant in restaurant_list:
+                    restaurant["saved_by_user"] = check_restaurant_saved(
+                        request.user, restaurant["id"]
+                    )
+
             restaurant_number = get_total_restaurant_number(
                 form.cleaned_data.get("keyword"),
                 form.cleaned_data.get("neighbourhood"),
@@ -181,3 +205,21 @@ def get_landing_page(request, page=1):
         "keyword": json.dumps({"keyword": keyword}),
     }
     return render(request, "browse.html", parameter_dict)
+
+
+def save_favorite_restaurant(request, business_id):
+    if request.method == "POST":
+        user = request.user
+        user.favorite_restaurants.add(Restaurant.objects.get(business_id=business_id))
+        logger.info(business_id)
+    return HttpResponse("Saved")
+
+
+def delete_favorite_restaurant(request, business_id):
+    if request.method == "POST":
+        user = request.user
+        user.favorite_restaurants.remove(
+            Restaurant.objects.get(business_id=business_id)
+        )
+        logger.info(business_id)
+        return HttpResponse("Deleted")
