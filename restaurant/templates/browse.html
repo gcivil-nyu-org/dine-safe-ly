@@ -158,6 +158,11 @@
                                    value="Compliant">
                             <label class="custom-control-label" for="Compliant">Compliant</label>
                         </div>
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input" id="fav" name="All" type="radio"
+                                   value="fav">
+                            <label class="custom-control-label" for="fav">Saved Restaurants</label>
+                        </div>
                     </div>
                 </div>
                 <div class="mb-4">
@@ -246,13 +251,19 @@
                 </div>
                 <div>
                     <label class="form-label mr-2" for="form_sort">Sort by</label>
-                    <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
-                        <option value="sortBy_0">Recommended</option>
-                        <option value="sortBy_1">Highest Rated</option>
-                        <option value="sortBy_2">Highest Price</option>
-                        <option value="sortBy_3">Lowest Price</option>
-                        <option value="sortBy_4">Near By</option>
+                    <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" onchange="changeFunc();">
+                        <option value="ratedhigh">Highest Rated</option>
+                        <option value="ratedlow">Lowest Rated</option>
+                        <option value="pricehigh">Highest Price</option>
+                        <option value="pricelow">Lowest Price</option>
                     </select>
+                    <script>
+                        function changeFunc() {
+                        var selectBox = document.getElementById("form_sort");
+                        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                        console.log(selectedValue);
+                       }
+                    </script>
                 </div>
             </div>
             <div id="res_list_group" class="row">
