@@ -128,7 +128,13 @@ class SearchFilterForm(forms.Form):
     CHOICES_COMPLIANCE = [("All", "All"), ("Compliant", "Compliant")]
     CHOICES_RATING = [("5", "5"), ("4", "4"), ("3", "3"), ("2", "2"), ("1", "1")]
 
-    CHOICES_SORT = [("none", "none"), ("ratedhigh", "ratedhigh"), ("ratedlow", "ratedlow"), ("pricehigh", "pricehigh"), ("pricelow", "pricelow")]
+    CHOICES_SORT = [
+        ("none", "none"),
+        ("ratedhigh", "ratedhigh"),
+        ("ratedlow", "ratedlow"),
+        ("pricehigh", "pricehigh"),
+        ("pricelow", "pricelow"),
+    ]
 
     keyword = forms.CharField(label="keyword", required=False)
     neighbourhood = forms.MultipleChoiceField(
