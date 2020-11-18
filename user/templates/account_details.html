@@ -49,52 +49,58 @@
 <!--                        </form>-->
 <!--                    </div>-->
 <!--                </div>-->
-                <div class="text-block">
-                    <h3 class="mb-4">Login</h3>
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <h6>Password</h6>
-<!--                            <p class="text-sm text-muted">Last updated 3 years ago</p>-->
-                        </div>
-                        <div class="col text-right">
-                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#updatePassword" aria-expanded="false" aria-controls="updatePassword">Update</button>
-                        </div>
-                    </div>
-                    <form class="form-validate" method="post">
-                        <div class="collapse" id="updatePassword">
-                            <div class="row mt-4">
-                                {% csrf_token %}
-                                {% if form.errors %}
-                                {% for field in form %}
-                                {% for error in field.errors %}
-                                <div class="alert alert-danger">
-                                    <strong>{{ error|escape }}</strong>
-                                </div>
-                                {% endfor %}
-                                {% endfor %}
-                                {% for error in form.non_field_errors %}
-                                <div class="alert alert-danger">
-                                    <strong>{{ error|escape }}</strong>
-                                </div>
-                                {% endfor %}
-                                {% endif %}
-                                <div class="form-group col-12">
-                                    <label class="form-label" for="password_current">Current Password</label>
-                                    <input class="form-control" type="password" name="password_current" id="password_current">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="password_new">New Password</label>
-                                    <input class="form-control" type="password" name="password_new" id="password_new">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="password_confirm">Confirm Password</label>
-                                    <input class="form-control" type="password" name="password_confirm" id="password_confirm">
-                                </div>
+                {% load socialaccount %}
+                {% get_social_accounts user as accounts %}
+                {% if accounts.facebook or accounts.google %}
+
+                {% else %}
+                    <div class="text-block">
+                        <h3 class="mb-4">Login</h3>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h6>Password</h6>
+                                <!--                            <p class="text-sm text-muted">Last updated 3 years ago</p>-->
                             </div>
-                            <button class="btn btn-outline-primary">Update Password</button>
+                            <div class="col text-right">
+                                <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#updatePassword" aria-expanded="false" aria-controls="updatePassword">Update</button>
+                            </div>
                         </div>
-                    </form>
-                </div>
+                        <form class="form-validate" method="post">
+                            <div class="collapse" id="updatePassword">
+                                <div class="row mt-4">
+                                    {% csrf_token %}
+                                    {% if form.errors %}
+                                    {% for field in form %}
+                                    {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                    {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                    <div class="form-group col-12">
+                                        <label class="form-label" for="password_current">Current Password</label>
+                                        <input class="form-control" type="password" name="password_current" id="password_current">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="password_new">New Password</label>
+                                        <input class="form-control" type="password" name="password_new" id="password_new">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="password_confirm">Confirm Password</label>
+                                        <input class="form-control" type="password" name="password_confirm" id="password_confirm">
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-primary">Update Password</button>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
 <!--                <div class="text-block">-->
 <!--                    <div class="row mb-3">-->
 <!--                        <div class="col-sm-9">-->
@@ -211,8 +217,6 @@
                     </div>
                     <div class="card-body p-4">
                         <div class="text-block">
-                            {% load socialaccount %}
-                            {% get_social_accounts user as accounts %}
                             <div class="row">
                                 <div class="col-sm-8">
                                     <h6>Facebook</h6>
