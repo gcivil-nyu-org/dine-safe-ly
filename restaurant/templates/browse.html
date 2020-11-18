@@ -160,15 +160,18 @@
                         </div>
                     </div>
                 </div>
+                {% if request.user.is_authenticated %}
                 <div class="mb-4">
-                    <label class="form-label">Saved Restaurants</label>
+                    <label class="form-label">Filter by Favorites</label>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" id="fav" name="fav" value="fav">
-                            <label class="custom-control-label" for="fav" >Saved</label>
+                            <label class="custom-control-label" for="fav"
+                            >Favorites</label>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 <div class="mb-4">
                     <label class="form-label">Ratings</label>
                     <div class="form-group">
