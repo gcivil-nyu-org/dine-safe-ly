@@ -11,3 +11,6 @@ coverage
 coveralls
 pre-commit
 python-dotenv
+django-allauth
+django-mathfilters
+boto3

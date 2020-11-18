@@ -9,6 +9,8 @@ from .models import (
 import requests
 import json
 import logging
+import pandas as pd
+import boto3
 
 logger = logging.getLogger(__name__)
 
@@ -135,6 +137,9 @@ def get_total_restaurant_number(
     price_filter=None,
     rating_filter=None,
     compliant_filter=None,
+    sort_option=None,
+    favorite_filter=None,
+    user=None,
 ):
     if (
         keyword
@@ -143,6 +148,8 @@ def get_total_restaurant_number(
         or price_filter
         or rating_filter
         or compliant_filter
+        or sort_option
+        or favorite_filter
     ):
         restaurants = get_filtered_restaurants(
             keyword,
@@ -151,6 +158,11 @@ def get_total_restaurant_number(
             rating_filter,
             categories_filter,
             compliant_filter,
+            0,
+            None,
+            None,
+            favorite_filter,
+            user,
         )
         return restaurants.count()
 
@@ -166,6 +178,9 @@ def get_restaurant_list(
     price_filter=None,
     rating_filter=None,
     compliant_filter=None,
+    sort_option=None,
+    favorite_filter=None,
+    user=None,
 ):
     page = int(page) - 1
     offset = int(page) * int(limit)
@@ -177,6 +192,8 @@ def get_restaurant_list(
         or price_filter
         or rating_filter
         or compliant_filter
+        or sort_option
+        or favorite_filter
     ):
         restaurants = get_filtered_restaurants(
             keyword,
@@ -187,6 +204,9 @@ def get_restaurant_list(
             compliant_filter,
             page,
             limit,
+            sort_option,
+            favorite_filter,
+            user,
         )
         return restaurants_to_dict(restaurants)
     else:
@@ -205,6 +225,9 @@ def get_filtered_restaurants(
     compliant=None,
     page=0,
     limit=None,
+    sort_option=None,
+    favorite_filter=None,
+    user=None,
 ):
     filters = {}
 
@@ -227,13 +250,59 @@ def get_filtered_restaurants(
     if compliant == "Compliant":
         keyword_filter["compliant_status__iexact"] = compliant
 
-    filtered_restaurants = (
-        Restaurant.objects.filter(
-            business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+    value = None
+    if sort_option:
+        if sort_option == "ratedhigh":
+            value = "rating"
+        elif sort_option == "ratedlow":
+            value = "-rating"
+        elif sort_option == "pricehigh":
+            value = "price"
+        elif sort_option == "pricelow":
+            value = "-price"
+    if favorite_filter:
+        if user.is_authenticated:
+            if value:
+                filtered_restaurants = user.favorite_restaurants.all()
+                filtered_restaurants = (
+                    filtered_restaurants.filter(
+                        business_id__in=YelpRestaurantDetails.objects.filter(
+                            **filters
+                        ).order_by(value)
+                    )
+                    .distinct()
+                    .filter(**keyword_filter)[offset : offset + int(limit)]
+                )
+            else:
+                filtered_restaurants = user.favorite_restaurants.all()
+                filtered_restaurants = (
+                    filtered_restaurants.filter(
+                        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+                    )
+                    .distinct()
+                    .filter(**keyword_filter)
+                    .order_by("-id")[offset : offset + int(limit)]
+                )
+
+    elif value:
+        filtered_restaurants = (
+            Restaurant.objects.filter(
+                business_id__in=YelpRestaurantDetails.objects.filter(
+                    **filters
+                ).order_by(value)
+            )
+            .distinct()
+            .filter(**keyword_filter)[offset : offset + int(limit)]
         )
-        .distinct()
-        .filter(**keyword_filter)[offset : offset + int(limit)]
-    )
+    else:
+        filtered_restaurants = (
+            Restaurant.objects.filter(
+                business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+            )
+            .distinct()
+            .filter(**keyword_filter)
+            .order_by("-id")[offset : offset + int(limit)]
+        )
 
     return filtered_restaurants
 
@@ -260,3 +329,15 @@ def get_average_safety_rating(business_id):
         average_safety_rating = str(round(total / len(all_feedback_list), 2))
         return average_safety_rating
     return None
+
+
+def get_csv_from_s3():
+    bucket = "dine-safely"
+    file_name = "last7days-by-modzcta.csv"
+    s3 = boto3.client("s3")
+    obj = s3.get_object(Bucket=bucket, Key=file_name)
+    return pd.read_csv(obj["Body"])
+
+
+def check_restaurant_saved(user, restaurant_id):
+    return len(user.favorite_restaurants.all().filter(id=restaurant_id)) > 0

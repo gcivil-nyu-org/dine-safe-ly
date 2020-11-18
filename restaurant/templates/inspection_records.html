@@ -12,102 +12,42 @@
     </div>
     <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
       <div class="mr-3">
-        <p class="mb-3 mb-lg-0">There are <strong id="inspection_count"></strong> inspection(s) for restaurant <strong id="res_name"></strong></p>
+        <p class="mb-3 mb-lg-0">There are <strong>{{ inspection_list|length }}</strong> inspection(s) for restaurant
+          <strong>{% with inspection_list|first as i %}{{ i.restaurant_name }}{% endwith %}</strong>
+        </p>
       </div>
     </div>
     <div id="group_item" class="list-group shadow mb-5">
-
+      {% for inspection in inspection_list %}
+      <a class="list-group-item list-group-item-action p-4">
+        <div class="row text-center">
+          <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+            {% if inspection.is_roadway_compliant == "Compliant" %}
+              <span class="badge badge-pill p-2 badge-success-light" style="font-size: x-large;">{{ inspection.is_roadway_compliant }}</span>
+            {% else %}
+              <span class="badge badge-pill p-2 badge-danger-light" style="font-size: x-large;">{{ inspection.is_roadway_compliant }}</span>
+            {% endif %}
+          </div>
+          <div class="col-lg-8">
+            <div class="row text-center">
+              <div class="col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0">
+                <h6 class="label-heading" style="font-size: larger;">SKIPPED REASON</h6>
+                {% if inspection.skipped_reason == "nan" %}
+                  <p class="text-sm font-weight-bold" style="font-size: larger;">-</p>
+                {% else %}
+                  <p class="text-sm font-weight-bold" style="font-size: larger;">{{ inspection.skipped_reason }}</p>
+                {% endif %}
+              </div>
+              <div class="col-6 col-md-6 col-lg-6 py-3">
+                <h6 class="label-heading" style="font-size: larger;">INSPECTION DATE</h6>
+                <p class="text-sm font-weight-bold" style="font-size: larger;">{{ inspection.inspected_on }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
     </div>
   </div>
 </section>
-<script>
-var List = {{ inspection_list | safe }};
-document.getElementById("inspection_count").innerHTML= List.length;
-for(var i = 0; i < List.length; i++)
-{
-    document.getElementById("res_name").innerHTML= List[i].restaurant_name;
-    var group_item = document.getElementById("group_item");
-
-    var a = document.createElement("a");
-    a.className = "list-group-item list-group-item-action p-4";
-
-    var div_row = document.createElement("div");
-    div_row.className = "row";
-
-    var div1 = document.createElement("div");
-    div1.className = "col-lg-4 mb-4 mb-lg-0";
-
-    var div2 = document.createElement("div");
-    div2.className = "d-flex align-items-center mb-3"
-
-
-
-    var span = document.createElement("span");
-    span.style = "font-size: x-large";
-    if(List[i].is_roadway_compliant=="Compliant")
-      {span.className = "badge badge-pill p-2 badge-success-light";
-      span.innerHTML = List[i].is_roadway_compliant;}
-     else
-     {span.className = "badge badge-pill p-2 badge-danger-light";
-      span.innerHTML = List[i].is_roadway_compliant;}
-
-    div1.appendChild(div2);
-    div1.appendChild(span);
-
-    var div3 = document.createElement("div");
-    div3.className = "col-lg-8";
-
-    var div_row2 = document.createElement("div");
-    div_row2.className = "row text-center";
-
-    var div4 = document.createElement("div");
-    div4.className = "col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0";
-
-    var h6_1 = document.createElement("h6");
-    h6_1.className = "label-heading";
-    h6_1.style = "font-size: larger";
-    h6_1.innerHTML = "Skipped Reason";
-
-    var p_1 = document.createElement("p");
-    p_1.className = "text-sm font-weight-bold";
-    p_1.style = "font-size: larger";
-    if(List[i].skipped_reason=="nan")
-        {p_1.innerHTML = "-";}
-    else {p_1.innerHTML = List[i].skipped_reason;}
-
-
-    div4.appendChild(h6_1);
-    div4.appendChild(p_1);
-
-    var div5 = document.createElement("div");
-    div5.className = "col-6 col-md-6 col-lg-6 py-3 mb-3 mb-lg-0";
-
-    var h6_2 = document.createElement("h6");
-    h6_2.className = "label-heading";
-    h6_2.style = "font-size: larger";
-    h6_2.innerHTML = "Inspection Date";
-
-    var p_2 = document.createElement("p");
-    p_2.className = "text-sm font-weight-bold mb-0";
-    p_2.style = "font-size: larger";
-    p_2.innerHTML = List[i].inspected_on;
-
-    div5.appendChild(h6_2);
-    div5.appendChild(p_2);
-
-    div_row2.appendChild(div4);
-    div_row2.appendChild(div5);
-    div3.appendChild(div_row2);
-
-    div_row.appendChild(div1);
-    div_row.appendChild(div3);
-
-    a.appendChild(div_row);
-
-    group_item.appendChild(a);
-
-}
-
-</script>
-
 {% endblock %}
