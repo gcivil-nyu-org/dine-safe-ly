@@ -259,7 +259,7 @@
 
             </div>
             <div class="text-center">
-                <button type="button" class="btn btn-light mb-2" onclick="load_more()" id="load_button">Load More</button>
+                <button type="button" class="btn btn-dark mb-2" onclick="load_more()" id="load_button">Load More</button>
             </div>
         </div>
         <script>
@@ -367,6 +367,7 @@
 
                 var div_hidden = document.createElement("div");
                 div_hidden.className = "badge badge-transparent badge-pill px-3 py-2 invisible";
+                div_hidden.innerHTML = "Restaurant";
 
                 var form_save_fav = document.createElement("form");
                 form_save_fav.className = "save_fav_res";
@@ -392,11 +393,18 @@
 
                 var a_svg = document.createElement("a");
                 a_svg.className = "card-fav-icon position-relative z-index-40";
+                a_svg.style = "opacity: 0.8";
+
+                $(".card-fav-icon").hover(function(){
+                  $(this).css("color", "red");
+                  }, function(){
+                  $(this).css("color", "");
+                });
 
                 var fav_icon = document.createElement("i");
                 fav_icon.id = restaurant_list[i].business_id;
-                fav_icon.className = "fa fa-heart";
-                //fav_icon.style.color = 'red'
+                fav_icon.className = "fa fa-heart fa-2x";
+                fav_icon.style = "padding-top: 10px; padding-left: 2px;";
                 console.log(restaurant_list[i]);
 
                 console.log(restaurant_list[i].saved_by_user);
@@ -421,14 +429,29 @@
                 div5.className = "card-body";
 
                 var p_1 = document.createElement("p");
-                p_1.className = "text-sm text-muted text-uppercase mb-1";
+                p_1.className = "text-sm text-uppercase mb-1";
 
                 var a2 = document.createElement("a");
                 a2.className = "text-dark";
                 a2.href = "../restaurant/inspection_records/" + restaurant_list[i].id ;
                 a2.innerHTML = restaurant_list[i].latest_record.is_roadway_compliant;
 
-                p_1.appendChild(a2);
+                if(restaurant_list[i].latest_record.is_roadway_compliant == "Compliant")
+                {
+                    a2.innerHTML += "&nbsp";
+                    var itick = document.createElement("i");
+                    itick.className = "fas fa-check-circle";
+                    itick.style = "color:#596ff8";
+                    p_1.appendChild(a2);
+                    p_1.appendChild(itick);
+                }
+                else
+                {
+                    p_1.appendChild(a2);
+                }
+
+
+
 
                 var p_2 = document.createElement("p");
                 p_2.id = "res_category";
