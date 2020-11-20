@@ -88,6 +88,11 @@ def save_restaurants(restaurant_df, inspection_df):
                     business_address=row["businessaddress"],
                     postcode=row["postcode"],
                 )
+                Restaurant.objects.filter(
+                    restaurant_name=row["restaurantname"],
+                    business_address=row["businessaddress"],
+                    postcode=row["postcode"],
+                ).update(compliant_status=row["isroadwaycompliant"])
                 save_inspections(row, rt.business_id)
                 logger.info(
                     "Inspection record for restaurant saved successfully: {}".format(rt)

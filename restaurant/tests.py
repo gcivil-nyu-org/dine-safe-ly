@@ -562,6 +562,10 @@ class RestaurantViewTests(TestCase):
     def test_get_valid_restaurant_profile(self):
         request = self.factory.get("restaurant:profile")
         request.restaurant = self.restaurant
+        request.user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
         response = get_restaurant_profile(request, self.restaurant.id)
         self.assertEqual(response.status_code, 200)
 
@@ -574,6 +578,10 @@ class RestaurantViewTests(TestCase):
 
     def test_valid_get_landing_page(self):
         request = self.factory.get("restaurant:browse")
+        request.user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
         response = get_landing_page(request, 6)
         self.assertEqual(response.status_code, 200)
 

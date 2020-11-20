@@ -30,7 +30,7 @@ class QuestionnaireForm(forms.Form):
 
 class SaveFavoriteForm(forms.Form):
     restaurant_business_id = forms.CharField(label="restaurant_id")
-    user_id = forms.CharField(label="user_id")
+    user_id = forms.CharField(label="user_id", required=False)
 
 
 class DeleteFavoriteForm(forms.Form):
@@ -128,6 +128,14 @@ class SearchFilterForm(forms.Form):
     CHOICES_COMPLIANCE = [("All", "All"), ("Compliant", "Compliant")]
     CHOICES_RATING = [("5", "5"), ("4", "4"), ("3", "3"), ("2", "2"), ("1", "1")]
 
+    CHOICES_SORT = [
+        ("none", "none"),
+        ("ratedhigh", "ratedhigh"),
+        ("ratedlow", "ratedlow"),
+        ("pricehigh", "pricehigh"),
+        ("pricelow", "pricelow"),
+    ]
+
     keyword = forms.CharField(label="keyword", required=False)
     neighbourhood = forms.MultipleChoiceField(
         label="neighbourhood", choices=CHOICES_NEIGHBOURHOOD, required=False
@@ -135,6 +143,11 @@ class SearchFilterForm(forms.Form):
     category = forms.MultipleChoiceField(
         label="category", choices=CHOICES_CATEGORY, required=False
     )
+
+    form_sort = forms.ChoiceField(
+        label="form_sort", choices=CHOICES_SORT, required=False
+    )
+
     price_1 = forms.BooleanField(label="price_1", required=False)
     price_2 = forms.BooleanField(label="price_2", required=False)
     price_3 = forms.BooleanField(label="price_3", required=False)
@@ -152,6 +165,8 @@ class SearchFilterForm(forms.Form):
         choices=CHOICES_COMPLIANCE,
         required=False,
     )
+
+    fav = forms.BooleanField(label="fav", required=False)
 
     rating = forms.MultipleChoiceField(
         label="rating", choices=CHOICES_RATING, required=False

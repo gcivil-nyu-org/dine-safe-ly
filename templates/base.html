@@ -42,34 +42,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/all.css' %}" crossorigin="anonymous"> </head>
 
-<body style="padding-top: 72px;">
+<body style="padding-top: 25px">
 <header class="header">
     <!-- Navbar-->
-    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
-        <div class="container-fluid">
-            <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="{% url 'index' %}"><h3>Dine Safe.ly</h3></a>
-                                <form class="form-inline d-none d-sm-flex" action="#" id="search">
-                                    <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
-                                        <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
-                                        <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search" placeholder="Search" aria-label="Search">
-                                        <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"></i></button>
-                                    </div>
-                                </form>
+    <nav class="navbar fixed-top navbar-expand-lg shadow navbar-light bg-white">
+        <div class="container-fluid" style="height: 25px">
+            <div class="d-flex align-items-center">
+                <a class="navbar-brand py-1" href="{% url 'index' %}">
+                    <img src="{% static 'img/logo.svg' %}" alt="Dine Safe.ly" height="50px" width="250px">
+                </a>
             </div>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <!-- Navbar Collapse -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <form class="form-inline mt-4 mb-2 d-sm-none" action="#" id="searchcollapsed">
-                    <div class="input-label-absolute input-label-absolute-left input-reset w-100">
-                        <label class="label-absolute" for="searchcollapsed_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
-                        <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="searchcollapsed_search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas">           </i></button>
-                    </div>
-                </form>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a> </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'restaurant:browse' %}">Restaurants</a> </li>
-                    <li class="nav-item"><a class="nav-link" href="/">About Us</a> </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle " id="docsDropdownMenuLink" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi {{user.username}}</a>
