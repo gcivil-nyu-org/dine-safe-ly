@@ -189,10 +189,11 @@
                                 {% for restaurant in favorite_restaurant_list %}
                                 {% csrf_token %}
                                 <ul class="list-group">
-                                    <li id="{{ restaurant.business_id }}" class="list-group-item">{{ restaurant.restaurant_name }}&nbsp&nbsp
+                                    <li id="{{ restaurant.business_id }}" class="list-group-item">
                                         <form name="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="{{ restaurant.business_id }}" method="POST">
-                                            <button type="submit" class="btn btn-link">
-                                                Remove
+                                            {{ restaurant.restaurant_name }}&nbsp&nbsp
+                                            <button type="submit" class="close" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
                                             </button>
                                         </form>
                                     </li>
