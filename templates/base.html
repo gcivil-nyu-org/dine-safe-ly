@@ -58,7 +58,9 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a> </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'restaurant:browse' %}">Restaurants</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'terms' %}">Terms and Conditions</a> </li>
                     {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'chatbot:chatbot' %}">Chatbot</a> </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle " id="docsDropdownMenuLink" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi {{user.username}}</a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="docsDropdownMenuLink">

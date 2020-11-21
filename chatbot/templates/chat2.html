@@ -12,9 +12,16 @@
 <script type="text/javascript" src="{% static 'chatbot_assets/lib/apiGatewayCore/utils.js' %}"></script>
 <script type="text/javascript" src="{% static 'chatbot_assets/apigClient.js' %}"></script>
 <section class="py-5">
-    <div class="container" style="width: 40%; border-style: solid;">
+    <div class="container">
+
+        <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-4">
+            <h1 class="mb-3 mb-md-0 hero-heading mb-0">Test our chatBot client</h1>
+            <div><a class="btn btn-link pl-0" href="{% url 'restaurant:browse' %}"><i class="fa fa-arrow-left mr-2"></i> Back to Browse page</a></div>
+        </div>
+
+        <div class="container" style="width: 50%;">
         <!-- Chat Box-->
-        <div class="px-4 py-5 messages" style="height: 500px; overflow-y: scroll;">
+        <div class="px-4 py-5 messages" style="height: 300px; overflow-y: scroll;">
             <div class="row messages-content">
                 <!-- Sender Message-->
                 <!-- Reciever Message-->
@@ -25,6 +32,7 @@
             <textarea type="text" class="form-control border-5 p-4 bg-light text-sm message-input" placeholder="Type a message" aria-describedby="button-sendMessage"></textarea>
         </div>
     </div>
+    </div>
     <script>
       var sdk = apigClientFactory.newClient({});
 
@@ -32,9 +40,6 @@
 </section>
 <!-- Bootstrap core JavaScript
 ================================================== -->
-
-
-
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- <script>window.jQuery || document.write('<script src="./assets/js/vendor/jquery.min.js"><\/script>')</script> -->

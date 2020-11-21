@@ -16,3 +16,7 @@ def index(request):
         "restaurant_list": restaurant_list,
     }
     return render(request, "index.html", parameter_dict)
+
+def terms(request):
+
+    return render(request, "terms.html")
