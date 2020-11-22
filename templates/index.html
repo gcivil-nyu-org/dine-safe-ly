@@ -212,13 +212,44 @@
                 <div class="text-center">
                     {% if user.is_authenticated %}
                     <p class="mb-2"><a class="btn btn-lg btn-primary" href="{% url 'restaurant:browse' %}">See Compliant Restaurants</a></p>
+                        <br>
+                        <button class="mb-2" data-toggle="modal" data-target="#report_bug"><a class="btn btn-lg btn-primary" >Report Error/Bugs to us</a></button>
                     {% else %}
                     <p class="mb-2"><a class="btn btn-lg btn-primary" href="{% url 'user:register' %}">Create Your Account</a></p>
                     <p class="text-muted text-small">It's free!</p>
                     {% endif %}
+                    <div class="modal fade" id="report_bug" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+{#                              <form class="form-validate" method="POST">#}
+                                  {% csrf_token %}
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="report_bug_label">Tell us what is wrong with our product</h5>
+                              </div>
+                                  <p>Which page do you encounter error?</p>
+                                <input type="text" id="error_page" name="error_page" >
+                                <br>
+                                  <p>Tell us a little more about what error it is</p>
+                                <input type="text" id="error_detail" name="error_detail" >
+                                <br>
+                                  <p>Send us an email</p>
+
+                                <p><a href = "mailto:dinesafely.nyc@gmail.com?subject = DineSafelyBugReport&body = Message">dinesafely.nyc@gmail.com</p>
+                                <br>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                  <button class="btn btn-primary" type="submit" name="report_error_submit">Submit</button>
+                                </div>
+{#                             </form>#}
+                            </div>
+                          </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+    <script>
+
+    </script>
 {% endblock %}

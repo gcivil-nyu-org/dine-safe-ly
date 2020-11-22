@@ -54,13 +54,13 @@
 
               {% if saved_restaurants %}
               <!-- Button trigger delete restaurant from favorite -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete_favorite">
-                Remove from favorite
+              <button type="button" class="fa fa-heart fa-2x" data-toggle="modal" data-target="#delete_favorite" id="delete_fav_button" style = "padding-top: 10px; padding-left: 2px;";>
+{#                Remove from favorite#}
               </button>
               {% else %}
                 <!-- Button trigger save restaurant as favorite -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save_favorite">
-                  Do you like this restaurant?
+                <button type="button" class="fa fa-heart fa-2x" data-toggle="modal" data-target="#save_favorite" id="save_fav_button" color="red" style = "padding-top: 10px; padding-left: 2px;";>
+{#                  Do you like this restaurant?#}
                 </button>
 
               {% endif %}
@@ -608,7 +608,6 @@ function initMap() {
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_delete_favorite").value = yelp_info.id ;
-
 </script>
 
 
