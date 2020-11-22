@@ -96,89 +96,84 @@
                                         <input class="form-control" type="password" name="password_confirm" id="password_confirm">
                                     </div>
                                 </div>
-                                <button class="btn btn-outline-primary">Update Password</button>
+                                <button class="btn btn-outline-primary" name="update_pass_form">Update Password</button>
                             </div>
                         </form>
                     </div>
                 {% endif %}
-<!--                <div class="text-block">-->
-<!--                    <div class="row mb-3">-->
-<!--                        <div class="col-sm-9">-->
-<!--                            <h3>Personal Preferences</h3>-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-3 text-right">-->
-<!--                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#personalPreferences" aria-expanded="false" aria-controls="personalDetails">Update</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p class="text-sm text-muted">-->
-<!--                        <i class="fas fa-pizza-slice fa-fw mr-2"></i>Pizza<br>-->
-<!--&lt;!&ndash;                        <i class="fa fa-birthday-cake fa-fw mr-2"></i>06/22/1980<br>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <i class="fa fa-envelope-open fa-fw mr-2"></i>john.doe@directory.com <span class="mx-2"> | </span>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <i class="fa fa-phone fa-fw mr-2"></i>+42055544466&ndash;&gt;-->
-<!--                    </p>-->
-<!--                    <div class="collapse" id="personalPreferences">-->
-<!--                        <form action="#">-->
-<!--                            <div class="row pt-4">-->
-<!--                                <div class="form-group col-md-6">-->
-<!--                                    <label class="form-label" for="pcategory">Category</label>-->
-<!--                                    <select class="selectpicker form-control" name="pcategory" id="pcategory" multiple-->
-<!--                                            data-style="btn-selectpicker" data-live-search="true"-->
-<!--                                            data-selected-text-format="count &gt; 1" title="">-->
-<!--                                        <option value="newamerican">New American</option>-->
-<!--                                        <option value="armenian">Armenian</option>-->
-<!--                                        <option value="barbeque">Barbeque</option>-->
-<!--                                        <option value="bars">Bars</option>-->
-<!--                                        <option value="bistros">Bistros</option>-->
-<!--                                        <option value="burgers">Burgers</option>-->
-<!--                                        <option value="chinese">Chinese</option>-->
-<!--                                        <option value="danish">Danish</option>-->
-<!--                                        <option value="diners">Diners</option>-->
-<!--                                        <option value="ethiopian">Ethiopian</option>-->
-<!--                                        <option value="filipino">Filipino</option>-->
-<!--                                        <option value="french">French</option>-->
-<!--                                        <option value="georgian">Georgian</option>-->
-<!--                                        <option value="german">German</option>-->
-<!--                                        <option value="greek">Greek</option>-->
-<!--                                        <option value="hotdog">Hot dog</option>-->
-<!--                                        <option value="italian">Italian</option>-->
-<!--                                        <option value="bistros">Bistros</option>-->
-<!--                                        <option value="japanese">Japanese</option>-->
-<!--                                        <option value="jewish">Jewish</option>-->
-<!--                                        <option value="kebab">Kebab</option>-->
-<!--                                        <option value="korean">Korean</option>-->
-<!--                                        <option value="kosher">Kosher</option>-->
-<!--                                        <option value="mexican">Mexican</option>-->
-<!--                                        <option value="noodles">Noodles</option>-->
-<!--                                        <option value="pizza">Pizza</option>-->
-<!--                                        <option value="salad">Salad</option>-->
-<!--                                        <option value="sandwiches">Sandwiches</option>-->
-<!--                                        <option value="seafood">Seafood</option>-->
-<!--                                        <option value="sushi">Sushi</option>-->
-<!--                                        <option value="tapassmallplates">Tapas/Small plates</option>-->
-<!--                                        <option value="vegan">Vegan</option>-->
-<!--                                        <option value="vegetarian">Vegetarian</option>-->
-<!--                                        <option value="vietnamese">Vietnamese</option>-->
-<!--                                        <option value="waffles">Waffles</option>-->
-<!--                                        <option value="wraps">Wraps</option>-->
-<!--                                    </select>-->
-<!--                                </div>-->
-<!--&lt;!&ndash;                                <div class="form-group col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <label class="form-label" for="date">Date of birth</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <input class="form-control" type="text" name="date" id="date" value="06/22/1980">&ndash;&gt;-->
-<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <div class="form-group col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <label class="form-label" for="email">Email address</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <input class="form-control" type="email" name="email" id="email" value="john.doe@directory.com">&ndash;&gt;-->
-<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <div class="form-group col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <label class="form-label" for="phone">Phone number</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <input class="form-control" type="text" name="phone" id="phone" value="+42055544466">&ndash;&gt;-->
-<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--                            </div>-->
-<!--                            <button class="btn btn-outline-primary mb-4" type="submit">Save your Preferences</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
+
+                <div class="text-block">
+                   <div class="row mb-3">
+                      <div class="col-sm-9">
+                          <h3>Personal Preferences</h3>
+                        </div>
+                        <div class="col-sm-3 text-right">
+                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#personalPreferences" aria-expanded="false" aria-controls="personalDetails">Update</button>
+                        </div>
+                   </div>
+                    <div class="row pt-4">
+                        {% for pref in user_pref %}
+                            {% csrf_token %}
+                            <ul class="list-group">
+                                <li id="{{ pref.category }}" class="list-group-item">
+                                    <form name="saved_pref_delete" class="saved_res_remove" onsubmit="return false;" category="{{ pref.category }}" method="POST">
+                                        {{ pref.category }}&nbsp&nbsp
+                                        <button type="submit" class="close" aria-label="Close" data-toggle="tooltip" data-placement="top" data-original-title="Remove from Preference">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                    <div class="collapse" id="personalPreferences">
+                        {% csrf_token %}
+                    <form class="form-validate" id="add_pref_form" name="add_pref_form" method="POST" onsubmit="return false;" >
+                        <div class="row pt-4">
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="pcategory">Category</label>
+                                <select class="selectpicker form-control" name="pcategory" id="pcategory" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
+                                        <option value="newamerican">New American</option>
+                                        <option value="armenian">Armenian</option>
+                                        <option value="bars">Bars</option>
+                                        <option value="bistros">Bistros</option>
+                                        <option value="burgers">Burgers</option>
+                                        <option value="chinese">Chinese</option>
+                                        <option value="danish">Danish</option>
+                                        <option value="diners">Diners</option>
+                                        <option value="ethiopian">Ethiopian</option>
+                                        <option value="filipino">Filipino</option>
+                                        <option value="french">French</option>
+                                        <option value="georgian">Georgian</option>
+                                        <option value="german">German</option>
+                                        <option value="greek">Greek</option>
+                                        <option value="hotdog">Hot dog</option>
+                                        <option value="italian">Italian</option>
+                                        <option value="bistros">Bistros</option>
+                                        <option value="japanese">Japanese</option>
+                                        <option value="jewish">Jewish</option>
+                                        <option value="kebab">Kebab</option>
+                                        <option value="korean">Korean</option>
+                                        <option value="kosher">Kosher</option>
+                                        <option value="mexican">Mexican</option>
+                                        <option value="noodles">Noodles</option>
+                                        <option value="pizza">Pizza</option>
+                                        <option value="salad">Salad</option>
+                                        <option value="sandwiches">Sandwiches</option>
+                                        <option value="seafood">Seafood</option>
+                                        <option value="sushi">Sushi</option>
+                                        <option value="vegan">Vegan</option>
+                                        <option value="vegetarian">Vegetarian</option>
+                                        <option value="vietnamese">Vietnamese</option>
+                                        <option value="waffles">Waffles</option>
+                                        <option value="wraps">Wraps</option>
+                                    </select>
+                                </div>
+                           </div>
+                           <button class="btn btn-outline-primary mb-4" type="submit" name="save_pref_button" data-original-title="add_preference">Save your Preferences</button>
+                        </form>
+                    </div>
+                </div>
 
 <!--                favorite restaurants list-->
                 <div class="text-block">
@@ -201,15 +196,6 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <div class="col-sm-3 text-right">
-<!--                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#restaurant_list" aria-expanded="false" aria-controls="restaurant">edit</button>-->
-                        </div>
-                    </div>
-                    <div class="collapse" id="restaurant_list">
-<!--                        <form action="#">-->
-
-<!--                            <button class="btn btn-outline-primary mb-4" type="submit">Save</button>-->
-<!--                        </form>-->
                     </div>
                 </div>
             </div>
@@ -297,5 +283,103 @@
                   }
                 });
             });
-        </script>
+</script>
+    <script>
+{#  remove saved preference #}
+        $('body').on('submit', "form[name='saved_pref_delete']", function(event) {
+                var currentForm = $(this);
+                event.preventDefault();
+                var formData = currentForm.serialize();
+
+                $.ajaxSetup({
+                     beforeSend: function(xhr, settings) {
+                         function getCookie(name) {
+                             var cookieValue = null;
+                             if (document.cookie && document.cookie != '') {
+                                 var cookies = document.cookie.split(';');
+                                 for (var i = 0; i < cookies.length; i++) {
+                                     var cookie = jQuery.trim(cookies[i]);
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                         break;
+                                     }
+                                 }
+                             }
+                             return cookieValue;
+                         }
+                         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                         }
+                     }
+                });
+
+                $.ajax({
+                  type: 'POST',
+                  url: "../user/delete/preference/user/" + currentForm.attr("category"),
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  // handle a successful response
+                  success : function(response) {
+                       $('#'+currentForm.attr('category')).hide();
+                  },
+                  error : function(xhr,errmsg,err) {
+                    console.log('Error')
+                  }
+                });
+        });
+    </script>
+    <script>
+    {# add preference #}
+    var preference_list = $('#pcategory').val();
+    add_form = document.getElementById("add_pref_form");
+
+    for(var i=0; i<preference_list.length; i++){
+        add_form.setAttribute("category", preference_list[i]);
+        console.log(preference_list[i]);
+        $('body').on('submit', "form[name='add_pref_form']", function(event) {
+                var currentForm = $(this);
+                event.preventDefault();
+                var formData = currentForm.serialize();
+
+                $.ajaxSetup({
+                     beforeSend: function(xhr, settings) {
+                         function getCookie(name) {
+                             var cookieValue = null;
+                             if (document.cookie && document.cookie != '') {
+                                 var cookies = document.cookie.split(';');
+                                 for (var i = 0; i < cookies.length; i++) {
+                                     var cookie = jQuery.trim(cookies[i]);
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                         break;
+                                     }
+                                 }
+                             }
+                             return cookieValue;
+                         }
+                         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                         }
+                     }
+                });
+
+                $.ajax({
+                  type: 'POST',
+                  url: "../user/add/preference/user/" + currentForm.attr("category"),
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  // handle a successful response
+                  success : function(response) {
+                       $('#'+currentForm.attr('category')).hide();
+                  },
+                  error : function(xhr,errmsg,err) {
+                    console.log('Error')
+                  }
+                });
+        });
+    }
+
+    </script>
 {% endblock %}

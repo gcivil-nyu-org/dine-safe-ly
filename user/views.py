@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from restaurant.models import Categories
 
 # from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -64,6 +65,8 @@ def account_details(request):
     user = request.user
 
     favorite_restaurant_list = user.favorite_restaurants.all()
+    user_pref_list = user.preference.all()
+    print(user_pref_list)
     if request.method == "POST":
         form = UpdatePasswordForm(user=user, data=request.POST)
         if form.is_valid():
@@ -76,6 +79,7 @@ def account_details(request):
             context={
                 "form": form,
                 "favorite_restaurant_list": favorite_restaurant_list,
+                "user_pref": user_pref_list,
             },
         )
     else:
@@ -86,6 +90,7 @@ def account_details(request):
             context={
                 "form": form,
                 "favorite_restaurant_list": favorite_restaurant_list,
+                "user_pref": user_pref_list,
             },
         )
 
@@ -126,3 +131,19 @@ def forget_password(request):
         return render(
             request=request, template_name="reset_email.html", context={"form": form}
         )
+
+
+def add_preference(request, category):
+    if request.method == "POST":
+        user = request.user
+        user.preference.add(Categories.objects.get(category=category))
+        logger.info(category)
+        return HttpResponse("Preference Saved")
+
+
+def delete_preference(request, category):
+    if request.method == "POST":
+        user = request.user
+        user.preference.remove(Categories.objects.get(category=category))
+        logger.info(category)
+        return HttpResponse("Preference Removed")
