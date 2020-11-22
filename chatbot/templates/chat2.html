@@ -3,7 +3,12 @@
     #mCSB_1 {
         width: 100%;
     }
-
+.messages {
+  height: 300px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
 
 </style>
 <script type="text/javascript" src="{% static 'chatbot_assets/lib/axios/dist/axios.standalone.js' %}"></script>
@@ -27,20 +32,24 @@
 
         <div class="container" style="width: 60%">
         <!-- Chat Box-->
-        <div class="px-4 py-5 messages" style="height: 300px; overflow-y: scroll;">
-            <div id="messages-content" class="row messages-content">
+        <div id="messages" class="px-4 py-5 messages">
+            <div class="row messages-content">
                 <!-- Sender Message-->
                 <!-- Reciever Message-->
             </div>
         </div>
         <!-- Typing area-->
         <div class="input-group">
-            <textarea type="text" class="form-control border-5 p-4 bg-light text-sm message-input" placeholder="Type a message" aria-describedby="button-sendMessage"></textarea>
+            <textarea type="text" class="form-control border-5 p-4 bg-light text-sm message-input" placeholder="Type a message" aria-describedby="button-sendMessage" onclick="updateScroll()"></textarea>
         </div>
     </div>
     </div>
     <script>
       var sdk = apigClientFactory.newClient({});
+      function updateScroll(){
+        var element = document.getElementById("messages");
+        element.scrollTop = element.scrollHeight;
+    }
    </script>
 </section>
 <!-- Bootstrap core JavaScript
