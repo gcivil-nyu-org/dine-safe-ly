@@ -63,67 +63,67 @@
             Have you been here before?
           </button>
 
-              {% if saved_restaurants %}
-              <!-- Button trigger delete restaurant from favorite -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete_favorite">
-                Remove from favorite
-              </button>
-              {% else %}
-                <!-- Button trigger save restaurant as favorite -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save_favorite">
-                  Do you like this restaurant?
-                </button>
+<!--              {% if saved_restaurants %}-->
+<!--              &lt;!&ndash; Button trigger delete restaurant from favorite &ndash;&gt;-->
+<!--              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete_favorite">-->
+<!--                Remove from favorite-->
+<!--              </button>-->
+<!--              {% else %}-->
+<!--                &lt;!&ndash; Button trigger save restaurant as favorite &ndash;&gt;-->
+<!--                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save_favorite">-->
+<!--                  Do you like this restaurant?-->
+<!--                </button>-->
 
-              {% endif %}
+<!--              {% endif %}-->
           {% endif %}
         </div>
 
 
                 <!-- Save Favorite Restaurant -->
-        <div class="modal fade" id="save_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <form class="form-validate" method="POST">
-                  {% csrf_token %}
-              <div class="modal-header">
-                <h5 class="modal-title" id="save_favorite_label">Save this restaurant to your favorite list?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <input type="text" id="restaurant_business_id_save_favorite" name="restaurant_business_id" value="" hidden>
-                <input type="text" id="user_id_save_favorite" name="user_id" value="{{user.id}}" hidden>
-              </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button class="btn btn-primary" type="submit" name="save_favorite_form">Yes</button>
-                </div>
-             </form>
-            </div>
-          </div>
-        </div>
+<!--        <div class="modal fade" id="save_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog" role="document">-->
+<!--            <div class="modal-content">-->
+<!--              <form class="form-validate" method="POST">-->
+<!--                  {% csrf_token %}-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="save_favorite_label">Save this restaurant to your favorite list?</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--                <input type="text" id="restaurant_business_id_save_favorite" name="restaurant_business_id" value="" hidden>-->
+<!--                <input type="text" id="user_id_save_favorite" name="user_id" value="{{user.id}}" hidden>-->
+<!--              </div>-->
+<!--                <div class="modal-footer">-->
+<!--                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+<!--                  <button class="btn btn-primary" type="submit" name="save_favorite_form">Yes</button>-->
+<!--                </div>-->
+<!--             </form>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <!-- Delete Favorite Restaurant -->
-        <div class="modal fade" id="delete_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <form class="form-validate" method="POST">
-                  {% csrf_token %}
-              <div class="modal-header">
-                <h5 class="modal-title" id="delete_favorite_label">Delete this restaurant from your favorite list?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <input type="text" id="restaurant_business_id_delete_favorite" name="restaurant_business_id" value="" hidden>
-                <input type="text" id="user_id_delete_favorite" name="user_id" value="{{user.id}}" hidden>
-              </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button class="btn btn-primary" type="submit" name="delete_favorite_form">Yes</button>
-                </div>
-             </form>
-            </div>
-          </div>
-        </div>
+<!--        <div class="modal fade" id="delete_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog" role="document">-->
+<!--            <div class="modal-content">-->
+<!--              <form class="form-validate" method="POST">-->
+<!--                  {% csrf_token %}-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="delete_favorite_label">Delete this restaurant from your favorite list?</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                  <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--                <input type="text" id="restaurant_business_id_delete_favorite" name="restaurant_business_id" value="" hidden>-->
+<!--                <input type="text" id="user_id_delete_favorite" name="user_id" value="{{user.id}}" hidden>-->
+<!--              </div>-->
+<!--                <div class="modal-footer">-->
+<!--                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+<!--                  <button class="btn btn-primary" type="submit" name="delete_favorite_form">Yes</button>-->
+<!--                </div>-->
+<!--             </form>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
 
 
         <!-- Modal -->
@@ -652,9 +652,9 @@ function initMap() {
 
                 var url = "";
                 if (document.getElementById(currentForm.attr("res_business_id")).style.color == "red") {
-                    url = "delete/favorite/restaurant/" + currentForm.attr("res_business_id");
+                    url = "../../delete/favorite/restaurant/" + currentForm.attr("res_business_id");
                 } else {
-                    url = "save/favorite/restaurant/" + currentForm.attr("res_business_id");
+                    url = "../../save/favorite/restaurant/" + currentForm.attr("res_business_id");
                 }
 
                 $.ajax({
