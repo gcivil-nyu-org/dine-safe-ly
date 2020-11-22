@@ -102,7 +102,7 @@ $(document).ready(function() {
   })
 
   function insertResponseMessage(content) {
-    $('<div class="message loading new"><figure class="avatar"><img src="https://media1.tenor.com/images/672b62d967f8d00d608d22f36c1831db/tenor.gif" width="10px" height="10px" /></figure><span></span></div>').appendTo($('.mCSB_container'));
+    $('<div class="message loading new"><figure class="avatar"><img src="https://media1.tenor.com/images/672b62d967f8d00d608d22f36c1831db/tenor.gif" width="25px" height="25px" /></figure><span></span></div>').appendTo($('.mCSB_container'));
         updateScrollbar();
 
     setTimeout(function() {
