@@ -23,7 +23,14 @@
     <div class="row">
       <div class="col-lg-8">
         <div class="text-block">
-          <h3 class="mb-4">Compliance Data</h3>
+          <h3 class="mb-4">
+            <form name="saved_res_remove" id="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="" method="POST">
+              Compliance Data
+              <button type="submit" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="save/remove">
+                <i id="iconid" class="fa fa-heart fa-2x"></i>
+              </button>
+            </form>
+          </h3>
           <div class="list-group shadow mb-5">
             <a class="list-group-item list-group-item-action p-4" href="/restaurant/inspection_records/{{ restaurant_id }}">
               <div class="row text-center">
@@ -369,6 +376,8 @@ var True = true;
 var False = false;
 var None = null;
 var yelp_info = {{ yelp_info.info | safe }};
+document.getElementById("saved_res_remove").setAttribute("res_business_id", yelp_info.id);
+document.getElementById("iconid").setAttribute("id", yelp_info.id);
 var keys = Object.keys(yelp_info);
 var empty1 = [];
 for (var i = 0; i < keys.length; i++) {
@@ -637,6 +646,60 @@ function initMap() {
   document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_delete_favorite").value = yelp_info.id ;
 
+</script>
+<script>
+            $('body').on('submit', "form[name='saved_res_remove']", function(event) {
+                var currentForm = $(this);
+                event.preventDefault();
+                var formData = currentForm.serialize();
+                $.ajaxSetup({
+                     beforeSend: function(xhr, settings) {
+                         function getCookie(name) {
+                             var cookieValue = null;
+                             if (document.cookie && document.cookie != '') {
+                                 var cookies = document.cookie.split(';');
+                                 for (var i = 0; i < cookies.length; i++) {
+                                     var cookie = jQuery.trim(cookies[i]);
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                         break;
+                                     }
+                                 }
+                             }
+                             return cookieValue;
+                         }
+                         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                         }
+                     }
+                });
+
+                var url = "";
+                if (document.getElementById(currentForm.attr("res_business_id")).style.color == "red") {
+                    url = "delete/favorite/restaurant/" + currentForm.attr("res_business_id");
+                } else {
+                    url = "save/favorite/restaurant/" + currentForm.attr("res_business_id");
+                }
+
+                $.ajax({
+                  type: 'POST',
+                  url: url,
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  // handle a successful response
+                  success : function(response) {
+                      if (response == "Saved") {
+                        $('#'+currentForm.attr("res_business_id")).css("color", "red");
+                      } else {
+                        $('#'+currentForm.attr("res_business_id")).css("color", "");
+                      }
+                  },
+                  error : function(xhr,errmsg,err) {
+                    console.log('Error')
+                  }
+                });
+            });
 </script>
 
 
