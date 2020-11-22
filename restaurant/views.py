@@ -237,3 +237,9 @@ def delete_favorite_restaurant(request, business_id):
         )
         logger.info(business_id)
         return HttpResponse("Deleted")
+
+
+def chatbot_keyword(request):
+    if request.method == "POST":
+        logger.info(request.body)
+        return HttpResponse("Dine safely")
