@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.facebook",
     "mathfilters",
+    "chatbot.apps.ChatbotConfig",
 ]
 
 SITE_ID = os.environ.get("SITE_ID")
