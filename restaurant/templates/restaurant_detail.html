@@ -27,7 +27,13 @@
             <form name="saved_res_remove" id="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="" method="POST">
               Compliance Data
               <button type="submit" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="save/remove">
+                {% if user.is_authenticated %}
+                  {% if saved_restaurants %}
+                <i id="iconid" class="fa fa-heart fa-2x" style="color: red"></i>
+                  {% else %}
                 <i id="iconid" class="fa fa-heart fa-2x"></i>
+                {% endif %}
+                {% endif %}
               </button>
             </form>
           </h3>
