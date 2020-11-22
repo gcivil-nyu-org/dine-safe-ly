@@ -418,7 +418,11 @@
                 form_save_fav.appendChild(save_btn);
 
                 div_svg.appendChild(div_hidden);
+                {% if user.is_authenticated %}
                 div_svg.appendChild(form_save_fav);
+                {% else %}
+
+                {% endif %}
 
                 div3.appendChild(div4);
                 div3.appendChild(div_svg);
