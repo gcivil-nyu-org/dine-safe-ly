@@ -67,7 +67,7 @@ def account_details(request):
     favorite_restaurant_list = user.favorite_restaurants.all()
     user_pref_list = user.preference.all()
 
-    if request.method == "POST":
+    if request.method == "POST" and "update_pass_form" in request.POST:
         form = UpdatePasswordForm(user=user, data=request.POST)
         if form.is_valid():
             form.save(user)

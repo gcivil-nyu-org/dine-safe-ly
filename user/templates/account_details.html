@@ -114,7 +114,7 @@
                     <div class="row pt-4">
                         {% for pref in user_pref %}
                             {% csrf_token %}
-                            <ul class="list-group">
+                            <ul id="displaying_category" class="list-group">
                                 <li id="{{ pref.category }}" class="list-group-item">
                                     <form name="saved_pref_delete" class="saved_res_remove" onsubmit="return false;" category="{{ pref.category }}" method="POST">
                                         {{ pref.category }}&nbsp&nbsp
@@ -127,8 +127,9 @@
                         {% endfor %}
                     </div>
                     <div class="collapse" id="personalPreferences">
+
+                    <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" >
                         {% csrf_token %}
-                    <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" onsubmit="return false;" >
                         <div class="row pt-4">
                             <div class="form-group col-md-6">
                                 <label class="form-label" for="pcategory">Category</label>
@@ -341,8 +342,8 @@
         $('body').on('submit', "form[name='add_pref_form']", function(event) {
                 var currentForm = $(this);
                 $(currentForm).attr("category", category);
-                event.preventDefault();
                 var formData = currentForm.serialize();
+                var category_name=String(category);
 
                 $.ajaxSetup({
                      beforeSend: function(xhr, settings) {
@@ -374,7 +375,7 @@
                   contentType: false,
                   // handle a successful response
                   success : function(response) {
-                       $('#'+currentForm.attr('category')).hide();
+                     $('#'+currentForm.attr('category')).hide();
                   },
                   error : function(xhr,errmsg,err) {
                     console.log('Error')
