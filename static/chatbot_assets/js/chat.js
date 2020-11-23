@@ -21,7 +21,7 @@ $(document).ready(function() {
     d = new Date()
     if (m != d.getMinutes()) {
       m = d.getMinutes();
-      $('<p class="small text-muted ml-3">' + d.getHours() + ':' + m + '</p>').appendTo($('.message:last'));
+      $('<p class="small ml-3">' + d.getHours() + ':' + m + '</p>').appendTo($('.message:last'));
     }
   }
 
@@ -46,7 +46,7 @@ $(document).ready(function() {
         if (m != d.getMinutes()) {
           m = d.getMinutes();
         }
-    $('<div class="media col-md-9 col-xl-7 ml-auto mb-3"><div class="media-body mr-3"><div class="bg-primary rounded p-4 mb-2"><p class="text-sm mb-0 text-white">' + msg + '</p></div><p class="small text-muted ml-3">' + d.getHours() + ':' + m + '</p></div><img class="avatar avatar-border-white" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/avatar/avatar-10.jpg" alt="user" /></div>').appendTo($('.mCSB_container')).addClass('new');
+    $('<div class="media col-md-9 col-xl-7 ml-auto mb-3"><div class="media-body mr-3"><div class="bg-primary rounded p-4 mb-2"><p class="text-sm mb-0 text-white">' + msg + '</p></div><p class="small ml-3">' + d.getHours() + ':' + m + '</p></div><img class="avatar avatar-border-white" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/avatar/avatar-10.jpg" alt="user" /></div>').appendTo($('.mCSB_container')).addClass('new');
     $('.message-input').val('');
     updateScrollbar();
 
