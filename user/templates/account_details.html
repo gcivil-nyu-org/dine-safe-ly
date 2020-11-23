@@ -128,7 +128,7 @@
                     </div>
                     <div class="collapse" id="personalPreferences">
                         {% csrf_token %}
-                    <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" onsubmit="return false;" category="">
+                    <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" onsubmit="return false;" >
                         <div class="row pt-4">
                             <div class="form-group col-md-6">
                                 <label class="form-label" for="pcategory">Category</label>
@@ -330,17 +330,17 @@
         });
     </script>
     <script>
+
     function add_pref_function(){
         {# add preference #}
     var category_list = $('#pcategory').val();
     var add_form = document.getElementById("add_pref_form");
     console.log(category_list);
-    for(var i=0; i<category_list.length; i++){
-        console.log(category_list[i]);
-        add_form.setAttribute("category", category_list[i]);
 
+    $.each(category_list, function (index, category) {
         $('body').on('submit', "form[name='add_pref_form']", function(event) {
                 var currentForm = $(this);
+                $(currentForm).attr("category", category);
                 event.preventDefault();
                 var formData = currentForm.serialize();
 
@@ -381,7 +381,7 @@
                   }
                 });
         });
-    }
+    })
 
 
 
