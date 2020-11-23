@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Restaurant
 from django.contrib.auth import get_user_model
+from django.views.decorators.csrf import csrf_exempt
 from .forms import (
     QuestionnaireForm,
     SearchFilterForm,
@@ -239,7 +240,14 @@ def delete_favorite_restaurant(request, business_id):
         return HttpResponse("Deleted")
 
 
+@csrf_exempt
 def chatbot_keyword(request):
     if request.method == "POST":
-        logger.info(request.body)
+        data = json.loads(request.body)
+        if 'keyword' in data:
+            restaurants = get_restaurant_list(keyword=data['keyword'])
+            response = {
+                'restaurants': restaurants
+            }
+            return JsonResponse(response)
         return HttpResponse("Dine safely")
