@@ -173,6 +173,7 @@ def save_yelp_restaurant_details(business_id):
             logger.info(
                 "Yelp restaurant details successfully saved: {}".format(business_id)
             )
+            return details
     except Exception as e:
         logger.error(
             "Error while saving to table YelpRestaurantDetails: {} {}".format(
@@ -221,9 +222,9 @@ def update_restuarant_inspection(restaurant):
 if __name__ == "__main__":
     # map_zipcode_to_neighbourhood()
     # save_yelp_restaurant_details()
-    # save_yelp_categories()
+    save_yelp_categories()
     # save_yelp_restaurant_details("-7PnG_cD9VY-IfHGWzynmQ")
 
-    restaurants = Restaurant.objects.all()[2400:]
-    for r in restaurants:
-        update_restuarant_inspection(r)
+    # restaurants = Restaurant.objects.all()[2400:]
+    # for r in restaurants:
+    #     update_restuarant_inspection(r)
