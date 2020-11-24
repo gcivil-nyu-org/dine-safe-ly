@@ -10,87 +10,84 @@
         <p class="text-muted mb-5">Manage your Account Details and settings here.</p>
         <div class="row">
             <div class="col-lg-7">
-<!--                <div class="text-block">-->
-<!--                    <div class="row mb-3">-->
-<!--                        <div class="col-sm-9">-->
-<!--                            <h3>Personal Details</h3>-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-3 text-right">-->
-<!--                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#personalDetails" aria-expanded="false" aria-controls="personalDetails">Update</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p class="text-sm text-muted">-->
-<!--                        <i class="fa fa-id-card fa-fw mr-2"></i>John Doe<br>-->
-<!--                        <i class="fa fa-birthday-cake fa-fw mr-2"></i>06/22/1980<br>-->
-<!--                        <i class="fa fa-envelope-open fa-fw mr-2"></i>john.doe@directory.com <span class="mx-2"> | </span>-->
-<!--                        <i class="fa fa-phone fa-fw mr-2"></i>+42055544466-->
-<!--                    </p>-->
-<!--                    <div class="collapse" id="personalDetails">-->
-<!--                        <form action="#">-->
-<!--                            <div class="row pt-4">-->
-<!--                                <div class="form-group col-md-6">-->
-<!--                                    <label class="form-label" for="name">Name</label>-->
-<!--                                    <input class="form-control" type="text" name="name" id="name" value="John Doe">-->
-<!--                                </div>-->
-<!--                                <div class="form-group col-md-6">-->
-<!--                                    <label class="form-label" for="date">Date of birth</label>-->
-<!--                                    <input class="form-control" type="text" name="date" id="date" value="06/22/1980">-->
-<!--                                </div>-->
-<!--                                <div class="form-group col-md-6">-->
-<!--                                    <label class="form-label" for="email">Email address</label>-->
-<!--                                    <input class="form-control" type="email" name="email" id="email" value="john.doe@directory.com">-->
-<!--                                </div>-->
-<!--                                <div class="form-group col-md-6">-->
-<!--                                    <label class="form-label" for="phone">Phone number</label>-->
-<!--                                    <input class="form-control" type="text" name="phone" id="phone" value="+42055544466">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <button class="btn btn-outline-primary mb-4" type="submit">Save your personal details</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="text-block">-->
+                <!--                    <div class="row mb-3">-->
+                <!--                        <div class="col-sm-9">-->
+                <!--                            <h3>Personal Details</h3>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-sm-3 text-right">-->
+                <!--                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#personalDetails" aria-expanded="false" aria-controls="personalDetails">Update</button>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <p class="text-sm text-muted">-->
+                <!--                        <i class="fa fa-id-card fa-fw mr-2"></i>John Doe<br>-->
+                <!--                        <i class="fa fa-birthday-cake fa-fw mr-2"></i>06/22/1980<br>-->
+                <!--                        <i class="fa fa-envelope-open fa-fw mr-2"></i>john.doe@directory.com <span class="mx-2"> | </span>-->
+                <!--                        <i class="fa fa-phone fa-fw mr-2"></i>+42055544466-->
+                <!--                    </p>-->
+                <!--                    <div class="collapse" id="personalDetails">-->
+                <!--                        <form action="#">-->
+                <!--                            <div class="row pt-4">-->
+                <!--                                <div class="form-group col-md-6">-->
+                <!--                                    <label class="form-label" for="name">Name</label>-->
+                <!--                                    <input class="form-control" type="text" name="name" id="name" value="John Doe">-->
+                <!--                                </div>-->
+                <!--                                <div class="form-group col-md-6">-->
+                <!--                                    <label class="form-label" for="date">Date of birth</label>-->
+                <!--                                    <input class="form-control" type="text" name="date" id="date" value="06/22/1980">-->
+                <!--                                </div>-->
+                <!--                                <div class="form-group col-md-6">-->
+                <!--                                    <label class="form-label" for="email">Email address</label>-->
+                <!--                                    <input class="form-control" type="email" name="email" id="email" value="john.doe@directory.com">-->
+                <!--                                </div>-->
+                <!--                                <div class="form-group col-md-6">-->
+                <!--                                    <label class="form-label" for="phone">Phone number</label>-->
+                <!--                                    <input class="form-control" type="text" name="phone" id="phone" value="+42055544466">-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                            <button class="btn btn-outline-primary mb-4" type="submit">Save your personal details</button>-->
+                <!--                        </form>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 {% load socialaccount %}
                 {% get_social_accounts user as accounts %}
                 {% if accounts.facebook or accounts.google %}
-
                 {% else %}
-                    <div class="text-block">
-                        <h3 class="mb-4">Login</h3>
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <h6>Password</h6>
-                                <!--                            <p class="text-sm text-muted">Last updated 3 years ago</p>-->
-                            </div>
-                            <div class="col text-right">
-                                <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#updatePassword" aria-expanded="false" aria-controls="updatePassword">Update</button>
-                            </div>
+                <div class="text-block">
+                    <h3 class="mb-4">Login</h3>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h6>Password</h6>
+                            <!--                            <p class="text-sm text-muted">Last updated 3 years ago</p>-->
                         </div>
-                        <form class="form-validate" method="post" id="update_password_form">
-                            {% csrf_token %}
-                            <div class="collapse" id="updatePassword">
-                                <div class="row mt-4" id="sub_update_password_form">
-                                    <div id="update_pass-error">
-
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <label class="form-label" for="password_current">Current Password</label>
-                                        <input class="form-control" type="password" name="password_current" id="password_current">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label" for="password_new">New Password</label>
-                                        <input class="form-control" type="password" name="password_new" id="password_new">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label" for="password_confirm">Confirm Password</label>
-                                        <input class="form-control" type="password" name="password_confirm" id="password_confirm">
-                                    </div>
+                        <div class="col text-right">
+                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#updatePassword" aria-expanded="false" aria-controls="updatePassword">Update</button>
+                        </div>
+                    </div>
+                    <form class="form-validate" method="post" id="update_password_form">
+                        {% csrf_token %}
+                        <div class="collapse" id="updatePassword">
+                            <div class="row mt-4" id="sub_update_password_form">
+                                <div id="error_update_pass">
 
                                 </div>
-                                <button class="btn btn-outline-primary">Update Password</button>
-
+                                <div class="form-group col-12">
+                                    <label class="form-label" for="password_current">Current Password</label>
+                                    <input class="form-control" type="password" name="password_current" id="password_current" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label" for="password_new">New Password</label>
+                                    <input class="form-control" type="password" name="password_new" id="password_new" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label" for="password_confirm">Confirm Password</label>
+                                    <input class="form-control" type="password" name="password_confirm" id="password_confirm" required>
+                                </div>
                             </div>
-                        </form>
-                    </div>
+                            <button class="btn btn-outline-primary">Update Password</button>
+                        </div>
+                    </form>
+                </div>
                 <script>
                     $('#update_password_form').on('submit', function(event){
                         event.preventDefault();
@@ -105,16 +102,18 @@
                             processData: false,
                             contentType: false,
                             success : function(json) {
+                                $('#error_update_pass').html("");
                                 for(i = 0; i < json.errors.length; i++) {
                                     console.log(json.errors[i]);
 
                                     var div1 = document.createElement("div");
                                     var strong1 = document.createElement("strong");
-                                    strong1.innerHTML = json.errors[i]
-                                    div1.appendChild(strong1)
+                                    strong1.innerHTML = json.errors[i];
+                                    div1.appendChild(strong1);
 
                                     div1.className = "alert alert-danger";
-                                    document.getElementById("update_pass-error").appendChild(div1)
+                                    div1.id = "alert_msg";
+                                    document.getElementById("error_update_pass").appendChild(div1);
                                 }
 
                             },
@@ -126,86 +125,80 @@
                     };
                 </script>
                 {% endif %}
-<!--                <div class="text-block">-->
-<!--                    <div class="row mb-3">-->
-<!--                        <div class="col-sm-9">-->
-<!--                            <h3>Personal Preferences</h3>-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-3 text-right">-->
-<!--                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#personalPreferences" aria-expanded="false" aria-controls="personalDetails">Update</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p class="text-sm text-muted">-->
-<!--                        <i class="fas fa-pizza-slice fa-fw mr-2"></i>Pizza<br>-->
-<!--&lt;!&ndash;                        <i class="fa fa-birthday-cake fa-fw mr-2"></i>06/22/1980<br>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <i class="fa fa-envelope-open fa-fw mr-2"></i>john.doe@directory.com <span class="mx-2"> | </span>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <i class="fa fa-phone fa-fw mr-2"></i>+42055544466&ndash;&gt;-->
-<!--                    </p>-->
-<!--                    <div class="collapse" id="personalPreferences">-->
-<!--                        <form action="#">-->
-<!--                            <div class="row pt-4">-->
-<!--                                <div class="form-group col-md-6">-->
-<!--                                    <label class="form-label" for="pcategory">Category</label>-->
-<!--                                    <select class="selectpicker form-control" name="pcategory" id="pcategory" multiple-->
-<!--                                            data-style="btn-selectpicker" data-live-search="true"-->
-<!--                                            data-selected-text-format="count &gt; 1" title="">-->
-<!--                                        <option value="newamerican">New American</option>-->
-<!--                                        <option value="armenian">Armenian</option>-->
-<!--                                        <option value="barbeque">Barbeque</option>-->
-<!--                                        <option value="bars">Bars</option>-->
-<!--                                        <option value="bistros">Bistros</option>-->
-<!--                                        <option value="burgers">Burgers</option>-->
-<!--                                        <option value="chinese">Chinese</option>-->
-<!--                                        <option value="danish">Danish</option>-->
-<!--                                        <option value="diners">Diners</option>-->
-<!--                                        <option value="ethiopian">Ethiopian</option>-->
-<!--                                        <option value="filipino">Filipino</option>-->
-<!--                                        <option value="french">French</option>-->
-<!--                                        <option value="georgian">Georgian</option>-->
-<!--                                        <option value="german">German</option>-->
-<!--                                        <option value="greek">Greek</option>-->
-<!--                                        <option value="hotdog">Hot dog</option>-->
-<!--                                        <option value="italian">Italian</option>-->
-<!--                                        <option value="bistros">Bistros</option>-->
-<!--                                        <option value="japanese">Japanese</option>-->
-<!--                                        <option value="jewish">Jewish</option>-->
-<!--                                        <option value="kebab">Kebab</option>-->
-<!--                                        <option value="korean">Korean</option>-->
-<!--                                        <option value="kosher">Kosher</option>-->
-<!--                                        <option value="mexican">Mexican</option>-->
-<!--                                        <option value="noodles">Noodles</option>-->
-<!--                                        <option value="pizza">Pizza</option>-->
-<!--                                        <option value="salad">Salad</option>-->
-<!--                                        <option value="sandwiches">Sandwiches</option>-->
-<!--                                        <option value="seafood">Seafood</option>-->
-<!--                                        <option value="sushi">Sushi</option>-->
-<!--                                        <option value="tapassmallplates">Tapas/Small plates</option>-->
-<!--                                        <option value="vegan">Vegan</option>-->
-<!--                                        <option value="vegetarian">Vegetarian</option>-->
-<!--                                        <option value="vietnamese">Vietnamese</option>-->
-<!--                                        <option value="waffles">Waffles</option>-->
-<!--                                        <option value="wraps">Wraps</option>-->
-<!--                                    </select>-->
-<!--                                </div>-->
-<!--&lt;!&ndash;                                <div class="form-group col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <label class="form-label" for="date">Date of birth</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <input class="form-control" type="text" name="date" id="date" value="06/22/1980">&ndash;&gt;-->
-<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <div class="form-group col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <label class="form-label" for="email">Email address</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <input class="form-control" type="email" name="email" id="email" value="john.doe@directory.com">&ndash;&gt;-->
-<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <div class="form-group col-md-6">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <label class="form-label" for="phone">Phone number</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <input class="form-control" type="text" name="phone" id="phone" value="+42055544466">&ndash;&gt;-->
-<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--                            </div>-->
-<!--                            <button class="btn btn-outline-primary mb-4" type="submit">Save your Preferences</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="text-block">
+                    <div class="row mb-3">
+                        <div class="col-sm-9">
+                            <h3>Personal Preferences</h3>
+                        </div>
+                        <div class="col-sm-3 text-right">
+                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#personalPreferences" aria-expanded="false" aria-controls="personalDetails">Update</button>
+                        </div>
+                    </div>
+                    <div class="row pt-4">
+                        {% for pref in user_pref %}
+                        {% csrf_token %}
+                        <ul class="list-group">
+                            <li id="{{ pref.category }}" class="list-group-item">
+                                <form name="saved_pref_delete" class="saved_res_remove" onsubmit="return false;" category="{{ pref.category }}" method="POST">
+                                    {{ pref.category }}&nbsp&nbsp
+                                    <button type="submit" class="close" aria-label="Close" data-toggle="tooltip" data-placement="top" data-original-title="Remove from Preference">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                        {% endfor %}
+                    </div>
+                    <div class="collapse" id="personalPreferences">
 
-<!--                favorite restaurants list-->
+                        <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" >
+                            {% csrf_token %}
+                            <div class="row pt-4">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="pcategory">Category</label>
+                                        <select class="selectpicker form-control" name="pcategory" id="pcategory" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
+                                            <option value="newamerican">New American</option>
+                                            <option value="armenian">Armenian</option>
+                                            <option value="bars">Bars</option>
+                                            <option value="bistros">Bistros</option>
+                                            <option value="burgers">Burgers</option>
+                                            <option value="chinese">Chinese</option>
+                                            <option value="danish">Danish</option>
+                                            <option value="diners">Diners</option>
+                                            <option value="ethiopian">Ethiopian</option>
+                                            <option value="filipino">Filipino</option>
+                                            <option value="french">French</option>
+                                            <option value="georgian">Georgian</option>
+                                            <option value="german">German</option>
+                                            <option value="greek">Greek</option>
+                                            <option value="hotdog">Hot dog</option>
+                                            <option value="italian">Italian</option>
+                                            <option value="bistros">Bistros</option>
+                                            <option value="japanese">Japanese</option>
+                                            <option value="jewish">Jewish</option>
+                                            <option value="kebab">Kebab</option>
+                                            <option value="korean">Korean</option>
+                                            <option value="kosher">Kosher</option>
+                                            <option value="mexican">Mexican</option>
+                                            <option value="noodles">Noodles</option>
+                                            <option value="pizza">Pizza</option>
+                                            <option value="salad">Salad</option>
+                                            <option value="sandwiches">Sandwiches</option>
+                                            <option value="seafood">Seafood</option>
+                                            <option value="sushi">Sushi</option>
+                                            <option value="vegan">Vegan</option>
+                                            <option value="vegetarian">Vegetarian</option>
+                                            <option value="vietnamese">Vietnamese</option>
+                                            <option value="waffles">Waffles</option>
+                                            <option value="wraps">Wraps</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-primary mb-4" type="submit" onclick="add_pref_function()" data-original-title="add_preference">Save your Preferences</button>
+                            </form>
+                    </div>
+                </div>
+                <!--                favorite restaurants list-->
                 <div class="text-block">
                     <div class="row mb-3">
                         <div class="col-sm-9">
@@ -226,15 +219,6 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <div class="col-sm-3 text-right">
-<!--                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#restaurant_list" aria-expanded="false" aria-controls="restaurant">edit</button>-->
-                        </div>
-                    </div>
-                    <div class="collapse" id="restaurant_list">
-<!--                        <form action="#">-->
-
-<!--                            <button class="btn btn-outline-primary mb-4" type="submit">Save</button>-->
-<!--                        </form>-->
                     </div>
                 </div>
             </div>
@@ -284,6 +268,99 @@
                 var currentForm = $(this);
                 event.preventDefault();
                 var formData = currentForm.serialize();
+                $.ajaxSetup({
+                     beforeSend: function(xhr, settings) {
+                         function getCookie(name) {
+                             var cookieValue = null;
+                             if (document.cookie && document.cookie != '') {
+                                 var cookies = document.cookie.split(';');
+                                 for (var i = 0; i < cookies.length; i++) {
+                                     var cookie = jQuery.trim(cookies[i]);
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                         break;
+                                     }
+                                 }
+                             }
+                             return cookieValue;
+                         }
+                         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                         }
+                     }
+                });
+                $.ajax({
+                  type: 'POST',
+                  url: "../restaurant/delete/favorite/restaurant/" + currentForm.attr("res_business_id"),
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  // handle a successful response
+                  success : function(response) {
+                       $('#'+currentForm.attr('res_business_id')).hide();
+                  },
+                  error : function(xhr,errmsg,err) {
+                    console.log('Error')
+                  }
+                });
+            });
+</script>
+<script>
+{#  remove saved preference #}
+        $('body').on('submit', "form[name='saved_pref_delete']", function(event) {
+                var currentForm = $(this);
+                event.preventDefault();
+                var formData = currentForm.serialize();
+                $.ajaxSetup({
+                     beforeSend: function(xhr, settings) {
+                         function getCookie(name) {
+                             var cookieValue = null;
+                             if (document.cookie && document.cookie != '') {
+                                 var cookies = document.cookie.split(';');
+                                 for (var i = 0; i < cookies.length; i++) {
+                                     var cookie = jQuery.trim(cookies[i]);
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                         break;
+                                     }
+                                 }
+                             }
+                             return cookieValue;
+                         }
+                         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                         }
+                     }
+                });
+                $.ajax({
+                  type: 'POST',
+                  url: "../user/delete/preference/user/" + currentForm.attr("category"),
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  // handle a successful response
+                  success : function(response) {
+                       $('#'+currentForm.attr('category')).hide();
+                  },
+                  error : function(xhr,errmsg,err) {
+                    console.log('Error')
+                  }
+                });
+        });
+    </script>
+<script>
+
+    function add_pref_function(){
+        {# add preference #}
+    var category_list = $('#pcategory').val();
+    var add_form = document.getElementById("add_pref_form");
+    console.log(category_list);
+
+    $.each(category_list, function (index, category) {
+        $('body').on('submit', "form[name='add_pref_form']", function(event) {
+                var currentForm = $(this);
+                $(currentForm).attr("category", category);
+                var formData = currentForm.serialize();
 
                 $.ajaxSetup({
                      beforeSend: function(xhr, settings) {
@@ -306,21 +383,25 @@
                          }
                      }
                 });
-
                 $.ajax({
                   type: 'POST',
-                  url: "../restaurant/delete/favorite/restaurant/" + currentForm.attr("res_business_id"),
+                  url: "../user/add/preference/user/" + currentForm.attr("category"),
                   data: formData,
                   processData: false,
                   contentType: false,
                   // handle a successful response
                   success : function(response) {
-                       $('#'+currentForm.attr('res_business_id')).hide();
+
                   },
                   error : function(xhr,errmsg,err) {
                     console.log('Error')
                   }
                 });
-            });
-        </script>
+        });
+    });
+
+
+
+    }
+    </script>
 {% endblock %}
