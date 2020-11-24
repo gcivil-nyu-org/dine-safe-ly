@@ -210,7 +210,7 @@ def get_restaurant_list(
         )
         return restaurants_to_dict(restaurants)
     else:
-        restaurants = Restaurant.objects.all()[
+        restaurants = Restaurant.objects.all().order_by("-id")[
             offset : offset + int(limit)  # noqa: E203
         ]
         return restaurants_to_dict(restaurants)
