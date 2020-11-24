@@ -228,6 +228,7 @@ class TestUpdatePasswordView(BaseTest):
                 "password_current": "pass123",
                 "password_new": "pass1234",
                 "password_confirm": "pass1234",
+                "update_pass_form": "",
             },
         )
         self.assertEqual(response.status_code, 302)
@@ -240,6 +241,7 @@ class TestUpdatePasswordView(BaseTest):
                 "password_current": "pass123",
                 "password_new": "pass123",
                 "password_confirm": "pass1234",
+                "update_pass_form": "",
             },
         )
         self.assertEqual(response.status_code, 200)
