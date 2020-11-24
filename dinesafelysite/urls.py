@@ -19,8 +19,10 @@ from dinesafelysite import views
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("terms/", views.terms, name="terms"),
     path("restaurant/", include("restaurant.urls")),
     path("admin/", admin.site.urls),
     path("user/", include("user.urls")),
     path("accounts/", include("allauth.urls")),
+    path("chatbot/", include("chatbot.urls")),
 ]

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Restaurant
@@ -16,8 +17,8 @@ from .utils import (
     get_latest_feedback,
     get_average_safety_rating,
     get_total_restaurant_number,
-    get_csv_from_s3,
     check_restaurant_saved,
+    get_csv_from_github,
 )
 
 from django.http import HttpResponse
@@ -59,7 +60,7 @@ def get_restaurant_profile(request, restaurant_id):
             form.save()
 
     try:
-        csv_file = get_csv_from_s3()
+        csv_file = get_csv_from_github()
         result = {}
         for idx, row in csv_file.iterrows():
             if idx == 0:
@@ -221,6 +222,7 @@ def get_landing_page(request, page=1):
     return render(request, "browse.html", parameter_dict)
 
 
+@login_required
 def save_favorite_restaurant(request, business_id):
     if request.method == "POST":
         user = request.user
@@ -229,6 +231,7 @@ def save_favorite_restaurant(request, business_id):
     return HttpResponse("Saved")
 
 
+@login_required
 def delete_favorite_restaurant(request, business_id):
     if request.method == "POST":
         user = request.user

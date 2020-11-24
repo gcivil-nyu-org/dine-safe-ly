@@ -6,3 +6,4 @@ from restaurant.models import Restaurant, Categories
 class DineSafelyUser(AbstractUser):
     favorite_restaurants = models.ManyToManyField(Restaurant, blank=True)
     preferences = models.ManyToManyField(Categories, blank=True)
+

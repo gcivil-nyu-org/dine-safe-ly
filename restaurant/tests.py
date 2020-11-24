@@ -585,6 +585,42 @@ class RestaurantViewTests(TestCase):
         response = get_landing_page(request, 6)
         self.assertEqual(response.status_code, 200)
 
+    def test_save_fav_rest(self):
+        self.user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
+        print(type(self.user))
+        self.user.set_password("pass123")
+        self.user.save()
+        c = Client()
+        c.login(username=self.user.username, password="pass123")
+        form_valid = {
+            "restaurant_business_id": self.restaurant.business_id,
+            "user_id": self.user.id,
+        }
+        form = SaveFavoriteForm(form_valid)
+        self.assertTrue(form.is_valid())
+
+        self.assertTrue(self.user.is_authenticated)
+        # response = Client().post("/restaurant/save/favorite/restaurant/1", form_valid)
+        # self.assertEqual(response.status_code, 200)
+
+    def test_delete_fav_rest(self):
+        request = self.factory.get("restaurant:delete_favorite_restaurant")
+        request.user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
+        form_valid = {
+            "restaurant_business_id": "16",
+            "user_id": "1",
+        }
+        form = DeleteFavoriteForm(form_valid)
+        self.assertTrue(form.is_valid())
+        # response = Client().post("/restaurant/delete/favorite/restaurant/1", form_valid)
+        # self.assertEqual(response.status_code, 200)
+
 
 class RestaurantUtilsTests(TestCase):
     def test_merge_yelp_info(self):
