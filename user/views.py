@@ -8,7 +8,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .utils import send_reset_password_email
 from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
 
@@ -147,3 +147,22 @@ def delete_preference(request, category):
         user.preference.remove(Categories.objects.get(category=category))
         logger.info(category)
         return HttpResponse("Preference Removed")
+
+
+def update_password(request):
+    if not request.user.is_authenticated:
+        return redirect("user:login")
+
+    user = request.user
+    if request.method == "POST":
+        form = UpdatePasswordForm(user=user, data=request.POST)
+        if form.is_valid():
+            form.save(user)
+            return redirect("user:login")
+
+        error_list = []
+        for field in form:
+            for error in field.errors:
+                error_list.append(error)
+        response = {"errors": error_list}
+        return JsonResponse(response)
