@@ -47,11 +47,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/all.css' %}" crossorigin="anonymous"> </head>
 
-<body style="padding-top: 25px">
+<body style="padding-top: 72px">
 <header class="header">
     <!-- Navbar-->
     <nav class="navbar fixed-top navbar-expand-lg shadow navbar-light bg-white">
-        <div class="container-fluid" style="height: 25px">
+        <div class="container-fluid">
             <div class="d-flex align-items-center">
                 <a class="navbar-brand py-1" href="{% url 'index' %}">
                     <img src="{% static 'img/logo.svg' %}" alt="Dine Safe.ly" height="50px" width="250px">
@@ -63,7 +63,6 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a> </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'restaurant:browse' %}">Restaurants</a> </li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'terms' %}">Terms and Conditions</a> </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'chatbot:chatbot' %}">Chatbot</a> </li>
                     <li class="nav-item dropdown">
@@ -123,7 +122,6 @@
 <script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}">
 </script>
 <script src="{% static 'js/demo.36f8799a.js' %}"></script>
-<script src="{% static 'chatbot_assets/js/bootstrap.min.js' %}"></script>
 
 <!-- Main Theme JS file    -->
 <script src="{% static 'js/theme.55f8348b.js' %}"></script>
