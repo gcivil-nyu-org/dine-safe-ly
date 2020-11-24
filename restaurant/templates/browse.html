@@ -1,10 +1,39 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<div class="container-fluid py-5 px-lg-5">
+<div class="container-fluid py-5 px-lg-5" id="topSection">
     <div class="row border-bottom mb-4">
         <div class="col-12">
-            <p class="lead text-muted">Browse local NYC restaurants based on COVID-19 seating
-                compliance</p></div>
+            <section>
+                <p class="lead text-muted">Browse local NYC restaurants based on COVID-19 seating
+                    compliance</p>
+            </section>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-3 pt-3">
@@ -242,6 +271,7 @@
                     <label class="form-label mr-2" for="form_sort">Sort by</label>
                     <select form="search_filter_form" class="selectpicker" name="form_sort" id="form_sort" data-style="btn-selectpicker" title="Select" onchange="document.getElementById('filterbtn').click();">
                         <option value="none">None</option>
+                        <option value="recommended">Recommended</option>
                         <option value="ratedhigh">Highest Rated</option>
                         <option value="ratedlow">Lowest Rated</option>
                         <option value="pricehigh">Highest Price</option>
@@ -254,11 +284,27 @@
             </div>
             <div class="text-center">
                 <button type="button" class="btn btn-dark mb-2" onclick="load_more()" id="load_button">Load More</button>
+                <a href="#topSection" id="myBtn" class="btn btn-dark mb-2">
+                    <i class="fa fa-arrow-up"></i>
+                </a>
             </div>
         </div>
-        <script>
+          <script>
+          $(function() {
 
-        </script>
+              var $btn = $('#myBtn');
+              var $home = $('#topSection');
+              var startpoint = $home.scrollTop() + $home.height();
+
+              $(window).on('scroll', function() {
+                if($(window).scrollTop() > startpoint) {
+                  $btn.show();
+                } else {
+                  $btn.hide();
+                }
+              });
+            });
+          </script>
         <script>
 		var page_global = 1; // Global page number
         var restaurant_content_list = null;
@@ -399,7 +445,11 @@
                 form_save_fav.appendChild(save_btn);
 
                 div_svg.appendChild(div_hidden);
+                {% if user.is_authenticated %}
                 div_svg.appendChild(form_save_fav);
+                {% else %}
+
+                {% endif %}
 
                 div3.appendChild(div4);
                 div3.appendChild(div_svg);

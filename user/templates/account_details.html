@@ -65,24 +65,13 @@
                                 <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#updatePassword" aria-expanded="false" aria-controls="updatePassword">Update</button>
                             </div>
                         </div>
-                        <form class="form-validate" method="post">
+                        <form class="form-validate" method="post" id="update_password_form">
+                            {% csrf_token %}
                             <div class="collapse" id="updatePassword">
-                                <div class="row mt-4">
-                                    {% csrf_token %}
-                                    {% if form.errors %}
-                                    {% for field in form %}
-                                    {% for error in field.errors %}
-                                    <div class="alert alert-danger">
-                                        <strong>{{ error|escape }}</strong>
+                                <div class="row mt-4" id="sub_update_password_form">
+                                    <div id="update_pass-error">
+
                                     </div>
-                                    {% endfor %}
-                                    {% endfor %}
-                                    {% for error in form.non_field_errors %}
-                                    <div class="alert alert-danger">
-                                        <strong>{{ error|escape }}</strong>
-                                    </div>
-                                    {% endfor %}
-                                    {% endif %}
                                     <div class="form-group col-12">
                                         <label class="form-label" for="password_current">Current Password</label>
                                         <input class="form-control" type="password" name="password_current" id="password_current">
@@ -95,11 +84,47 @@
                                         <label class="form-label" for="password_confirm">Confirm Password</label>
                                         <input class="form-control" type="password" name="password_confirm" id="password_confirm">
                                     </div>
+
                                 </div>
                                 <button class="btn btn-outline-primary">Update Password</button>
+
                             </div>
                         </form>
                     </div>
+                <script>
+                    $('#update_password_form').on('submit', function(event){
+                        event.preventDefault();
+                        update_password();
+                    });
+                    function update_password() {
+                        var form = new FormData(document.getElementById("update_password_form"));
+                        $.ajax({
+                            url : "update_password",
+                            type : "POST",
+                            data : form,
+                            processData: false,
+                            contentType: false,
+                            success : function(json) {
+                                for(i = 0; i < json.errors.length; i++) {
+                                    console.log(json.errors[i]);
+
+                                    var div1 = document.createElement("div");
+                                    var strong1 = document.createElement("strong");
+                                    strong1.innerHTML = json.errors[i]
+                                    div1.appendChild(strong1)
+
+                                    div1.className = "alert alert-danger";
+                                    document.getElementById("update_pass-error").appendChild(div1)
+                                }
+
+                            },
+                            error : function(xhr,errmsg,err) {
+                                console.log(errmsg)
+
+                            }
+                        });
+                    };
+                </script>
                 {% endif %}
 <!--                <div class="text-block">-->
 <!--                    <div class="row mb-3">-->
@@ -189,10 +214,11 @@
                                 {% for restaurant in favorite_restaurant_list %}
                                 {% csrf_token %}
                                 <ul class="list-group">
-                                    <li id="{{ restaurant.business_id }}" class="list-group-item">{{ restaurant.restaurant_name }}&nbsp&nbsp
+                                    <li id="{{ restaurant.business_id }}" class="list-group-item">
                                         <form name="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="{{ restaurant.business_id }}" method="POST">
-                                            <button type="submit" class="btn btn-link">
-                                                Remove
+                                            {{ restaurant.restaurant_name }}&nbsp&nbsp
+                                            <button type="submit" class="close" aria-label="Close" data-toggle="tooltip" data-placement="top" data-original-title="Remove from Favorites">
+                                                <span aria-hidden="true">&times;</span>
                                             </button>
                                         </form>
                                     </li>

@@ -23,7 +23,14 @@
     <div class="row">
       <div class="col-lg-8">
         <div class="text-block">
-          <h3 class="mb-4">Compliance Data</h3>
+          <h3 class="mb-4">
+            <form id="save_delete_form" >
+              Compliance Data
+                <input id="res_id" name="restaurant_business_id" type="hidden" value="{{ yelp_info.restaurant_business_id }}">
+                <button type="submit" class="btn btn-link mb-2"></button>
+                <i id="fav_icon" class="fa fa-heart fa-2x" style="padding-top: 10px; padding-left: 2px;"></i>
+            </form>
+          </h3>
           <div class="list-group shadow mb-5">
             <a class="list-group-item list-group-item-action p-4" href="/restaurant/inspection_records/{{ restaurant_id }}">
               <div class="row text-center">
@@ -52,23 +59,22 @@
             Have you been here before?
           </button>
 
-              {% if saved_restaurants %}
-              <!-- Button trigger delete restaurant from favorite -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete_favorite">
-                Remove from favorite
-              </button>
-              {% else %}
-                <!-- Button trigger save restaurant as favorite -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save_favorite">
-                  Do you like this restaurant?
-                </button>
-
-              {% endif %}
+{#              {% if saved_restaurants %}#}
+{#              <!-- Button trigger delete restaurant from favorite -->#}
+{#              <button type="button" class="fa fa-heart fa-2x" data-toggle="modal" data-target="#delete_favorite" id="delete_fav_button" >#}
+{#                Remove from favorite#}
+{#              </button>#}
+{#              {% else %}#}
+{#                <!-- Button trigger save restaurant as favorite -->#}
+{#                <button type="button" class="fa fa-heart fa-2x" data-toggle="modal" data-target="#save_favorite" id="save_fav_button" color="red" >#}
+{#                  Do you like this restaurant?#}
+{#                </button>#}
+{##}
+{#              {% endif %}#}
           {% endif %}
         </div>
 
-
-                <!-- Save Favorite Restaurant -->
+          <!-- Save Favorite Restaurant -->
         <div class="modal fade" id="save_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -90,8 +96,7 @@
             </div>
           </div>
         </div>
-
-        <!-- Delete Favorite Restaurant -->
+          <!-- Delete Favorite Restaurant -->
         <div class="modal fade" id="delete_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -135,42 +140,42 @@
                   <br>
                   <p>Did you receive a temperature check?</p>
                   <div class="form-group">
-                    <input type="radio" name="temperature_required" value="true" />
-                    <label for="star1" title="text">Yes</label>
-                    <input type="radio" name="temperature_required" value="false" />
-                    <label for="star2" title="text">No</label>
+                    <input id="temp_check_true" type="radio" name="temperature_required" value="true" />
+                    <label for="temp_check_true" title="text">Yes</label>
+                    <input id="temp_check_false" type="radio" name="temperature_required" value="false" />
+                    <label for="temp_check_false" title="text">No</label>
                   </div>
                   <br>
                   <p>Were you or a member of your party required to provide contact tracing information?</p>
                   <div class="form-group">
-                    <input type="radio" name="contact_info_required" value="true" />
-                    <label for="star1" title="text">Yes</label>
-                    <input type="radio" name="contact_info_required" value="false" />
-                    <label for="star2" title="text">No</label>
+                    <input id="contact_true" type="radio" name="contact_info_required" value="true" />
+                    <label for="contact_true" title="text">Yes</label>
+                    <input id="contact_false" type="radio" name="contact_info_required" value="false" />
+                    <label for="contact_false" title="text">No</label>
                   </div>
                   <br>
                   <p>Were restaurant staff wearing masks at all times?</p>
                   <div class="form-group">
-                    <input type="radio" name="employee_mask" value="true" />
-                    <label for="star1" title="text">Yes</label>
-                    <input type="radio" name="employee_mask" value="false" />
-                    <label for="star2" title="text">No</label>
+                    <input id="employee_mask_true" type="radio" name="employee_mask" value="true" />
+                    <label for="employee_mask_true" title="text">Yes</label>
+                    <input id="employee_mask_false" type="radio" name="employee_mask" value="false" />
+                    <label for="employee_mask_false" title="text">No</label>
                   </div>
                   <br>
                   <p>Was in-door capacity under 25%?</p>
                   <div class="form-group">
-                    <input type="radio" name="capacity_compliant" value="true" />
-                    <label for="star1" title="text">Yes</label>
-                    <input type="radio" name="capacity_compliant" value="false" />
-                    <label for="star2" title="text">No</label>
+                    <input id="capacity_true" type="radio" name="capacity_compliant" value="true" />
+                    <label for="capacity_true" title="text">Yes</label>
+                    <input id="capacity_false" type="radio" name="capacity_compliant" value="false" />
+                    <label for="capacity_false" title="text">No</label>
                   </div>
                   <br>
                   <p>Were you seated at least 6 feet from the nearest party?</p>
                   <div class="form-group">
-                    <input type="radio" name="distance_compliant" value="true" />
-                    <label for="star1" title="text">Yes</label>
-                    <input type="radio" name="distance_compliant" value="false" />
-                    <label for="star2" title="text">No</label>
+                    <input id="distance_compliant_true" type="radio" name="distance_compliant" value="true" />
+                    <label for="distance_compliant_true" title="text">Yes</label>
+                    <input id="distance_compliant_false" type="radio" name="distance_compliant" value="false" />
+                    <label for="distance_compliant_false" title="text">No</label>
                   </div>
                   <br>
                   <p>How would you rate the safety level for this restaurant?</p>
@@ -341,6 +346,8 @@ var True = true;
 var False = false;
 var None = null;
 var yelp_info = {{ yelp_info.info | safe }};
+{#document.getElementById("saved_res_remove").setAttribute("res_business_id", yelp_info.id);#}
+{#document.getElementById("iconid").setAttribute("id", yelp_info.id);#}
 var keys = Object.keys(yelp_info);
 var empty1 = [];
 for (var i = 0; i < keys.length; i++) {
@@ -608,7 +615,75 @@ function initMap() {
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_delete_favorite").value = yelp_info.id ;
+</script>
+<script>
+var save_delete_form = document.getElementById("save_delete_form");
+save_delete_form.className = "save_fav_res";
+save_delete_form.setAttribute("method", "POST");
+save_delete_form.setAttribute("onsubmit", "return false;");
+save_delete_form.setAttribute("name", "save_form");
+save_delete_form.setAttribute("restaurant_business_id", yelp_info.restaurant_business_id);
 
+var res_id = document.getElementById("res_id");
+
+var fav_icon = document.getElementById("fav_icon");
+
+if(  {{ saved_restaurants }} ) {
+    fav_icon.style.color = 'red';
+}
+
+            $('body').on('submit', "form[name='save_delete_form']", function(event) {
+                var currentForm = $(this);
+                event.preventDefault();
+                var formData = currentForm.serialize();
+                $.ajaxSetup({
+                     beforeSend: function(xhr, settings) {
+                         function getCookie(name) {
+                             var cookieValue = null;
+                             if (document.cookie && document.cookie != '') {
+                                 var cookies = document.cookie.split(';');
+                                 for (var i = 0; i < cookies.length; i++) {
+                                     var cookie = jQuery.trim(cookies[i]);
+                                     if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                         break;
+                                     }
+                                 }
+                             }
+                             return cookieValue;
+                         }
+                         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                         }
+                     }
+                });
+
+                var url = "";
+                if (document.getElementById(currentForm.attr("res_business_id")).style.color === "red") {
+                    url = "delete/favorite/restaurant/" + currentForm.attr("res_business_id");
+                } else {
+                    url = "save/favorite/restaurant/" + currentForm.attr("res_business_id");
+                }
+
+                $.ajax({
+                  type: 'POST',
+                  url: url,
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  // handle a successful response
+                  success : function(response) {
+                      if (response === "Saved") {
+                        $('#'+currentForm.attr("res_business_id")).css("color", "red");
+                      } else {
+                        $('#'+currentForm.attr("res_business_id")).css("color", "");
+                      }
+                  },
+                  error : function(xhr,errmsg,err) {
+                    console.log('Error')
+                  }
+                });
+            });
 </script>
 
 

@@ -10,7 +10,7 @@ import requests
 import json
 import logging
 import pandas as pd
-import boto3
+import io
 
 logger = logging.getLogger(__name__)
 
@@ -253,23 +253,22 @@ def get_filtered_restaurants(
     value = None
     if sort_option:
         if sort_option == "ratedhigh":
-            value = "rating"
+            value = "-yelp_detail__rating"
         elif sort_option == "ratedlow":
-            value = "-rating"
+            value = "yelp_detail__rating"
         elif sort_option == "pricehigh":
-            value = "price"
+            value = "-yelp_detail__price"
         elif sort_option == "pricelow":
-            value = "-price"
+            value = "yelp_detail__price"
     if favorite_filter:
         if user.is_authenticated:
             if value:
                 filtered_restaurants = user.favorite_restaurants.all()
                 filtered_restaurants = (
                     filtered_restaurants.filter(
-                        business_id__in=YelpRestaurantDetails.objects.filter(
-                            **filters
-                        ).order_by(value)
+                        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
                     )
+                    .order_by(value)
                     .distinct()
                     .filter(**keyword_filter)[offset : offset + int(limit)]
                 )
@@ -287,10 +286,9 @@ def get_filtered_restaurants(
     elif value:
         filtered_restaurants = (
             Restaurant.objects.filter(
-                business_id__in=YelpRestaurantDetails.objects.filter(
-                    **filters
-                ).order_by(value)
+                business_id__in=YelpRestaurantDetails.objects.filter(**filters)
             )
+            .order_by(value)
             .distinct()
             .filter(**keyword_filter)[offset : offset + int(limit)]
         )
@@ -331,12 +329,10 @@ def get_average_safety_rating(business_id):
     return None
 
 
-def get_csv_from_s3():
-    bucket = "dine-safely"
-    file_name = "last7days-by-modzcta.csv"
-    s3 = boto3.client("s3")
-    obj = s3.get_object(Bucket=bucket, Key=file_name)
-    return pd.read_csv(obj["Body"])
+def get_csv_from_github():
+    url = "https://raw.githubusercontent.com/nychealth/coronavirus-data/master/latest/last7days-by-modzcta.csv"  # noqa: E501
+    download = requests.get(url).content
+    return pd.read_csv(io.StringIO(download.decode("utf-8")))
 
 
 def check_restaurant_saved(user, restaurant_id):

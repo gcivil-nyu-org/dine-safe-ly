@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from restaurant.models import Categories
 
 # from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -7,7 +8,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .utils import send_reset_password_email
 from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
 
@@ -64,7 +65,9 @@ def account_details(request):
     user = request.user
 
     favorite_restaurant_list = user.favorite_restaurants.all()
-    if request.method == "POST":
+    user_pref_list = user.preferences.all()
+
+    if request.method == "POST" and "update_pass_form" in request.POST:
         form = UpdatePasswordForm(user=user, data=request.POST)
         if form.is_valid():
             form.save(user)
@@ -76,6 +79,7 @@ def account_details(request):
             context={
                 "form": form,
                 "favorite_restaurant_list": favorite_restaurant_list,
+                "user_pref": user_pref_list,
             },
         )
     else:
@@ -86,6 +90,7 @@ def account_details(request):
             context={
                 "form": form,
                 "favorite_restaurant_list": favorite_restaurant_list,
+                "user_pref": user_pref_list,
             },
         )
 
@@ -126,3 +131,38 @@ def forget_password(request):
         return render(
             request=request, template_name="reset_email.html", context={"form": form}
         )
+
+
+def add_preference(request, category):
+    if request.method == "POST":
+        user = request.user
+        user.preferences.add(Categories.objects.get(category=category))
+        logger.info(category)
+        return HttpResponse("Preference Saved")
+
+
+def delete_preference(request, category):
+    if request.method == "POST":
+        user = request.user
+        user.preferences.remove(Categories.objects.get(category=category))
+        logger.info(category)
+        return HttpResponse("Preference Removed")
+
+
+def update_password(request):
+    if not request.user.is_authenticated:
+        return redirect("user:login")
+
+    user = request.user
+    if request.method == "POST":
+        form = UpdatePasswordForm(user=user, data=request.POST)
+        if form.is_valid():
+            form.save(user)
+            return redirect("user:login")
+
+        error_list = []
+        for field in form:
+            for error in field.errors:
+                error_list.append(error)
+        response = {"errors": error_list}
+        return JsonResponse(response)
