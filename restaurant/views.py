@@ -17,7 +17,7 @@ from .utils import (
     get_average_safety_rating,
     get_total_restaurant_number,
     get_csv_from_s3,
-    check_restaurant_saved,
+    check_restaurant_saved, get_csv_from_github,
 )
 
 from django.http import HttpResponse
@@ -59,7 +59,8 @@ def get_restaurant_profile(request, restaurant_id):
             form.save()
 
     try:
-        csv_file = get_csv_from_s3()
+        # csv_file = get_csv_from_s3()
+        csv_file = get_csv_from_github()
         result = {}
         for idx, row in csv_file.iterrows():
             if idx == 0:
