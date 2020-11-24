@@ -65,7 +65,7 @@ def account_details(request):
     user = request.user
 
     favorite_restaurant_list = user.favorite_restaurants.all()
-    user_pref_list = user.preference.all()
+    user_pref_list = user.preferences.all()
 
     if request.method == "POST" and "update_pass_form" in request.POST:
         form = UpdatePasswordForm(user=user, data=request.POST)
@@ -136,7 +136,7 @@ def forget_password(request):
 def add_preference(request, category):
     if request.method == "POST":
         user = request.user
-        user.preference.add(Categories.objects.get(category=category))
+        user.preferences.add(Categories.objects.get(category=category))
         logger.info(category)
         return HttpResponse("Preference Saved")
 
@@ -144,7 +144,7 @@ def add_preference(request, category):
 def delete_preference(request, category):
     if request.method == "POST":
         user = request.user
-        user.preference.remove(Categories.objects.get(category=category))
+        user.preferences.remove(Categories.objects.get(category=category))
         logger.info(category)
         return HttpResponse("Preference Removed")
 
