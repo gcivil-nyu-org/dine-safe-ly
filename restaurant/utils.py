@@ -10,7 +10,6 @@ import requests
 import json
 import logging
 import pandas as pd
-import boto3
 import io
 
 logger = logging.getLogger(__name__)
@@ -332,18 +331,10 @@ def get_average_safety_rating(business_id):
     return None
 
 
-def get_csv_from_s3():
-    bucket = "dine-safely"
-    file_name = "last7days-by-modzcta.csv"
-    s3 = boto3.client("s3")
-    obj = s3.get_object(Bucket=bucket, Key=file_name)
-    return pd.read_csv(obj["Body"])
-
-
 def get_csv_from_github():
-    url = "https://raw.githubusercontent.com/nychealth/coronavirus-data/master/latest/last7days-by-modzcta.csv"
+    url = "https://raw.githubusercontent.com/nychealth/coronavirus-data/master/latest/last7days-by-modzcta.csv"  # noqa: E501
     download = requests.get(url).content
-    return pd.read_csv(io.StringIO(download.decode('utf-8')))
+    return pd.read_csv(io.StringIO(download.decode("utf-8")))
 
 
 def check_restaurant_saved(user, restaurant_id):
