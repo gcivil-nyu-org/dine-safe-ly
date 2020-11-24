@@ -17,6 +17,7 @@ def index(request):
     }
     return render(request, "index.html", parameter_dict)
 
+
 def terms(request):
 
     return render(request, "terms.html")
