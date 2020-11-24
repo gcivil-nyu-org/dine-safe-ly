@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Restaurant
@@ -221,6 +222,7 @@ def get_landing_page(request, page=1):
     return render(request, "browse.html", parameter_dict)
 
 
+@login_required
 def save_favorite_restaurant(request, business_id):
     if request.method == "POST":
         user = request.user
@@ -229,6 +231,7 @@ def save_favorite_restaurant(request, business_id):
     return HttpResponse("Saved")
 
 
+@login_required
 def delete_favorite_restaurant(request, business_id):
     if request.method == "POST":
         user = request.user
