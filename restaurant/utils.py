@@ -27,7 +27,7 @@ def default_info_page(restaurant_name):
         "name": restaurant_name,
         "image_url": settings.DEFAULT_IMAGE,
         "rating": 0,
-        "fake_info": True
+        "fake_info": True,
     }
 
 
