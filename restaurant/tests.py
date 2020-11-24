@@ -29,10 +29,13 @@ from .utils import (
 import json
 
 
-def create_restaurant(restaurant_name, business_address, postcode, business_id):
+def create_restaurant(
+    restaurant_name, business_address, yelp_detail, postcode, business_id
+):
     return Restaurant.objects.create(
         restaurant_name=restaurant_name,
         business_address=business_address,
+        yelp_detail=yelp_detail,
         postcode=postcode,
         business_id=business_id,
     )
@@ -88,6 +91,7 @@ class ModelTests(TestCase):
         restaurant = create_restaurant(
             restaurant_name="Gary Danko",
             business_address="800 N Point St",
+            yelp_detail=None,
             postcode="94109",
             business_id="WavvLdfdP6g8aZTtbBQHTw",
         )
@@ -141,6 +145,17 @@ class ModelTests(TestCase):
             latitude=40.8522129,
             longitude=-73.8290069,
         )
+
+        YelpRestaurantDetails.objects.create(
+            business_id="1",
+            neighborhood="Upper East Side",
+            price="$$",
+            rating=4.0,
+            img_url="https://s3-media1.fl.yelpcdn.com/bphoto/C4emY32GDusdMCybR6NmpQ/o.jpg",
+            latitude=40.8522129,
+            longitude=-73.8290069,
+        )
+
         category = Categories.objects.get(category="wine_bar")
         details.category.add(category)
         self.assertIsNotNone(details)
@@ -220,6 +235,7 @@ class InspectionRecordsViewTests(TestCase):
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
             "street, Manhattan, NY",
+            yelp_detail=None,
             postcode="10040",
             business_id="16",
         )
@@ -403,6 +419,7 @@ class UserQuestionnaireFormTests(BaseTest):
         create_restaurant(
             "random_name",
             "random_address",
+            None,
             "random_postcode",
             "U8C69ISrhGTTubjqoVgZYg",
         )
@@ -428,6 +445,7 @@ class SaveFavoriteFormTests(BaseTest):
         create_restaurant(
             "random_name",
             "random_address",
+            None,
             "random_postcode",
             "U8C69ISrhGTTubjqoVgZYg",
         )
@@ -446,6 +464,7 @@ class DeleteFavoriteFormTests(BaseTest):
         create_restaurant(
             "random_name",
             "random_address",
+            None,
             "random_postcode",
             "U8C69ISrhGTTubjqoVgZYg",
         )
@@ -483,6 +502,7 @@ class RestaurantViewFormTests(BaseTest):
         create_restaurant(
             "random_name",
             "random_address",
+            None,
             "random_postcode",
             "U8C69ISrhGTTubjqoVgZYg",
         )
@@ -504,6 +524,7 @@ class RestaurantViewFormTests(BaseTest):
         create_restaurant(
             "random_name",
             "random_address",
+            None,
             "random_postcode",
             "U8C69ISrhGTTubjqoVgZYg",
         )
@@ -525,6 +546,7 @@ class RestaurantViewFormTests(BaseTest):
         create_restaurant(
             "random_name",
             "random_address",
+            None,
             "random_postcode",
             "U8C69ISrhGTTubjqoVgZYg",
         )
@@ -551,10 +573,28 @@ class RestaurantViewTests(TestCase):
 
     def setUp(self):
         self.factory = RequestFactory()
+        business_id = "WavvLdfdP6g8aZTtbBQHTw"
+        neighborhood = "Upper East Side"
+        price = "$$"
+        rating = 4.0
+        img_url = "https://s3-media1.fl.yelpcdn.com/bphoto/C4emY32GDusdMCybR6NmpQ/o.jpg"
+        latitude = 40.8522129
+        longitude = -73.8290069
+
+        details = create_yelp_restaurant_details(
+            business_id,
+            neighborhood,
+            price,
+            rating,
+            img_url,
+            latitude,
+            longitude,
+        )
         self.restaurant = create_restaurant(
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
             "street, Manhattan, NY",
+            yelp_detail=details,
             postcode="10040",
             business_id="16",
         )
@@ -724,7 +764,7 @@ class RestaurantUtilsTests(TestCase):
 
     def test_get_restaurant_list(self):
         create_restaurant(
-            "Gary Danko", "somewhere in LIC", "11101", "WavvLdfdP6g8aZTtbBQHTw"
+            "Gary Danko", "somewhere in LIC", None, "11101", "WavvLdfdP6g8aZTtbBQHTw"
         )
         create_inspection_records(
             restaurant_inspection_id="27555",
@@ -813,6 +853,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
             "street, Manhattan, NY",
+            yelp_detail=None,
             postcode="10040",
             business_id="16",
         )
@@ -856,6 +897,7 @@ class IntegratedInspectionRestaurantsTests(TestCase):
             restaurant_name="Tacos El Paisa",
             business_address="1548 St. Nicholas btw West 187th street and west 188th "
             "street, Manhattan, NY",
+            yelp_detail=None,
             postcode="10040",
             business_id="16",
         )
@@ -897,6 +939,7 @@ class GetFilteredRestaurantsTests(TestCase):
         create_restaurant(
             business_id=business_id,
             business_address="fake addres",
+            yelp_detail=None,
             postcode="11111",
             restaurant_name="Test Italian Restaurant",
         )

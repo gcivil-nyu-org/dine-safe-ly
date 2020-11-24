@@ -253,23 +253,22 @@ def get_filtered_restaurants(
     value = None
     if sort_option:
         if sort_option == "ratedhigh":
-            value = "rating"
+            value = "-yelp_detail__rating"
         elif sort_option == "ratedlow":
-            value = "-rating"
+            value = "yelp_detail__rating"
         elif sort_option == "pricehigh":
-            value = "price"
+            value = "-yelp_detail__price"
         elif sort_option == "pricelow":
-            value = "-price"
+            value = "yelp_detail__price"
     if favorite_filter:
         if user.is_authenticated:
             if value:
                 filtered_restaurants = user.favorite_restaurants.all()
                 filtered_restaurants = (
                     filtered_restaurants.filter(
-                        business_id__in=YelpRestaurantDetails.objects.filter(
-                            **filters
-                        ).order_by(value)
+                        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
                     )
+                    .order_by(value)
                     .distinct()
                     .filter(**keyword_filter)[offset : offset + int(limit)]
                 )
@@ -287,10 +286,9 @@ def get_filtered_restaurants(
     elif value:
         filtered_restaurants = (
             Restaurant.objects.filter(
-                business_id__in=YelpRestaurantDetails.objects.filter(
-                    **filters
-                ).order_by(value)
+                business_id__in=YelpRestaurantDetails.objects.filter(**filters)
             )
+            .order_by(value)
             .distinct()
             .filter(**keyword_filter)[offset : offset + int(limit)]
         )

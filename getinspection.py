@@ -93,7 +93,10 @@ def save_restaurants(restaurant_df, inspection_df):
                     business_address=row["businessaddress"],
                     postcode=row["postcode"],
                 ).update(compliant_status=row["isroadwaycompliant"])
-                save_inspections(row, rt.business_id)
+                if rt.yelp_detail:
+                    save_inspections(row, rt.yelp_detail.business_id)
+                else:
+                    save_inspections(row, None)
                 logger.info(
                     "Inspection record for restaurant saved successfully: {}".format(rt)
                 )
@@ -116,19 +119,29 @@ def save_restaurants(restaurant_df, inspection_df):
                 )
                 if b_id:
                     if not Restaurant.objects.filter(business_id=b_id).exists():
+                        yelp_rest = save_yelp_restaurant_details(b_id)
+                        r.yelp_detail = yelp_rest
                         r.save()
                         logger.info(
                             "Restaurant details successfully saved: {}".format(b_id)
                         )
                         save_inspections(row, b_id)
-                        save_yelp_restaurant_details(b_id)
+
                     else:
                         Restaurant.objects.filter(business_id=b_id).update(
                             compliant_status=row["isroadwaycompliant"]
                         )
+                        logger.info("Restaurant details updated saved: {}".format(b_id))
                         save_inspections(row, b_id)
                 else:
+                    logger.info(
+                        "Saving Restaurant details with no Business ID: {}".format(b_id)
+                    )
+                    r.yelp_detail = None
                     r.save()
+                    logger.info(
+                        "Restaurant details saved with no business ID: {}".format(b_id)
+                    )
                     save_inspections(row, b_id)
 
         except Exception as e:
@@ -222,6 +235,6 @@ def populate_restaurant_with_yelp_id():
     print(count)
 
 
-# if __name__ == "__main__":
-#     # populate_restaurant_with_yelp_id()
-#     get_inspection_data()
+if __name__ == "__main__":
+    #     # populate_restaurant_with_yelp_id()
+    get_inspection_data()
