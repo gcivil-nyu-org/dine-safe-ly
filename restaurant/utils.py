@@ -67,7 +67,7 @@ def merge_yelp_info(restaurant_info, restaurant_reviews):
     yelp_info["rating"] = yelp_info["rating"] if "rating" in yelp_info else 0
     yelp_info["price"] = yelp_info["price"] if "price" in yelp_info else ""
     yelp_info["image_url"] = (
-        yelp_info["img_url"] if "img_url" in yelp_info else settings.DEFAULT_IMAGE
+        yelp_info["image_url"] if "image_url" in yelp_info else settings.DEFAULT_IMAGE
     )
     return {
         "info": yelp_info,
