@@ -46,7 +46,6 @@ def match_on_yelp(restaurant_name, restaurant_location):
 
 def clean_inspection_data(results_df):
     restaurant_df = results_df.loc[:, ["restaurantname", "businessaddress", "postcode"]]
-    print(results_df["postcode"])
     inspection_df = results_df.loc[
         :,
         [

@@ -266,9 +266,7 @@ def get_filtered_restaurants(
                 filtered_restaurants = user.favorite_restaurants.all()
                 filtered_restaurants = (
                     filtered_restaurants.filter(
-                        business_id__in=YelpRestaurantDetails.objects.filter(
-                            **filters
-                        )  # .order_by(value)
+                        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
                     )
                     .order_by(value)
                     .distinct()
