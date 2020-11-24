@@ -107,8 +107,8 @@ $(document).ready(function() {
 
     setTimeout(function() {
       $('.message.loading').remove();
-      $('<div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/avatar/avatar-1.jpg" alt="user"><div class="message media-body ml-3"><div class="bg-gray-200 rounded p-4 mb-2"><p class="text-sm mb-0">' + content + '</p></div></div>').appendTo($('.mCSB_container')).addClass('new');
-      setDate();
+      $('<div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white" src="https://d19m59y37dris4.cloudfront.net/directory/1-6/img/avatar/avatar-1.jpg" alt="user"><div class="message media-body ml-3"><div class="bg-gray-200 rounded p-4 mb-2"><p class="text-sm mb-0">' + content + '</p><p class="small ml-3">' + d.getHours() + ':' + m + '</p></div></div>').appendTo($('.mCSB_container')).addClass('new');
+
       updateScrollbar();
       i++;
     }, 500);
