@@ -24,9 +24,10 @@ def get_restaurant_info_yelp(business_id):
 
 def default_info_page(restaurant_name):
     return {
-        "restaurant_name": restaurant_name,
-        "img_url": settings.DEFAULT_IMAGE,
+        "name": restaurant_name,
+        "image_url": settings.DEFAULT_IMAGE,
         "rating": 0,
+        "fake_info": True
     }
 
 

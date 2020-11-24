@@ -364,7 +364,12 @@ $(document).ready(function(){
 
                 var a1 = document.createElement("a");
                 a1.className = "title-link";
-                a1.href = "../restaurant/profile/" + restaurant_list[i].id;
+                if (restaurant_list[i].yelp_info.fake_info) {
+                    a1.href = "../restaurant/inspection_records/" + restaurant_list[i].id;
+                } else {
+                    a1.href = "../restaurant/profile/" + restaurant_list[i].id;
+                }
+
 
                 var div3 = document.createElement("div");
                 div3.className = "card-img-top overflow-hidden dark-overlay bg-cover";
