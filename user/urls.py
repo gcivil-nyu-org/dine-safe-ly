@@ -13,4 +13,5 @@ urlpatterns = [
     ),
     path("forget_password", views.forget_password, name="forget_password"),
     path("account_details", views.account_details, name="account_details"),
+    path("update_password", views.update_password, name="update_password")
 ]
