@@ -1,9 +1,35 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+</script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="container-fluid py-5 px-lg-5" id="topSection">
     <div class="row border-bottom mb-4">
         <div class="col-12">
-            <section id="#=topSection">
+            <section>
                 <p class="lead text-muted">Browse local NYC restaurants based on COVID-19 seating
                     compliance</p>
             </section>
@@ -418,7 +444,11 @@
                 form_save_fav.appendChild(save_btn);
 
                 div_svg.appendChild(div_hidden);
+                {% if user.is_authenticated %}
                 div_svg.appendChild(form_save_fav);
+                {% else %}
+
+                {% endif %}
 
                 div3.appendChild(div4);
                 div3.appendChild(div_svg);

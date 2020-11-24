@@ -186,7 +186,7 @@ LOGGING = {
     "loggers": {"": {"level": "INFO", "handlers": ["console", "file"]}},
 }
 
-LOGIN_URL = "login"
+LOGIN_URL = "user:login"
 LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "index"
 
@@ -195,9 +195,6 @@ EMAIL_HOST_USER = "dinesafely.nyc@gmail.com"
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-
-AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
-AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
 
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
