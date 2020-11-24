@@ -18,7 +18,7 @@ from restaurant.models import Restaurant, InspectionRecords  # noqa: E402
 from yelprestaurantdetails import save_yelp_restaurant_details  # noqa: E402
 
 
-# sched = BlockingScheduler()
+sched = BlockingScheduler()
 logger = logging.getLogger(__name__)
 
 
@@ -46,7 +46,7 @@ def match_on_yelp(restaurant_name, restaurant_location):
 
 def clean_inspection_data(results_df):
     restaurant_df = results_df.loc[:, ["restaurantname", "businessaddress", "postcode"]]
-    print(results_df['postcode'])
+    print(results_df["postcode"])
     inspection_df = results_df.loc[
         :,
         [
@@ -57,7 +57,7 @@ def clean_inspection_data(results_df):
             "restaurantname",
             "businessaddress",
             "postcode",
-        ]
+        ],
     ]
     restaurant_df = restaurant_df.apply(
         lambda x: x.str.strip() if x.dtype == "str" else x
@@ -95,9 +95,9 @@ def save_restaurants(restaurant_df, inspection_df):
                     postcode=row["postcode"],
                 ).update(compliant_status=row["isroadwaycompliant"])
                 if rt.yelp_detail:
-                    save_inspections(row, rt.yelp_detail.business_id) 
+                    save_inspections(row, rt.yelp_detail.business_id)
                 else:
-                    save_inspections(row, None) 
+                    save_inspections(row, None)
                 logger.info(
                     "Inspection record for restaurant saved successfully: {}".format(rt)
                 )
@@ -127,24 +127,22 @@ def save_restaurants(restaurant_df, inspection_df):
                             "Restaurant details successfully saved: {}".format(b_id)
                         )
                         save_inspections(row, b_id)
-                        
+
                     else:
                         Restaurant.objects.filter(business_id=b_id).update(
                             compliant_status=row["isroadwaycompliant"]
                         )
-                        logger.info(
-                            "Restaurant details updated saved: {}".format(b_id)
-                        )
+                        logger.info("Restaurant details updated saved: {}".format(b_id))
                         save_inspections(row, b_id)
                 else:
                     logger.info(
-                            "Saving Restaurant details with no Business ID: {}".format(b_id)
-                        )
+                        "Saving Restaurant details with no Business ID: {}".format(b_id)
+                    )
                     r.yelp_detail = None
                     r.save()
                     logger.info(
-                            "Restaurant details successfully saved with No business ID: {}".format(b_id)
-                        )
+                        "Restaurant details saved with no business ID: {}".format(b_id)
+                    )
                     save_inspections(row, b_id)
 
         except Exception as e:
@@ -177,7 +175,7 @@ def save_inspections(row, business_id):
     return
 
 
-# @sched.scheduled_job("interval", hours=12)
+@sched.scheduled_job("interval", hours=12)
 def get_inspection_data():
     # ir = InspectionRecords.objects.all().count()
     lastInspection = InspectionRecords.objects.order_by("-inspected_on")[0:1]
@@ -209,7 +207,7 @@ def get_inspection_data():
         # save_inspections(inspection_df)
 
 
-# sched.start()
+sched.start()
 
 
 def populate_restaurant_with_yelp_id():
@@ -239,5 +237,5 @@ def populate_restaurant_with_yelp_id():
 
 
 if __name__ == "__main__":
-#     # populate_restaurant_with_yelp_id()
+    #     # populate_restaurant_with_yelp_id()
     get_inspection_data()

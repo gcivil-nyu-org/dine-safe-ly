@@ -1,12 +1,14 @@
 from django.db import models
 from django.utils import timezone
 
+
 class Categories(models.Model):
     category = models.CharField(max_length=200, primary_key=True)
     parent_category = models.CharField(max_length=200, default=None, null=True)
 
     def __str__(self):
         return "{} {}".format(self.category, self.parent_category)
+
 
 class YelpRestaurantDetails(models.Model):
     business_id = models.CharField(max_length=200, primary_key=True)
@@ -39,7 +41,15 @@ class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=200)
     business_address = models.CharField(max_length=200)
     postcode = models.CharField(max_length=200)
-    yelp_detail = models.ForeignKey(YelpRestaurantDetails,on_delete=models.SET_DEFAULT, max_length=200, default=1, blank=True, null=True, unique=True)
+    yelp_detail = models.ForeignKey(
+        YelpRestaurantDetails,
+        on_delete=models.SET_DEFAULT,
+        max_length=200,
+        default=1,
+        blank=True,
+        null=True,
+        unique=True,
+    )
     business_id = models.CharField(
         max_length=200, default=None, blank=True, null=True, unique=True
     )

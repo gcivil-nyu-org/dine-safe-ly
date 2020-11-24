@@ -268,8 +268,9 @@ def get_filtered_restaurants(
                     filtered_restaurants.filter(
                         business_id__in=YelpRestaurantDetails.objects.filter(
                             **filters
-                        )#.order_by(value)
-                    ).order_by(value)
+                        )  # .order_by(value)
+                    )
+                    .order_by(value)
                     .distinct()
                     .filter(**keyword_filter)[offset : offset + int(limit)]
                 )
@@ -287,10 +288,9 @@ def get_filtered_restaurants(
     elif value:
         filtered_restaurants = (
             Restaurant.objects.filter(
-                business_id__in=YelpRestaurantDetails.objects.filter(
-                    **filters
-                )
-            ).order_by(value)
+                business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+            )
+            .order_by(value)
             .distinct()
             .filter(**keyword_filter)[offset : offset + int(limit)]
         )

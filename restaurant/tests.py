@@ -141,6 +141,17 @@ class ModelTests(TestCase):
             latitude=40.8522129,
             longitude=-73.8290069,
         )
+
+        YelpRestaurantDetails.objects.create(
+            business_id="1",
+            neighborhood="Upper East Side",
+            price="$$",
+            rating=4.0,
+            img_url="https://s3-media1.fl.yelpcdn.com/bphoto/C4emY32GDusdMCybR6NmpQ/o.jpg",
+            latitude=40.8522129,
+            longitude=-73.8290069,
+        )
+
         category = Categories.objects.get(category="wine_bar")
         details.category.add(category)
         self.assertIsNotNone(details)

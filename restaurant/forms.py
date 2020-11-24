@@ -130,7 +130,7 @@ class SearchFilterForm(forms.Form):
 
     CHOICES_SORT = [
         ("none", "none"),
-        ("recommended","recommended"),
+        ("recommended", "recommended"),
         ("ratedhigh", "ratedhigh"),
         ("ratedlow", "ratedlow"),
         ("pricehigh", "pricehigh"),
