@@ -674,6 +674,8 @@ class RestaurantUtilsTests(TestCase):
                     "review_count": 5296,
                     "rating": 4.5,
                     "price": "$$$$",
+                    "img_url": "test_url.com",
+                    "image_url": "test_url.com",
                 }
             ),
             200,
@@ -755,7 +757,7 @@ class RestaurantUtilsTests(TestCase):
         )
         data = query_yelp(business_id)
         self.assertIsNotNone(data)
-        self.assertEqual(data["info"], {"id": business_id})
+        self.assertEqual(data["info"]["id"], business_id)
         self.assertEqual(data["reviews"], {"reviews": 1})
 
     def test_query_yelp_business_id_empty(self):

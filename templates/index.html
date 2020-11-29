@@ -43,6 +43,7 @@
             <!-- Additional required wrapper-->
             <div class="swiper-wrapper pb-5">
                 {% for restaurant in restaurant_list %}
+                {% if not restaurant.yelp_info.fake_info %}
                 <div class="swiper-slide h-auto px-2">
                     <!-- venue item-->
                     <div class="w-100 h-100 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
@@ -81,6 +82,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
             <!-- If we need pagination-->

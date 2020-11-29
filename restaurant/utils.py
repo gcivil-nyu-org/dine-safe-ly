@@ -24,9 +24,10 @@ def get_restaurant_info_yelp(business_id):
 
 def default_info_page(restaurant_name):
     return {
-        "restaurant_name": restaurant_name,
-        "img_url": settings.DEFAULT_IMAGE,
+        "name": restaurant_name,
+        "image_url": settings.DEFAULT_IMAGE,
         "rating": 0,
+        "fake_info": True,
     }
 
 
@@ -38,6 +39,8 @@ def get_restaurant_info_yelp_local(business_id, restaurant_name):
     yelp_dict = model_to_dict(yelp_detail) if yelp_detail else None
     if yelp_dict:
         # Format the info
+        yelp_dict["rating"] = yelp_dict["rating"] if yelp_dict["rating"] else 0
+        yelp_dict["price"] = yelp_dict["price"] if yelp_dict["price"] else ""
         yelp_dict["id"] = yelp_dict["business_id"]
         yelp_dict["name"] = restaurant_name
         yelp_dict["image_url"] = (
@@ -60,8 +63,14 @@ def get_restaurant_reviews_yelp(business_id):
 
 
 def merge_yelp_info(restaurant_info, restaurant_reviews):
+    yelp_info = json.loads(restaurant_info.content)
+    yelp_info["rating"] = yelp_info["rating"] if "rating" in yelp_info else 0
+    yelp_info["price"] = yelp_info["price"] if "price" in yelp_info else ""
+    yelp_info["image_url"] = (
+        yelp_info["image_url"] if "image_url" in yelp_info else settings.DEFAULT_IMAGE
+    )
     return {
-        "info": json.loads(restaurant_info.content),
+        "info": yelp_info,
         "reviews": json.loads(restaurant_reviews.content),
     }
 

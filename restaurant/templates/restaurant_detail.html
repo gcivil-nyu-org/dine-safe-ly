@@ -24,11 +24,15 @@
       <div class="col-lg-8">
         <div class="text-block">
           <h3 class="mb-4">
-            <form id="save_delete_form" >
+            <form name="saved_res_remove" id="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="" method="POST">
               Compliance Data
-                <input id="res_id" name="restaurant_business_id" type="hidden" value="{{ yelp_info.restaurant_business_id }}">
-                <button type="submit" class="btn btn-link mb-2"></button>
-                <i id="fav_icon" class="fa fa-heart fa-2x" style="padding-top: 10px; padding-left: 2px;"></i>
+              <button type="submit" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="save/remove">
+                {% if saved_restaurants %}
+                <i id="iconid" class="fa fa-heart fa-2x" style="color: red;"></i>
+                {% else %}
+                <i id="iconid" class="fa fa-heart fa-2x"></i>
+                {% endif %}
+              </button>
             </form>
           </h3>
           <div class="list-group shadow mb-5">
@@ -346,8 +350,8 @@ var True = true;
 var False = false;
 var None = null;
 var yelp_info = {{ yelp_info.info | safe }};
-{#document.getElementById("saved_res_remove").setAttribute("res_business_id", yelp_info.id);#}
-{#document.getElementById("iconid").setAttribute("id", yelp_info.id);#}
+document.getElementById("saved_res_remove").setAttribute("res_business_id", yelp_info.id);
+document.getElementById("iconid").setAttribute("id", yelp_info.id);
 var keys = Object.keys(yelp_info);
 var empty1 = [];
 for (var i = 0; i < keys.length; i++) {
@@ -617,22 +621,7 @@ function initMap() {
   document.getElementById("restaurant_business_id_delete_favorite").value = yelp_info.id ;
 </script>
 <script>
-var save_delete_form = document.getElementById("save_delete_form");
-save_delete_form.className = "save_fav_res";
-save_delete_form.setAttribute("method", "POST");
-save_delete_form.setAttribute("onsubmit", "return false;");
-save_delete_form.setAttribute("name", "save_form");
-save_delete_form.setAttribute("restaurant_business_id", yelp_info.restaurant_business_id);
-
-var res_id = document.getElementById("res_id");
-
-var fav_icon = document.getElementById("fav_icon");
-
-if(  {{ saved_restaurants }} ) {
-    fav_icon.style.color = 'red';
-}
-
-            $('body').on('submit', "form[name='save_delete_form']", function(event) {
+            $('body').on('submit', "form[name='saved_res_remove']", function(event) {
                 var currentForm = $(this);
                 event.preventDefault();
                 var formData = currentForm.serialize();
@@ -644,7 +633,7 @@ if(  {{ saved_restaurants }} ) {
                                  var cookies = document.cookie.split(';');
                                  for (var i = 0; i < cookies.length; i++) {
                                      var cookie = jQuery.trim(cookies[i]);
-                                     if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
                                          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                                          break;
                                      }
@@ -659,10 +648,10 @@ if(  {{ saved_restaurants }} ) {
                 });
 
                 var url = "";
-                if (document.getElementById(currentForm.attr("res_business_id")).style.color === "red") {
-                    url = "delete/favorite/restaurant/" + currentForm.attr("res_business_id");
+                if (document.getElementById(currentForm.attr("res_business_id")).style.color == "red") {
+                    url = "../../delete/favorite/restaurant/" + currentForm.attr("res_business_id");
                 } else {
-                    url = "save/favorite/restaurant/" + currentForm.attr("res_business_id");
+                    url = "../../save/favorite/restaurant/" + currentForm.attr("res_business_id");
                 }
 
                 $.ajax({
@@ -673,7 +662,7 @@ if(  {{ saved_restaurants }} ) {
                   contentType: false,
                   // handle a successful response
                   success : function(response) {
-                      if (response === "Saved") {
+                      if (response == "Saved") {
                         $('#'+currentForm.attr("res_business_id")).css("color", "red");
                       } else {
                         $('#'+currentForm.attr("res_business_id")).css("color", "");
