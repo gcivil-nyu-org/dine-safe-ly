@@ -12,7 +12,7 @@
           <span id="res_rev_star">
 
           </span>
-          &nbsp;&nbsp;<span id="res_review_count"></span><span>&nbsp;Reviews</span>
+          &nbsp;&nbsp;<span id="res_review_count" class="ml-4"></span><span>&nbsp;Reviews</span>
         </p>
       </div>
     </div>
@@ -396,7 +396,7 @@ for (j = 0; j < Math.ceil(rate); j++) {
 }
 for (j = 0; j < 5 - Math.ceil(rate); j++) {
     var icon2 = document.createElement("i");
-    icon2.className = "fa fa-xs fa-star text-gray-200 mr-4";
+    icon2.className = "fa fa-xs fa-star text-gray-200";
     res_rev_star.appendChild(icon2);
 }
 
