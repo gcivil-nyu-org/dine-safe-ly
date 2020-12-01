@@ -10,8 +10,13 @@ from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
 from django.http import HttpResponse, JsonResponse
 from .utils import send_reset_password_email
-from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
-
+from .forms import (
+    UserCreationForm,
+    ResetPasswordForm,
+    UpdatePasswordForm,
+    GetEmailForm,
+    UserPreferenceForm,
+)
 
 import logging
 
@@ -135,6 +140,11 @@ def forget_password(request):
 
 def add_preference(request, category):
     if request.method == "POST":
+        form = UserPreferenceForm(request.POST)
+
+        if form.is_valid():
+            print(form.cleaned_data.get("pref_list"))
+        logger.error(form.errors)
         user = request.user
         user.preferences.add(Categories.objects.get(category=category))
         logger.info(category)

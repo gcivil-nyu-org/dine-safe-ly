@@ -1,4 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <section class="py-5">
     <div class="container">
         <!-- Breadcrumbs -->
@@ -150,13 +152,13 @@
                         {% endfor %}
                     </div>
                     <div class="collapse" id="personalPreferences">
-
+                        {% csrf_token %}
                         <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" >
                             {% csrf_token %}
                             <div class="row pt-4">
                                     <div class="form-group col-md-6">
-                                        <label class="form-label" for="pcategory">Category</label>
-                                        <select class="selectpicker form-control" name="pcategory" id="pcategory" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
+                                        <label class="form-label" for="pref_list">Category</label>
+                                        <select class="selectpicker form-control" name="pref_list" id="pref_list" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
                                             <option value="newamerican">New American</option>
                                             <option value="armenian">Armenian</option>
                                             <option value="bars">Bars</option>
@@ -352,16 +354,16 @@
 
     function add_pref_function(){
         {# add preference #}
-    var category_list = $('#pcategory').val();
-    var add_form = document.getElementById("add_pref_form");
+    var category_list = $('#pref_list').val();
+    {#var add_form = document.getElementById("add_pref_form");#}
     console.log(category_list);
 
-    $.each(category_list, function (index, category) {
-        $('body').on('submit', "form[name='add_pref_form']", function(event) {
+    $('#add_pref_form').on('submit', function(event) {
+                event.preventDefault();
+                var add_form = document.getElementById("add_pref_form");
                 var currentForm = $(this);
-                $(currentForm).attr("category", category);
-                var formData = currentForm.serialize();
-
+                $(currentForm).attr("category", "sushi");
+                console.log("add form is: ",add_form);
                 $.ajaxSetup({
                      beforeSend: function(xhr, settings) {
                          function getCookie(name) {
@@ -386,7 +388,7 @@
                 $.ajax({
                   type: 'POST',
                   url: "../user/add/preference/user/" + currentForm.attr("category"),
-                  data: formData,
+                  data: add_form,
                   processData: false,
                   contentType: false,
                   // handle a successful response
@@ -394,11 +396,54 @@
 
                   },
                   error : function(xhr,errmsg,err) {
-                    console.log('Error')
+                    console.log('Ajax Error')
                   }
                 });
         });
-    });
+
+    {#$.each(category_list, function (index, category) {#}
+    {#    $('body').on('submit', "form[name='add_pref_form']", function(event) {#}
+    {#            var currentForm = $(this);#}
+    {#            $(currentForm).attr("category", category);#}
+    {#            var formData = currentForm.serialize();#}
+    {##}
+    {#            $.ajaxSetup({#}
+    {#                 beforeSend: function(xhr, settings) {#}
+    {#                     function getCookie(name) {#}
+    {#                         var cookieValue = null;#}
+    {#                         if (document.cookie && document.cookie != '') {#}
+    {#                             var cookies = document.cookie.split(';');#}
+    {#                             for (var i = 0; i < cookies.length; i++) {#}
+    {#                                 var cookie = jQuery.trim(cookies[i]);#}
+    {#                                 if (cookie.substring(0, name.length + 1) == (name + '=')) {#}
+    {#                                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));#}
+    {#                                     break;#}
+    {#                                 }#}
+    {#                             }#}
+    {#                         }#}
+    {#                         return cookieValue;#}
+    {#                     }#}
+    {#                     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {#}
+    {#                         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));#}
+    {#                     }#}
+    {#                 }#}
+    {#            });#}
+    {#            $.ajax({#}
+    {#              type: 'POST',#}
+    {#              url: "../user/add/preference/user/" + currentForm.attr("category"),#}
+    {#              data: add_form,#}
+    {#              processData: false,#}
+    {#              contentType: false,#}
+    {#              // handle a successful response#}
+    {#              success : function(response) {#}
+    {##}
+    {#              },#}
+    {#              error : function(xhr,errmsg,err) {#}
+    {#                console.log('Error')#}
+    {#              }#}
+    {#            });#}
+    {#    });#}
+    {#});#}
 
 
 

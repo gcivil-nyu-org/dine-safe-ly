@@ -10,6 +10,8 @@ from django.contrib.auth.password_validation import (
 )
 import logging
 
+from restaurant.models import Categories
+
 logger = logging.getLogger(__name__)
 
 
@@ -138,3 +140,52 @@ class GetEmailForm(forms.Form):
         if r.count() == 0:
             raise ValidationError("Email doesn't exists")
         return email
+
+
+class UserPreferenceForm(forms.Form):
+    CHOICES_CATEGORY = [
+        ("newamerican", "newamerican"),
+        ("armenian", "armenian"),
+        ("barbeque", "barbeque"),
+        ("bars", "bars"),
+        ("bistros", "bistros"),
+        ("burgers", "burgers"),
+        ("chinese", "chinese"),
+        ("danish", "danish"),
+        ("diners", "diners"),
+        ("ethiopian", "ethiopian"),
+        ("filipino", "filipino"),
+        ("french", "french"),
+        ("georgian", "georgian"),
+        ("german", "german"),
+        ("greek", "greek"),
+        ("hotdog", "hotdog"),
+        ("italian", "italian"),
+        ("bistros", "bistros"),
+        ("japanese", "japanese"),
+        ("jewish", "jewish"),
+        ("kebab", "kebab"),
+        ("korean", "korean"),
+        ("kosher", "kosher"),
+        ("mexican", "mexican"),
+        ("noodles", "noodles"),
+        ("pizza", "pizza"),
+        ("salad", "salad"),
+        ("sandwiches", "sandwiches"),
+        ("seafood", "seafood"),
+        ("sushi", "sushi"),
+        ("tapassmallplates", "tapassmallplates"),
+        ("vegan", "vegan"),
+        ("vegetarian", "vegetarian"),
+        ("vietnamese", "vietnamese"),
+        ("waffles", "waffles"),
+        ("wraps", "wraps"),
+    ]
+    pref_list = forms.MultipleChoiceField(
+        label="pref_list", choices=CHOICES_CATEGORY, required=False
+    )
+
+    def save(self, user, commit=True):
+        category_list = self.cleaned_data.get("category_list")
+        for category in category_list:
+            user.preferences.add(Categories.objects.get(category=category))
