@@ -26,13 +26,19 @@
           <h3 class="mb-4">
             <form name="saved_res_remove" id="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="" method="POST">
               Compliance Data
-              <button type="submit" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="save/remove">
-                {% if saved_restaurants %}
-                <i id="iconid" class="fa fa-heart fa-2x" style="color: red;"></i>
-                {% else %}
+            {% if user.is_authenticated %}
+                <button type="submit" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="save/remove">
+
+                    {% if saved_restaurants %}
+                    <i id="iconid" class="fa fa-heart fa-2x" style="color: #ff0000;"></i>
+                    {% else %}
+                    <i id="iconid" class="fa fa-heart fa-2x"></i>
+                    {% endif %}
+                </button>
+            {% else %}
+                <button id="log_in_to_save" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="log in to save" >
                 <i id="iconid" class="fa fa-heart fa-2x"></i>
-                {% endif %}
-              </button>
+            {% endif %}
             </form>
           </h3>
           <div class="list-group shadow mb-5">
@@ -619,6 +625,9 @@ function initMap() {
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_delete_favorite").value = yelp_info.id ;
+  document.getElementById("log_in_to_save").onclick = function() {
+      location.href = "{% url 'user:login' %}";
+  }
 </script>
 <script>
             $('body').on('submit', "form[name='saved_res_remove']", function(event) {
