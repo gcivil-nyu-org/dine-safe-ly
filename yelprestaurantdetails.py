@@ -44,7 +44,7 @@ def map_zipcode_to_neighbourhood():
 
 
 def save_yelp_categories():
-    access_token = settings.YELP_ACESS_TOKEN_BETA
+    access_token = settings.YELP_ACESS_TOKEN_CATEGORY
     headers = {"Authorization": "bearer %s" % access_token}
     url = settings.YELP_CATEGORY_API
     response = requests.get(url, headers=headers)
@@ -78,7 +78,7 @@ def get_neighbourhood(zip):
 
 
 def get_restaurant_category_yelp(alias):
-    access_token = settings.YELP_ACESS_TOKEN_BETA
+    access_token = settings.YELP_ACESS_TOKEN_CATEGORY
     headers = {"Authorization": "bearer %s" % access_token}
     url = settings.YELP_CATEGORY_API + alias
     response = requests.get(url, headers=headers)

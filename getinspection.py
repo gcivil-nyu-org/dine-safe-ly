@@ -29,7 +29,7 @@ def match_on_yelp(restaurant_name, restaurant_location):
     state = "NY"
     country = "US"
 
-    YELP_ACCESS_TOKE = settings.YELP_ACCESS_TOKEN2
+    YELP_ACCESS_TOKE = settings.YELP_ACCESS_TOKEN_BUSINESS_SEARCH
     headers = {"Authorization": "Bearer %s" % YELP_ACCESS_TOKE}
     url = "https://api.yelp.com/v3/businesses/matches"
     params = {
