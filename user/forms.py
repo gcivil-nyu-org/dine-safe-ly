@@ -1,6 +1,16 @@
 from django.contrib.auth import get_user_model
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.password_validation import (
+    UserAttributeSimilarityValidator,
+    MinimumLengthValidator,
+    CommonPasswordValidator,
+    NumericPasswordValidator,
+)
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class UserCreationForm(forms.Form):
@@ -31,6 +41,30 @@ class UserCreationForm(forms.Form):
             raise ValidationError("Password don't match")
 
         return password2
+
+    def clean_password1(self):
+        user = get_user_model().objects.create(
+            username=self.cleaned_data["username"],
+            email=self.cleaned_data["email"],
+            password=self.cleaned_data["password1"],
+        )
+        password_validators = [
+            MinimumLengthValidator(),
+            UserAttributeSimilarityValidator(),
+            CommonPasswordValidator(),
+            NumericPasswordValidator(),
+        ]
+
+        try:
+            validate_password(
+                password=self.cleaned_data["password1"],
+                user=user,
+                password_validators=password_validators,
+            )
+        except ValidationError as e:
+            logger.error("validation failed")
+            get_user_model().objects.filter(pk=user.id).delete()
+            raise ValidationError(e)
 
     def save(self, commit=True):
         user = get_user_model().objects.create_user(
