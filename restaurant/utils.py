@@ -175,7 +175,9 @@ def get_total_restaurant_number(
         )
         return restaurants.count()
 
-    return Restaurant.objects.filter(business_id__in=YelpRestaurantDetails.objects.all()).count()
+    return Restaurant.objects.filter(
+        business_id__in=YelpRestaurantDetails.objects.all()
+    ).count()
 
 
 def get_restaurant_list(
@@ -219,7 +221,9 @@ def get_restaurant_list(
         )
         return restaurants_to_dict(restaurants)
     else:
-        restaurants = Restaurant.objects.filter(business_id__in=YelpRestaurantDetails.objects.all())[
+        restaurants = Restaurant.objects.filter(
+            business_id__in=YelpRestaurantDetails.objects.all()
+        )[
             offset : offset + int(limit)  # noqa: E203
         ]
         return restaurants_to_dict(restaurants)
