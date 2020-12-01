@@ -8,7 +8,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from .utils import send_reset_password_email
 from .forms import (
     UserCreationForm,
@@ -138,17 +138,14 @@ def forget_password(request):
         )
 
 
-def add_preference(request, category):
+def add_preference(request):
     if request.method == "POST":
         form = UserPreferenceForm(request.POST)
-
         if form.is_valid():
             print(form.cleaned_data.get("pref_list"))
-        logger.error(form.errors)
-        user = request.user
-        user.preferences.add(Categories.objects.get(category=category))
-        logger.info(category)
-        return HttpResponse("Preference Saved")
+            form.save(user=request.user)
+            return HttpResponse("Preference Saved")
+        return HttpResponseBadRequest
 
 
 def delete_preference(request, category):

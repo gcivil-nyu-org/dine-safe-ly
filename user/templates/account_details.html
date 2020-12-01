@@ -153,7 +153,7 @@
                     </div>
                     <div class="collapse" id="personalPreferences">
                         {% csrf_token %}
-                        <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" >
+                        <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" action="">
                             {% csrf_token %}
                             <div class="row pt-4">
                                     <div class="form-group col-md-6">
@@ -196,7 +196,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button class="btn btn-outline-primary mb-4" type="submit" onclick="add_pref_function()" data-original-title="add_preference">Save your Preferences</button>
+                                <button class="btn btn-outline-primary mb-4" type="submit" data-original-title="add_preference">Save your Preferences</button>
                             </form>
                     </div>
                 </div>
@@ -351,19 +351,12 @@
         });
     </script>
 <script>
-
-    function add_pref_function(){
-        {# add preference #}
-    var category_list = $('#pref_list').val();
-    {#var add_form = document.getElementById("add_pref_form");#}
-    console.log(category_list);
-
     $('#add_pref_form').on('submit', function(event) {
                 event.preventDefault();
+                var form_data = new FormData(document.getElementById("add_pref_form"))
                 var add_form = document.getElementById("add_pref_form");
-                var currentForm = $(this);
-                $(currentForm).attr("category", "sushi");
-                console.log("add form is: ",add_form);
+
+                {#console.log("add form value is : ",form_data.get("pref_list"));#}
                 $.ajaxSetup({
                      beforeSend: function(xhr, settings) {
                          function getCookie(name) {
@@ -387,65 +380,19 @@
                 });
                 $.ajax({
                   type: 'POST',
-                  url: "../user/add/preference/user/" + currentForm.attr("category"),
-                  data: add_form,
+                  url: "../user/add/preference/user",
+                  data: form_data,
                   processData: false,
                   contentType: false,
                   // handle a successful response
                   success : function(response) {
-
+                      window.location.reload(true);
                   },
                   error : function(xhr,errmsg,err) {
                     console.log('Ajax Error')
                   }
                 });
         });
-
-    {#$.each(category_list, function (index, category) {#}
-    {#    $('body').on('submit', "form[name='add_pref_form']", function(event) {#}
-    {#            var currentForm = $(this);#}
-    {#            $(currentForm).attr("category", category);#}
-    {#            var formData = currentForm.serialize();#}
-    {##}
-    {#            $.ajaxSetup({#}
-    {#                 beforeSend: function(xhr, settings) {#}
-    {#                     function getCookie(name) {#}
-    {#                         var cookieValue = null;#}
-    {#                         if (document.cookie && document.cookie != '') {#}
-    {#                             var cookies = document.cookie.split(';');#}
-    {#                             for (var i = 0; i < cookies.length; i++) {#}
-    {#                                 var cookie = jQuery.trim(cookies[i]);#}
-    {#                                 if (cookie.substring(0, name.length + 1) == (name + '=')) {#}
-    {#                                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));#}
-    {#                                     break;#}
-    {#                                 }#}
-    {#                             }#}
-    {#                         }#}
-    {#                         return cookieValue;#}
-    {#                     }#}
-    {#                     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {#}
-    {#                         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));#}
-    {#                     }#}
-    {#                 }#}
-    {#            });#}
-    {#            $.ajax({#}
-    {#              type: 'POST',#}
-    {#              url: "../user/add/preference/user/" + currentForm.attr("category"),#}
-    {#              data: add_form,#}
-    {#              processData: false,#}
-    {#              contentType: false,#}
-    {#              // handle a successful response#}
-    {#              success : function(response) {#}
-    {##}
-    {#              },#}
-    {#              error : function(xhr,errmsg,err) {#}
-    {#                console.log('Error')#}
-    {#              }#}
-    {#            });#}
-    {#    });#}
-    {#});#}
-
-
 
     }
     </script>

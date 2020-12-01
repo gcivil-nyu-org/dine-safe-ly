@@ -186,6 +186,6 @@ class UserPreferenceForm(forms.Form):
     )
 
     def save(self, user, commit=True):
-        category_list = self.cleaned_data.get("category_list")
+        category_list = self.cleaned_data.get("pref_list")
         for category in category_list:
             user.preferences.add(Categories.objects.get(category=category))
