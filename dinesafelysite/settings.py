@@ -145,17 +145,17 @@ STATICFILES_DIRS = [
 
 
 YELP_BUSINESS_API = "https://api.yelp.com/v3/businesses/"
-YELP_TOKEN_1 = os.environ.get("YELP_TOKEN_1")
+YELP_ACCESS_TOKEN_REVIEW = os.environ.get("YELP_ACCESS_TOKEN_REVIEW")
 
-YELP_ACCESS_TOKEN2 = os.environ.get("YELP_ACCESS_TOKEN2")
+YELP_ACCESS_TOKEN_BUSINESS_SEARCH = os.environ.get("YELP_ACCESS_TOKEN_BUSINESS_SEARCH")
 
-YELP_ACCESS_TOKE = os.environ.get("YELP_ACCESS_TOKE")
+YELP_ACCESS_TOKEN_BUSINESS_ID = os.environ.get("YELP_ACCESS_TOKEN_BUSINESS_ID")
 
 YELP_TOKEN_CHUANQI = os.environ.get("YELP_TOKEN_CHUANQI")
 
 # Yelp categories
 YELP_CATEGORY_API = "https://api.yelp.com/v3/categories"
-YELP_ACESS_TOKEN_BETA = os.environ.get("YELP_ACESS_TOKEN_BETA")
+YELP_ACESS_TOKEN_CATEGORY = os.environ.get("YELP_ACESS_TOKEN_CATEGORY")
 
 DEFAULT_IMAGE = (
     "https://www.theskinnypignyc.com/wp-content/uploads/2019/05/what"
