@@ -103,6 +103,13 @@
                             contentType: false,
                             success : function(json) {
                                 $('#error_update_pass').html("");
+                                window.location.reload();
+
+                            },
+                            error : function(xhr,errmsg,err) {
+                                console.log(xhr);
+                                $('#error_update_pass').html("");
+                                var json = JSON.parse(xhr.responseText);
                                 for(i = 0; i < json.errors.length; i++) {
                                     console.log(json.errors[i]);
 
@@ -115,10 +122,6 @@
                                     div1.id = "alert_msg";
                                     document.getElementById("error_update_pass").appendChild(div1);
                                 }
-
-                            },
-                            error : function(xhr,errmsg,err) {
-                                console.log(errmsg)
 
                             }
                         });

@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth import authenticate, login, logout
 from restaurant.models import Categories
 
@@ -164,5 +166,9 @@ def update_password(request):
         for field in form:
             for error in field.errors:
                 error_list.append(error)
-        response = {"errors": error_list}
-        return JsonResponse(response)
+        context = {
+            'status': '400', 'errors': error_list
+        }
+        response = HttpResponse(json.dumps(context), content_type='application/json')
+        response.status_code = 400
+        return response
