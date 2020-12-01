@@ -59,7 +59,7 @@ def get_restaurant_profile(request, restaurant_id):
         form = QuestionnaireForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'success')
+            messages.success(request, "success")
             return HttpResponseRedirect("")
 
     try:
