@@ -14,7 +14,7 @@
         <form action="{% url 'restaurant:browse' %}">
             <div class="row">
                 <div class="col-lg-10 d-flex align-items-center form-group">
-                    <input class="form-control border-0 shadow-0" type="search" name="search"  id="search-keyword" placeholder="What are you searching for?">
+                    <input class="form-control border-0 shadow-0" type="search" name="search"  id="search-keyword" placeholder="Search restaurants by name">
                 </div>
                 <div class="col-lg-2 form-group mb-0">
                     <a class="btn btn-primary btn-block h-100" onclick="search_keyword()">Search</a>
@@ -48,7 +48,12 @@
                     <!-- venue item-->
                     <div class="w-100 h-100 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
                         <div class="card h-100 border-0 shadow">
-                            <div class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({{ restaurant.yelp_info.image_url }}); min-height: 200px;"><a class="tile-link" href="../restaurant/profile/{{restaurant.id}}"></a>
+                        {% if restaurant.yelp_info.rating == 5 %}
+                            <div class="ribbon ribbon-primary">
+                                Recommended
+                            </div>
+                        {% endif %}
+                            <div class="card-img-top overflow-hidden dark-overlay bg-cover" style="background-image: url({{ restaurant.yelp_info.image_url }}); min-height: 200px;"><a class="tile-link" href="{% url 'restaurant:profile' restaurant.id %}"></a>
                                 <div class="card-img-overlay-bottom z-index-20">
                                     <h4 class="text-white text-shadow">{{ restaurant.yelp_info.name }}</h4>
                                     <p class="mb-2 text-xs">
@@ -68,14 +73,14 @@
                             </div>
                             <div class="card-body">
                                 <p class="text-sm text-muted text-uppercase mb-1">
-                                    <a href="../restaurant/inspection_records/{{restaurant.id}}" class="text-dark">{{ restaurant.latest_record.is_roadway_compliant }}</a>
+                                    <a href="{% url 'restaurant:inspection_history' restaurant.id %}" class="text-dark">{{ restaurant.latest_record.is_roadway_compliant }}</a>
                                     {% if restaurant.latest_record.is_roadway_compliant == "Compliant" %}
                                         <i class="fas fa-check-circle" style="color:#596ff8"></i>
                                     {% endif %}
                                 </p>
                                 <p class="text-sm mb-0">
                                     {% for cat in restaurant.yelp_info.categories %}
-                                    <a class="mr-1 disabled">{{ cat.title}}</a>
+                                    <a class="mr-1 disabled text-decoration-none">{{ cat.title}}</a>
                                     {% endfor %}
                                 </p>
                             </div>

@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 def get_restaurant_info_yelp(business_id):
-    access_token = settings.YELP_ACCESS_TOKE
+    access_token = settings.YELP_ACCESS_TOKEN_BUSINESS_ID
     headers = {"Authorization": "bearer %s" % access_token}
     url = settings.YELP_BUSINESS_API + business_id
     return requests.get(url, headers=headers)
@@ -56,7 +56,7 @@ def get_restaurant_info_yelp_local(business_id, restaurant_name):
 
 
 def get_restaurant_reviews_yelp(business_id):
-    access_token = settings.YELP_TOKEN_1
+    access_token = settings.YELP_ACCESS_TOKEN_REVIEW
     headers = {"Authorization": "bearer %s" % access_token}
     url = settings.YELP_BUSINESS_API + business_id + "/reviews"
     return requests.get(url, headers=headers)
@@ -169,18 +169,20 @@ def get_total_restaurant_number(
             compliant_filter,
             0,
             None,
-            None,
+            sort_option,
             favorite_filter,
             user,
         )
         return restaurants.count()
 
-    return Restaurant.objects.all().count()
+    return Restaurant.objects.filter(
+        business_id__in=YelpRestaurantDetails.objects.all()
+    ).count()
 
 
 def get_restaurant_list(
-    page,
-    limit,
+    page=1,
+    limit=6,
     keyword=None,
     neighbourhoods_filter=None,
     categories_filter=None,
@@ -219,7 +221,9 @@ def get_restaurant_list(
         )
         return restaurants_to_dict(restaurants)
     else:
-        restaurants = Restaurant.objects.all()[
+        restaurants = Restaurant.objects.filter(
+            business_id__in=YelpRestaurantDetails.objects.all()
+        )[
             offset : offset + int(limit)  # noqa: E203
         ]
         return restaurants_to_dict(restaurants)
@@ -269,6 +273,49 @@ def get_filtered_restaurants(
             value = "-yelp_detail__price"
         elif sort_option == "pricelow":
             value = "yelp_detail__price"
+
+    if user and user.is_authenticated and sort_option == "recommended":
+        preferred_categories = []
+        keyword_filter["compliant_status__iexact"] = "Compliant"
+        if not user.preferences.all():
+            restaurants = (
+                Restaurant.objects.filter(
+                    business_id__in=YelpRestaurantDetails.objects.all()
+                )
+                .distinct()
+                .filter(**keyword_filter)
+                .order_by("-yelp_detail__rating")[offset : offset + int(limit)]
+            )
+            return restaurants
+
+        for c in user.preferences.all():
+            preferred_categories.append(c.parent_category)
+
+        filters["category__parent_category__in"] = preferred_categories
+
+        value = "-yelp_detail__rating"
+        if favorite_filter:
+            filtered_restaurants = user.favorite_restaurants.all()
+            filtered_restaurants = (
+                filtered_restaurants.filter(
+                    business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+                )
+                .distinct()
+                .filter(**keyword_filter)
+                .order_by(value)[offset : offset + int(limit)]
+            )
+        else:
+            filtered_restaurants = (
+                Restaurant.objects.filter(
+                    business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+                )
+                .distinct()
+                .filter(**keyword_filter)
+                .order_by(value)[offset : offset + int(limit)]
+            )
+
+        return filtered_restaurants
+
     if favorite_filter:
         if user.is_authenticated:
             if value:

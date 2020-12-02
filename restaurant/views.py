@@ -1,8 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
 from .models import Restaurant
 from django.contrib.auth import get_user_model
+from django.views.decorators.csrf import csrf_exempt
 from .forms import (
     QuestionnaireForm,
     SearchFilterForm,
@@ -58,6 +60,8 @@ def get_restaurant_profile(request, restaurant_id):
         form = QuestionnaireForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "success")
+            return HttpResponseRedirect("")
 
     try:
         csv_file = get_csv_from_github()
@@ -206,3 +210,17 @@ def delete_favorite_restaurant(request, business_id):
         )
         logger.info(business_id)
         return HttpResponse("Deleted")
+
+
+@csrf_exempt
+def chatbot_keyword(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            restaurants = get_restaurant_list(
+                keyword=data["keyword"], categories_filter=[data["category"]]
+            )
+            response = {"restaurants": restaurants}
+            return JsonResponse(response)
+        except AttributeError as e:
+            return HttpResponseBadRequest(e)

@@ -27,4 +27,5 @@ urlpatterns = [
         views.delete_favorite_restaurant,
         name="delete_favorite_restaurant",
     ),
+    path("chatbot/keywordtest", views.chatbot_keyword, name="chatbottest"),
 ]
