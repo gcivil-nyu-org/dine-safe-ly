@@ -276,11 +276,23 @@ def get_filtered_restaurants(
 
     if user and user.is_authenticated and sort_option == "recommended":
         preferred_categories = []
+        keyword_filter["compliant_status__iexact"] = "Compliant"
+        if not user.preferences.all():
+            restaurants = (
+                Restaurant.objects.filter(
+                    business_id__in=YelpRestaurantDetails.objects.all()
+                )
+                .distinct()
+                .filter(**keyword_filter)
+                .order_by("-yelp_detail__rating")[offset : offset + int(limit)]
+            )
+            return restaurants
+
         for c in user.preferences.all():
             preferred_categories.append(c.parent_category)
 
         filters["category__parent_category__in"] = preferred_categories
-        keyword_filter["compliant_status__iexact"] = "Compliant"
+
         value = "-yelp_detail__rating"
         if favorite_filter:
             filtered_restaurants = user.favorite_restaurants.all()
