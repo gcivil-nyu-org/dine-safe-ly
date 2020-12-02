@@ -34,12 +34,19 @@ def user_login(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
+            logger.info("valid")
             if user is not None:
-                if not user.is_active:
-                    send_verification_email(request, form.cleaned_data.get("email"))
                 login(request, user)
                 return redirect("user:register")
-        logger.error(form.errors)
+
+        # Check if the user is active or not.
+        for error in form.errors.as_data()["__all__"]:
+            if "This account is inactive." in error:
+                user = get_user_model().objects.get(username=form.data["username"])
+                send_verification_email(request, user.email)
+                return render(
+                    request=request, template_name="sent_verification_email.html"
+                )
     else:
         form = AuthenticationForm()
     return render(request, template_name="login.html", context={"form": form})

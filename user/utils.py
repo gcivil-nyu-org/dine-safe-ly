@@ -4,7 +4,6 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_bytes
 from django.core.mail import EmailMultiAlternatives
 from django import template
-from django.contrib.sites.models import Site
 
 import logging
 
