@@ -376,7 +376,7 @@ switch (false) {
     case (empty1.includes(review_count)):
         document.getElementById("res_review_count").innerHTML = yelp_info.review_count;
     case (empty1.includes(rating)):
-        document.getElementById("res_rating_info").innerHTML = yelp_info.rating;
+        document.getElementById("res_rating_info").innerHTML = Math.ceil(yelp_info.rating);
     case (empty1.includes(display_address)):
         document.getElementById("res-display-addr").innerHTML = yelp_info.location.display_address;
     case (empty1.includes(price)):
