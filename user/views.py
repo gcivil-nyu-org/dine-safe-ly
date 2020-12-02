@@ -62,9 +62,7 @@ def register(request):
             user.is_active = False
             user.save()
             send_verification_email(request, form.cleaned_data.get("email"))
-            return render(
-                request=request, template_name="sent_verification_email.html"
-            )
+            return render(request=request, template_name="sent_verification_email.html")
     else:
         form = UserCreationForm()
     return render(
