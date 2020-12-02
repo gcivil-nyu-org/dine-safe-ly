@@ -226,7 +226,10 @@
                                 <ul class="list-group">
                                     <li id="{{ restaurant.business_id }}" class="list-group-item">
                                         <form name="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="{{ restaurant.business_id }}" method="POST">
-                                            <a href="/restaurant/profile/{{ restaurant.id }}">{{ restaurant.restaurant_name }}&nbsp&nbsp</a>
+                                            <a href="../restaurant/profile/{{ restaurant.id }}" target="_blank">
+                                                {{ restaurant.restaurant_name }}
+                                            </a>
+                                            &nbsp&nbsp
                                             <button type="submit" class="close" aria-label="Close" data-toggle="tooltip" data-placement="top" data-original-title="Remove from Favorites">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>

@@ -12,7 +12,7 @@
           <span id="res_rev_star">
 
           </span>
-          &nbsp;&nbsp;<span id="res_review_count"></span><span>&nbsp;Reviews</span>
+          &nbsp;&nbsp;<span id="res_review_count" class="ml-4"></span><span>&nbsp;Reviews</span>
         </p>
       </div>
     </div>
@@ -26,6 +26,7 @@
           <h3 class="mb-4">
             <form name="saved_res_remove" id="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="" method="POST">
               Compliance Data
+
             {% if user.is_authenticated %}
                 <button type="submit" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="save/remove">
 
@@ -282,20 +283,20 @@
             <div class="card-body">
               <ul class="list-unstyled mb-4">
                 <li class="mb-2">
-                  <a class="text-gray-00 text-sm text-decoration-none" href="#">
+                  <a class="text-gray-00 text-sm text-decoration-none">
                     <i class="fas fa-phone mr-3"></i>
                     <span id="res_display_phn" class="text-muted"></span>
                   </a>
                 </li>
                 <li class="mb-2">
-                  <a class=" text-sm text-decoration-none" href="#">
+                  <a class=" text-sm text-decoration-none">
                     <i class="fas fa-star mr-3"></i>
                     <span class="text-muted"><span id="res_rating_info"></span>
-                        Reviews</span>
+                        Stars</span>
                   </a>
                 </li>
                 <li class="mb-2">
-                  <a class=" text-sm text-decoration-none" href="#">
+                  <a class=" text-sm text-decoration-none">
                     <i class="fas fa-money-check-alt mr-3"></i>
                     <span id="res-price" class="text-muted"></span>
                   </a>
@@ -375,7 +376,7 @@ switch (false) {
     case (empty1.includes(review_count)):
         document.getElementById("res_review_count").innerHTML = yelp_info.review_count;
     case (empty1.includes(rating)):
-        document.getElementById("res_rating_info").innerHTML = yelp_info.rating;
+        document.getElementById("res_rating_info").innerHTML = Math.ceil(yelp_info.rating);
     case (empty1.includes(display_address)):
         document.getElementById("res-display-addr").innerHTML = yelp_info.location.display_address;
     case (empty1.includes(price)):
@@ -405,7 +406,7 @@ for (j = 0; j < Math.ceil(rate); j++) {
 }
 for (j = 0; j < 5 - Math.ceil(rate); j++) {
     var icon2 = document.createElement("i");
-    icon2.className = "fa fa-xs fa-star text-gray-200 mr-4";
+    icon2.className = "fa fa-xs fa-star text-gray-200";
     res_rev_star.appendChild(icon2);
 }
 
