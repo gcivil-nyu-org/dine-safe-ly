@@ -1,7 +1,6 @@
-import json
-
 from django.contrib.auth import authenticate, login, logout
 from restaurant.models import Categories
+import json
 
 # from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -10,10 +9,16 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
-from django.http import HttpResponse
-from .utils import send_reset_password_email
-from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
+from django.http import HttpResponse, HttpResponseBadRequest
 
+from .utils import send_reset_password_email
+from .forms import (
+    UserCreationForm,
+    ResetPasswordForm,
+    UpdatePasswordForm,
+    GetEmailForm,
+    UserPreferenceForm,
+)
 
 import logging
 
@@ -135,12 +140,14 @@ def forget_password(request):
         )
 
 
-def add_preference(request, category):
+def add_preference(request):
     if request.method == "POST":
-        user = request.user
-        user.preferences.add(Categories.objects.get(category=category))
-        logger.info(category)
-        return HttpResponse("Preference Saved")
+        form = UserPreferenceForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data.get("pref_list"))
+            form.save(user=request.user)
+            return HttpResponse("Preference Saved")
+        return HttpResponseBadRequest
 
 
 def delete_preference(request, category):
