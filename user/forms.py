@@ -92,7 +92,28 @@ class ResetPasswordForm(forms.Form):
         if password1 and password2 and password1 != password2:
             raise ValidationError("Password don't match")
 
-        return password2
+        user = User(
+            username=self.cleaned_data.get("username"),
+            email=self.cleaned_data.get("email"),
+            password=self.cleaned_data.get("password2"),
+        )
+        password_validators = [
+            MinimumLengthValidator(),
+            UserAttributeSimilarityValidator(),
+            CommonPasswordValidator(),
+            NumericPasswordValidator(),
+        ]
+
+        try:
+            validate_password(
+                password=self.cleaned_data["password2"],
+                user=user,
+                password_validators=password_validators,
+            )
+        except ValidationError as e:
+            logger.error("validation failed")
+            raise ValidationError(e)
+        return self.cleaned_data["password2"]
 
     def save(self, uid, commit=True):
         user = get_user_model().objects.get(pk=uid)
@@ -127,7 +148,28 @@ class UpdatePasswordForm(forms.Form):
         if password1 and password2 and password1 != password2:
             raise ValidationError("New passwords don't match")
 
-        return password2
+        user = User(
+            username=self.cleaned_data.get("username"),
+            email=self.cleaned_data.get("email"),
+            password=self.cleaned_data.get("password_confirm"),
+        )
+        password_validators = [
+            MinimumLengthValidator(),
+            UserAttributeSimilarityValidator(),
+            CommonPasswordValidator(),
+            NumericPasswordValidator(),
+        ]
+
+        try:
+            validate_password(
+                password=self.cleaned_data["password_confirm"],
+                user=user,
+                password_validators=password_validators,
+            )
+        except ValidationError as e:
+            logger.error("validation failed")
+            raise ValidationError(e)
+        return self.cleaned_data["password_confirm"]
 
     def save(self, user, commit=True):
         user.set_password(self.cleaned_data["password_new"])
