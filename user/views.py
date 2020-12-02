@@ -1,4 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
+from django.core.serializers.json import DjangoJSONEncoder
+from django.forms import model_to_dict
+
 from restaurant.models import Categories
 import json
 
@@ -85,6 +88,10 @@ def account_details(request):
 
     favorite_restaurant_list = user.favorite_restaurants.all()
     user_pref_list = user.preferences.all()
+    user_pref_list_json = []
+    for pref in user_pref_list:
+        pref_dic = model_to_dict(pref)
+        user_pref_list_json.append(pref_dic)
 
     if request.method == "POST" and "update_pass_form" in request.POST:
         form = UpdatePasswordForm(user=user, data=request.POST)
@@ -99,6 +106,9 @@ def account_details(request):
                 "form": form,
                 "favorite_restaurant_list": favorite_restaurant_list,
                 "user_pref": user_pref_list,
+                "user_pref_json": json.dumps(
+                    user_pref_list_json, cls=DjangoJSONEncoder
+                ),
             },
         )
     else:
@@ -110,6 +120,9 @@ def account_details(request):
                 "form": form,
                 "favorite_restaurant_list": favorite_restaurant_list,
                 "user_pref": user_pref_list,
+                "user_pref_json": json.dumps(
+                    user_pref_list_json, cls=DjangoJSONEncoder
+                ),
             },
         )
 
