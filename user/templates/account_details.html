@@ -12,45 +12,6 @@
         <p class="text-muted mb-5">Manage your Account Details and settings here.</p>
         <div class="row">
             <div class="col-lg-7">
-                <!--                <div class="text-block">-->
-                <!--                    <div class="row mb-3">-->
-                <!--                        <div class="col-sm-9">-->
-                <!--                            <h3>Personal Details</h3>-->
-                <!--                        </div>-->
-                <!--                        <div class="col-sm-3 text-right">-->
-                <!--                            <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#personalDetails" aria-expanded="false" aria-controls="personalDetails">Update</button>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                    <p class="text-sm text-muted">-->
-                <!--                        <i class="fa fa-id-card fa-fw mr-2"></i>John Doe<br>-->
-                <!--                        <i class="fa fa-birthday-cake fa-fw mr-2"></i>06/22/1980<br>-->
-                <!--                        <i class="fa fa-envelope-open fa-fw mr-2"></i>john.doe@directory.com <span class="mx-2"> | </span>-->
-                <!--                        <i class="fa fa-phone fa-fw mr-2"></i>+42055544466-->
-                <!--                    </p>-->
-                <!--                    <div class="collapse" id="personalDetails">-->
-                <!--                        <form action="#">-->
-                <!--                            <div class="row pt-4">-->
-                <!--                                <div class="form-group col-md-6">-->
-                <!--                                    <label class="form-label" for="name">Name</label>-->
-                <!--                                    <input class="form-control" type="text" name="name" id="name" value="John Doe">-->
-                <!--                                </div>-->
-                <!--                                <div class="form-group col-md-6">-->
-                <!--                                    <label class="form-label" for="date">Date of birth</label>-->
-                <!--                                    <input class="form-control" type="text" name="date" id="date" value="06/22/1980">-->
-                <!--                                </div>-->
-                <!--                                <div class="form-group col-md-6">-->
-                <!--                                    <label class="form-label" for="email">Email address</label>-->
-                <!--                                    <input class="form-control" type="email" name="email" id="email" value="john.doe@directory.com">-->
-                <!--                                </div>-->
-                <!--                                <div class="form-group col-md-6">-->
-                <!--                                    <label class="form-label" for="phone">Phone number</label>-->
-                <!--                                    <input class="form-control" type="text" name="phone" id="phone" value="+42055544466">-->
-                <!--                                </div>-->
-                <!--                            </div>-->
-                <!--                            <button class="btn btn-outline-primary mb-4" type="submit">Save your personal details</button>-->
-                <!--                        </form>-->
-                <!--                    </div>-->
-                <!--                </div>-->
                 {% load socialaccount %}
                 {% get_social_accounts user as accounts %}
                 {% if accounts.facebook or accounts.google %}
@@ -172,6 +133,7 @@
                             {% csrf_token %}
                             <div class="row pt-4">
                                     <div class="form-group col-md-6">
+
                                         <label class="form-label" for="pref_list">Category</label>
                                         <select class="selectpicker form-control" name="pref_list" id="pref_list" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
                                             <option value="newamerican">New American</option>
@@ -210,6 +172,20 @@
                                             <option value="wraps">Wraps</option>
                                         </select>
                                     </div>
+                                        <script>
+                                            var pref_menu = document.getElementById("pref_list").options;
+                                            for(var i=0; i<{{user_pref_json|safe}}.length; i++){
+                                                var current_pref = {{user_pref_json|safe}}[i].category;
+
+                                                if($("#pref_list option[value='+current_pref+']").length == 0){
+                                                    console.log(current_pref);
+                                                    $('#pref_list').children('option[value='+current_pref+']').hide();
+
+                                                }
+                                            }
+
+
+                                        </script>
                                 </div>
                                 <button class="btn btn-outline-primary mb-4" type="submit" data-original-title="add_preference">Save your Preferences</button>
                             </form>
