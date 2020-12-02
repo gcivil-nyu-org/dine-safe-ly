@@ -271,7 +271,9 @@ $(document).ready(function(){
                     <label class="form-label mr-2" for="form_sort">Sort by</label>
                     <select form="search_filter_form" class="selectpicker" name="form_sort" id="form_sort" data-style="btn-selectpicker" title="Select" onchange="document.getElementById('filterbtn').click();">
                         <option value="none">None</option>
+                        {% if request.user.is_authenticated %}
                         <option value="recommended">Recommended</option>
+                        {% endif %}
                         <option value="ratedhigh">Highest Rated</option>
                         <option value="ratedlow">Lowest Rated</option>
                         <option value="pricehigh">Highest Price</option>
@@ -284,27 +286,11 @@ $(document).ready(function(){
             </div>
             <div class="text-center">
                 <button type="button" class="btn btn-dark mb-2" onclick="load_more()" id="load_button">Load More</button>
-                <a href="#topSection" id="myBtn" class="btn btn-dark mb-2">
-                    <i class="fa fa-arrow-up"></i>
+                <a href="#topSection" id="myBtn" class="btn-primary float-right mb-2 rounded-circle" data-toggle="tooltip" data-placement="top" data-original-title="Scroll to top">
+                    <i class="fa fa-arrow-up m-2"></i>
                 </a>
             </div>
         </div>
-          <script>
-          $(function() {
-
-              var $btn = $('#myBtn');
-              var $home = $('#topSection');
-              var startpoint = $home.scrollTop() + $home.height();
-
-              $(window).on('scroll', function() {
-                if($(window).scrollTop() > startpoint) {
-                  $btn.show();
-                } else {
-                  $btn.hide();
-                }
-              });
-            });
-          </script>
         <script>
 		var page_global = 1; // Global page number
         var restaurant_content_list = null;
@@ -489,7 +475,7 @@ $(document).ready(function(){
                 p_2.className = "text-sm mb-0";
 
                 var a3 = document.createElement("a");
-                a3.className = "mr-1 disabled";
+                a3.className = "mr-1 disabled text-decoration-none";
                 var str = "";
                 if (restaurant_list[i].yelp_info.categories != null) {
                   for (var p = 0; p < restaurant_list[i].yelp_info.categories.length; p++) {
