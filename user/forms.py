@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django import forms
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.password_validation import (
@@ -47,7 +48,7 @@ class UserCreationForm(forms.Form):
         return password2
 
     def clean_password1(self):
-        user = get_user_model().objects.create(
+        user = User(
             username=self.cleaned_data.get("username"),
             email=self.cleaned_data.get("email"),
             password=self.cleaned_data.get("password1"),
@@ -67,16 +68,15 @@ class UserCreationForm(forms.Form):
             )
         except ValidationError as e:
             logger.error("validation failed")
-            get_user_model().objects.filter(pk=user.id).delete()
             raise ValidationError(e)
 
-    # def save(self, commit=True):
-    #     user = get_user_model().objects.create_user(
-    #         username=self.cleaned_data["username"],
-    #         email=self.cleaned_data["email"],
-    #         password=self.cleaned_data["password1"],
-    #     )
-    #     return user
+    def save(self, commit=True):
+        user = get_user_model().objects.create_user(
+            username=self.cleaned_data["username"],
+            email=self.cleaned_data["email"],
+            password=self.cleaned_data["password1"],
+        )
+        return user
 
 
 class ResetPasswordForm(forms.Form):
