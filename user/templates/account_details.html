@@ -1,4 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <section class="py-5">
     <div class="container">
         <!-- Breadcrumbs -->
@@ -165,13 +167,13 @@
                         {% endfor %}
                     </div>
                     <div class="collapse" id="personalPreferences">
-
-                        <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" >
+                        {% csrf_token %}
+                        <form class="saved_res_remove" id="add_pref_form" name="add_pref_form" method="POST" action="">
                             {% csrf_token %}
                             <div class="row pt-4">
                                     <div class="form-group col-md-6">
-                                        <label class="form-label" for="pcategory">Category</label>
-                                        <select class="selectpicker form-control" name="pcategory" id="pcategory" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
+                                        <label class="form-label" for="pref_list">Category</label>
+                                        <select class="selectpicker form-control" name="pref_list" id="pref_list" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
                                             <option value="newamerican">New American</option>
                                             <option value="armenian">Armenian</option>
                                             <option value="bars">Bars</option>
@@ -209,11 +211,11 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button class="btn btn-outline-primary mb-4" type="submit" onclick="add_pref_function()" data-original-title="add_preference">Save your Preferences</button>
+                                <button class="btn btn-outline-primary mb-4" type="submit" data-original-title="add_preference">Save your Preferences</button>
                             </form>
                     </div>
                 </div>
-                <!--                favorite restaurants list-->
+                <!--favorite restaurants list-->
                 <div class="text-block">
                     <div class="row mb-3">
                         <div class="col-sm-9">
@@ -224,7 +226,7 @@
                                 <ul class="list-group">
                                     <li id="{{ restaurant.business_id }}" class="list-group-item">
                                         <form name="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="{{ restaurant.business_id }}" method="POST">
-                                            {{ restaurant.restaurant_name }}&nbsp&nbsp
+                                            <a href="/restaurant/profile/{{ restaurant.id }}">{{ restaurant.restaurant_name }}&nbsp&nbsp</a>
                                             <button type="submit" class="close" aria-label="Close" data-toggle="tooltip" data-placement="top" data-original-title="Remove from Favorites">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -364,19 +366,12 @@
         });
     </script>
 <script>
+    $('#add_pref_form').on('submit', function(event) {
+                event.preventDefault();
+                var form_data = new FormData(document.getElementById("add_pref_form"))
+                var add_form = document.getElementById("add_pref_form");
 
-    function add_pref_function(){
-        {# add preference #}
-    var category_list = $('#pcategory').val();
-    var add_form = document.getElementById("add_pref_form");
-    console.log(category_list);
-
-    $.each(category_list, function (index, category) {
-        $('body').on('submit', "form[name='add_pref_form']", function(event) {
-                var currentForm = $(this);
-                $(currentForm).attr("category", category);
-                var formData = currentForm.serialize();
-
+                {#console.log("add form value is : ",form_data.get("pref_list"));#}
                 $.ajaxSetup({
                      beforeSend: function(xhr, settings) {
                          function getCookie(name) {
@@ -400,23 +395,20 @@
                 });
                 $.ajax({
                   type: 'POST',
-                  url: "../user/add/preference/user/" + currentForm.attr("category"),
-                  data: formData,
+                  url: "../user/add/preference/user",
+                  data: form_data,
                   processData: false,
                   contentType: false,
                   // handle a successful response
                   success : function(response) {
-
+                      window.location.reload(true);
                   },
                   error : function(xhr,errmsg,err) {
-                    console.log('Error')
+                    console.log('Ajax Error')
                   }
                 });
         });
-    });
 
 
-
-    }
     </script>
 {% endblock %}

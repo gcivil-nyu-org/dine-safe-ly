@@ -15,7 +15,7 @@ urlpatterns = [
     path("account_details", views.account_details, name="account_details"),
     path("update_password", views.update_password, name="update_password"),
     path(
-        "add/preference/user/<category>",
+        "add/preference/user",
         views.add_preference,
         name="add_preference",
     ),
