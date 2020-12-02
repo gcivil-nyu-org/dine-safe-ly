@@ -41,24 +41,21 @@
 						<input class="form-control" type="text" name="username" id="username"
                                placeholder="Username" autocomplete="off" required
                                pattern="^[a-zA-Z][a-zA-Z\d\.]{5,}$"
-							   data-msg="Please enter your username">
+							   data-msg="Please enter your username"
+							   data-toggle="tooltip"
+							   data-html="true"
+							   title='<small>Must be at least 5+ characters<br><br>Cannot start with a number</small>'>
 					</div>
-					<ul class="text-muted">
-						<li>Must be at least 5 or more characters</li>
-						<li>Cannot start with a number</li>
-					</ul>
 					<div class="form-group">
 						<label class="form-label" for="password1"> Password</label>
 						<input class="form-control" name="password1" id="password1"
                                placeholder="Password"
 							   type="password"
-							   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-							   required data-msg="Please enter your password">
+							   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+							   required data-msg="Please enter your password"data-toggle="tooltip"
+							   data-html="true"
+							   title='<small>Must be at least 8+ characters<br><br>Password should not be too common<br><br>Must contain at least one number and one uppercase and lowercase letter<br><br>Password should be similar to username and email<br><br></small>'>
 					</div>
-					<ul class="text-muted">
-						<li>Must be at least 6 or more characters</li>
-						<li>Must contain at least one number and one uppercase and lowercase letter</li>
-					</ul>
 					<div class="form-group mb-4">
 						<label class="form-label" for="password2"> Confirm your
                             password</label>
