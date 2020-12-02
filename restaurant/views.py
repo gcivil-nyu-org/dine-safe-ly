@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
 from .models import Restaurant
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
@@ -99,7 +99,7 @@ def get_restaurant_profile(request, restaurant_id):
                 "saved_restaurants": len(
                     user.favorite_restaurants.all().filter(id=restaurant_id)
                 )
-                > 0,
+                                     > 0,
             }
         else:
             parameter_dict = {
@@ -215,11 +215,12 @@ def delete_favorite_restaurant(request, business_id):
 @csrf_exempt
 def chatbot_keyword(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-        if 'keyword' in data:
-            restaurants = get_restaurant_list(keyword=data['keyword'])
+        try:
+            data = json.loads(request.body)
+            restaurants = get_restaurant_list(keyword=data['keyword'], categories_filter=[data['category']])
             response = {
                 'restaurants': restaurants
             }
             return JsonResponse(response)
-        return HttpResponse("Dine safely")
+        except AttributeError as e:
+            return HttpResponseBadRequest(e)
