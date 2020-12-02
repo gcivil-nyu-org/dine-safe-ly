@@ -565,7 +565,7 @@ class RestaurantViewFormTests(BaseTest):
         form = QuestionnaireForm(self.questionnaire_form)
         response = self.c.post("/restaurant/profile/1/", self.questionnaire_form)
         self.assertTrue(form.is_valid())
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
 
 class RestaurantViewTests(TestCase):

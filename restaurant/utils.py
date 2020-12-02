@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 def get_restaurant_info_yelp(business_id):
-    access_token = settings.YELP_ACCESS_TOKE
+    access_token = settings.YELP_ACCESS_TOKEN_BUSINESS_ID
     headers = {"Authorization": "bearer %s" % access_token}
     url = settings.YELP_BUSINESS_API + business_id
     return requests.get(url, headers=headers)
@@ -56,7 +56,7 @@ def get_restaurant_info_yelp_local(business_id, restaurant_name):
 
 
 def get_restaurant_reviews_yelp(business_id):
-    access_token = settings.YELP_TOKEN_1
+    access_token = settings.YELP_ACCESS_TOKEN_REVIEW
     headers = {"Authorization": "bearer %s" % access_token}
     url = settings.YELP_BUSINESS_API + business_id + "/reviews"
     return requests.get(url, headers=headers)
@@ -175,7 +175,9 @@ def get_total_restaurant_number(
         )
         return restaurants.count()
 
-    return Restaurant.objects.all().count()
+    return Restaurant.objects.filter(
+        business_id__in=YelpRestaurantDetails.objects.all()
+    ).count()
 
 
 def get_restaurant_list(
@@ -219,7 +221,9 @@ def get_restaurant_list(
         )
         return restaurants_to_dict(restaurants)
     else:
-        restaurants = Restaurant.objects.all()[
+        restaurants = Restaurant.objects.filter(
+            business_id__in=YelpRestaurantDetails.objects.all()
+        )[
             offset : offset + int(limit)  # noqa: E203
         ]
         return restaurants_to_dict(restaurants)
