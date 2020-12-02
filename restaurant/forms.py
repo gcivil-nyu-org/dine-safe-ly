@@ -168,7 +168,6 @@ class SearchFilterForm(forms.Form):
     )
 
     fav = forms.BooleanField(label="fav", required=False)
-    pref = forms.BooleanField(label="pref", required=False)
 
     rating = forms.MultipleChoiceField(
         label="rating", choices=CHOICES_RATING, required=False
