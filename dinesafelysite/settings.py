@@ -155,7 +155,7 @@ YELP_TOKEN_CHUANQI = os.environ.get("YELP_TOKEN_CHUANQI")
 
 # Yelp categories
 YELP_CATEGORY_API = "https://api.yelp.com/v3/categories"
-YELP_ACESS_TOKEN_CATEGORY = os.environ.get("YELP_ACESS_TOKEN_CATEGORY")
+YELP_ACCESS_TOKEN_CATEGORY = os.environ.get("YELP_ACCESS_TOKEN_CATEGORY")
 
 DEFAULT_IMAGE = (
     "https://www.theskinnypignyc.com/wp-content/uploads/2019/05/what"
