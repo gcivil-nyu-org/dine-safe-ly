@@ -181,8 +181,8 @@ def get_total_restaurant_number(
 
 
 def get_restaurant_list(
-    page,
-    limit,
+    page=1,
+    limit=6,
     keyword=None,
     neighbourhoods_filter=None,
     categories_filter=None,
