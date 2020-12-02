@@ -11,7 +11,9 @@ RESTAURANT_NUMBER = 18
 
 
 def index(request):
-    restaurant_list = get_restaurant_list(1, RESTAURANT_NUMBER, rating_filter=[3, 4, 5], compliant_filter="Compliant")
+    restaurant_list = get_restaurant_list(
+        1, RESTAURANT_NUMBER, rating_filter=[3, 4, 5], compliant_filter="Compliant"
+    )
     parameter_dict = {
         "restaurant_list": restaurant_list,
     }
