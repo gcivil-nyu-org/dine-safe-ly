@@ -66,6 +66,7 @@ class UserCreationForm(forms.Form):
                 user=user,
                 password_validators=password_validators,
             )
+            return self.cleaned_data["password1"]
         except ValidationError as e:
             logger.error("validation failed")
             raise ValidationError(e)
@@ -74,8 +75,9 @@ class UserCreationForm(forms.Form):
         user = get_user_model().objects.create_user(
             username=self.cleaned_data["username"],
             email=self.cleaned_data["email"],
-            password=self.cleaned_data["password1"],
         )
+        user.set_password(self.cleaned_data["password1"])
+
         return user
 
 

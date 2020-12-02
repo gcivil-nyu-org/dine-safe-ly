@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
 from django.http import HttpResponse, HttpResponseBadRequest
 
-from .utils import send_reset_password_email
+from .utils import send_reset_password_email, send_verification_email
 from .forms import (
     UserCreationForm,
     ResetPasswordForm,
@@ -34,10 +34,19 @@ def user_login(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
+            logger.info("valid")
             if user is not None:
                 login(request, user)
                 return redirect("user:register")
 
+        # Check if the user is active or not.
+        for error in form.errors.as_data()["__all__"]:
+            if "This account is inactive." in error:
+                user = get_user_model().objects.get(username=form.data["username"])
+                send_verification_email(request, user.email)
+                return render(
+                    request=request, template_name="sent_verification_email.html"
+                )
     else:
         form = AuthenticationForm()
     return render(request, template_name="login.html", context={"form": form})
@@ -49,8 +58,11 @@ def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("user:login")
+            user = form.save()
+            user.is_active = False
+            user.save()
+            send_verification_email(request, form.cleaned_data.get("email"))
+            return render(request=request, template_name="sent_verification_email.html")
     else:
         form = UserCreationForm()
     return render(
@@ -123,11 +135,21 @@ def reset_password_link(request, base64_id, token):
         )
 
 
+def verify_user_link(request, base64_id, token):
+    uid = force_text(urlsafe_base64_decode(base64_id))
+    user = get_user_model().objects.get(pk=uid)
+    if not user or not PasswordResetTokenGenerator().check_token(user, token):
+        return HttpResponse("This is invalid!")
+    user.is_active = True
+    user.save()
+
+    return redirect("user:login")
+
+
 def forget_password(request):
     if request.method == "POST":
         form = GetEmailForm(request.POST)
         if form.is_valid():
-            # TODO: Check the django reset password form
             send_reset_password_email(request, form.cleaned_data.get("email"))
             return render(request=request, template_name="sent_email.html")
         return render(
