@@ -344,6 +344,7 @@ def get_filtered_restaurants(
             .distinct()
             .filter(**keyword_filter)
             .order_by("-id")[offset : offset + int(limit)]
+
         )
 
     return filtered_restaurants
