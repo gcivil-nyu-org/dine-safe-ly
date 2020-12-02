@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth import authenticate, login, logout
 from restaurant.models import Categories
 
@@ -8,7 +10,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from .utils import send_reset_password_email
 from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
 
@@ -164,5 +166,7 @@ def update_password(request):
         for field in form:
             for error in field.errors:
                 error_list.append(error)
-        response = {"errors": error_list}
-        return JsonResponse(response)
+        context = {"status": "400", "errors": error_list}
+        response = HttpResponse(json.dumps(context), content_type="application/json")
+        response.status_code = 400
+        return response

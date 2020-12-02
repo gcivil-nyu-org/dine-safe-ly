@@ -103,6 +103,25 @@
                             contentType: false,
                             success : function(json) {
                                 $('#error_update_pass').html("");
+
+                                var div1 = document.createElement("div");
+                                var strong1 = document.createElement("strong");
+                                strong1.innerHTML = "Your password has been updated, the page will redirect to login page in 3 seconds.";
+                                div1.appendChild(strong1);
+
+                                div1.className = "alert alert-danger";
+                                div1.id = "alert_msg";
+                                document.getElementById("error_update_pass").appendChild(div1);
+
+                                window.setTimeout(function() {
+                                    window.location.reload();
+                                }, 3000);
+
+                            },
+                            error : function(xhr,errmsg,err) {
+                                console.log(xhr);
+                                $('#error_update_pass').html("");
+                                var json = JSON.parse(xhr.responseText);
                                 for(i = 0; i < json.errors.length; i++) {
                                     console.log(json.errors[i]);
 
@@ -115,10 +134,6 @@
                                     div1.id = "alert_msg";
                                     document.getElementById("error_update_pass").appendChild(div1);
                                 }
-
-                            },
-                            error : function(xhr,errmsg,err) {
-                                console.log(errmsg)
 
                             }
                         });
