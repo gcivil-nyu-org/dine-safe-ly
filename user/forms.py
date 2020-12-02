@@ -30,6 +30,8 @@ class UserCreationForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data["email"].lower()
+        if not email:
+            raise ValidationError("Email is required")
         r = get_user_model().objects.filter(email=email)
         if r.count():
             raise ValidationError("Email already exists")
@@ -46,9 +48,9 @@ class UserCreationForm(forms.Form):
 
     def clean_password1(self):
         user = get_user_model().objects.create(
-            username=self.cleaned_data["username"],
-            email=self.cleaned_data["email"],
-            password=self.cleaned_data["password1"],
+            username=self.cleaned_data.get("username"),
+            email=self.cleaned_data.get("email"),
+            password=self.cleaned_data.get("password1"),
         )
         password_validators = [
             MinimumLengthValidator(),
@@ -68,13 +70,13 @@ class UserCreationForm(forms.Form):
             get_user_model().objects.filter(pk=user.id).delete()
             raise ValidationError(e)
 
-    def save(self, commit=True):
-        user = get_user_model().objects.create_user(
-            username=self.cleaned_data["username"],
-            email=self.cleaned_data["email"],
-            password=self.cleaned_data["password1"],
-        )
-        return user
+    # def save(self, commit=True):
+    #     user = get_user_model().objects.create_user(
+    #         username=self.cleaned_data["username"],
+    #         email=self.cleaned_data["email"],
+    #         password=self.cleaned_data["password1"],
+    #     )
+    #     return user
 
 
 class ResetPasswordForm(forms.Form):
