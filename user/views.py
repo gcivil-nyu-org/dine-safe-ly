@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from restaurant.models import Categories
+import json
 
 # from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -8,10 +9,16 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
-from django.http import HttpResponse, JsonResponse
-from .utils import send_reset_password_email
-from .forms import UserCreationForm, ResetPasswordForm, UpdatePasswordForm, GetEmailForm
+from django.http import HttpResponse, HttpResponseBadRequest
 
+from .utils import send_reset_password_email, send_verification_email
+from .forms import (
+    UserCreationForm,
+    ResetPasswordForm,
+    UpdatePasswordForm,
+    GetEmailForm,
+    UserPreferenceForm,
+)
 
 import logging
 
@@ -27,10 +34,19 @@ def user_login(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
+            logger.info("valid")
             if user is not None:
                 login(request, user)
                 return redirect("user:register")
 
+        # Check if the user is active or not.
+        for error in form.errors.as_data()["__all__"]:
+            if "This account is inactive." in error:
+                user = get_user_model().objects.get(username=form.data["username"])
+                send_verification_email(request, user.email)
+                return render(
+                    request=request, template_name="sent_verification_email.html"
+                )
     else:
         form = AuthenticationForm()
     return render(request, template_name="login.html", context={"form": form})
@@ -42,8 +58,11 @@ def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("user:login")
+            user = form.save()
+            user.is_active = False
+            user.save()
+            send_verification_email(request, form.cleaned_data.get("email"))
+            return render(request=request, template_name="sent_verification_email.html")
     else:
         form = UserCreationForm()
     return render(
@@ -65,7 +84,7 @@ def account_details(request):
     user = request.user
 
     favorite_restaurant_list = user.favorite_restaurants.all()
-    user_pref_list = user.preference.all()
+    user_pref_list = user.preferences.all()
 
     if request.method == "POST" and "update_pass_form" in request.POST:
         form = UpdatePasswordForm(user=user, data=request.POST)
@@ -116,11 +135,21 @@ def reset_password_link(request, base64_id, token):
         )
 
 
+def verify_user_link(request, base64_id, token):
+    uid = force_text(urlsafe_base64_decode(base64_id))
+    user = get_user_model().objects.get(pk=uid)
+    if not user or not PasswordResetTokenGenerator().check_token(user, token):
+        return HttpResponse("This is invalid!")
+    user.is_active = True
+    user.save()
+
+    return redirect("user:login")
+
+
 def forget_password(request):
     if request.method == "POST":
         form = GetEmailForm(request.POST)
         if form.is_valid():
-            # TODO: Check the django reset password form
             send_reset_password_email(request, form.cleaned_data.get("email"))
             return render(request=request, template_name="sent_email.html")
         return render(
@@ -133,18 +162,20 @@ def forget_password(request):
         )
 
 
-def add_preference(request, category):
+def add_preference(request):
     if request.method == "POST":
-        user = request.user
-        user.preference.add(Categories.objects.get(category=category))
-        logger.info(category)
-        return HttpResponse("Preference Saved")
+        form = UserPreferenceForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data.get("pref_list"))
+            form.save(user=request.user)
+            return HttpResponse("Preference Saved")
+        return HttpResponseBadRequest
 
 
 def delete_preference(request, category):
     if request.method == "POST":
         user = request.user
-        user.preference.remove(Categories.objects.get(category=category))
+        user.preferences.remove(Categories.objects.get(category=category))
         logger.info(category)
         return HttpResponse("Preference Removed")
 
@@ -164,5 +195,7 @@ def update_password(request):
         for field in form:
             for error in field.errors:
                 error_list.append(error)
-        response = {"errors": error_list}
-        return JsonResponse(response)
+        context = {"status": "400", "errors": error_list}
+        response = HttpResponse(json.dumps(context), content_type="application/json")
+        response.status_code = 400
+        return response

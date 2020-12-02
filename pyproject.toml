@@ -4,5 +4,6 @@ target-version = ['py37']
 exclude = '''
 /(
     | migrations
+    | venv
 )/
 '''

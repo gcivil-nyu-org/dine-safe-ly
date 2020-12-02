@@ -14,7 +14,7 @@
         <form action="{% url 'restaurant:browse' %}">
             <div class="row">
                 <div class="col-lg-10 d-flex align-items-center form-group">
-                    <input class="form-control border-0 shadow-0" type="search" name="search"  id="search-keyword" placeholder="What are you searching for?">
+                    <input class="form-control border-0 shadow-0" type="search" name="search"  id="search-keyword" placeholder="Search restaurants by name">
                 </div>
                 <div class="col-lg-2 form-group mb-0">
                     <a class="btn btn-primary btn-block h-100" onclick="search_keyword()">Search</a>
@@ -43,6 +43,7 @@
             <!-- Additional required wrapper-->
             <div class="swiper-wrapper pb-5">
                 {% for restaurant in restaurant_list %}
+                {% if not restaurant.yelp_info.fake_info %}
                 <div class="swiper-slide h-auto px-2">
                     <!-- venue item-->
                     <div class="w-100 h-100 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
@@ -74,13 +75,14 @@
                                 </p>
                                 <p class="text-sm mb-0">
                                     {% for cat in restaurant.yelp_info.categories %}
-                                    <a class="mr-1 disabled">{{ cat.title}}</a>
+                                    <a class="mr-1 disabled text-decoration-none">{{ cat.title}}</a>
                                     {% endfor %}
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
             <!-- If we need pagination-->

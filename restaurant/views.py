@@ -1,6 +1,7 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from .models import Restaurant
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
@@ -59,6 +60,8 @@ def get_restaurant_profile(request, restaurant_id):
         form = QuestionnaireForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "success")
+            return HttpResponseRedirect("")
 
     try:
         csv_file = get_csv_from_github()
@@ -142,7 +145,6 @@ def get_inspection_info(request, restaurant_id):
 def get_restaurants_list(request, page):
     if request.method == "POST":
         form = SearchFilterForm(request.POST)
-
         if form.is_valid():
             restaurant_list = get_restaurant_list(
                 page,
@@ -187,40 +189,7 @@ def get_restaurants_list(request, page):
 
 
 def get_landing_page(request, page=1):
-    neighbourhoods_filter = request.GET.getlist("neighbourhood")
-    categories_filter = request.GET.getlist("category")
-    price_filter = request.GET.getlist("price")
-    rating_filter = None
-    compliant_filter = None
-    sort_option = None
-    favorite_filter = None
-    user = None
-    if request.user.is_authenticated:
-        user = request.user
-    if request.GET.getlist("ratingfrom"):
-        rating_filter = float(request.GET.getlist("ratingfrom")[0])
-    keyword = request.GET.get("search")
-
-    restaurant_list = get_restaurant_list(
-        page,
-        12,
-        keyword,
-        neighbourhoods_filter,
-        categories_filter,
-        price_filter,
-        rating_filter,
-        compliant_filter,
-        sort_option,
-        favorite_filter,
-        user,
-    )
-
-    parameter_dict = {
-        "restaurant_list": json.dumps(restaurant_list, cls=DjangoJSONEncoder),
-        "page": page,
-        "keyword": json.dumps({"keyword": keyword}),
-    }
-    return render(request, "browse.html", parameter_dict)
+    return render(request, "browse.html")
 
 
 @login_required

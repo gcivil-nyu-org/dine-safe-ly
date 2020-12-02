@@ -12,7 +12,7 @@
           <span id="res_rev_star">
 
           </span>
-          &nbsp;&nbsp;<span id="res_review_count"></span><span>&nbsp;Reviews</span>
+          &nbsp;&nbsp;<span id="res_review_count" class="ml-4"></span><span>&nbsp;Reviews</span>
         </p>
       </div>
     </div>
@@ -24,11 +24,22 @@
       <div class="col-lg-8">
         <div class="text-block">
           <h3 class="mb-4">
-            <form id="save_delete_form" >
+            <form name="saved_res_remove" id="saved_res_remove" class="saved_res_remove" onsubmit="return false;" res_business_id="" method="POST">
               Compliance Data
-                <input id="res_id" name="restaurant_business_id" type="hidden" value="{{ yelp_info.restaurant_business_id }}">
-                <button type="submit" class="btn btn-link mb-2"></button>
-                <i id="fav_icon" class="fa fa-heart fa-2x" style="padding-top: 10px; padding-left: 2px;"></i>
+
+            {% if user.is_authenticated %}
+                <button type="submit" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="save/remove">
+
+                    {% if saved_restaurants %}
+                    <i id="iconid" class="fa fa-heart fa-2x" style="color: #ff0000;"></i>
+                    {% else %}
+                    <i id="iconid" class="fa fa-heart fa-2x"></i>
+                    {% endif %}
+                </button>
+            {% else %}
+                <button id="log_in_to_save" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="log in to save" >
+                <i id="iconid" class="fa fa-heart fa-2x"></i>
+            {% endif %}
             </form>
           </h3>
           <div class="list-group shadow mb-5">
@@ -53,11 +64,15 @@
               </div>
             </a>
           </div>
-            {% if user.is_authenticated %}
-                <!-- Button trigger questionnaire modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Have you been here before?
-          </button>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message %}
+                            <h2><span class="badge badge-secondary p-2">Thanks for your feedback!</span></h2>
+                        {% endif %}
+                    {% endfor %}
+                {% elif user.is_authenticated %}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Have you been here before?</button>
+                {% endif %}
 
 {#              {% if saved_restaurants %}#}
 {#              <!-- Button trigger delete restaurant from favorite -->#}
@@ -71,7 +86,6 @@
 {#                </button>#}
 {##}
 {#              {% endif %}#}
-          {% endif %}
         </div>
 
           <!-- Save Favorite Restaurant -->
@@ -134,47 +148,47 @@
                 {% csrf_token %}
                 <div class="modal-body">
                   <h2>For this restaurant:</h2>
-                  <input type="text" id="restaurant_business_id" name="restaurant_business_id" value="" hidden>
+                  <input type="text" id="restaurant_business_id" name="restaurant_business_id" value="" hidden >
                     <input type="text" id="user_id" name="user_id" value="{{user.id}}" hidden>
                     <input type="text" id="saved_on" name="saved_on"   hidden>
                   <br>
                   <p>Did you receive a temperature check?</p>
                   <div class="form-group">
-                    <input id="temp_check_true" type="radio" name="temperature_required" value="true" />
+                    <input id="temp_check_true" type="radio" name="temperature_required" value="true" required/>
                     <label for="temp_check_true" title="text">Yes</label>
-                    <input id="temp_check_false" type="radio" name="temperature_required" value="false" />
+                    <input id="temp_check_false" type="radio" name="temperature_required" value="false" required/>
                     <label for="temp_check_false" title="text">No</label>
                   </div>
                   <br>
                   <p>Were you or a member of your party required to provide contact tracing information?</p>
                   <div class="form-group">
-                    <input id="contact_true" type="radio" name="contact_info_required" value="true" />
+                    <input id="contact_true" type="radio" name="contact_info_required" value="true" required/>
                     <label for="contact_true" title="text">Yes</label>
-                    <input id="contact_false" type="radio" name="contact_info_required" value="false" />
+                    <input id="contact_false" type="radio" name="contact_info_required" value="false" required/>
                     <label for="contact_false" title="text">No</label>
                   </div>
                   <br>
                   <p>Were restaurant staff wearing masks at all times?</p>
                   <div class="form-group">
-                    <input id="employee_mask_true" type="radio" name="employee_mask" value="true" />
+                    <input id="employee_mask_true" type="radio" name="employee_mask" value="true" required/>
                     <label for="employee_mask_true" title="text">Yes</label>
-                    <input id="employee_mask_false" type="radio" name="employee_mask" value="false" />
+                    <input id="employee_mask_false" type="radio" name="employee_mask" value="false" required/>
                     <label for="employee_mask_false" title="text">No</label>
                   </div>
                   <br>
                   <p>Was in-door capacity under 25%?</p>
                   <div class="form-group">
-                    <input id="capacity_true" type="radio" name="capacity_compliant" value="true" />
+                    <input id="capacity_true" type="radio" name="capacity_compliant" value="true" required/>
                     <label for="capacity_true" title="text">Yes</label>
-                    <input id="capacity_false" type="radio" name="capacity_compliant" value="false" />
+                    <input id="capacity_false" type="radio" name="capacity_compliant" value="false" required/>
                     <label for="capacity_false" title="text">No</label>
                   </div>
                   <br>
                   <p>Were you seated at least 6 feet from the nearest party?</p>
                   <div class="form-group">
-                    <input id="distance_compliant_true" type="radio" name="distance_compliant" value="true" />
+                    <input id="distance_compliant_true" type="radio" name="distance_compliant" value="true" required/>
                     <label for="distance_compliant_true" title="text">Yes</label>
-                    <input id="distance_compliant_false" type="radio" name="distance_compliant" value="false" />
+                    <input id="distance_compliant_false" type="radio" name="distance_compliant" value="false" required/>
                     <label for="distance_compliant_false" title="text">No</label>
                   </div>
                   <br>
@@ -192,7 +206,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button class="btn btn-primary" type="submit" name="questionnaire_form">Submit</button>
+                  <button class="btn btn-primary" type="submit" name="questionnaire_form" data-toggle="tooltip" data-placement="top" data-original-title="All fields required. Incomplete form will not be saved">Submit</button>
                 </div>
               </form>
             </div>
@@ -269,20 +283,20 @@
             <div class="card-body">
               <ul class="list-unstyled mb-4">
                 <li class="mb-2">
-                  <a class="text-gray-00 text-sm text-decoration-none" href="#">
+                  <a class="text-gray-00 text-sm text-decoration-none">
                     <i class="fas fa-phone mr-3"></i>
                     <span id="res_display_phn" class="text-muted"></span>
                   </a>
                 </li>
                 <li class="mb-2">
-                  <a class=" text-sm text-decoration-none" href="#">
+                  <a class=" text-sm text-decoration-none">
                     <i class="fas fa-star mr-3"></i>
                     <span class="text-muted"><span id="res_rating_info"></span>
-                        Reviews</span>
+                        Stars</span>
                   </a>
                 </li>
                 <li class="mb-2">
-                  <a class=" text-sm text-decoration-none" href="#">
+                  <a class=" text-sm text-decoration-none">
                     <i class="fas fa-money-check-alt mr-3"></i>
                     <span id="res-price" class="text-muted"></span>
                   </a>
@@ -346,8 +360,8 @@ var True = true;
 var False = false;
 var None = null;
 var yelp_info = {{ yelp_info.info | safe }};
-{#document.getElementById("saved_res_remove").setAttribute("res_business_id", yelp_info.id);#}
-{#document.getElementById("iconid").setAttribute("id", yelp_info.id);#}
+document.getElementById("saved_res_remove").setAttribute("res_business_id", yelp_info.id);
+document.getElementById("iconid").setAttribute("id", yelp_info.id);
 var keys = Object.keys(yelp_info);
 var empty1 = [];
 for (var i = 0; i < keys.length; i++) {
@@ -362,7 +376,7 @@ switch (false) {
     case (empty1.includes(review_count)):
         document.getElementById("res_review_count").innerHTML = yelp_info.review_count;
     case (empty1.includes(rating)):
-        document.getElementById("res_rating_info").innerHTML = yelp_info.rating;
+        document.getElementById("res_rating_info").innerHTML = Math.ceil(yelp_info.rating);
     case (empty1.includes(display_address)):
         document.getElementById("res-display-addr").innerHTML = yelp_info.location.display_address;
     case (empty1.includes(price)):
@@ -392,7 +406,7 @@ for (j = 0; j < Math.ceil(rate); j++) {
 }
 for (j = 0; j < 5 - Math.ceil(rate); j++) {
     var icon2 = document.createElement("i");
-    icon2.className = "fa fa-xs fa-star text-gray-200 mr-4";
+    icon2.className = "fa fa-xs fa-star text-gray-200";
     res_rev_star.appendChild(icon2);
 }
 
@@ -615,24 +629,12 @@ function initMap() {
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_delete_favorite").value = yelp_info.id ;
+  document.getElementById("log_in_to_save").onclick = function() {
+      location.href = "{% url 'user:login' %}";
+  }
 </script>
 <script>
-var save_delete_form = document.getElementById("save_delete_form");
-save_delete_form.className = "save_fav_res";
-save_delete_form.setAttribute("method", "POST");
-save_delete_form.setAttribute("onsubmit", "return false;");
-save_delete_form.setAttribute("name", "save_form");
-save_delete_form.setAttribute("restaurant_business_id", yelp_info.restaurant_business_id);
-
-var res_id = document.getElementById("res_id");
-
-var fav_icon = document.getElementById("fav_icon");
-
-if(  {{ saved_restaurants }} ) {
-    fav_icon.style.color = 'red';
-}
-
-            $('body').on('submit', "form[name='save_delete_form']", function(event) {
+            $('body').on('submit', "form[name='saved_res_remove']", function(event) {
                 var currentForm = $(this);
                 event.preventDefault();
                 var formData = currentForm.serialize();
@@ -644,7 +646,7 @@ if(  {{ saved_restaurants }} ) {
                                  var cookies = document.cookie.split(';');
                                  for (var i = 0; i < cookies.length; i++) {
                                      var cookie = jQuery.trim(cookies[i]);
-                                     if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
                                          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                                          break;
                                      }
@@ -659,10 +661,10 @@ if(  {{ saved_restaurants }} ) {
                 });
 
                 var url = "";
-                if (document.getElementById(currentForm.attr("res_business_id")).style.color === "red") {
-                    url = "delete/favorite/restaurant/" + currentForm.attr("res_business_id");
+                if (document.getElementById(currentForm.attr("res_business_id")).style.color == "red") {
+                    url = "../../delete/favorite/restaurant/" + currentForm.attr("res_business_id");
                 } else {
-                    url = "save/favorite/restaurant/" + currentForm.attr("res_business_id");
+                    url = "../../save/favorite/restaurant/" + currentForm.attr("res_business_id");
                 }
 
                 $.ajax({
@@ -673,7 +675,7 @@ if(  {{ saved_restaurants }} ) {
                   contentType: false,
                   // handle a successful response
                   success : function(response) {
-                      if (response === "Saved") {
+                      if (response == "Saved") {
                         $('#'+currentForm.attr("res_business_id")).css("color", "red");
                       } else {
                         $('#'+currentForm.attr("res_business_id")).css("color", "");
