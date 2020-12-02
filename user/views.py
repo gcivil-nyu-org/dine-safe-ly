@@ -10,6 +10,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
 from django.http import HttpResponse, HttpResponseBadRequest
+
 from .utils import send_reset_password_email
 from .forms import (
     UserCreationForm,
