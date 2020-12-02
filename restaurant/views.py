@@ -99,7 +99,7 @@ def get_restaurant_profile(request, restaurant_id):
                 "saved_restaurants": len(
                     user.favorite_restaurants.all().filter(id=restaurant_id)
                 )
-                                     > 0,
+                > 0,
             }
         else:
             parameter_dict = {
@@ -217,10 +217,10 @@ def chatbot_keyword(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
-            restaurants = get_restaurant_list(keyword=data['keyword'], categories_filter=[data['category']])
-            response = {
-                'restaurants': restaurants
-            }
+            restaurants = get_restaurant_list(
+                keyword=data["keyword"], categories_filter=[data["category"]]
+            )
+            response = {"restaurants": restaurants}
             return JsonResponse(response)
         except AttributeError as e:
             return HttpResponseBadRequest(e)
