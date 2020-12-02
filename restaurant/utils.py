@@ -280,6 +280,8 @@ def get_filtered_restaurants(
             preferred_categories.append(c.parent_category)
 
         filters["category__parent_category__in"] = preferred_categories
+        keyword_filter["compliant_status__iexact"] = "Compliant"
+        value = "-yelp_detail__rating"
         if favorite_filter:
             filtered_restaurants = user.favorite_restaurants.all()
             filtered_restaurants = (
@@ -288,7 +290,7 @@ def get_filtered_restaurants(
                 )
                 .distinct()
                 .filter(**keyword_filter)
-                .order_by("-id")[offset : offset + int(limit)]
+                .order_by(value)[offset : offset + int(limit)]
             )
         else:
             filtered_restaurants = (
@@ -297,10 +299,9 @@ def get_filtered_restaurants(
                 )
                 .distinct()
                 .filter(**keyword_filter)
-                .order_by("-id")[offset : offset + int(limit)]
+                .order_by(value)[offset : offset + int(limit)]
             )
 
-        print(filtered_restaurants)
         return filtered_restaurants
 
     if favorite_filter:
