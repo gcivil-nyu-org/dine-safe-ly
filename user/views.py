@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 from django.utils.encoding import force_text
 from django.http import HttpResponse, HttpResponseBadRequest
 
-from .utils import send_reset_password_email
+from .utils import send_reset_password_email, send_verification_email
 from .forms import (
     UserCreationForm,
     ResetPasswordForm,
@@ -35,9 +35,11 @@ def user_login(request):
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
             if user is not None:
+                if not user.is_active:
+                    send_verification_email(request, form.cleaned_data.get("email"))
                 login(request, user)
                 return redirect("user:register")
-
+        logger.error(form.errors)
     else:
         form = AuthenticationForm()
     return render(request, template_name="login.html", context={"form": form})
@@ -49,7 +51,10 @@ def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.is_active = False
+            user.save()
+            send_verification_email(request, form.cleaned_data.get("email"))
             return redirect("user:login")
     else:
         form = UserCreationForm()
@@ -123,11 +128,21 @@ def reset_password_link(request, base64_id, token):
         )
 
 
+def verify_user_link(request, base64_id, token):
+    uid = force_text(urlsafe_base64_decode(base64_id))
+    user = get_user_model().objects.get(pk=uid)
+    if not user or not PasswordResetTokenGenerator().check_token(user, token):
+        return HttpResponse("This is invalid!")
+    user.is_active = True
+    user.save()
+
+    return redirect("user:login")
+
+
 def forget_password(request):
     if request.method == "POST":
         form = GetEmailForm(request.POST)
         if form.is_valid():
-            # TODO: Check the django reset password form
             send_reset_password_email(request, form.cleaned_data.get("email"))
             return render(request=request, template_name="sent_email.html")
         return render(
