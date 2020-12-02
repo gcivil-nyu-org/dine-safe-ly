@@ -59,11 +59,15 @@
               </div>
             </a>
           </div>
-            {% if user.is_authenticated %}
-                <!-- Button trigger questionnaire modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Have you been here before?
-          </button>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message %}
+                            <h2><span class="badge badge-secondary p-2">Thanks for your feedback!</span></h2>
+                        {% endif %}
+                    {% endfor %}
+                {% elif user.is_authenticated %}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Have you been here before?</button>
+                {% endif %}
 
 {#              {% if saved_restaurants %}#}
 {#              <!-- Button trigger delete restaurant from favorite -->#}
@@ -77,7 +81,6 @@
 {#                </button>#}
 {##}
 {#              {% endif %}#}
-          {% endif %}
         </div>
 
           <!-- Save Favorite Restaurant -->
