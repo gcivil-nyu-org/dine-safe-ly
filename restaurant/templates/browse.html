@@ -271,7 +271,9 @@ $(document).ready(function(){
                     <label class="form-label mr-2" for="form_sort">Sort by</label>
                     <select form="search_filter_form" class="selectpicker" name="form_sort" id="form_sort" data-style="btn-selectpicker" title="Select" onchange="document.getElementById('filterbtn').click();">
                         <option value="none">None</option>
+                        {% if request.user.is_authenticated %}
                         <option value="recommended">Recommended</option>
+                        {% endif %}
                         <option value="ratedhigh">Highest Rated</option>
                         <option value="ratedlow">Lowest Rated</option>
                         <option value="pricehigh">Highest Price</option>
