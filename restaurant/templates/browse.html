@@ -197,6 +197,18 @@ $(document).ready(function(){
                     </div>
                 </div>
                 {% endif %}
+                {% if request.user.is_authenticated %}
+                <div class="mb-4">
+                    <label class="form-label">Filter by Preferences</label>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="pref" name="pref" value="pref">
+                            <label class="custom-control-label" for="pref"
+                            >Preferences</label>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
                 <div class="mb-4">
                     <label class="form-label">Filter by Rating</label>
                     <div class="form-group">
