@@ -273,12 +273,12 @@ def get_filtered_restaurants(
             value = "-yelp_detail__price"
         elif sort_option == "pricelow":
             value = "yelp_detail__price"
-    
+
     if user and user.is_authenticated and sort_option == "recommended":
         preferred_categories = []
         for c in user.preferences.all():
             preferred_categories.append(c.parent_category)
-        
+
         filters["category__parent_category__in"] = preferred_categories
         if favorite_filter:
             filtered_restaurants = user.favorite_restaurants.all()
@@ -292,17 +292,16 @@ def get_filtered_restaurants(
             )
         else:
             filtered_restaurants = (
-            Restaurant.objects.filter(
-                business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+                Restaurant.objects.filter(
+                    business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+                )
+                .distinct()
+                .filter(**keyword_filter)
+                .order_by("-id")[offset : offset + int(limit)]
             )
-            .distinct()
-            .filter(**keyword_filter)
-            .order_by("-id")[offset : offset + int(limit)]
-        )
 
         print(filtered_restaurants)
         return filtered_restaurants
-        
 
     if favorite_filter:
         if user.is_authenticated:
