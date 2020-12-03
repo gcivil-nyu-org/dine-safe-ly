@@ -311,7 +311,7 @@
                 <div class="media-body">
                   <p class="subtitle text-sm text-primary">Safety Statistics</p><br>
                   <h6 class="mb-0">Average Safety Rating: &#160;<span class="badge
-                  badge-primary">{{ average_safety_rating }}</span></h6>
+                  badge-primary">{{ statistics_dict.valuable_avg_safety_rating }}</span></h6>
                 </div>
               </div>
                 </div>
@@ -321,6 +321,8 @@
                   <canvas id="myChart1"></canvas>
                 </li>
                 <script>
+                  var temp_check_true = {{ statistics_dict.temp_check_true }};
+                  var temp_check_false = {{ statistics_dict.temp_check_false }};
                 var ctx = document.getElementById('myChart1');
                 var myChart = new Chart(ctx, {
                     type: 'pie',
@@ -328,7 +330,7 @@
                         labels: ['True', 'False'],
                         datasets: [{
                             label: 'Temperature Check',
-                            data: [12, 19],
+                            data: [temp_check_true, temp_check_false],
                             backgroundColor: [
                                 'rgba(54, 162, 235, 0.2)',
                                 'rgba(255, 99, 132, 0.2)'
@@ -350,7 +352,7 @@
                       },
                       legend: {
                       display: false,
-                  }
+                      }
                     }
                 });
                 </script>
@@ -358,6 +360,8 @@
                   <canvas id="myChart2"></canvas>
                 </li>
                 <script>
+                  var contact_info_required_true = {{ statistics_dict.contact_info_required_true }};
+                  var contact_info_required_false = {{ statistics_dict.contact_info_required_false }};
                 var ctx = document.getElementById('myChart2');
                 var myChart = new Chart(ctx, {
                     type: 'pie',
@@ -365,7 +369,7 @@
                         labels: ['True', 'False'],
                         datasets: [{
                             label: 'Temperature Check',
-                            data: [12, 19],
+                            data: [contact_info_required_true, contact_info_required_false],
                             backgroundColor: [
                                 'rgba(54, 162, 235, 0.2)',
                                 'rgba(255, 99, 132, 0.2)'
@@ -384,6 +388,9 @@
                           display: true,
                           text: 'Contact Info Tracing',
                           fontSize: 15
+                      },
+                      legend: {
+                      display: false,
                       }
                     }
                 });
@@ -392,6 +399,8 @@
                   <canvas id="myChart3"></canvas>
                 </li>
                 <script>
+                  var employee_mask_true = {{ statistics_dict.employee_mask_true }};
+                  var employee_mask_false = {{ statistics_dict.employee_mask_false }};
                 var ctx = document.getElementById('myChart3');
                 var myChart = new Chart(ctx, {
                     type: 'pie',
@@ -399,7 +408,7 @@
                         labels: ['True', 'False'],
                         datasets: [{
                             label: 'Temperature Check',
-                            data: [12, 19],
+                            data: [employee_mask_true, employee_mask_false],
                             backgroundColor: [
                                 'rgba(54, 162, 235, 0.2)',
                                 'rgba(255, 99, 132, 0.2)'
@@ -418,6 +427,9 @@
                           display: true,
                           text: 'Staff Wearing Mask',
                           fontSize: 15
+                      },
+                      legend: {
+                      display: false,
                       }
                     }
                 });
@@ -426,6 +438,8 @@
                   <canvas id="myChart4"></canvas>
                 </li>
                 <script>
+                  var capacity_compliant_true = {{ statistics_dict.capacity_compliant_true }};
+                  var capacity_compliant_false = {{ statistics_dict.capacity_compliant_false }};
                 var ctx = document.getElementById('myChart4');
                 var myChart = new Chart(ctx, {
                     type: 'pie',
@@ -433,7 +447,7 @@
                         labels: ['True', 'False'],
                         datasets: [{
                             label: 'Temperature Check',
-                            data: [12, 19],
+                            data: [capacity_compliant_true, capacity_compliant_false],
                             backgroundColor: [
                                 'rgba(54, 162, 235, 0.2)',
                                 'rgba(255, 99, 132, 0.2)'
@@ -452,6 +466,9 @@
                           display: true,
                           text: 'Capacity under 25%',
                           fontSize: 15
+                      },
+                      legend: {
+                      display: false,
                       }
                     }
                 });
@@ -460,6 +477,8 @@
                   <canvas id="myChart5"></canvas>
                 </li>
                 <script>
+                  var distance_compliant_true = {{ statistics_dict.distance_compliant_true }};
+                  var distance_compliant_false = {{ statistics_dict.distance_compliant_false }};
                 var ctx = document.getElementById('myChart5');
                 var myChart = new Chart(ctx, {
                     type: 'pie',
@@ -467,7 +486,7 @@
                         labels: ['True', 'False'],
                         datasets: [{
                             label: 'Temperature Check',
-                            data: [12, 19],
+                            data: [distance_compliant_true, distance_compliant_false],
                             backgroundColor: [
                                 'rgba(54, 162, 235, 0.2)',
                                 'rgba(255, 99, 132, 0.2)'
@@ -486,6 +505,9 @@
                           display: true,
                           text: 'Distance Compliant',
                           fontSize: 15
+                      },
+                      legend: {
+                      display: false,
                       }
                     }
                 });
