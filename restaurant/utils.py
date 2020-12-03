@@ -393,3 +393,91 @@ def get_csv_from_github():
 
 def check_restaurant_saved(user, restaurant_id):
     return len(user.favorite_restaurants.all().filter(id=restaurant_id)) > 0
+
+
+def questionnaire_report(restaurant_business_id):
+    inspection_results = list(
+        InspectionRecords.objects.filter(business_id=restaurant_business_id).order_by(
+            "inspected_on"
+        )
+    )
+    if len(inspection_results) >= 1:
+        latest_inspection = inspection_results[0]
+        latest_inspection_time = latest_inspection.inspected_on
+        latest_inspection_status = latest_inspection.is_roadway_compliant
+
+        valuable_questionnaire_list = list(
+            UserQuestionnaire.objects.filter(
+                restaurant_business_id=restaurant_business_id,
+                saved_on__gte=latest_inspection_time,
+            ).order_by("saved_on")
+        )
+
+        return latest_inspection_status, valuable_questionnaire_list
+    return None
+
+
+def questionnaire_statistics(restaurant_business_id):
+    latest_inspection_status, valuable_questionnaire_list = questionnaire_report(
+        restaurant_business_id
+    )
+    total_valuable_count = len(valuable_questionnaire_list)
+    if total_valuable_count >= 1:
+        total_safety_rating = 0
+        temp_check_true = 0
+        contact_info_required_true = 0
+        employee_mask_true = 0
+        capacity_compliant_true = 0
+        distance_compliant_true = 0
+
+        for questionnaire in valuable_questionnaire_list:
+            total_safety_rating += int(questionnaire.safety_level)
+            temp_check_true += (
+                1 if questionnaire.temperature_required.__contains__("true") else 0
+            )
+            contact_info_required_true += (
+                1 if questionnaire.contact_info_required.__contains__("true") else 0
+            )
+            employee_mask_true += (
+                1 if questionnaire.employee_mask.__contains__("true") else 0
+            )
+            capacity_compliant_true += (
+                1 if questionnaire.capacity_compliant.__contains__("true") else 0
+            )
+            distance_compliant_true += (
+                1 if questionnaire.distance_compliant.__contains__("true") else 0
+            )
+        valuable_avg_safety_rating = str(
+            round(total_safety_rating / total_valuable_count, 2)
+        )
+        # valuable_temp_percentage = str(round(temp_check_true / total_valuable_count, 2))
+        # valuable_contact_percentage = str(
+        #     round(contact_info_required_true / total_valuable_count, 2)
+        # )
+        # valuable_employee_mask_percentage = str(
+        #     round(employee_mask_true / total_valuable_count, 2)
+        # )
+        # valuable_capacity_compliant_percentage = str(
+        #     round(capacity_compliant_true / total_valuable_count, 2)
+        # )
+        # valuable_distance_compliant_percentage = str(
+        #     round(distance_compliant_true / total_valuable_count, 2)
+        # )
+        statistics_dict = {
+            "valuable_avg_safety_rating": valuable_avg_safety_rating,
+            "temp_check_true": temp_check_true,
+            "temp_check_false": total_valuable_count - temp_check_true,
+            "contact_info_required_true": contact_info_required_true,
+            "contact_info_required_false": total_valuable_count
+            - contact_info_required_true,
+            "employee_mask_true": employee_mask_true,
+            "employee_mask_false": total_valuable_count - employee_mask_true,
+            "capacity_compliant_true": capacity_compliant_true,
+            "capacity_compliant_false": total_valuable_count - capacity_compliant_true,
+            "distance_compliant_true": distance_compliant_true,
+            "distance_compliant_false": total_valuable_count - distance_compliant_true,
+        }
+
+        return statistics_dict
+
+    return None
