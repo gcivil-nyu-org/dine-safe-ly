@@ -21,6 +21,7 @@ from .utils import (
     get_total_restaurant_number,
     check_restaurant_saved,
     get_csv_from_github,
+    questionnaire_statistics,
 )
 
 from django.http import HttpResponse
@@ -61,7 +62,7 @@ def get_restaurant_profile(request, restaurant_id):
         if form.is_valid():
             form.save()
             messages.success(request, "success")
-            return HttpResponseRedirect("")
+            return HttpResponseRedirect("../../../restaurant/profile/" + restaurant_id)
 
     try:
         csv_file = get_csv_from_github()
@@ -85,6 +86,8 @@ def get_restaurant_profile(request, restaurant_id):
         )
         feedback = get_latest_feedback(restaurant.business_id)
         average_safety_rating = get_average_safety_rating(restaurant.business_id)
+
+        statistics_dict = questionnaire_statistics(restaurant.business_id)
         if request.user.is_authenticated:
             user = request.user
             parameter_dict = {
@@ -100,6 +103,7 @@ def get_restaurant_profile(request, restaurant_id):
                     user.favorite_restaurants.all().filter(id=restaurant_id)
                 )
                 > 0,
+                "statistics_dict": statistics_dict,
             }
         else:
             parameter_dict = {
@@ -111,6 +115,7 @@ def get_restaurant_profile(request, restaurant_id):
                 "restaurant_id": restaurant_id,
                 "latest_feedback": feedback,
                 "average_safety_rating": average_safety_rating,
+                "statistics_dict": statistics_dict,
             }
 
         return render(request, "restaurant_detail.html", parameter_dict)
