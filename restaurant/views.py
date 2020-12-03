@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
@@ -61,7 +62,11 @@ def get_restaurant_profile(request, restaurant_id):
         if form.is_valid():
             form.save()
             messages.success(request, "success")
-            return HttpResponseRedirect("")
+            # base_url = reverse('restaurant:profile')
+            # url = "{} {}".format(base_url, restaurant_id)
+            # print(base_url)
+            # print("url :" + url)
+            return HttpResponseRedirect("../../../restaurant/profile/" + restaurant_id)
 
     try:
         csv_file = get_csv_from_github()
