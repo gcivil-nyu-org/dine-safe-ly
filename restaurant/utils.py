@@ -450,19 +450,7 @@ def questionnaire_statistics(restaurant_business_id):
         valuable_avg_safety_rating = str(
             round(total_safety_rating / total_valuable_count, 2)
         )
-        # valuable_temp_percentage = str(round(temp_check_true / total_valuable_count, 2))
-        # valuable_contact_percentage = str(
-        #     round(contact_info_required_true / total_valuable_count, 2)
-        # )
-        # valuable_employee_mask_percentage = str(
-        #     round(employee_mask_true / total_valuable_count, 2)
-        # )
-        # valuable_capacity_compliant_percentage = str(
-        #     round(capacity_compliant_true / total_valuable_count, 2)
-        # )
-        # valuable_distance_compliant_percentage = str(
-        #     round(distance_compliant_true / total_valuable_count, 2)
-        # )
+
         statistics_dict = {
             "valuable_avg_safety_rating": valuable_avg_safety_rating,
             "temp_check_true": temp_check_true,
