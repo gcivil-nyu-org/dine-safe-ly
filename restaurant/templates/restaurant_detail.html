@@ -39,6 +39,11 @@
             {% else %}
                 <button id="log_in_to_save" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="log in to save" >
                 <i id="iconid" class="fa fa-heart fa-2x"></i>
+                  <script>
+                    document.getElementById("log_in_to_save").onclick = function() {
+                    location.href = "{% url 'user:login' %}";
+                }
+                  </script>
             {% endif %}
             </form>
           </h3>
@@ -323,7 +328,7 @@
                 <script>
                   var temp_check_true = {{ statistics_dict.temp_check_true }};
                   var temp_check_false = {{ statistics_dict.temp_check_false }};
-                var ctx = document.getElementById('myChart1');
+                var ctx = document.getElementById('myChart1').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'pie',
                     data: {
@@ -350,9 +355,10 @@
                           text: 'Temperature Check',
                           fontSize: 15
                       },
-                      legend: {
-                      display: false,
-                      }
+                        legend: {
+                          display: false,
+                        },
+                        responsive: true
                     }
                 });
                 </script>
@@ -808,9 +814,6 @@ function initMap() {
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_delete_favorite").value = yelp_info.id ;
-  document.getElementById("log_in_to_save").onclick = function() {
-      location.href = "{% url 'user:login' %}";
-  }
 </script>
 <script>
             $('body').on('submit', "form[name='saved_res_remove']", function(event) {
