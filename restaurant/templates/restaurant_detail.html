@@ -309,8 +309,7 @@
             <div class="card-header bg-gray-100 py-4 border-0">
               <div class="media align-items-center">
                 <div class="media-body">
-                  <p class="subtitle text-sm text-primary">Most Recent User
-                      Feedback</p><br>
+                  <p class="subtitle text-sm text-primary">Safety Statistics</p><br>
                   <h6 class="mb-0">Average Safety Rating: &#160;<span class="badge
                   badge-primary">{{ average_safety_rating }}</span></h6>
                 </div>
@@ -319,20 +318,173 @@
             <div class="card-body">
               <ul class="list-group">
                 <li class="list-group-item">
-                  <p id="temperature_check">Temperature Check: <span class="badge badge-primary">{{ latest_feedback.temperature_required }}</span></p>
+                  <canvas id="myChart1"></canvas>
                 </li>
+                <script>
+                var ctx = document.getElementById('myChart1');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['True', 'False'],
+                        datasets: [{
+                            label: 'Temperature Check',
+                            data: [12, 19],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Temperature Check'
+                      },
+                      legend: {
+                      display: false,
+                  }
+                    }
+                });
+                </script>
                 <li class="list-group-item">
-                  <p id="contact_info">Contact Info Tracing: <span class="badge badge-primary">{{ latest_feedback.contact_info_required }}</span></p>
+                  <canvas id="myChart2"></canvas>
                 </li>
+                <script>
+                var ctx = document.getElementById('myChart2');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['True', 'False'],
+                        datasets: [{
+                            label: 'Temperature Check',
+                            data: [12, 19],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Contact Info Tracing'
+                      }
+                    }
+                });
+                </script>
                 <li class="list-group-item">
-                  <p id="staff_mask">Staff Wearing Mask: <span class="badge badge-primary">{{ latest_feedback.employee_mask }}</span></p>
+                  <canvas id="myChart3"></canvas>
                 </li>
+                <script>
+                var ctx = document.getElementById('myChart3');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['True', 'False'],
+                        datasets: [{
+                            label: 'Temperature Check',
+                            data: [12, 19],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Staff Wearing Mask'
+                      }
+                    }
+                });
+                </script>
                 <li class="list-group-item">
-                  <p id="capacity_compliance">Capacity under 25%: <span class="badge badge-primary">{{ latest_feedback.capacity_compliant }}</span></p>
+                  <canvas id="myChart4"></canvas>
                 </li>
+                <script>
+                var ctx = document.getElementById('myChart4');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['True', 'False'],
+                        datasets: [{
+                            label: 'Temperature Check',
+                            data: [12, 19],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Capacity under 25%'
+                      }
+                    }
+                });
+                </script>
                 <li class="list-group-item">
-                  <p id="distance_compliance">Distance Compliant: <span class="badge badge-primary">{{ latest_feedback.distance_compliant }}</span></p>
+                  <canvas id="myChart5"></canvas>
                 </li>
+                <script>
+                var ctx = document.getElementById('myChart5');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['True', 'False'],
+                        datasets: [{
+                            label: 'Temperature Check',
+                            data: [12, 19],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Distance Compliant'
+                      }
+                    }
+                });
+                </script>
               </ul>
 
             </div>
