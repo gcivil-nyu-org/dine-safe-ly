@@ -4,7 +4,6 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
 from .models import Restaurant
 
-# from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from .forms import (
     QuestionnaireForm,

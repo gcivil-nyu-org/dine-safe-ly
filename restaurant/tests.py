@@ -24,6 +24,7 @@ from .utils import (
     get_filtered_restaurants,
     get_latest_feedback,
     get_average_safety_rating,
+    check_restaurant_saved,
     # questionnaire_report,
     # questionnaire_statistics,
 )
@@ -778,6 +779,25 @@ class RestaurantUtilsTests(TestCase):
         )
         average_safety = get_average_safety_rating("WavvLdfdP6g8aZTtbBQHTw")
         self.assertEqual(average_safety, "2.0")
+
+    def test_check_restaurant_saved(self):
+        self.dummy_user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
+        self.dummy_user.set_password("Dinesafely123")
+        self.dummy_user.save()
+        self.temp_rest = create_restaurant(
+            "random_name",
+            "random_address",
+            None,
+            "random_postcode",
+            "U8C69ISrhGTTubjqoVgZYg",
+        )
+        self.dummy_user.favorite_restaurants.add(
+            Restaurant.objects.get(business_id="U8C69ISrhGTTubjqoVgZYg")
+        )
+        self.assertTrue(check_restaurant_saved(self.dummy_user, 1))
 
 
 class IntegratedInspectionRestaurantsTests(TestCase):
