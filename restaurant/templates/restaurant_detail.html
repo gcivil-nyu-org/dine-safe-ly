@@ -82,6 +82,11 @@
                     <div class="progress-bar" role="progressbar" style="width: {{ statistics_dict.valuable_avg_safety_rating|mul:20 }}%;" aria-valuenow="{{ statistics_dict.valuable_avg_safety_rating }}" aria-valuemin="0" aria-valuemax="5">{{ statistics_dict.valuable_avg_safety_rating }}</div>
                   </div>
                 </h6>
+              {% if statistics_dict.valuable_avg_safety_rating == 0 %}
+                <div class="row text-center justify-content-md-center">
+                  No user submitted data available
+                </div>
+              {% else %}
               <div class="row text-center justify-content-md-center">
                 <div class="col-md-4">
                 <canvas id="temp_check_chart"></canvas>
@@ -280,6 +285,7 @@
                 </script>
                   </div>
                 </div>
+              {% endif %}
             </a>
           </div>
           <div class="text-block">
