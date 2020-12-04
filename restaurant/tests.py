@@ -25,7 +25,7 @@ from .utils import (
     get_latest_feedback,
     get_average_safety_rating,
     check_restaurant_saved,
-    # questionnaire_report,
+    questionnaire_report,
     # questionnaire_statistics,
 )
 
@@ -798,6 +798,50 @@ class RestaurantUtilsTests(TestCase):
             Restaurant.objects.get(business_id="U8C69ISrhGTTubjqoVgZYg")
         )
         self.assertTrue(check_restaurant_saved(self.dummy_user, 1))
+
+    def test_questionnaire_report(self):
+        self.dummy_user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
+        self.dummy_user.set_password("Dinesafely123")
+        self.dummy_user.save()
+        self.temp_rest = create_restaurant(
+            restaurant_name="Tacos El Paisa",
+            business_address="1548 St. Nicholas btw West 187th street and west 188th "
+            "street, Manhattan, NY",
+            yelp_detail=None,
+            postcode="10040",
+            business_id="WavvLdfdP6g8aZTtbBQHTw",
+        )
+        self.temp_inspection = InspectionRecords.objects.create(
+            restaurant_inspection_id="24111",
+            restaurant_name="Tacos El Paisa",
+            postcode="10040",
+            business_address="1548 St. Nicholas btw West 187th street "
+            "and west 188th "
+            "street, Manhattan, NY",
+            is_roadway_compliant="Compliant",
+            skipped_reason="No Seating",
+            inspected_on=datetime(2020, 10, 21, 12, 30, 30),
+            business_id="WavvLdfdP6g8aZTtbBQHTw",
+        )
+        self.temp_user_questionnaire = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="5",
+            saved_on=datetime.now(),
+            temperature_required="True",
+            contact_info_required="True",
+            employee_mask="True",
+            capacity_compliant="True",
+            distance_compliant="True",
+        )
+        latest_inspection_status, valuable_questionnaire_list = questionnaire_report(
+            "WavvLdfdP6g8aZTtbBQHTw"
+        )
+        self.assertEqual(latest_inspection_status, "Compliant")
+        self.assertEqual(valuable_questionnaire_list[0], self.temp_user_questionnaire)
 
 
 class IntegratedInspectionRestaurantsTests(TestCase):
