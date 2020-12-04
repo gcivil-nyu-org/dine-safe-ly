@@ -4,13 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
 from .models import Restaurant
-from django.contrib.auth import get_user_model
+
+# from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from .forms import (
     QuestionnaireForm,
     SearchFilterForm,
-    SaveFavoriteForm,
-    DeleteFavoriteForm,
 )
 from .utils import (
     query_yelp,
@@ -40,24 +39,7 @@ def index(request):
 
 
 def get_restaurant_profile(request, restaurant_id):
-    if request.method == "POST" and "save_favorite_form" in request.POST:
-        form = SaveFavoriteForm(request.POST)
-        if form.is_valid():
-            user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
-            user.favorite_restaurants.add(
-                Restaurant.objects.get(
-                    business_id=form.cleaned_data.get("restaurant_business_id")
-                )
-            )
-    if request.method == "POST" and "delete_favorite_form" in request.POST:
-        form = DeleteFavoriteForm(request.POST)
-        if form.is_valid():
-            user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
-            user.favorite_restaurants.remove(
-                Restaurant.objects.get(
-                    business_id=form.cleaned_data.get("restaurant_business_id")
-                )
-            )
+
     if request.method == "POST" and "questionnaire_form" in request.POST:
         form = QuestionnaireForm(request.POST)
         if form.is_valid():
