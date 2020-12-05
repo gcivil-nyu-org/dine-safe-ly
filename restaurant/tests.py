@@ -3,6 +3,9 @@ from django.forms.models import model_to_dict
 from django.test import Client
 from datetime import datetime, timedelta
 from unittest import mock
+
+from django.urls import reverse
+
 from .forms import QuestionnaireForm
 from django.contrib.auth import get_user_model
 from .models import (
@@ -560,16 +563,15 @@ class RestaurantViewTests(TestCase):
         )
         self.dummy_user.set_password("pass123")
         self.dummy_user.save()
-        # self.dummy_user.login()
         self.c = Client()
-        # print(Restaurant.objects.all().filter(business_id="U8C69ISrhGTTubjqoVgZYg"))
-        response = self.c.post(
-            path="/restaurant/save/favorite/restaurant/" + "U8C69ISrhGTTubjqoVgZYg"
+        self.c.login(username="myuser", password="pass123")
+
+        url = reverse(
+            "restaurant:save_favorite_restaurant", args=["U8C69ISrhGTTubjqoVgZYg"]
         )
-        self.assertEqual(response.status_code, 302)
-        # user = get_user_model().objects.get(pk=1)
-        # print("count is : ", user.favorite_restaurants.all().count())
-        # self.assertTrue(user.favorite_restaurants.all().count() == 1)
+        response = self.c.post(path=url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(self.dummy_user.favorite_restaurants.all().count() == 1)
 
     def test_restaurant_profile_view_delete_favorite(self):
         create_restaurant(
@@ -585,15 +587,14 @@ class RestaurantViewTests(TestCase):
         )
         self.dummy_user.set_password("pass123")
         self.dummy_user.save()
-        # self.dummy_user.login()
         self.c = Client()
-        response = self.c.post(
-            path="/restaurant/delete/favorite/restaurant/" + "U8C69ISrhGTTubjqoVgZYg"
+        self.c.login(username="myuser", password="pass123")
+        url = reverse(
+            "restaurant:delete_favorite_restaurant", args=["U8C69ISrhGTTubjqoVgZYg"]
         )
-        self.assertEqual(response.status_code, 302)
-        # user = get_user_model().objects.get(pk=1)
-        # print("count is : ", user.favorite_restaurants.all().count())
-        # self.assertTrue(user.favorite_restaurants.all().count() == 0)
+        response = self.c.post(path=url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(self.dummy_user.favorite_restaurants.all().count() == 0)
 
 
 class RestaurantUtilsTests(TestCase):
