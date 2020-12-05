@@ -5,13 +5,11 @@ from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadReque
 from django.urls import reverse
 
 from .models import Restaurant
-from django.contrib.auth import get_user_model
+
 from django.views.decorators.csrf import csrf_exempt
 from .forms import (
     QuestionnaireForm,
     SearchFilterForm,
-    SaveFavoriteForm,
-    DeleteFavoriteForm,
 )
 from .utils import (
     query_yelp,
@@ -23,6 +21,7 @@ from .utils import (
     get_total_restaurant_number,
     check_restaurant_saved,
     get_csv_from_github,
+    questionnaire_statistics,
 )
 
 from django.http import HttpResponse
@@ -35,29 +34,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def index(request):
-    return HttpResponse("Hello, this is restaurant.")
-
-
 def get_restaurant_profile(request, restaurant_id):
-    if request.method == "POST" and "save_favorite_form" in request.POST:
-        form = SaveFavoriteForm(request.POST)
-        if form.is_valid():
-            user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
-            user.favorite_restaurants.add(
-                Restaurant.objects.get(
-                    business_id=form.cleaned_data.get("restaurant_business_id")
-                )
-            )
-    if request.method == "POST" and "delete_favorite_form" in request.POST:
-        form = DeleteFavoriteForm(request.POST)
-        if form.is_valid():
-            user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
-            user.favorite_restaurants.remove(
-                Restaurant.objects.get(
-                    business_id=form.cleaned_data.get("restaurant_business_id")
-                )
-            )
+
     if request.method == "POST" and "questionnaire_form" in request.POST:
         form = QuestionnaireForm(request.POST)
         if form.is_valid():
@@ -88,6 +66,8 @@ def get_restaurant_profile(request, restaurant_id):
         )
         feedback = get_latest_feedback(restaurant.business_id)
         average_safety_rating = get_average_safety_rating(restaurant.business_id)
+
+        statistics_dict = questionnaire_statistics(restaurant.business_id)
         if request.user.is_authenticated:
             user = request.user
             parameter_dict = {
@@ -103,6 +83,7 @@ def get_restaurant_profile(request, restaurant_id):
                     user.favorite_restaurants.all().filter(id=restaurant_id)
                 )
                 > 0,
+                "statistics_dict": statistics_dict,
             }
         else:
             parameter_dict = {
@@ -114,6 +95,7 @@ def get_restaurant_profile(request, restaurant_id):
                 "restaurant_id": restaurant_id,
                 "latest_feedback": feedback,
                 "average_safety_rating": average_safety_rating,
+                "statistics_dict": statistics_dict,
             }
 
         return render(request, "restaurant_detail.html", parameter_dict)
@@ -200,7 +182,6 @@ def save_favorite_restaurant(request, business_id):
     if request.method == "POST":
         user = request.user
         user.favorite_restaurants.add(Restaurant.objects.get(business_id=business_id))
-        logger.info(business_id)
     return HttpResponse("Saved")
 
 
@@ -211,7 +192,6 @@ def delete_favorite_restaurant(request, business_id):
         user.favorite_restaurants.remove(
             Restaurant.objects.get(business_id=business_id)
         )
-        logger.info(business_id)
         return HttpResponse("Deleted")
 
 
