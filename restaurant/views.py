@@ -6,7 +6,6 @@ from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadReque
 
 from .models import Restaurant
 
-# from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from .forms import (
     QuestionnaireForm,
@@ -33,10 +32,6 @@ import json
 import logging
 
 logger = logging.getLogger(__name__)
-
-
-def index(request):
-    return HttpResponse("Hello, this is restaurant.")
 
 
 def get_restaurant_profile(request, restaurant_id):
@@ -187,7 +182,6 @@ def save_favorite_restaurant(request, business_id):
     if request.method == "POST":
         user = request.user
         user.favorite_restaurants.add(Restaurant.objects.get(business_id=business_id))
-        logger.info(business_id)
     return HttpResponse("Saved")
 
 
@@ -198,7 +192,6 @@ def delete_favorite_restaurant(request, business_id):
         user.favorite_restaurants.remove(
             Restaurant.objects.get(business_id=business_id)
         )
-        logger.info(business_id)
         return HttpResponse("Deleted")
 
 
