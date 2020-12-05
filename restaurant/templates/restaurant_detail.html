@@ -74,7 +74,7 @@
 
                 <h5>Safety Statistics
                   {% if not statistics_dict.valuable_avg_safety_rating == 0 %}
-                  <span class="badge badge-primary-light">{{ statistics_dict.valuable_avg_safety_rating }}/5</span>
+                  <span class="badge badge-primary-light">{{ statistics_dict.valuable_avg_safety_rating|floatformat:1 }}/5</span>
                   {% endif %}
                 </h5>
                 {% if messages %}
