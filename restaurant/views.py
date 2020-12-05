@@ -182,7 +182,6 @@ def save_favorite_restaurant(request, business_id):
     if request.method == "POST":
         user = request.user
         user.favorite_restaurants.add(Restaurant.objects.get(business_id=business_id))
-        logger.info(business_id)
     return HttpResponse("Saved")
 
 
@@ -193,7 +192,6 @@ def delete_favorite_restaurant(request, business_id):
         user.favorite_restaurants.remove(
             Restaurant.objects.get(business_id=business_id)
         )
-        logger.info(business_id)
         return HttpResponse("Deleted")
 
 
