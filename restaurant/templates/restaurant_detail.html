@@ -70,17 +70,26 @@
               </div>
             </a>
             <a class="list-group-item list-group-item-action p-4">
-              <h5>
-                Safety Statistics
-              </h5>
+              <div class="d-flex flex-row justify-content-between">
+
+                <h5>Safety Statistics
+                  {% if not statistics_dict.valuable_avg_safety_rating == 0 %}
+                  <span class="badge badge-primary-light">{{ statistics_dict.valuable_avg_safety_rating }}/5</span>
+                  {% endif %}
+                </h5>
+                {% if messages %}
+                {% for message in messages %}
+                {% if message %}
+                <span class="badge badge-primary-light"><h6>Thanks for your feedback!</h6></span>
+                {% endif %}
+                {% endfor %}
+                {% elif user.is_authenticated %}
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">Submit Feedback?</button>
+                {% endif %}
+              </div>
+
                 <h6 class="mb-4" style="text-decoration: none; font-size: 12px;">
                   User submitted data that will help judge restaurant safety
-<!--                  <span class="badge badge-primary" style="font-size: 16px">-->
-<!--                  {{ statistics_dict.valuable_avg_safety_rating }}-->
-<!--                  </span>-->
-                  <div class="progress mt-2">
-                    <div class="progress-bar" role="progressbar" style="width: {{ statistics_dict.valuable_avg_safety_rating|mul:20 }}%;" aria-valuenow="{{ statistics_dict.valuable_avg_safety_rating }}" aria-valuemin="0" aria-valuemax="5">{{ statistics_dict.valuable_avg_safety_rating }}</div>
-                  </div>
                 </h6>
               {% if statistics_dict.valuable_avg_safety_rating == 0 %}
                 <div class="row text-center justify-content-md-center">
@@ -97,7 +106,7 @@
                 var myChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['True', 'False'],
+                        labels: ['Yes', 'No'],
                         datasets: [{
                             label: 'Temperature Check',
                             data: [temp_check_true, temp_check_false],
@@ -137,7 +146,7 @@
                 var myChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['True', 'False'],
+                        labels: ['Yes', 'No'],
                         datasets: [{
                             data: [contact_info_required_true, contact_info_required_false],
                             backgroundColor: [
@@ -175,7 +184,7 @@
                 var myChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['True', 'False'],
+                        labels: ['Yes', 'No'],
                         datasets: [{
                             label: 'Temperature Check',
                             data: [employee_mask_true, employee_mask_false],
@@ -214,7 +223,7 @@
                 var myChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['True', 'False'],
+                        labels: ['Yes', 'No'],
                         datasets: [{
                             label: 'Temperature Check',
                             data: [capacity_compliant_true, capacity_compliant_false],
@@ -246,7 +255,6 @@
                   </div>
                   <div class="col-md-4 mt-2">
                     <canvas id="distance_compliant_chart"></canvas>
-                </li>
                 <script>
                   var distance_compliant_true = {{ statistics_dict.distance_compliant_true }};
                   var distance_compliant_false = {{ statistics_dict.distance_compliant_false }};
@@ -254,7 +262,7 @@
                 var myChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['True', 'False'],
+                        labels: ['Yes', 'No'],
                         datasets: [{
                             label: 'Temperature Check',
                             data: [distance_compliant_true, distance_compliant_false],
@@ -290,15 +298,7 @@
           </div>
           <div class="text-block">
           </div>
-                {% if messages %}
-                    {% for message in messages %}
-                        {% if message %}
-                            <h2><span class="badge badge-secondary p-2">Thanks for your feedback!</span></h2>
-                        {% endif %}
-                    {% endfor %}
-                {% elif user.is_authenticated %}
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Have you been here before?</button>
-                {% endif %}
+
 
 {#              {% if saved_restaurants %}#}
 {#              <!-- Button trigger delete restaurant from favorite -->#}
