@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+{% load mathfilters %}
 <!-- Hero Section-->
 <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" id="res_img">
   <div class="container overlay-content">
@@ -39,10 +40,15 @@
             {% else %}
                 <button id="log_in_to_save" class="btn"  data-toggle="tooltip" data-placement="top" data-original-title="log in to save" >
                 <i id="iconid" class="fa fa-heart fa-2x"></i>
+                  <script>
+                    document.getElementById("log_in_to_save").onclick = function() {
+                    location.href = "{% url 'user:login' %}";
+                }
+                  </script>
             {% endif %}
             </form>
           </h3>
-          <div class="list-group shadow mb-5">
+          <div class="list-group shadow">
             <a class="list-group-item list-group-item-action p-4" href="/restaurant/inspection_records/{{ restaurant_id }}">
               <div class="row text-center">
                 <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
@@ -63,16 +69,236 @@
                 </div>
               </div>
             </a>
-          </div>
+            <a class="list-group-item list-group-item-action p-4">
+              <div class="d-flex flex-row justify-content-between">
+
+                <h5>Safety Statistics
+                  {% if not statistics_dict.valuable_avg_safety_rating == 0 %}
+                  <span class="badge badge-primary-light">{{ statistics_dict.valuable_avg_safety_rating|floatformat:1 }}/5</span>
+                  {% endif %}
+                </h5>
                 {% if messages %}
-                    {% for message in messages %}
-                        {% if message %}
-                            <h2><span class="badge badge-secondary p-2">Thanks for your feedback!</span></h2>
-                        {% endif %}
-                    {% endfor %}
-                {% elif user.is_authenticated %}
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Have you been here before?</button>
+                {% for message in messages %}
+                {% if message %}
+                <span class="badge badge-primary-light"><h6>Thanks for your feedback!</h6></span>
                 {% endif %}
+                {% endfor %}
+                {% elif user.is_authenticated %}
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">Submit Feedback?</button>
+                {% endif %}
+              </div>
+
+                <h6 class="mb-4" style="text-decoration: none; font-size: 12px;">
+                  User submitted data that will help judge restaurant safety
+                </h6>
+              {% if statistics_dict.valuable_avg_safety_rating == 0 %}
+                <div class="row text-center justify-content-md-center">
+                  No user submitted data available
+                </div>
+              {% else %}
+              <div class="row text-center justify-content-md-center">
+                <div class="col-md-4">
+                <canvas id="temp_check_chart"></canvas>
+                <script>
+                  var temp_check_true = {{ statistics_dict.temp_check_true }};
+                  var temp_check_false = {{ statistics_dict.temp_check_false }};
+                var ctx = document.getElementById('temp_check_chart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Yes', 'No'],
+                        datasets: [{
+                            label: 'Temperature Check',
+                            data: [temp_check_true, temp_check_false],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Temperature Check',
+                          fontSize: 15
+                      },
+                        legend: {
+                          display: false,
+                        },
+                        responsive: true
+                    }
+                });
+                </script>
+                  </div>
+                <div class="col-md-4">
+                  <canvas id="contact_info_tracing_chart"></canvas>
+                <script>
+                  var contact_info_required_true = {{ statistics_dict.contact_info_required_true }};
+                  var contact_info_required_false = {{ statistics_dict.contact_info_required_false }};
+                var ctx = document.getElementById('contact_info_tracing_chart');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Yes', 'No'],
+                        datasets: [{
+                            data: [contact_info_required_true, contact_info_required_false],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Contact Info Tracing',
+                          fontSize: 15
+                      },
+                      legend: {
+                      display: false,
+                      }
+                    }
+                });
+                </script>
+                </div>
+                <div class="col-md-4">
+                  <canvas id="employee_mask_chart"></canvas>
+                <script>
+                  var employee_mask_true = {{ statistics_dict.employee_mask_true }};
+                  var employee_mask_false = {{ statistics_dict.employee_mask_false }};
+                var ctx = document.getElementById('employee_mask_chart');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Yes', 'No'],
+                        datasets: [{
+                            label: 'Temperature Check',
+                            data: [employee_mask_true, employee_mask_false],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Staff Wearing Mask',
+                          fontSize: 15
+                      },
+                      legend: {
+                      display: false,
+                      }
+                    }
+                });
+                </script>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <canvas id="capacity_compliant_chart"></canvas>
+                <script>
+                  var capacity_compliant_true = {{ statistics_dict.capacity_compliant_true }};
+                  var capacity_compliant_false = {{ statistics_dict.capacity_compliant_false }};
+                var ctx = document.getElementById('capacity_compliant_chart');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Yes', 'No'],
+                        datasets: [{
+                            label: 'Temperature Check',
+                            data: [capacity_compliant_true, capacity_compliant_false],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Capacity under 25%',
+                          fontSize: 15
+                      },
+                      legend: {
+                      display: false,
+                      }
+                    }
+                });
+                </script>
+                  </div>
+                  <div class="col-md-4 mt-2">
+                    <canvas id="distance_compliant_chart"></canvas>
+                <script>
+                  var distance_compliant_true = {{ statistics_dict.distance_compliant_true }};
+                  var distance_compliant_false = {{ statistics_dict.distance_compliant_false }};
+                var ctx = document.getElementById('distance_compliant_chart');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Yes', 'No'],
+                        datasets: [{
+                            label: 'Temperature Check',
+                            data: [distance_compliant_true, distance_compliant_false],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                          display: true,
+                          text: 'Distance Compliant',
+                          fontSize: 15
+                      },
+                      legend: {
+                      display: false,
+                      }
+                    }
+                });
+                </script>
+                  </div>
+                </div>
+              {% endif %}
+            </a>
+          </div>
+          <div class="text-block">
+          </div>
+
 
 {#              {% if saved_restaurants %}#}
 {#              <!-- Button trigger delete restaurant from favorite -->#}
@@ -304,40 +530,7 @@
               </ul>
             </div>
           </div>
-<!--          recent user feedback-->
-            <div class="card border-0 shadow mb-5">
-            <div class="card-header bg-gray-100 py-4 border-0">
-              <div class="media align-items-center">
-                <div class="media-body">
-                  <p class="subtitle text-sm text-primary">Most Recent User
-                      Feedback</p><br>
-                  <h6 class="mb-0">Average Safety Rating: &#160;<span class="badge
-                  badge-primary">{{ average_safety_rating }}</span></h6>
-                </div>
-              </div>
-                </div>
-            <div class="card-body">
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <p id="temperature_check">Temperature Check: <span class="badge badge-primary">{{ latest_feedback.temperature_required }}</span></p>
-                </li>
-                <li class="list-group-item">
-                  <p id="contact_info">Contact Info Tracing: <span class="badge badge-primary">{{ latest_feedback.contact_info_required }}</span></p>
-                </li>
-                <li class="list-group-item">
-                  <p id="staff_mask">Staff Wearing Mask: <span class="badge badge-primary">{{ latest_feedback.employee_mask }}</span></p>
-                </li>
-                <li class="list-group-item">
-                  <p id="capacity_compliance">Capacity under 25%: <span class="badge badge-primary">{{ latest_feedback.capacity_compliant }}</span></p>
-                </li>
-                <li class="list-group-item">
-                  <p id="distance_compliance">Distance Compliant: <span class="badge badge-primary">{{ latest_feedback.distance_compliant }}</span></p>
-                </li>
-              </ul>
-
-            </div>
-          </div>
-        </div>
+     </div>
       </div>
     </div>
   </div>
@@ -629,9 +822,6 @@ function initMap() {
   document.getElementById("restaurant_business_id").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_save_favorite").value = yelp_info.id ;
   document.getElementById("restaurant_business_id_delete_favorite").value = yelp_info.id ;
-  document.getElementById("log_in_to_save").onclick = function() {
-      location.href = "{% url 'user:login' %}";
-  }
 </script>
 <script>
             $('body').on('submit', "form[name='saved_res_remove']", function(event) {

@@ -1,8 +1,8 @@
 from django.contrib import messages
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
-from django.urls import reverse
 
 from .models import Restaurant
 
