@@ -326,17 +326,6 @@ class TestAddPrefView(BaseTest):
         response = self.c.post(path=url, data=form_data)
         self.assertEqual(response.status_code, 200)
 
-    # def test_add_pref_invalid(self):
-    #     self.c.login(username="myuser", password="pass123")
-    #     Categories.objects.create(category="sushi", parent_category="sushi")
-    #     Categories.objects.create(category="french", parent_category="french")
-    #     url = reverse("user:add_preference")
-    #     form_data = {"invalid": "invalid"}
-    #     user_pref_form = UserPreferenceForm(form_data)
-    #     self.assertFalse(user_pref_form.is_valid())
-    #     response = self.c.post(path=url, data=form_data)
-    #     self.assertEqual(response.status_code, 400)
-
 
 class TestDeletePrefView(BaseTest):
     def test_del_pref_valid(self):
