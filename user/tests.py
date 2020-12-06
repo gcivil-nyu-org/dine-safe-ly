@@ -1,6 +1,15 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from .forms import UserCreationForm, ResetPasswordForm, GetEmailForm, UpdatePasswordForm
+from django.urls import reverse
+
+from restaurant.models import Categories
+from .forms import (
+    UserCreationForm,
+    ResetPasswordForm,
+    GetEmailForm,
+    UpdatePasswordForm,
+    UserPreferenceForm,
+)
 from .utils import send_reset_password_email
 from django.test import Client
 from django.utils.http import urlsafe_base64_encode
@@ -141,6 +150,18 @@ class TestUpdatePasswordForm(BaseTest):
         }
         form = UpdatePasswordForm(user=self.dummy_user, data=form_data)
         self.assertFalse(form.is_valid())
+
+
+class TestUserPreferenceForm(BaseTest):
+    def test_user_pref_form_valid(self):
+        form_data = {
+            "pref_list": [
+                "sushi",
+                "french",
+            ]
+        }
+        user_pref_form = UserPreferenceForm(data=form_data)
+        self.assertTrue(user_pref_form.is_valid())
 
 
 class TestUtils(BaseTest):
@@ -285,4 +306,43 @@ class TestForgetPasswordView(BaseTest):
                 "email": "fake_email",
             },
         )
+        self.assertEqual(response.status_code, 200)
+
+
+class TestAddPrefView(BaseTest):
+    def test_add_pref_valid(self):
+        self.c.login(username="myuser", password="pass123")
+        Categories.objects.create(category="sushi", parent_category="sushi")
+        Categories.objects.create(category="french", parent_category="french")
+        url = reverse("user:add_preference")
+        form_data = {
+            "pref_list": [
+                "sushi",
+                "french",
+            ]
+        }
+        user_pref_form = UserPreferenceForm(form_data)
+        self.assertTrue(user_pref_form.is_valid())
+        response = self.c.post(path=url, data=form_data)
+        self.assertEqual(response.status_code, 200)
+
+    # def test_add_pref_invalid(self):
+    #     self.c.login(username="myuser", password="pass123")
+    #     Categories.objects.create(category="sushi", parent_category="sushi")
+    #     Categories.objects.create(category="french", parent_category="french")
+    #     url = reverse("user:add_preference")
+    #     form_data = {"invalid": "invalid"}
+    #     user_pref_form = UserPreferenceForm(form_data)
+    #     self.assertFalse(user_pref_form.is_valid())
+    #     response = self.c.post(path=url, data=form_data)
+    #     self.assertEqual(response.status_code, 400)
+
+
+class TestDeletePrefView(BaseTest):
+    def test_del_pref_valid(self):
+        self.c.login(username="myuser", password="pass123")
+        url = reverse("user:delete_preference", args=["sushi"])
+        Categories.objects.create(category="sushi", parent_category="sushi")
+        Categories.objects.create(category="french", parent_category="french")
+        response = self.c.post(path=url)
         self.assertEqual(response.status_code, 200)
