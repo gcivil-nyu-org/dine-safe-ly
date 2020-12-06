@@ -151,6 +151,18 @@ class TestUpdatePasswordForm(BaseTest):
         form = UpdatePasswordForm(user=self.dummy_user, data=form_data)
         self.assertFalse(form.is_valid())
 
+    def test_verify_user(self):
+        user = self.dummy_user
+
+        response = self.c.post(
+            "/user/verification/"
+            + urlsafe_base64_encode(force_bytes(user.pk))
+            + "/"
+            + PasswordResetTokenGenerator().make_token(user)
+        )
+        # redirect to login page after reset
+        self.assertEqual(response.status_code, 302)
+
 
 class TestUserPreferenceForm(BaseTest):
     def test_user_pref_form_valid(self):
@@ -178,17 +190,17 @@ class TestUtils(BaseTest):
 
 
 class TestUserRegisterView(BaseTest):
-    # def test_view_register_page(self):
-    #     response = self.c.post(
-    #         "/user/register",
-    #         {
-    #             "username": "myuser4",
-    #             "email": "abcde@gmail.com",
-    #             "password1": "hardPass123",
-    #             "password2": "hardPass123",
-    #         },
-    #     )
-    #     self.assertEqual(response.status_code, 302)
+    def test_view_register_page(self):
+        response = self.c.post(
+            "/user/register",
+            {
+                "username": "user_test_for_register",
+                "email": "abcde@gmail.com",
+                "password1": "hardPass123",
+                "password2": "hardPass123",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
 
     def test__register_page_invalid_request(self):
         response = self.c.get(
@@ -238,45 +250,43 @@ class TestUserLoginView(BaseTest):
 
 class TestUpdatePasswordView(BaseTest):
     def test_no_user_logged_in(self):
-        response = self.c.get("/user/account_details")
+        response = self.c.get("/user/update_password")
         self.assertEqual(response.status_code, 302)
 
-    # def test_update_password_save(self):
-    #     self.c.login(username=self.dummy_user.username, password="pass123")
-    #     response = self.c.post(
-    #         "/user/account_details",
-    #         {
-    #             "password_current": "pass123",
-    #             "password_new": "pass1234",
-    #             "password_confirm": "pass1234",
-    #             "update_pass_form": "",
-    #         },
-    #     )
-    #     self.assertEqual(response.status_code, 302)
+    def test_update_password_save(self):
+        self.c.force_login(self.dummy_user)
+        response = self.c.post(
+            "/user/update_password",
+            {
+                "password_current": "pass123",
+                "password_new": "ReallyHardPassword123!",
+                "password_confirm": "ReallyHardPassword123!",
+            },
+        )
+        self.assertEqual(response.status_code, 302)
 
     def test_update_password_invalid_form(self):
         self.c.force_login(self.dummy_user)
         response = self.c.post(
-            "/user/account_details",
+            "/user/update_password",
             {
                 "password_current": "pass123",
-                "password_new": "pass123",
-                "password_confirm": "pass1234",
+                "password_new": "ReallyHardPassword123!",
+                "password_confirm": "FakePassword!",
                 "update_pass_form": "",
             },
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 400)
 
-    def test_update_password_not_post(self):
+
+class TestAccountDetailsView(BaseTest):
+    def test_no_user_logged_in(self):
+        response = self.c.get("/user/account_details")
+        self.assertEqual(response.status_code, 302)
+
+    def test_user_login(self):
         self.c.force_login(self.dummy_user)
-        response = self.c.get(
-            "/user/account_details",
-            {
-                "password_current": "pass123",
-                "password_new": "pass123",
-                "password_confirm": "pass1234",
-            },
-        )
+        response = self.c.get("/user/account_details")
         self.assertEqual(response.status_code, 200)
 
 
