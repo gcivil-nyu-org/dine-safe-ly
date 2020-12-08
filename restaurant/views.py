@@ -24,7 +24,7 @@ from .utils import (
     get_csv_from_github,
     questionnaire_statistics,
     get_filtered_restaurants,
-    restaurants_to_dict
+    restaurants_to_dict,
 )
 
 from django.http import HttpResponse
@@ -204,13 +204,19 @@ def chatbot_keyword(request):
         try:
             data = json.loads(request.body)
 
-            # If user chose to be recommended by preference, category list is the preference list.
+            # If user chose to be recommended by preference
+            # category list is the preference list.
             if request.user and data["is_preference"]:
-                data["category"] = [category.category for category in request.user.preferences.all()]
+                data["category"] = [
+                    category.category for category in request.user.preferences.all()
+                ]
 
             restaurants = get_filtered_restaurants(
                 limit=Restaurant.objects.all().count(),
-                keyword=data["keyword"], category=data["category"], neighborhood=data["location"]
+                category=data["category"],
+                neighborhood=data["location"],
+                rating=[3.0, 3.5, 4.0, 4.5, 5.0],
+                compliant="Compliant",
             )
 
             # If number > 3, we pick 3 random restaurants in that list to recommend to user.
