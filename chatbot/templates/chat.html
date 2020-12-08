@@ -191,9 +191,9 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(data) {
         if (data['restaurants'].length == 0) {
-          insertResponseMessage("Sorry, we can't found any compliant restaurants for you.");
+          insertResponseMessage("Sorry, we couldn't find any compliant restaurants based on your inputs.");
         } else {
-          let recommend_restaurants_str = "Found some great restaurant(s) for you! You can click the link to see the profile(s): <br>";
+          let recommend_restaurants_str = "Here, I found some highly-rated restaurant(s) for you!";
           for(var i = 0; i < data['restaurants'].length; i++) {
             recommend_restaurants_str += "<a target='_blank' href=" + "https://dine-safe-ly.herokuapp.com/restaurant/profile/" + data['restaurants'][i]['id'].toString() + ">" + data['restaurants'][i]['restaurant_name'].toString() + "</a>";
             recommend_restaurants_str += "<br>";
