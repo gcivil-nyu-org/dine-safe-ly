@@ -147,7 +147,6 @@ $(document).ready(function() {
 
             } else if (message.type === 'structured' && message.structured.type === 'product') {
               var html = '';
-              console.log('2');
               insertResponseMessage(message.structured.text);
 
               setTimeout(function() {
@@ -191,9 +190,6 @@ $(document).ready(function() {
       contentType: 'application/json; charset=UTF-8',
       dataType: 'json',
       success: function(data) {
-        console.log(data);
-        //var dict_data = JSON.parse(data);
-        //console.log(dict);
         if (data['restaurants'].length == 0) {
           insertResponseMessage("Sorry, we can't found any compliant restaurants for you.");
         } else {
