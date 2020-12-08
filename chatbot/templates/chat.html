@@ -136,10 +136,17 @@ $(document).ready(function() {
 
           for (var message of messages) {
             if (message.type === 'unstructured') {
-              insertResponseMessage(message.unstructured.text);
+
+              // Got json from aws
+              if (message.unstructured.text[0] == "{") {
+                var aws_data = JSON.parse(message.unstructured.text);
+                insertResponseMessageWithFilter(aws_data);
+              } else {
+                insertResponseMessage(message.unstructured.text);
+              }
+
             } else if (message.type === 'structured' && message.structured.type === 'product') {
               var html = '';
-
               insertResponseMessage(message.structured.text);
 
               setTimeout(function() {
@@ -174,6 +181,33 @@ $(document).ready(function() {
       return false;
     }
   })
+  function insertResponseMessageWithFilter(filter) {
+    console.log(filter);
+    $.ajax({
+      type: 'POST',
+      url: '../restaurant/chatbot/keywordtest',
+      data: JSON.stringify(filter),
+      contentType: 'application/json; charset=UTF-8',
+      dataType: 'json',
+      success: function(data) {
+        if (data['restaurants'].length == 0) {
+          insertResponseMessage("Sorry, we couldn't find any compliant restaurants based on your inputs.");
+        } else {
+          let recommend_restaurants_str = "Here, I found some highly-rated restaurant(s) for you!";
+          for(var i = 0; i < data['restaurants'].length; i++) {
+            recommend_restaurants_str += "<a target='_blank' href=" + "https://dine-safe-ly.herokuapp.com/restaurant/profile/" + data['restaurants'][i]['id'].toString() + ">" + data['restaurants'][i]['restaurant_name'].toString() + "</a>";
+            recommend_restaurants_str += "<br>";
+          }
+          insertResponseMessage(recommend_restaurants_str);
+        }
+
+
+
+      },
+      error: function(xhr, type) {
+      }
+    });
+  }
 
   function insertResponseMessage(content) {
     $('<div class="message loading new"><figure class="avatar"><img src="https://media1.tenor.com/images/672b62d967f8d00d608d22f36c1831db/tenor.gif" width="25px" height="25px" /></figure><span></span></div>').appendTo($('.mCSB_container'));

@@ -1,8 +1,9 @@
 from django.contrib import messages
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
+from django.urls import reverse
+import random
 
 from .models import Restaurant
 
@@ -22,6 +23,8 @@ from .utils import (
     check_restaurant_saved,
     get_csv_from_github,
     questionnaire_statistics,
+    get_filtered_restaurants,
+    restaurants_to_dict,
 )
 
 from django.http import HttpResponse
@@ -200,10 +203,29 @@ def chatbot_keyword(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
-            restaurants = get_restaurant_list(
-                keyword=data["keyword"], categories_filter=[data["category"]]
+
+            # If user chose to be recommended by preference
+            # category list is the preference list.
+            if request.user and data["is_preference"]:
+                data["category"] = [
+                    category.category for category in request.user.preferences.all()
+                ]
+
+            restaurants = get_filtered_restaurants(
+                limit=Restaurant.objects.all().count(),
+                category=data["category"],
+                neighborhood=data["location"],
+                rating=[3.0, 3.5, 4.0, 4.5, 5.0],
+                compliant="Compliant",
             )
-            response = {"restaurants": restaurants}
+
+            # If number > 3, we pick 3 random restaurants in that list to recommend to user.
+            total_number = restaurants.count()
+            if total_number > 3:
+                idx = random.sample(range(0, total_number), 3)
+                restaurants = [restaurants[i] for i in idx]
+
+            response = {"restaurants": restaurants_to_dict(restaurants)}
             return JsonResponse(response)
         except AttributeError as e:
             return HttpResponseBadRequest(e)

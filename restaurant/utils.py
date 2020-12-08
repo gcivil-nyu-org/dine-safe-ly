@@ -251,11 +251,11 @@ def get_filtered_restaurants(
     if price:
         filters["price__in"] = price
     if neighborhood:
-        filters["neighborhood__in"] = neighborhood
+        filters["neighborhood__iregex"] = r"^(" + "|".join(neighborhood) + ")$"
     if rating:
         filters["rating__in"] = rating
     if category:
-        filters["category__parent_category__in"] = category
+        filters["category__parent_category__iregex"] = r"^(" + "|".join(category) + ")$"
 
     keyword_filter = {}
     if keyword:
