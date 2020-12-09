@@ -1,0 +1,10 @@
+diff a/getinspection.py b/getinspection.py	(rejected hunks)
+@@ -207,7 +207,7 @@
+         # save_inspections(inspection_df)
+ 
+ 
+-# sched.start()
++sched.start()
+ 
+ 
+ def populate_restaurant_with_yelp_id():
