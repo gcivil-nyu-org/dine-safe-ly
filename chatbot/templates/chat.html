@@ -80,7 +80,7 @@ $(document).ready(function() {
   $(window).load(function() {
     $messages.mCustomScrollbar();
     {% if user.is_authenticated %}
-    insertResponseMessage('Hi {{ user.username }}, I\'m your Personal Concierge. How can I help?');
+    insertResponseMessage('Hi {{ user.username }}, I’m a virtual assistant that can help you find COVID-19 compliant restaurants.');
     {% endif %}
   });
 
@@ -193,7 +193,7 @@ $(document).ready(function() {
         if (data['restaurants'].length == 0) {
           insertResponseMessage("Sorry, we couldn't find any compliant restaurants based on your inputs.");
         } else {
-          let recommend_restaurants_str = "Here, I found some highly-rated restaurant(s) for you!";
+          let recommend_restaurants_str = "Here, I found some highly-rated restaurant(s) for you!<br>";
           for(var i = 0; i < data['restaurants'].length; i++) {
             recommend_restaurants_str += "<a target='_blank' href=" + "https://dine-safe-ly.herokuapp.com/restaurant/profile/" + data['restaurants'][i]['id'].toString() + ">" + data['restaurants'][i]['restaurant_name'].toString() + "</a>";
             recommend_restaurants_str += "<br>";
