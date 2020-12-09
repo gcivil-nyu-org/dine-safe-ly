@@ -48,7 +48,7 @@
                     <!-- venue item-->
                     <div class="w-100 h-100 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
                         <div class="card h-100 border-0 shadow">
-                        {% if restaurant.yelp_info.rating == 5 %}
+                        {% if restaurant.yelp_info.rating >= 4 %}
                             <div class="ribbon ribbon-primary">
                                 Recommended
                             </div>

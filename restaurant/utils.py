@@ -485,3 +485,39 @@ def questionnaire_statistics(restaurant_business_id):
     }
 
     return statistics_dict
+
+
+def get_compliant_restaurant_list(
+    page=1,
+    limit=6,
+    rating_filter=None,
+    compliant_filter=None,
+):
+    page = int(page) - 1
+    offset = int(page) * int(limit)
+    inspections = InspectionRecords.objects.order_by("-inspected_on").distinct()
+
+    latest_restaurants = list()
+    c = 0
+    for ir in inspections:
+        if (
+            ir.is_roadway_compliant == "Compliant"
+            and ir.business_id not in latest_restaurants
+            and c <= limit
+        ):
+            latest_restaurants.append(ir.business_id)
+            c += 1
+        elif c > limit:
+            break
+
+    filters = {}
+
+    filters["business_id__in"] = latest_restaurants
+    filters["rating__in"] = rating_filter
+
+    restaurants = Restaurant.objects.filter(
+        business_id__in=YelpRestaurantDetails.objects.filter(**filters)
+    )[
+        offset : offset + int(limit)  # noqa: E203
+    ]
+    return restaurants_to_dict(restaurants)
