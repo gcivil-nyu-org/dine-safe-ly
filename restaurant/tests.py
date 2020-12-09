@@ -3,7 +3,10 @@ from django.forms.models import model_to_dict
 from django.test import Client
 from datetime import datetime, timedelta
 from unittest import mock
-from .forms import QuestionnaireForm, SaveFavoriteForm, DeleteFavoriteForm
+
+from django.urls import reverse
+
+from .forms import QuestionnaireForm
 from django.contrib.auth import get_user_model
 from .models import (
     Restaurant,
@@ -24,6 +27,9 @@ from .utils import (
     get_filtered_restaurants,
     get_latest_feedback,
     get_average_safety_rating,
+    check_restaurant_saved,
+    questionnaire_report,
+    questionnaire_statistics,
 )
 
 import json
@@ -269,11 +275,11 @@ class BaseTest(TestCase):
             user_id="1",
             safety_level="5",
             saved_on=datetime.now(),
-            temperature_required="True",
-            contact_info_required="True",
-            employee_mask="True",
-            capacity_compliant="True",
-            distance_compliant="True",
+            temperature_required="true",
+            contact_info_required="true",
+            employee_mask="true",
+            capacity_compliant="true",
+            distance_compliant="true",
         )
 
         return super().setUp
@@ -286,11 +292,11 @@ class UserQuestionnaireFormTests(BaseTest):
             "user_id": "1",
             "saved_on": str(datetime.now()),
             "safety_level": "5",
-            "temperature_required": "True",
-            "contact_info_required": "True",
-            "employee_mask": "True",
-            "capacity_compliant": "True",
-            "distance_compliant": "True",
+            "temperature_required": "true",
+            "contact_info_required": "true",
+            "employee_mask": "true",
+            "capacity_compliant": "true",
+            "distance_compliant": "true",
         }
         questionnaire_form = QuestionnaireForm(self.form_no_business_id)
         self.assertFalse(questionnaire_form.is_valid())
@@ -301,11 +307,11 @@ class UserQuestionnaireFormTests(BaseTest):
             "user_id": "",
             "saved_on": str(datetime.now()),
             "safety_level": "5",
-            "temperature_required": "True",
-            "contact_info_required": "True",
-            "employee_mask": "True",
-            "capacity_compliant": "True",
-            "distance_compliant": "True",
+            "temperature_required": "true",
+            "contact_info_required": "true",
+            "employee_mask": "true",
+            "capacity_compliant": "true",
+            "distance_compliant": "true",
         }
         questionnaire_form = QuestionnaireForm(self.form_no_user_id)
         self.assertFalse(questionnaire_form.is_valid())
@@ -316,11 +322,11 @@ class UserQuestionnaireFormTests(BaseTest):
             "user_id": "1",
             "saved_on": str(datetime.now()),
             "safety_level": "",
-            "temperature_required": "True",
-            "contact_info_required": "True",
-            "employee_mask": "True",
-            "capacity_compliant": "True",
-            "distance_compliant": "True",
+            "temperature_required": "true",
+            "contact_info_required": "true",
+            "employee_mask": "true",
+            "capacity_compliant": "true",
+            "distance_compliant": "true",
         }
         questionnaire_form = QuestionnaireForm(self.form_no_safety_level)
         self.assertFalse(questionnaire_form.is_valid())
@@ -332,10 +338,10 @@ class UserQuestionnaireFormTests(BaseTest):
             "saved_on": str(datetime.now()),
             "safety_level": "5",
             "temperature_required": "",
-            "contact_info_required": "True",
-            "employee_mask": "True",
-            "capacity_compliant": "True",
-            "distance_compliant": "True",
+            "contact_info_required": "true",
+            "employee_mask": "true",
+            "capacity_compliant": "true",
+            "distance_compliant": "true",
         }
         questionnaire_form = QuestionnaireForm(self.form_no_temperature_required)
         self.assertFalse(questionnaire_form.is_valid())
@@ -346,11 +352,11 @@ class UserQuestionnaireFormTests(BaseTest):
             "user_id": "1",
             "saved_on": str(datetime.now()),
             "safety_level": "5",
-            "temperature_required": "True",
+            "temperature_required": "true",
             "contact_info_required": "",
-            "employee_mask": "True",
-            "capacity_compliant": "True",
-            "distance_compliant": "True",
+            "employee_mask": "true",
+            "capacity_compliant": "true",
+            "distance_compliant": "true",
         }
         questionnaire_form = QuestionnaireForm(self.form_no_contact_info_required)
         self.assertFalse(questionnaire_form.is_valid())
@@ -361,11 +367,11 @@ class UserQuestionnaireFormTests(BaseTest):
             "user_id": "1",
             "saved_on": str(datetime.now()),
             "safety_level": "5",
-            "temperature_required": "True",
-            "contact_info_required": "True",
+            "temperature_required": "true",
+            "contact_info_required": "true",
             "employee_mask": "",
-            "capacity_compliant": "True",
-            "distance_compliant": "True",
+            "capacity_compliant": "true",
+            "distance_compliant": "true",
         }
         questionnaire_form = QuestionnaireForm(self.form_no_employee_mask)
         self.assertFalse(questionnaire_form.is_valid())
@@ -376,11 +382,11 @@ class UserQuestionnaireFormTests(BaseTest):
             "user_id": "1",
             "saved_on": str(datetime.now()),
             "safety_level": "5",
-            "temperature_required": "True",
-            "contact_info_required": "True",
-            "employee_mask": "True",
+            "temperature_required": "true",
+            "contact_info_required": "true",
+            "employee_mask": "true",
             "capacity_compliant": "",
-            "distance_compliant": "True",
+            "distance_compliant": "true",
         }
         questionnaire_form = QuestionnaireForm(self.form_no_capacity_compliant)
         self.assertFalse(questionnaire_form.is_valid())
@@ -391,10 +397,10 @@ class UserQuestionnaireFormTests(BaseTest):
             "user_id": "1",
             "saved_on": str(datetime.now()),
             "safety_level": "5",
-            "temperature_required": "True",
-            "contact_info_required": "True",
-            "employee_mask": "True",
-            "capacity_compliant": "True",
+            "temperature_required": "true",
+            "contact_info_required": "true",
+            "employee_mask": "true",
+            "capacity_compliant": "true",
             "distance_compliant": "",
         }
         questionnaire_form = QuestionnaireForm(self.form_no_distance_compliant)
@@ -406,11 +412,11 @@ class UserQuestionnaireFormTests(BaseTest):
             "user_id": "1",
             "safety_level": "5",
             "saved_on": datetime.now(),
-            "temperature_required": "True",
-            "contact_info_required": "True",
-            "employee_mask": "True",
-            "capacity_compliant": "True",
-            "distance_compliant": "True",
+            "temperature_required": "true",
+            "contact_info_required": "true",
+            "employee_mask": "true",
+            "capacity_compliant": "true",
+            "distance_compliant": "true",
         }
         form = QuestionnaireForm(self.form_valid)
         self.assertTrue(form.is_valid())
@@ -428,52 +434,14 @@ class UserQuestionnaireFormTests(BaseTest):
             "user_id": "1",
             "safety_level": "5",
             "saved_on": datetime.now(),
-            "temperature_required": "True",
-            "contact_info_required": "True",
-            "employee_mask": "True",
-            "capacity_compliant": "True",
-            "distance_compliant": "True",
+            "temperature_required": "true",
+            "contact_info_required": "true",
+            "employee_mask": "true",
+            "capacity_compliant": "true",
+            "distance_compliant": "true",
         }
         form = QuestionnaireForm(self.form)
         response = self.c.post("/restaurant/profile/1/", self.form)
-        self.assertTrue(form.is_valid())
-        self.assertEqual(response.status_code, 200)
-
-
-class SaveFavoriteFormTests(BaseTest):
-    def test_save_favorite_form_submission(self):
-        create_restaurant(
-            "random_name",
-            "random_address",
-            None,
-            "random_postcode",
-            "U8C69ISrhGTTubjqoVgZYg",
-        )
-        self.save_fav_form = {
-            "restaurant_business_id": "1",
-            "user_id": "1",
-        }
-        form = SaveFavoriteForm(self.save_fav_form)
-        response = self.c.post("/restaurant/profile/1/", self.save_fav_form)
-        self.assertTrue(form.is_valid())
-        self.assertEqual(response.status_code, 200)
-
-
-class DeleteFavoriteFormTests(BaseTest):
-    def test_delete_favorite_form_submission(self):
-        create_restaurant(
-            "random_name",
-            "random_address",
-            None,
-            "random_postcode",
-            "U8C69ISrhGTTubjqoVgZYg",
-        )
-        self.delete_fav_form = {
-            "restaurant_business_id": "1",
-            "user_id": "1",
-        }
-        form = SaveFavoriteForm(self.delete_fav_form)
-        response = self.c.post("/restaurant/profile/1/", self.delete_fav_form)
         self.assertTrue(form.is_valid())
         self.assertEqual(response.status_code, 200)
 
@@ -498,50 +466,6 @@ class SearchFilterFormTests(BaseTest):
 
 
 class RestaurantViewFormTests(BaseTest):
-    def test_restaurant_profile_view_save_favorite(self):
-        create_restaurant(
-            "random_name",
-            "random_address",
-            None,
-            "random_postcode",
-            "U8C69ISrhGTTubjqoVgZYg",
-        )
-        self.save_fav_form = {
-            "restaurant_business_id": "U8C69ISrhGTTubjqoVgZYg",
-            "user_id": "1",
-            "save_favorite_form": "",
-        }
-        form = SaveFavoriteForm(self.save_fav_form)
-        # print(Restaurant.objects.all().filter(business_id="U8C69ISrhGTTubjqoVgZYg"))
-        response = self.c.post("/restaurant/profile/1/", self.save_fav_form)
-        self.assertTrue(form.is_valid())
-        self.assertEqual(response.status_code, 200)
-        user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
-        # print("count is : ", user.favorite_restaurants.all().count())
-        self.assertTrue(user.favorite_restaurants.all().count() == 1)
-
-    def test_restaurant_profile_view_delete_favorite(self):
-        create_restaurant(
-            "random_name",
-            "random_address",
-            None,
-            "random_postcode",
-            "U8C69ISrhGTTubjqoVgZYg",
-        )
-        self.delete_fav_form = {
-            "restaurant_business_id": "U8C69ISrhGTTubjqoVgZYg",
-            "user_id": "1",
-            "delete_favorite_form": "",
-        }
-        form = DeleteFavoriteForm(self.delete_fav_form)
-        # print(Restaurant.objects.all().filter(business_id="U8C69ISrhGTTubjqoVgZYg"))
-        response = self.c.post("/restaurant/profile/1/", self.delete_fav_form)
-        self.assertTrue(form.is_valid())
-        self.assertEqual(response.status_code, 200)
-        user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
-        # print("count is : ", user.favorite_restaurants.all().count())
-        self.assertTrue(user.favorite_restaurants.all().count() == 0)
-
     def test_restaurant_profile_view_questionnaire(self):
         create_restaurant(
             "random_name",
@@ -555,11 +479,11 @@ class RestaurantViewFormTests(BaseTest):
             "user_id": "1",
             "safety_level": "5",
             "saved_on": datetime.now(),
-            "temperature_required": "True",
-            "contact_info_required": "True",
-            "employee_mask": "True",
-            "capacity_compliant": "True",
-            "distance_compliant": "True",
+            "temperature_required": "true",
+            "contact_info_required": "true",
+            "employee_mask": "true",
+            "capacity_compliant": "true",
+            "distance_compliant": "true",
             "questionnaire_form": "",
         }
         form = QuestionnaireForm(self.questionnaire_form)
@@ -625,41 +549,52 @@ class RestaurantViewTests(TestCase):
         response = get_landing_page(request, 6)
         self.assertEqual(response.status_code, 200)
 
-    def test_save_fav_rest(self):
-        self.user = get_user_model().objects.create(
+    def test_restaurant_profile_view_save_favorite(self):
+        create_restaurant(
+            "random_name",
+            "random_address",
+            None,
+            "random_postcode",
+            "U8C69ISrhGTTubjqoVgZYg",
+        )
+        self.dummy_user = get_user_model().objects.create(
             username="myuser",
             email="abcd@gmail.com",
         )
-        print(type(self.user))
-        self.user.set_password("pass123")
-        self.user.save()
-        c = Client()
-        c.login(username=self.user.username, password="pass123")
-        form_valid = {
-            "restaurant_business_id": self.restaurant.business_id,
-            "user_id": self.user.id,
-        }
-        form = SaveFavoriteForm(form_valid)
-        self.assertTrue(form.is_valid())
+        self.dummy_user.set_password("pass123")
+        self.dummy_user.save()
+        self.c = Client()
+        self.c.login(username="myuser", password="pass123")
 
-        self.assertTrue(self.user.is_authenticated)
-        # response = Client().post("/restaurant/save/favorite/restaurant/1", form_valid)
-        # self.assertEqual(response.status_code, 200)
+        url = reverse(
+            "restaurant:save_favorite_restaurant", args=["U8C69ISrhGTTubjqoVgZYg"]
+        )
+        response = self.c.post(path=url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(self.dummy_user.favorite_restaurants.all().count() == 1)
 
-    def test_delete_fav_rest(self):
-        request = self.factory.get("restaurant:delete_favorite_restaurant")
-        request.user = get_user_model().objects.create(
+    def test_restaurant_profile_view_delete_favorite(self):
+        create_restaurant(
+            "random_name",
+            "random_address",
+            None,
+            "random_postcode",
+            "U8C69ISrhGTTubjqoVgZYg",
+        )
+        self.dummy_user = get_user_model().objects.create(
             username="myuser",
             email="abcd@gmail.com",
         )
-        form_valid = {
-            "restaurant_business_id": "16",
-            "user_id": "1",
-        }
-        form = DeleteFavoriteForm(form_valid)
-        self.assertTrue(form.is_valid())
-        # response = Client().post("/restaurant/delete/favorite/restaurant/1", form_valid)
-        # self.assertEqual(response.status_code, 200)
+        self.dummy_user.set_password("pass123")
+        self.dummy_user.save()
+        self.c = Client()
+        self.c.login(username="myuser", password="pass123")
+        url = reverse(
+            "restaurant:delete_favorite_restaurant", args=["U8C69ISrhGTTubjqoVgZYg"]
+        )
+        response = self.c.post(path=url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(self.dummy_user.favorite_restaurants.all().count() == 0)
 
 
 class RestaurantUtilsTests(TestCase):
@@ -788,22 +723,22 @@ class RestaurantUtilsTests(TestCase):
             user_id="1",
             safety_level="5",
             saved_on=datetime.now(),
-            temperature_required="True",
-            contact_info_required="True",
-            employee_mask="True",
-            capacity_compliant="True",
-            distance_compliant="True",
+            temperature_required="true",
+            contact_info_required="true",
+            employee_mask="true",
+            capacity_compliant="true",
+            distance_compliant="true",
         )
         questionnaire_new = UserQuestionnaire.objects.create(
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="5",
             saved_on=datetime.now() + timedelta(hours=1),
-            temperature_required="True",
-            contact_info_required="True",
-            employee_mask="True",
-            capacity_compliant="True",
-            distance_compliant="True",
+            temperature_required="true",
+            contact_info_required="true",
+            employee_mask="true",
+            capacity_compliant="true",
+            distance_compliant="true",
         )
         latest_feedback = get_latest_feedback("WavvLdfdP6g8aZTtbBQHTw")
         self.assertEqual(latest_feedback, model_to_dict(questionnaire_new))
@@ -815,36 +750,167 @@ class RestaurantUtilsTests(TestCase):
             user_id="1",
             safety_level="1",
             saved_on=datetime.now(),
-            temperature_required="True",
-            contact_info_required="True",
-            employee_mask="True",
-            capacity_compliant="True",
-            distance_compliant="True",
+            temperature_required="true",
+            contact_info_required="true",
+            employee_mask="true",
+            capacity_compliant="true",
+            distance_compliant="true",
         )
         UserQuestionnaire.objects.create(
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="2",
             saved_on=datetime.now() + timedelta(hours=1),
-            temperature_required="True",
-            contact_info_required="True",
-            employee_mask="True",
-            capacity_compliant="True",
-            distance_compliant="True",
+            temperature_required="true",
+            contact_info_required="true",
+            employee_mask="true",
+            capacity_compliant="true",
+            distance_compliant="true",
         )
         UserQuestionnaire.objects.create(
             restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
             user_id="1",
             safety_level="3",
             saved_on=datetime.now() + timedelta(hours=2),
-            temperature_required="True",
-            contact_info_required="True",
-            employee_mask="True",
-            capacity_compliant="True",
-            distance_compliant="True",
+            temperature_required="true",
+            contact_info_required="true",
+            employee_mask="true",
+            capacity_compliant="true",
+            distance_compliant="true",
         )
         average_safety = get_average_safety_rating("WavvLdfdP6g8aZTtbBQHTw")
         self.assertEqual(average_safety, "2.0")
+
+    def test_check_restaurant_saved(self):
+        self.dummy_user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
+        self.dummy_user.set_password("Dinesafely123")
+        self.dummy_user.save()
+        self.temp_rest = create_restaurant(
+            "random_name",
+            "random_address",
+            None,
+            "random_postcode",
+            "U8C69ISrhGTTubjqoVgZYg",
+        )
+        self.dummy_user.favorite_restaurants.add(
+            Restaurant.objects.get(business_id="U8C69ISrhGTTubjqoVgZYg")
+        )
+        self.assertTrue(check_restaurant_saved(self.dummy_user, 1))
+
+    def test_questionnaire_report(self):
+        self.dummy_user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
+        self.dummy_user.set_password("Dinesafely123")
+        self.dummy_user.save()
+        self.temp_rest = create_restaurant(
+            restaurant_name="Tacos El Paisa",
+            business_address="1548 St. Nicholas btw West 187th street and west 188th "
+            "street, Manhattan, NY",
+            yelp_detail=None,
+            postcode="10040",
+            business_id="WavvLdfdP6g8aZTtbBQHTw",
+        )
+        self.temp_inspection = InspectionRecords.objects.create(
+            restaurant_inspection_id="24111",
+            restaurant_name="Tacos El Paisa",
+            postcode="10040",
+            business_address="1548 St. Nicholas btw West 187th street "
+            "and west 188th "
+            "street, Manhattan, NY",
+            is_roadway_compliant="Compliant",
+            skipped_reason="No Seating",
+            inspected_on=datetime(2020, 10, 21, 12, 30, 30),
+            business_id="WavvLdfdP6g8aZTtbBQHTw",
+        )
+        self.temp_user_questionnaire = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="5",
+            saved_on=datetime.now(),
+            temperature_required="true",
+            contact_info_required="true",
+            employee_mask="true",
+            capacity_compliant="true",
+            distance_compliant="true",
+        )
+        latest_inspection_status, valuable_questionnaire_list = questionnaire_report(
+            "WavvLdfdP6g8aZTtbBQHTw"
+        )
+        self.assertEqual(latest_inspection_status, "Compliant")
+        self.assertEqual(valuable_questionnaire_list[0], self.temp_user_questionnaire)
+
+    def test_questionnaire_statistics(self):
+        self.dummy_user = get_user_model().objects.create(
+            username="myuser",
+            email="abcd@gmail.com",
+        )
+        self.dummy_user.set_password("Dinesafely123")
+        self.dummy_user.save()
+        self.temp_rest = create_restaurant(
+            restaurant_name="Tacos El Paisa",
+            business_address="1548 St. Nicholas btw West 187th street and west 188th "
+            "street, Manhattan, NY",
+            yelp_detail=None,
+            postcode="10040",
+            business_id="WavvLdfdP6g8aZTtbBQHTw",
+        )
+        self.temp_inspection = InspectionRecords.objects.create(
+            restaurant_inspection_id="24111",
+            restaurant_name="Tacos El Paisa",
+            postcode="10040",
+            business_address="1548 St. Nicholas btw West 187th street "
+            "and west 188th "
+            "street, Manhattan, NY",
+            is_roadway_compliant="Compliant",
+            skipped_reason="No Seating",
+            inspected_on=datetime(2020, 10, 21, 12, 30, 30),
+            business_id="WavvLdfdP6g8aZTtbBQHTw",
+        )
+        self.temp_user_questionnaire_1 = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="5",
+            saved_on=datetime.now(),
+            temperature_required="true",
+            contact_info_required="true",
+            employee_mask="true",
+            capacity_compliant="true",
+            distance_compliant="true",
+        )
+        self.temp_user_questionnaire_2 = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="1",
+            saved_on=datetime.now(),
+            temperature_required="false",
+            contact_info_required="false",
+            employee_mask="false",
+            capacity_compliant="false",
+            distance_compliant="false",
+        )
+        self.temp_user_questionnaire_3 = UserQuestionnaire.objects.create(
+            restaurant_business_id="WavvLdfdP6g8aZTtbBQHTw",
+            user_id="1",
+            safety_level="3",
+            saved_on=datetime.now(),
+            temperature_required="false",
+            contact_info_required="false",
+            employee_mask="false",
+            capacity_compliant="false",
+            distance_compliant="false",
+        )
+        statistics_dict = questionnaire_statistics("WavvLdfdP6g8aZTtbBQHTw")
+        self.assertEqual(statistics_dict["valuable_avg_safety_rating"], "3.0")
+        self.assertEqual(statistics_dict["temp_check_true"], 1)
+        self.assertEqual(statistics_dict["contact_info_required_true"], 1)
+        self.assertEqual(statistics_dict["employee_mask_true"], 1)
+        self.assertEqual(statistics_dict["capacity_compliant_true"], 1)
+        self.assertEqual(statistics_dict["distance_compliant_true"], 1)
 
 
 class IntegratedInspectionRestaurantsTests(TestCase):
@@ -954,211 +1020,3 @@ class GetFilteredRestaurantsTests(TestCase):
         )
 
         self.assertEqual(details.business_id, filtered_restaurants[0].business_id)
-
-
-class GetInspectionDataTests(TestCase):
-    """ Test Get/Save Inspection data Script"""
-
-    # def test_clean_inspection_data(self):
-    #     result = [
-    #         {
-    #             "borough": "Manhattan",
-    #             "restaurantname": "AJISEN RAMEN",
-    #             "seatingchoice": "both",
-    #             # "legalbusinessname": "AJISEN RAMEN CHELSEA INC.",
-    #             "businessaddress": "136 WEST 28TH STREET",
-    #             "restaurantinspectionid": "25808",
-    #             "isroadwaycompliant": "Skipped Inspection",
-    #             "skippedreason": "No Seating",
-    #             "inspectedon": "2020-10-19T10:57:21.000",
-    #             "agencycode": "DOT",
-    #             "postcode": "10001",
-    #             "latitude": "40.746520",
-    #             "longitude": "-73.991678",
-    #             "communityboard": "5",
-    #             "councildistrict": "3",
-    #             "censustract": "95",
-    #             "bin": "1015092",
-    #             "bbl": "1008030060",
-    #             "nta": "Midtown-Midtown South",
-    #         }
-    #     ]
-    #
-    #     results_df = pd.DataFrame.from_records(result)
-    #     restaurant = [
-    #         {
-    #             "restaurantname": "AJISEN RAMEN",
-    #             # "legalbusinessname": "AJISEN RAMEN CHELSEA INC.",
-    #             "businessaddress": "136 WEST 28TH STREET",
-    #             "postcode": "10001",
-    #         }
-    #     ]
-    #     r_df = pd.DataFrame.from_records(restaurant)
-    #     restaurant_df, inspection_df = clean_inspection_data(results_df)
-    #
-    #     assert_frame_equal(restaurant_df, r_df)
-
-    # def test_match_on_yelp(self):
-    #     restaurant_name = "AJISEN RAMEN"
-    #     restaurant_location = "136 WEST 28TH STREET"
-    #     b_id = "2SMaAUcbNjW7vSwdg38P2Q"
-    #     response = json.loads(match_on_yelp(restaurant_name, restaurant_location))
-    #
-    #     self.assertEqual(response["businesses"][0]["id"], b_id)
-
-    # def test_save_restaurants(self):
-    #     restaurant = [
-    #         {
-    #             "restaurantname": "AJISEN RAMEN",
-    #             # "legalbusinessname": "AJISEN RAMEN CHELSEA INC.",
-    #             "businessaddress": "136 WEST 28TH STREET",
-    #             "postcode": "10001",
-    #         }
-    #     ]
-    #     r_df = pd.DataFrame.from_records(restaurant)
-    #
-    #     save_restaurants(r_df)
-    #
-    #     return True
-
-    # @mock.patch("getinspection.match_on_yelp")
-    # def test_save_restaurants_catch(self, mock_match_on_yelp):
-    #     restaurant = [
-    #         {
-    #             "restaurantname": "AJISEN RAMEN",
-    #             # "legalbusinessname": "AJISEN RAMEN CHELSEA INC.",
-    #             "businessaddress": "136 WEST 28TH STREET",
-    #             "postcode": "10001",
-    #         }
-    #     ]
-    #     r_df = pd.DataFrame.from_records(restaurant)
-    #
-    #     # business_id = "2SMaAUcbNjW7vSwdg38P2Q"
-    #     mock_match_on_yelp.return_value = MockResponse(
-    #         {
-    #             "businesses": [
-    #                 {
-    #                     "id": "2SMaAUcbNjW7vSwdg38P2Q",
-    #                     "alias": "ajisen-ramen-new-york-2",
-    #                     "name": "Ajisen Ramen",
-    #                     "coordinates": {"latitude": 40.74661, "longitude": -73.9921},
-    #                     "location": {
-    #                         "address1": "136 W 28th St",
-    #                         "address2": None,
-    #                         "address3": "",
-    #                         "city": "New York",
-    #                         "zip_code": "10001",
-    #                         "country": "US",
-    #                         "state": "NY",
-    #                         "display_address":
-    #                         ["136 W 28th St", "New York, NY 10001"],
-    #                     },
-    #                     "phone": "+16466380888",
-    #                     "display_phone": "(646) 638-0888",
-    #                 }
-    #             ]
-    #         },
-    #         200,
-    #     )
-    #
-    #     save_restaurants(r_df)
-    #
-    #     return True
-
-    # def test_save_inspections(self):
-    #     inspections = [
-    #         {
-    #             "restaurantname": "AJISEN RAMEN",
-    #             "businessaddress": "136 WEST 28TH STREET",
-    #             "restaurantinspectionid": "25808",
-    #             "isroadwaycompliant": "Skipped Inspection",
-    #             "skippedreason": "No Seating",
-    #             "inspectedon": "2020-10-19T10:57:21.000",
-    #             "postcode": "10001",
-    #         }
-    #     ]
-    #
-    #     in_rec_df = pd.DataFrame.from_records(inspections)
-    #
-    #     save_inspections(in_rec_df)
-    #
-    #     return True
-
-    # @mock.patch("getinspection.clean_inspection_data")
-    # @mock.patch("getinspection.save_restaurants")
-    # @mock.patch("getinspection.save_inspections")
-    # @mock.patch("getinspection.get_inspection_data.client.get")
-
-    # def test_get_inspection_data(self,
-    #                              mock_clean_inspection_data,
-    #                              mock_save_restaurants,
-    #                              mock_save_inspections):
-    #     inspection1 = InspectionRecords.objects.create(
-    #         restaurant_Inspection_ID="24111",
-    #         restaurant_name="Tacos El Paisa",
-    #         postcode="10040",
-    #         business_address="1548 St. Nicholas btw West 187th street and west 188th "
-    #                          "street, Manhattan, NY",
-    #         is_roadway_compliant="Compliant",
-    #         skipped_reason="No Seating",
-    #         inspected_on=datetime(2020, 10, 21, 12, 30, 30),
-    #     )
-    #     inspection2 = InspectionRecords.objects.create(
-    #         restaurant_Inspection_ID="24112",
-    #         restaurant_name="Tacos El Paisa",
-    #         postcode="10040",
-    #         business_address="1548 St. Nicholas btw West 187th street and west 188th "
-    #                          "street, Manhattan, NY",
-    #         is_roadway_compliant="Non-Compliant",
-    #         skipped_reason="No Seating",
-    #         inspected_on=datetime(2020, 10, 22, 12, 30, 30),
-    #     )
-    #     # mock_get.return_value = [
-    #     #         {
-    #     #             "borough": "Manhattan",
-    #     #             "restaurantname": "AJISEN RAMEN",
-    #     #             "seatingchoice": "both",
-    #     #             "legalbusinessname": "AJISEN RAMEN CHELSEA INC.",
-    #     #             "businessaddress": "136 WEST 28TH STREET",
-    #     #             "restaurantinspectionid": "25808",
-    #     #             "isroadwaycompliant": "Skipped Inspection",
-    #     #             "skippedreason": "No Seating",
-    #     #             "inspectedon": "2020-10-19T10:57:21.000",
-    #     #             "agencycode": "DOT",
-    #     #             "postcode": "10001",
-    #     #             "latitude": "40.746520",
-    #     #             "longitude": "-73.991678",
-    #     #             "communityboard": "5",
-    #     #             "councildistrict": "3",
-    #     #             "censustract": "95",
-    #     #             "bin": "1015092",
-    #     #             "bbl": "1008030060",
-    #     #             "nta": "Midtown-Midtown South"
-    #     #         }
-    #     #     ]
-    #     inspections = [
-    #         {'restaurantname': 'AJISEN RAMEN',
-    #          'businessaddress': '136 WEST 28TH STREET',
-    #          'restaurantinspectionid': '25808',
-    #          'isroadwaycompliant': 'Skipped Inspection',
-    #          'skippedreason': 'No Seating',
-    #          'inspectedon': '2020-10-19T10:57:21.000',
-    #          'postcode': '10001'}
-    #     ]
-    #     in_rec_df = pd.DataFrame.from_records(inspections)
-    #
-    #     restaurant = [
-    #         {'restaurantname': 'AJISEN RAMEN',
-    #          'legalbusinessname': 'AJISEN RAMEN CHELSEA INC.',
-    #          'businessaddress': '136 WEST 28TH STREET',
-    #          'postcode': '10001'}
-    #     ]
-    #     r_df = pd.DataFrame.from_records(restaurant)
-    #
-    #     mock_clean_inspection_data.return_value = r_df
-    #     mock_save_restaurants = True
-    #     mock_save_inspections = True
-    #
-    #     get_inspection_data()
-    #
-    #     return True

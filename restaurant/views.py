@@ -2,14 +2,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
+from django.urls import reverse
+import random
+
 from .models import Restaurant
-from django.contrib.auth import get_user_model
+
 from django.views.decorators.csrf import csrf_exempt
 from .forms import (
     QuestionnaireForm,
     SearchFilterForm,
-    SaveFavoriteForm,
-    DeleteFavoriteForm,
 )
 from .utils import (
     query_yelp,
@@ -21,6 +22,9 @@ from .utils import (
     get_total_restaurant_number,
     check_restaurant_saved,
     get_csv_from_github,
+    questionnaire_statistics,
+    get_filtered_restaurants,
+    restaurants_to_dict,
 )
 
 from django.http import HttpResponse
@@ -33,35 +37,15 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def index(request):
-    return HttpResponse("Hello, this is restaurant.")
-
-
 def get_restaurant_profile(request, restaurant_id):
-    if request.method == "POST" and "save_favorite_form" in request.POST:
-        form = SaveFavoriteForm(request.POST)
-        if form.is_valid():
-            user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
-            user.favorite_restaurants.add(
-                Restaurant.objects.get(
-                    business_id=form.cleaned_data.get("restaurant_business_id")
-                )
-            )
-    if request.method == "POST" and "delete_favorite_form" in request.POST:
-        form = DeleteFavoriteForm(request.POST)
-        if form.is_valid():
-            user = get_user_model().objects.get(pk=form.cleaned_data.get("user_id"))
-            user.favorite_restaurants.remove(
-                Restaurant.objects.get(
-                    business_id=form.cleaned_data.get("restaurant_business_id")
-                )
-            )
+
     if request.method == "POST" and "questionnaire_form" in request.POST:
         form = QuestionnaireForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "success")
-            return HttpResponseRedirect("")
+            url = reverse("restaurant:profile", args=[restaurant_id])
+            return HttpResponseRedirect(url)
 
     try:
         csv_file = get_csv_from_github()
@@ -85,6 +69,8 @@ def get_restaurant_profile(request, restaurant_id):
         )
         feedback = get_latest_feedback(restaurant.business_id)
         average_safety_rating = get_average_safety_rating(restaurant.business_id)
+
+        statistics_dict = questionnaire_statistics(restaurant.business_id)
         if request.user.is_authenticated:
             user = request.user
             parameter_dict = {
@@ -100,6 +86,7 @@ def get_restaurant_profile(request, restaurant_id):
                     user.favorite_restaurants.all().filter(id=restaurant_id)
                 )
                 > 0,
+                "statistics_dict": statistics_dict,
             }
         else:
             parameter_dict = {
@@ -111,6 +98,7 @@ def get_restaurant_profile(request, restaurant_id):
                 "restaurant_id": restaurant_id,
                 "latest_feedback": feedback,
                 "average_safety_rating": average_safety_rating,
+                "statistics_dict": statistics_dict,
             }
 
         return render(request, "restaurant_detail.html", parameter_dict)
@@ -197,7 +185,6 @@ def save_favorite_restaurant(request, business_id):
     if request.method == "POST":
         user = request.user
         user.favorite_restaurants.add(Restaurant.objects.get(business_id=business_id))
-        logger.info(business_id)
     return HttpResponse("Saved")
 
 
@@ -208,7 +195,6 @@ def delete_favorite_restaurant(request, business_id):
         user.favorite_restaurants.remove(
             Restaurant.objects.get(business_id=business_id)
         )
-        logger.info(business_id)
         return HttpResponse("Deleted")
 
 
@@ -217,10 +203,29 @@ def chatbot_keyword(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
-            restaurants = get_restaurant_list(
-                keyword=data["keyword"], categories_filter=[data["category"]]
+
+            # If user chose to be recommended by preference
+            # category list is the preference list.
+            if request.user and data["is_preference"]:
+                data["category"] = [
+                    category.category for category in request.user.preferences.all()
+                ]
+
+            restaurants = get_filtered_restaurants(
+                limit=Restaurant.objects.all().count(),
+                category=data["category"],
+                neighborhood=data["location"],
+                rating=[3.0, 3.5, 4.0, 4.5, 5.0],
+                compliant="Compliant",
             )
-            response = {"restaurants": restaurants}
+
+            # If number > 3, we pick 3 random restaurants in that list to recommend to user.
+            total_number = restaurants.count()
+            if total_number > 3:
+                idx = random.sample(range(0, total_number), 3)
+                restaurants = [restaurants[i] for i in idx]
+
+            response = {"restaurants": restaurants_to_dict(restaurants)}
             return JsonResponse(response)
         except AttributeError as e:
             return HttpResponseBadRequest(e)

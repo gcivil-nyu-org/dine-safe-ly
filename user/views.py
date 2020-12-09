@@ -93,38 +93,15 @@ def account_details(request):
         pref_dic = model_to_dict(pref)
         user_pref_list_json.append(pref_dic)
 
-    if request.method == "POST" and "update_pass_form" in request.POST:
-        form = UpdatePasswordForm(user=user, data=request.POST)
-        if form.is_valid():
-            form.save(user)
-            return redirect("user:login")
-        logger.error(form.errors)
-        return render(
-            request=request,
-            template_name="account_details.html",
-            context={
-                "form": form,
-                "favorite_restaurant_list": favorite_restaurant_list,
-                "user_pref": user_pref_list,
-                "user_pref_json": json.dumps(
-                    user_pref_list_json, cls=DjangoJSONEncoder
-                ),
-            },
-        )
-    else:
-        form = ResetPasswordForm()
-        return render(
-            request=request,
-            template_name="account_details.html",
-            context={
-                "form": form,
-                "favorite_restaurant_list": favorite_restaurant_list,
-                "user_pref": user_pref_list,
-                "user_pref_json": json.dumps(
-                    user_pref_list_json, cls=DjangoJSONEncoder
-                ),
-            },
-        )
+    return render(
+        request=request,
+        template_name="account_details.html",
+        context={
+            "favorite_restaurant_list": favorite_restaurant_list,
+            "user_pref": user_pref_list,
+            "user_pref_json": json.dumps(user_pref_list_json, cls=DjangoJSONEncoder),
+        },
+    )
 
 
 def reset_password_link(request, base64_id, token):
