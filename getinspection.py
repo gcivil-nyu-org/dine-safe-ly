@@ -18,7 +18,7 @@ from restaurant.models import Restaurant, InspectionRecords  # noqa: E402
 from yelprestaurantdetails import save_yelp_restaurant_details  # noqa: E402
 
 
-# sched = BlockingScheduler()
+sched = BlockingScheduler()
 logger = logging.getLogger(__name__)
 
 
@@ -175,7 +175,7 @@ def save_inspections(row, business_id):
     return
 
 
-# @sched.scheduled_job("interval", minutes=1)
+@sched.scheduled_job("interval", hours=12)
 def get_inspection_data():
     # ir = InspectionRecords.objects.all().count()
     lastInspection = InspectionRecords.objects.order_by("-inspected_on")[0:1]
@@ -207,7 +207,7 @@ def get_inspection_data():
         # save_inspections(inspection_df)
 
 
-# sched.start()
+sched.start()
 
 
 def populate_restaurant_with_yelp_id():
